@@ -37,10 +37,9 @@ class Expert(models.Model):
 
 
 class Staff(models.Model):
+    pass
 
 
 
 
 
-
-# Create your models here.
