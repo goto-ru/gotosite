@@ -15,7 +15,33 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from goto import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index, name='index'),
+    #Events
+    url(r'^upcoming/$', views.index, name='upcoming_events'),
+    url(r'^archive/$', views.index, name='archive_events'),
+    url(r'^event/?P<id>\d+/$', views.index, name='event_detail'),
+    #Participant
+    url(r'^participant/$', views.index, name='participants'),
+    url(r'^participant/?P<id>\d+/$', views.index, name='participant_detail'),
+
+
+    # url(r'^disconnect/$', views.disconnect, name='disconnect'),
+    # url(r'^actions/sign_in/$', views.sign_in_action, name='sign_in_action'),
+    # url(r'^actions/sign_up/$', views.sign_up_action, name='sign_up_action'),
+    # url(r'^actions/sign_out/$', views.sign_out_action, name='sign_out_action'),
+    # url(r'^profile/$', views.profile, name='profile'),
+    # url(r'^about_us/$', views.about_us, name='about_us'),
+    # url(r'^hack/$', views.hackathon, name='hakathon'),
+    # url(r'^lecture/$', views.lecture, name='lecture'),
+    # url(r'^camp/$', views.camp, name='camp'),
+    # url(r'^actions/apply/$', views.apply, name='apply'),
+    # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),
+    # url(r'^actions/edit_profile/$', views.edit_profile_action, name='edit_profile_action'),
+    # url(r'^actions/apply/$', views.apply, name='apply'),
+    # url(r'^actions/refuse/$', views.refuse, name='refuse'),
+    # url(r'^actions/write_comment_action/$', views.write_comment_action, name='write_comment_action'),
 ]
