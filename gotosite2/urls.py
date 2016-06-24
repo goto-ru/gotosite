@@ -20,6 +20,11 @@ from goto import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    #Auth
+    url(r'^signup/$', views.sign_up, name='sign_up'),
+    url(r'^signin/$', views.sign_in, name='sign_in'),
+    url(r'^signout/$', views.sign_out, name='sign_out'),
+
     #Events
     url(r'^upcoming/$', views.index, name='upcoming_events'),
     url(r'^archive/$', views.index, name='archive_events'),

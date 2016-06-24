@@ -1,0 +1,37 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="col-md-12">
+            <h1>Регистрация</h1>
+            {% if err %}
+            <p>
+                {{ err }}
+            </p>
+            {% endif %}
+            {% if info %}
+            <p>
+                {{ info }}
+            </p>
+            {% endif %}
+            <form action="{% url 'sign_up' %}" method="post">
+                {% csrf_token %}
+                First name: <input type="text" name="first_name"> <br>
+                Last name:  <input type="text" name="email"> <br>
+                Email: <input type="email" name="email"> <br>
+                Password: <input type="password" name="password"> <br>
+                Type: <select name="type">
+                        <option value="participant">Participant</option>
+                        <option value="staff">Staff</option>
+                        <option value="expert">Expert</option>
+                    </select> <br>
+                <input type="submit">
+            </form>
+        </div>
+
+
+    </div>
+{% endblock %}
