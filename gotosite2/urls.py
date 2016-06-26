@@ -15,23 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from goto import views
+from goto import views, login_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     #Auth
-    url(r'^signup/$', views.sign_up, name='sign_up'),
-    url(r'^signin/$', views.sign_in, name='sign_in'),
-    url(r'^signout/$', views.sign_out, name='sign_out'),
+    url(r'^signup/$', login_views.sign_up, name='sign_up'),
+    url(r'^signin/$', login_views.sign_in, name='sign_in'),
+    url(r'^signout/$', login_views.sign_out, name='sign_out'),
 
     #Events
-    url(r'^upcoming/$', views.index, name='upcoming_events'),
-    url(r'^archive/$', views.index, name='archive_events'),
-    url(r'^event/?P<id>\d+/$', views.index, name='event_detail'),
+    url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
+    url(r'^archive/$', views.archive, name='archive_events'),
+    url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     #Participant
-    url(r'^participant/$', views.index, name='participants'),
-    url(r'^participant/?P<id>\d+/$', views.index, name='participant_detail'),
+    url(r'^participants/$', views.participants, name='participants'),
+    url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
 
 
     # url(r'^disconnect/$', views.disconnect, name='disconnect'),

@@ -8,14 +8,14 @@
         <div class="col-md-12">
             <h1>Вход</h1>
             {% if err %}
-            <p>
-                {{ err }}
-            </p>
+                <div class="alert alert-danger" role="alert">
+                    {{ err }}
+                </div>
             {% endif %}
             {% if info %}
-            <p>
-                {{ info }}
-            </p>
+                <div class="alert alert-info" role="alert">
+                    {{ info }}
+                </div>
             {% endif %}
             <form action="{% url 'sign_in' %}" method="post">
                 {% csrf_token %}

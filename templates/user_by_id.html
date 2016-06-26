@@ -1,0 +1,16 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <h3>Контакты</h3>
+        <p><b>Email:</b> {{ user.email }}</p>
+        <p><b>Опыт в программировании:</b> {{ user. }}
+
+        </p>
+
+    </div>
+{% endblock %}

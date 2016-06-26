@@ -4,58 +4,39 @@ from django.http.response import HttpResponseServerError, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from goto.models import *
 from django.contrib.auth.decorators import login_required
+import datetime
 
 
 # Create your views here.
 
 def index(req):
     context_dictionary = {}
-
     return render(req, 'index.html', context_dictionary)
 
-def sign_up(req):
-    if req.POST:
-        type = req.POST.get('type')
-        password = req.POST.get('password')
-        email = req.POST.get('email')
 
-        if GotoUser.objects.filter(email=email).count()>0:
-            return render(req, 'signup.html', {'err': 'This email already exists!'})
-        if type == 'participant':
-            user = Participant()
-        elif type == 'expert':
-            user = Expert()
-        elif type == 'staff':
-            user = Staff()
-        else:
-            return HttpResponseServerError()
-        user.email = email
-        user.username = email
-        user.set_password(password)
-        user.save()
-        user_log = authenticate(username=email, password=password)
-        login(req, user_log)
-        return render(req,'signup.html', {'info': "Successfully created!"})
+def upcoming(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today()).order_by('begin_date')
+    return render(req, 'events.html', {'events': events})
 
-    else:
-        return render(req,'signup.html')
+def archive(req):
+    events = Event.objects.filter(end_date__lte =datetime.date.today()).order_by('-end_date')
+    return render(req, 'events.html', {'events': events})
 
 
-def sign_in(req):
-    if req.POST:
-        password = req.POST.get('password')
-        email = req.POST.get('email')
-        user_log = authenticate(username=email, password=password)
-        login(req, user_log)
-        return render(req, 'login.html', {'info': 'Logged in!'})
-    else:
-        return render(req,'login.html')
+def event_by_id(req, id):
+    e = Event.objects.get(pk=id)
+    return render(req, 'event_by_id.html', {'event': e})
 
 
-@login_required
-def sign_out(req):
-    logout(req)
-    return  HttpResponseRedirect('/')
+def participants(req):
+    participants = Participant.objects.all()
+    return render(req, 'users.html', {'users': participants})
 
 
+def experts(req):
+    pass
 
+
+def user_by_id(req, id):
+    user = User.objects.get(pk=id)
+    return render(req, 'user_by_id.html', {'user': user})

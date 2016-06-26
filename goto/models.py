@@ -89,7 +89,6 @@ class Experting(models.Model):
         (0, 'In discuss'),
         (1, 'Confirmed'),
         (2, 'Canceled'),
-
     ]
     status = models.IntegerField(choices=STATUSES, default=0)
 
