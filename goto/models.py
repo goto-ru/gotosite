@@ -6,32 +6,30 @@ from django.contrib.auth.models import User
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
+    SEX = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('N', 'Can\'t say'),
+    )
+    sex = models.CharField(choices=SEX, default='M', max_length=2)
     surname = models.CharField(max_length=40, blank=True)
+    vk = models.URLField(max_length=240, default='', blank=True)
+    github = models.URLField(max_length=240, default='', blank=True)
+    about = models.CharField(max_length=500, default='', blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 
 
 class Participant(GotoUser):
-    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    # Personal data
     birthday = models.DateField(default=date.today)
-    place_of_birth = models.CharField(max_length=140, null=True, blank=True)
     city = models.CharField(max_length=40, default='Москва', blank=True)
     citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
     phone_number = models.CharField(max_length=40, null=True, blank=True)
-    parents_phone_number = models.CharField(max_length=40, null=True, blank=True)
-
-    occupation = models.CharField(max_length=250, blank=True, default='', null=True)
-    programming_languages = models.CharField(max_length=250, blank=True, default='', null=True)
-
-    document = models.CharField(max_length=40, blank=True, default='', null=True)
-    document_number = models.IntegerField(blank=True, null=True)
-    police_number = models.IntegerField(blank=True, null=True)
-
-    vk = models.URLField(max_length=240, default='', blank=True)
-    github = models.URLField(max_length=240, default='', blank=True)
-
     health_issues = models.CharField(max_length=40, default='Никаких', blank=True)
 
+    # Public data
+    programming_languages = models.CharField(max_length=250, blank=True, default='', null=True)
     experience = models.CharField(max_length=700, default='', blank=True)
-    about = models.CharField(max_length=500, default='', blank=True)
 
     class Meta():
         verbose_name = 'Participant'
@@ -39,8 +37,7 @@ class Participant(GotoUser):
 
 
 class Expert(GotoUser):
-    description = models.CharField(max_length=500, )
-    teacher_image = models.ImageField(upload_to='teacher_images/', null=True, blank=True)
+    company = models.CharField(max_length=140, null=True, blank=True)
 
     class Meta():
         verbose_name = 'Expert'
@@ -53,6 +50,14 @@ class Staff(GotoUser):
         verbose_name_plural = 'Staff'
 
 
+class Page(models.Model):
+    name = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=256, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     name = models.CharField(max_length=256, )
     description = models.CharField(max_length=2000, )
@@ -62,6 +67,7 @@ class Event(models.Model):
     place = models.CharField(max_length=400, blank=True, default='')
     participants = models.ManyToManyField(Participant, through='Application')
     experts = models.ManyToManyField(Expert, through='Experting')
+    pages = models.ManyToManyField(Page)
 
     def __str__(self):
         return self.name
@@ -91,4 +97,3 @@ class Experting(models.Model):
         (2, 'Canceled'),
     ]
     status = models.IntegerField(choices=STATUSES, default=0)
-

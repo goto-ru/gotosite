@@ -6,11 +6,16 @@
 {% block container %}
     <div class="container">
         <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+
+        {% if user.participant %}
+            <p><b>Опыт в программировании:</b> {{ user.participant.experience }}
+
+        {% endif %}
         <h3>Контакты</h3>
         <p><b>Email:</b> {{ user.email }}</p>
-        <p><b>Опыт в программировании:</b> {{ user. }}
-
-        </p>
+        {% if user.vk %}
+            <p><b>VK:</b> <a href="{{ user.vk }}">{{ user.vk }}</a></p>
+        {% endif %}
 
     </div>
 {% endblock %}

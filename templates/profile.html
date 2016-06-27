@@ -1,0 +1,16 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <h1>Личный кабинет</h1>
+        <h2>Статус заявок</h2>
+        <h2>Информация</h2>
+        <a href="{% url 'user_detail' user.id %}">Мой профиль</a> <br>
+        <a href="{% url 'profile_edit'%}">Редактировать</a> <br>
+
+
+    </div>
+{% endblock %}

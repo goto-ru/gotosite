@@ -20,29 +20,27 @@ from goto import views, login_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
-    #Auth
+    url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='index'),
+    # Auth
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
     url(r'^signin/$', login_views.sign_in, name='sign_in'),
     url(r'^signout/$', login_views.sign_out, name='sign_out'),
 
-    #Events
+    # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
-    #Participant
-    url(r'^participants/$', views.participants, name='participants'),
+
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
+    # Participant
+    url(r'^participants/$', views.participants, name='participants'),
+    url(r'^experts/$', views.experts, name='experts'),
+    url(r'^staff/', views.staff, name='staff'),
 
+    url(r'^about-us/$', views.about_us, name='about_us'),
 
-    # url(r'^disconnect/$', views.disconnect, name='disconnect'),
-    # url(r'^actions/sign_in/$', views.sign_in_action, name='sign_in_action'),
-    # url(r'^actions/sign_up/$', views.sign_up_action, name='sign_up_action'),
-    # url(r'^actions/sign_out/$', views.sign_out_action, name='sign_out_action'),
-    # url(r'^profile/$', views.profile, name='profile'),
-    # url(r'^about_us/$', views.about_us, name='about_us'),
-    # url(r'^hack/$', views.hackathon, name='hakathon'),
-    # url(r'^lecture/$', views.lecture, name='lecture'),
-    # url(r'^camp/$', views.camp, name='camp'),
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),
     # url(r'^actions/edit_profile/$', views.edit_profile_action, name='edit_profile_action'),
