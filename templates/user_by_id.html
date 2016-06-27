@@ -6,9 +6,10 @@
 {% block container %}
     <div class="container">
         <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <img src="/{{ user.profile_picture }}" class="profile_img"/>
 
         {% if user.participant %}
-            <p><b>Опыт в программировании:</b> {{ user.participant.experience }}
+            <b>Опыт в программировании:</b> {{ user.participant.experience }}
 
         {% endif %}
         <h3>Контакты</h3>

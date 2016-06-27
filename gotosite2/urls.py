@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from goto import views, login_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -48,3 +50,5 @@ urlpatterns = [
     # url(r'^actions/refuse/$', views.refuse, name='refuse'),
     # url(r'^actions/write_comment_action/$', views.write_comment_action, name='write_comment_action'),
 ]
+if settings.DEBUG :
+   urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -7,7 +7,7 @@
     <div class="container">
 
         {{ form.message.errors }}
-        <form action="{% url 'profile_edit' %}" method="post">
+        <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
 
             <h2>Основные данные</h2>
 

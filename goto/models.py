@@ -16,7 +16,7 @@ class GotoUser(User):
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
     about = models.CharField(max_length=500, default='', blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='media/profile_pictures/', null=True, blank=True)
 
 
 class Participant(GotoUser):

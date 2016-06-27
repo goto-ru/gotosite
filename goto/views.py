@@ -56,7 +56,7 @@ def profile(req):
 
 def profile_edit(req):
     user = GotoUser.objects.get(pk=req.user.pk)
-    form = ProfileEditForm(req.POST or None, instance=user)
+    form = ProfileEditForm(req.POST or None, req.FILES or None, instance=user)
     if req.method == 'POST':
         # create a form instance and populate it with data from the request:
 
