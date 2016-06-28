@@ -1,20 +1,43 @@
 from django.contrib import admin
 from goto.models import *
 
-models = [Participant, Expert, Staff, Page, Answer, Question]
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+
+models = [Participant, Expert, Staff, Page, Answer, Question, Application]
 
 
-class QuestionInline(admin.StackedInline):
-    model = Question
-    extra = 0
+
+class AnswerInline(NestedStackedInline):
+    #fields = ['text']
+    model = Answer
     max_num = 0
+    extra = 0
 
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
+
+class QuestionInline(NestedStackedInline):
+    fields = ['text']
+    model = Question
+    inlines = [AnswerInline]
+    max_num = 0
+    extra = 0
+
+
+
+
+
+class ApplicationInline(NestedStackedInline):
+
+    model = Application
+    inlines = [AnswerInline]
+    #fk_name = 'answers'
+    max_num = 0
+    extra = 0
+
+
+class EventAdmin(NestedModelAdmin):
     model = Event
-    #inlines = [QuestionInline]
-
-
+    inlines = [ApplicationInline]
+admin.site.register(Event, EventAdmin)
 
 for model in models:
     admin.site.register(model)

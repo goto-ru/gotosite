@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http.response import HttpResponseServerError, HttpResponseRedirect
 
-
 from django.contrib.auth import login, logout, authenticate
 from goto.models import *
 from django.contrib.auth.decorators import login_required
@@ -56,17 +55,33 @@ def profile(req):
 
 
 def application_fill(req, event_id):
-    if req.method=='POST':
-        form = Application(req.POST or None, req.FILES or None, instance=user)
+    user = GotoUser.objects.get(pk=req.user.pk)
+    event = Event.objects.get(pk=event_id)
+    base_cotext = {'user': user, 'event': event}
+    if not user.is_authenticated() or user.participant is None:
+        base_cotext.update({'err': 'Please login as participant to fill application!'})
+        return render(req, 'fill_application.html', base_cotext)
+    a = Application.objects.filter(participant=user.participant, event=event)
+    if a.count() > 0:
+        base_cotext.update({'err': 'You already posted an application!'})
+        return render(req, 'fill_application.html', base_cotext)
+    if req.method == 'POST':
+        app = Application()
+        app.event = event
+        app.participant = user.participant
+        app.save()
 
+        for q in event.questions.all():
+            text = req.POST['question%s' % q.pk]
+            ans = Answer()
+            ans.application = app
+            ans.question = q
+            ans.text = text
+            ans.save()
+        base_cotext.update({'info': 'Successfully accepted!'})
+        return render(req, 'fill_application.html', base_cotext)
     else:
-        user = GotoUser.objects.get(pk=req.user.pk)
-        if not user.is_authenticated() or user.participant is None:
-            return render(req, 'fill_application.html', {'err': 'Please login as participant to fill application!'})
-        a = Application.objects.filter(participant=user.participant)
-        if a.count()>0:
-            return render(req, 'fill_application.html', {'err': 'You already posted an application!'})
-
+        return render(req, 'fill_application.html', base_cotext)
 
 
 def application(req, id):

@@ -46,7 +46,7 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}">{{ request.user.email }}</a></li>
+                        <li><a href="{% url 'profile' %}">{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
                     {% else %}
                         <li><a href="{% url 'sign_in' %}">Sign in</a></li>
                         <li><a href="{% url 'sign_up' %}">Sign up</a></li>
@@ -57,6 +57,18 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <div class="container-fluid">
+        {% if err %}
+            <div class="alert alert-danger" role="alert">
+                {{ err }}
+            </div>
+        {% endif %}
+        {% if info %}
+            <div class="alert alert-info" role="alert">
+                {{ info }}
+            </div>
+        {% endif %}
+    </div>
 
 
 {% endblock %}

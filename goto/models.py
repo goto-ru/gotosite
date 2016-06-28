@@ -22,6 +22,10 @@ class GotoUser(User):
     organization = models.CharField(max_length=240, blank=True)
 
 
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
+
 class Participant(GotoUser):
     # Personal data
     birthday = models.DateField(default=date.today)
@@ -91,6 +95,10 @@ class Application(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
 
+    def __str__(self):
+        return '%s on %s' % (self.participant, self.event)
+
+
 
 class Experting(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
@@ -102,6 +110,9 @@ class Experting(models.Model):
     ]
     status = models.IntegerField(choices=STATUSES, default=0)
 
+    def __str__(self):
+        return '%s on %s' % (self.expert, self.event)
+
 
 class Question(models.Model):
     text = models.CharField(max_length=256)
@@ -111,11 +122,9 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    event = models.ForeignKey(Event)
+    application = models.ForeignKey(Application, related_name='answers')
     question = models.ForeignKey(Question)
-    user = models.ForeignKey(User)
     text = models.CharField(max_length=512)
 
-
     def __str__(self):
-        return self.answer
+        return self.text

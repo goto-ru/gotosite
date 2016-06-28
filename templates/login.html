@@ -7,16 +7,7 @@
     <div class="container">
         <div class="col-md-12">
             <h1>Вход</h1>
-            {% if err %}
-                <div class="alert alert-danger" role="alert">
-                    {{ err }}
-                </div>
-            {% endif %}
-            {% if info %}
-                <div class="alert alert-info" role="alert">
-                    {{ info }}
-                </div>
-            {% endif %}
+
             <form action="{% url 'sign_in' %}" method="post">
                 {% csrf_token %}
                 Email: <input type="email" name="email"> <br>
