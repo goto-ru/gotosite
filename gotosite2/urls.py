@@ -27,19 +27,20 @@ urlpatterns = [
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
     url(r'^signin/$', login_views.sign_in, name='sign_in'),
     url(r'^signout/$', login_views.sign_out, name='sign_out'),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
-
-    url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
-    url(r'^profile/$', views.profile, name='profile'),
-    url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
+    url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
+    url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
     # Participant
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^staff/', views.staff, name='staff'),
+    url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
 
     url(r'^about-us/$', views.about_us, name='about_us'),
 

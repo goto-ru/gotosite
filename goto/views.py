@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http.response import HttpResponseServerError, HttpResponseRedirect
 
+
 from django.contrib.auth import login, logout, authenticate
 from goto.models import *
 from django.contrib.auth.decorators import login_required
@@ -22,7 +23,7 @@ def upcoming(req):
 
 
 def archive(req):
-    events = Event.objects.filter(end_date__lte=datetime.date.today()).order_by('-end_date')
+    events = Event.objects.filter(end_date__lt=datetime.date.today()).order_by('-end_date')
     return render(req, 'events.html', {'events': events})
 
 
@@ -52,6 +53,24 @@ def profile(req):
         return render(req, 'profile.html', {'user': user})
     else:
         return HttpResponseRedirect('/signin')
+
+
+def application_fill(req, event_id):
+    if req.method=='POST':
+        form = Application(req.POST or None, req.FILES or None, instance=user)
+
+    else:
+        user = GotoUser.objects.get(pk=req.user.pk)
+        if not user.is_authenticated() or user.participant is None:
+            return render(req, 'fill_application.html', {'err': 'Please login as participant to fill application!'})
+        a = Application.objects.filter(participant=user.participant)
+        if a.count()>0:
+            return render(req, 'fill_application.html', {'err': 'You already posted an application!'})
+
+
+
+def application(req, id):
+    pass
 
 
 def profile_edit(req):

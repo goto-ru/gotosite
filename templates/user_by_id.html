@@ -6,16 +6,26 @@
 {% block container %}
     <div class="container">
         <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-        <img src="/{{ user.profile_picture }}" class="profile_img"/>
+        <img src="/{{ user.profile_picture }}" align="left" hspace="5" vspace="5" class="profile_img"
+             alt="{{ user.first_name }} {{ user.last_name }}"/>
+        <b>Пол:</b> {{ user.sex }} <br>
+        <b>Организация:</b> {{ user.organization}} <br>
 
         {% if user.participant %}
-            <b>Опыт в программировании:</b> {{ user.participant.experience }}
+            <b>Языки и технологии:</b> {{ user.participant.programming_languages }} <br>
+            <b>Опыт в программировании:</b> {{ user.participant.experience }} <br>
+
 
         {% endif %}
+        <b>О себе:</b> {{ user.about }}
+
         <h3>Контакты</h3>
-        <p><b>Email:</b> {{ user.email }}</p>
+        <p><b>Email:</b> <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
         {% if user.vk %}
             <p><b>VK:</b> <a href="{{ user.vk }}">{{ user.vk }}</a></p>
+        {% endif %}
+        {% if user.github %}
+            <p><b>Github:</b> <a href="{{ user.github }}">{{ user.github }}</a></p>
         {% endif %}
 
     </div>

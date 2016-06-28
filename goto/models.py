@@ -16,7 +16,10 @@ class GotoUser(User):
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
     about = models.CharField(max_length=500, default='', blank=True)
-    profile_picture = models.ImageField(upload_to='media/profile_pictures/', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='media/profile_pictures/',
+                                        default='media/profile_pictures/no-photo.jpg', blank=False,
+                                        null=False)
+    organization = models.CharField(max_length=240, blank=True)
 
 
 class Participant(GotoUser):
@@ -67,7 +70,8 @@ class Event(models.Model):
     place = models.CharField(max_length=400, blank=True, default='')
     participants = models.ManyToManyField(Participant, through='Application')
     experts = models.ManyToManyField(Expert, through='Experting')
-    pages = models.ManyToManyField(Page)
+    pages = models.ManyToManyField(Page, blank=True)
+    questions = models.ManyToManyField('Question', blank=True)
 
     def __str__(self):
         return self.name
@@ -77,14 +81,14 @@ class Event(models.Model):
 
 
 class Application(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     STATUSES = [
         (0, 'In review'),
         (1, 'Approved'),
         (2, 'Declined'),
         (3, 'Confirmed'),
     ]
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
 
 
@@ -97,3 +101,21 @@ class Experting(models.Model):
         (2, 'Canceled'),
     ]
     status = models.IntegerField(choices=STATUSES, default=0)
+
+
+class Question(models.Model):
+    text = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.text
+
+
+class Answer(models.Model):
+    event = models.ForeignKey(Event)
+    question = models.ForeignKey(Question)
+    user = models.ForeignKey(User)
+    text = models.CharField(max_length=512)
+
+
+    def __str__(self):
+        return self.answer
