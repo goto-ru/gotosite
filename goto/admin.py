@@ -3,7 +3,7 @@ from goto.models import *
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-models = [Participant, Expert, Staff, Page, Answer, Question, Application]
+models = [Participant, Expert, Page, Answer, Question, Application]
 
 
 

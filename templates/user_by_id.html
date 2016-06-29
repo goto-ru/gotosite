@@ -11,7 +11,9 @@
         <b>Пол:</b> {{ user.sex }} <br>
         <b>Организация:</b> {{ user.organization}} <br>
 
+
         {% if user.participant %}
+            <b>Класс:</b> {{ user.current_class }} <br>
             <b>Языки и технологии:</b> {{ user.participant.programming_languages }} <br>
             <b>Опыт в программировании:</b> {{ user.participant.experience }} <br>
 

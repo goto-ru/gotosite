@@ -39,7 +39,6 @@ urlpatterns = [
     # Participant
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
-    url(r'^staff/', views.staff, name='staff'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
 
     url(r'^about-us/$', views.about_us, name='about_us'),

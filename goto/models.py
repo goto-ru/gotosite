@@ -21,13 +21,13 @@ class GotoUser(User):
                                         null=False)
     organization = models.CharField(max_length=240, blank=True)
 
-
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
 
 
 class Participant(GotoUser):
     # Personal data
+    graduation_year = models.IntegerField(blank=True)
     birthday = models.DateField(default=date.today)
     city = models.CharField(max_length=40, default='Москва', blank=True)
     citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
@@ -37,6 +37,18 @@ class Participant(GotoUser):
     # Public data
     programming_languages = models.CharField(max_length=250, blank=True, default='', null=True)
     experience = models.CharField(max_length=700, default='', blank=True)
+
+    def current_age(self):
+        return (self.birthday - date.today()).days // 365
+
+    def current_class(self):
+        left = self.graduation_year - date.today().year
+        if date.today().month < 5:
+            left += 1
+        cl = 12 - left
+        if cl >= 12:
+            cl = 'Выпустился в %s' % self.graduation_year
+        return cl
 
     class Meta():
         verbose_name = 'Participant'
@@ -49,12 +61,6 @@ class Expert(GotoUser):
     class Meta():
         verbose_name = 'Expert'
         verbose_name_plural = 'Experts'
-
-
-class Staff(GotoUser):
-    class Meta():
-        verbose_name = 'Staff'
-        verbose_name_plural = 'Staff'
 
 
 class Page(models.Model):
@@ -97,7 +103,6 @@ class Application(models.Model):
 
     def __str__(self):
         return '%s on %s' % (self.participant, self.event)
-
 
 
 class Experting(models.Model):

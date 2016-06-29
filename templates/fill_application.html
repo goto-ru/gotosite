@@ -7,6 +7,7 @@
     <div class="container">
 
         <h2>Подача заявки на мероприятие "{{ event.name }}"</h2>
+        Перед подачей заявки убедитесь, что у вас в профиле указана актуальная информация!
         <form action="{% url 'application_fill' event.pk %}" method="post" enctype="multipart/form-data">
             <p><label>Имя, Фамилия</label> <input disabled value="{{ user.first_name }} {{ user.last_name }}"></p>
             <h3>Дополнительные вопросы</h3>
