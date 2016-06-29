@@ -40,7 +40,3 @@ pylint:
         - W0141 # filter()
         - too-few-public-methods
         - missing-docstring # disable requiring docstrings for every public %s for now
-
-vulture:
-    # find unused code
-    run: true
