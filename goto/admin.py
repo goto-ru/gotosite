@@ -6,7 +6,6 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 models = [Participant, Expert, Page, Answer, Question, Application]
 
 
-
 class AnswerInline(NestedStackedInline):
     #fields = ['text']
     model = Answer
@@ -22,9 +21,6 @@ class QuestionInline(NestedStackedInline):
     extra = 0
 
 
-
-
-
 class ApplicationInline(NestedStackedInline):
 
     model = Application
@@ -37,6 +33,8 @@ class ApplicationInline(NestedStackedInline):
 class EventAdmin(NestedModelAdmin):
     model = Event
     inlines = [ApplicationInline]
+
+
 admin.site.register(Event, EventAdmin)
 
 for model in models:
