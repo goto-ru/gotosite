@@ -41,9 +41,7 @@ def experts(req):
     return render(req, 'users.html', {'users': experts})
 
 
-def staff(req):
-    staff = Staff.objects.all()
-    return render(req, 'users.html', {'users': staff})
+
 
 
 def profile(req):
