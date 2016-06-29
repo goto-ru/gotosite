@@ -8,13 +8,14 @@ class GotoUser(User):
     # first_name = models.CharField(max_length=40, blank=True)
     SEX = (('M', 'Male'),
            ('F', 'Female'),
-           ('N', 'Can\'t say'), )
+           ('N', 'Can\'t say'),)
     sex = models.CharField(choices=SEX, default='M', max_length=2)
     surname = models.CharField(max_length=40, blank=True)
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
-    about = models.CharField(max_length=500, default='', blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/no-photo.jpg', blank=False, null=False)
+    about = models.TextField(blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/no-photo.jpg',
+                                        blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
     def __str__(self):
@@ -28,11 +29,11 @@ class Participant(GotoUser):
     city = models.CharField(max_length=40, default='Москва', blank=True)
     citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
     phone_number = models.CharField(max_length=40, null=True, blank=True)
-    health_issues = models.CharField(max_length=40, default='Никаких', blank=True)
+    health_issues = models.TextField(default='Никаких', blank=True)
 
     # Public data
-    programming_languages = models.CharField(max_length=250, blank=True, default='', null=True)
-    experience = models.CharField(max_length=700, default='', blank=True)
+    programming_languages = models.TextField(blank=True, )
+    experience = models.TextField(blank=True)
 
     def current_age(self):
         return (self.birthday - date.today()).days // 365
@@ -52,7 +53,7 @@ class Participant(GotoUser):
 
 
 class Expert(GotoUser):
-    company = models.CharField(max_length=140, null=True, blank=True)
+    position = models.CharField(max_length=140, null=True, blank=True)
 
     class Meta():
         verbose_name = 'Expert'
@@ -69,11 +70,16 @@ class Page(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=256, )
-    description = models.CharField(max_length=2000, )
+    short_description = models.CharField(max_length=512, blank=True)
+    full_description = models.TextField(blank=True)
+
+    price = models.CharField(max_length=400, blank=True)
+    target_auditory = models.CharField(max_length=400, blank=True)
+    format = models.CharField(max_length=400, blank=True)
+    place = models.CharField(max_length=400, blank=True)
+
     begin_date = models.DateField(default=date.today)
     end_date = models.DateField(default=date.today)
-    format = models.CharField(max_length=400, blank=True, default='')
-    place = models.CharField(max_length=400, blank=True, default='')
     participants = models.ManyToManyField(Participant, through='Application')
     experts = models.ManyToManyField(Expert, through='Experting')
     pages = models.ManyToManyField(Page, blank=True)
@@ -87,16 +93,31 @@ class Event(models.Model):
 
 
 class Application(models.Model):
-    STATUSES = [
-        (0, 'In review'),
-        (1, 'Approved'),
-        (2, 'Declined'),
-        (3, 'Confirmed'),
-    ]
+    status_to_text = meta_status = {
+        0: 'Ожидает рассмотрения',
+        1: 'Одобрена',
+        2: 'Отклонена',
+        3: 'Подтверждена',
+        4: 'Не подтверждена',
+    }
+    STATUSES = list(status_to_text.items())
+    status_to_class = {
+        0: 'info',
+        1: 'warning',
+        2: 'danger',
+        3: 'success',
+        4: 'danger',
+    }
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
+
+    def text_status(self):
+        return self.status_to_text[self.status]
+
+    def class_status(self):
+        return self.status_to_class[self.status]
 
     def __str__(self):
         return '%s on %s' % (self.participant, self.event)

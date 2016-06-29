@@ -5,12 +5,39 @@
 
 {% block container %}
     <div class="container">
-
-        <div class="col-md-12">
+        <div class="page-header">
             <h1>{{ event.name }} </h1>
-            <p>{{ event.description }} </p>
-            <a href="{% url 'application_fill' event.pk %}">Подать заявку</a>
-            </div>
+
+        </div>
+        <div class="col-md-8">
+            <p>{{ event.full_description}} </p>
+
+            <a class="btn btn-default btn-lg" href="{% url 'application_fill' event.pk %}">Подать заявку</a>
+        </div>
+
+        <div class="col-md-4 sidebar">
+            {% if event.price %}
+                <h3>Стоимость</h3>
+                <p>{{ event.price }}</p>
+                <hr>
+            {% endif %}
+            {% if event.target_auditory %}
+                <h3>Для кого?</h3>
+                <p>{{ event.target_auditory }}</p>
+                <hr>
+            {% endif %}
+            {% if event.format %}
+                <h3>Формат</h3>
+                <p>{{ event.format }}</p>
+                <hr>
+            {% endif %}
+            {% if event.place %}
+                <h3>Где?</h3>
+                <p>{{ event.place }}</p>
+                <hr>
+            {% endif %}
+
+
         </div>
 
 

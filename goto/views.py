@@ -8,6 +8,7 @@ import datetime
 
 from .forms import *
 
+
 # Create your views here.
 
 
@@ -41,12 +42,12 @@ def experts(req):
     return render(req, 'users.html', {'users': experts})
 
 
+@login_required()
 def profile(req):
-    if req.user.is_authenticated():
-        user = GotoUser.objects.get(pk=req.user.pk)
-        return render(req, 'profile.html', {'user': user})
-    else:
-        return HttpResponseRedirect('/signin')
+
+    user = GotoUser.objects.get(pk=req.user.pk)
+
+    return render(req, 'profile.html', {'user': user, })
 
 
 def application_fill(req, event_id):
@@ -88,6 +89,7 @@ def application(req, id):
 def profile_edit(req):
     user = GotoUser.objects.get(pk=req.user.pk)
     form = ProfileEditForm(req.POST or None, req.FILES or None, instance=user)
+
     if req.method == 'POST':
         # create a form instance and populate it with data from the request:
 
@@ -108,7 +110,7 @@ def about_us(req):
 
 
 def page(req, slug):
-    return render(req, 'pages/%s.html' % (slug, ))
+    return render(req, 'pages/%s.html' % (slug,))
 
 
 def user_by_id(req, id):

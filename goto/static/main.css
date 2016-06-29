@@ -6,3 +6,8 @@
     height: 200px;
 
 }
+.sidebar {
+    border: solid slateblue 1px;
+    border-radius: 5px;
+    background: lightblue;
+}
