@@ -6,19 +6,15 @@ from django.contrib.auth.models import User
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
-    SEX = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('N', 'Can\'t say'),
-    )
+    SEX = (('M', 'Male'),
+           ('F', 'Female'),
+           ('N', 'Can\'t say'), )
     sex = models.CharField(choices=SEX, default='M', max_length=2)
     surname = models.CharField(max_length=40, blank=True)
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
     about = models.CharField(max_length=500, default='', blank=True)
-    profile_picture = models.ImageField(upload_to='media/profile_pictures/',
-                                        default='media/profile_pictures/no-photo.jpg', blank=False,
-                                        null=False)
+    profile_picture = models.ImageField(upload_to='media/profile_pictures/', default='media/profile_pictures/no-photo.jpg', blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
     def __str__(self):

@@ -8,8 +8,8 @@ import datetime
 
 from .forms import *
 
-
 # Create your views here.
+
 
 def index(req):
     context_dictionary = {}
@@ -39,9 +39,6 @@ def participants(req):
 def experts(req):
     experts = Expert.objects.all()
     return render(req, 'users.html', {'users': experts})
-
-
-
 
 
 def profile(req):
@@ -109,7 +106,7 @@ def about_us(req):
 
 
 def page(req, slug):
-    return render(req, 'pages/%s.html' % (slug,))
+    return render(req, 'pages/%s.html' % (slug, ))
 
 
 def user_by_id(req, id):

@@ -40,7 +40,6 @@ urlpatterns = [
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
-
     url(r'^about-us/$', views.about_us, name='about_us'),
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
@@ -50,5 +49,5 @@ urlpatterns = [
     # url(r'^actions/refuse/$', views.refuse, name='refuse'),
     # url(r'^actions/write_comment_action/$', views.write_comment_action, name='write_comment_action'),
 ]
-if settings.DEBUG :
-   urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
