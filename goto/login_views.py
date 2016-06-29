@@ -18,8 +18,6 @@ def sign_up(req):
             user = Participant()
         elif type == 'expert':
             user = Expert()
-        elif type == 'staff':
-            user = Staff()
         else:
             return HttpResponseServerError()
         user.email = email
