@@ -42,12 +42,10 @@ def experts(req):
     return render(req, 'users.html', {'users': experts})
 
 
-@login_required()
-def profile(req):
-
-    user = GotoUser.objects.get(pk=req.user.pk)
-
-    return render(req, 'profile.html', {'user': user, })
+# @login_required()
+# def profile(req):
+#     user = GotoUser.objects.get(pk=req.user.pk)
+#     return render(req, 'profile.html', {'user': user,})
 
 
 def application_fill(req, event_id):
@@ -81,9 +79,25 @@ def application_fill(req, event_id):
         return render(req, 'fill_application.html', base_cotext)
 
 
+@login_required()
 def application(req, id):
     app = Application.objects.get(pk=id)
-    return render(req, 'application.html', {'application': app})
+    base_context = {
+    }
+    if req.POST:
+        if req.user.id == app.participant.id:
+            if app.status == 1:
+                if 'confirm' in req.POST:
+                    app.status = 3
+                    base_context['info'] = 'Заявка успешно подтвержденна'
+                elif 'reject' in req.POST:
+                    app.status = 4
+                    base_context['info'] = 'Заявка успешно отозвана'
+                app.save()
+        else:
+            base_context['err'] = 'You are not allowed to manage this application'
+    base_context['application'] = app
+    return render(req, 'application.html', base_context)
 
 
 def profile_edit(req):
@@ -115,4 +129,4 @@ def page(req, slug):
 
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
-    return render(req, 'user_by_id.html', {'user': user})
+    return render(req, 'user_by_id.html', {'viewed_user': user})

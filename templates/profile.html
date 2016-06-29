@@ -6,16 +6,7 @@
 {% block container %}
     <div class="container">
         <h1>Личный кабинет</h1>
-        <h2>Статус заявок</h2>
-        {% for ap in user.participant.application_set.all %}
-            <div class="alert alert-{{ ap.class_status }}" role="alert">
 
-                <b>Мероприятие:</b> {{ ap.event.name }} <br>
-                <b>Статус заявки:</b> {{ ap.text_status }}
-                <a href="{% url 'application' ap.pk %}">Посмотреть заявку</a>
-            </div>
-
-        {% endfor %}
         <h2>Информация</h2>
         <a href="{% url 'user_detail' user.id %}">Мой профиль</a> <br>
         <a href="{% url 'profile_edit' %}">Редактировать</a> <br>

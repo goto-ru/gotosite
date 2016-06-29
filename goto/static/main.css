@@ -11,3 +11,10 @@
     border-radius: 5px;
     background: lightblue;
 }
+.application{
+    float: right;
+    vertical-align: middle;
+}
+.edit-button {
+    float: right;
+}

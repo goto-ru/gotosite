@@ -1,13 +1,16 @@
 from django.contrib import admin
+from django.contrib.auth.models import Permission, User
 from goto.models import *
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 models = [Participant, Expert, Page, Answer, Question, Application]
 
+admin.site.register(Permission)
+
 
 class AnswerInline(NestedStackedInline):
-    #fields = ['text']
+    # fields = ['text']
     model = Answer
     max_num = 0
     extra = 0
@@ -22,10 +25,9 @@ class QuestionInline(NestedStackedInline):
 
 
 class ApplicationInline(NestedStackedInline):
-
     model = Application
     inlines = [AnswerInline]
-    #fk_name = 'answers'
+    # fk_name = 'answers'
     max_num = 0
     extra = 0
 
