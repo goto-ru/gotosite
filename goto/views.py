@@ -64,6 +64,7 @@ def application_fill(req, event_id):
         app = Application()
         app.event = event
         app.participant = user.participant
+        app.date_created = datetime.datetime.now()
         app.save()
 
         for q in event.questions.all():
@@ -80,7 +81,8 @@ def application_fill(req, event_id):
 
 
 def application(req, id):
-    pass
+    app = Application.objects.get(pk=id)
+    return render(req, 'application.html', {'application': app})
 
 
 def profile_edit(req):

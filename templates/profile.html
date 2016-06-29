@@ -12,6 +12,7 @@
             <div class="alert alert-info" role="alert">
                 <b>Мероприятие:</b> {{ ap.event.name }} <br>
                 <b>Статус заявки:</b> Рассматривается
+                <a href="{% url 'application' ap.pk %}">Посмотреть заявку</a>
             </div>
             {% endif %}
         {% endfor %}

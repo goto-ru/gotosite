@@ -1,0 +1,27 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    Заявка на мероприятие "{{ application.event.name }}"
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <h2>Заявка участника <a href="{% url 'user_detail' application.participant.id %}">{{ application.participant }}</a> на мероприятие "{{ application.event }}"</h2>
+        <h3>Личные данные</h3>
+        <label>Фамилия Имя Отчество:</label> {{ application.participant.last_name }}
+        {{ application.participant.first_name }} {{ application.participant.surname}} <br>
+        <label>Дата рождения: </label> {{ application.participant.birthday }} <br>
+        <label>Полных лет: </label> {{ application.participant.current_age }} <br>
+        <label>Текущий класс: </label> {{ application.participant.current_class }} <br>
+
+        <h3>Дополнительные вопросы</h3>
+        {% if application.answers|length > 0 %}
+            {% for a in application.answers.all %}
+                {{ q.text }} <br>
+            {% endfor %}
+        {% else %}
+            Дополнительных вопросов нет
+        {% endif %}
+
+
+    </div>
+{% endblock %}

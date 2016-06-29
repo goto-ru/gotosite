@@ -14,7 +14,7 @@ class GotoUser(User):
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
     about = models.CharField(max_length=500, default='', blank=True)
-    profile_picture = models.ImageField(upload_to='media/profile_pictures/', default='media/profile_pictures/no-photo.jpg', blank=False, null=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/no-photo.jpg', blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
     def __str__(self):
@@ -96,6 +96,7 @@ class Application(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
+    date_created = models.DateTimeField()
 
     def __str__(self):
         return '%s on %s' % (self.participant, self.event)
