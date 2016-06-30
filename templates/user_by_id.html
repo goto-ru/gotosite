@@ -6,8 +6,9 @@
 {% block container %}
     <div class="container">
         <div class="col-md-12">
-            <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}  <a class="btn btn-default btn-sm" href="{% url 'profile_edit' %}">Редактировать</a>
-</h1>
+            <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }} <a class="btn btn-default btn-sm"
+                                                                            href="{% url 'profile_edit' %}">Редактировать</a>
+            </h1>
 
 
         </div>
@@ -20,20 +21,18 @@
             <label>Пол:</label> {{ viewed_user.sex }} <br>
             <label>Организация:</label> {{ viewed_user.organization }} <br>
 
-
-
             {% if viewed_user.participant %}
-                <label>Дата рождения: </label> {{ viewed_user.participant.birthday }} <br>
-                <label>Полных лет: </label> {{ viewed_user.participant.current_age }} <br>
-                <label>Класс:</label> {{ viewed_user.participant.current_class }} <br>
+                <label>Город проживания:</label> {{ viewed_user.participant.city }} <br>
+                <label>Страна проживания:</label> {{ viewed_user.participant.citizenship }} <br>
                 <label>Языки и технологии:</label> {{ viewed_user.participant.programming_languages }} <br>
                 <label>Опыт в программировании:</label> {{ viewed_user.participant.experience }} <br>
-
-
             {% endif %}
-
+            {% if viewed_user.expert %}
+                <label>Должность:</label> {{ viewed_user.expert.position }} <br>
+            {% endif %}
             <b>О себе:</b> {{ viewed_user.about }}
         </div>
+
         <div class="col-md-9">
             <h3>Контакты</h3>
             <p><b>Email:</b> <a href="mailto:{{ viewed_user.email }}">{{ viewed_user.email }}</a></p>
@@ -44,12 +43,23 @@
                 <p><b>Github:</b> <a href="{{ viewed_user.github }}">{{ viewed_user.github }}</a></p>
             {% endif %}
         </div>
+        {% if viewed_user.id == user.id or perms.goto.view_personal_data %}
+            <div class="col-md-9">
+                <h3>Личные данные</h3>
+                <label>Полных лет:</label> {{ viewed_user.participant.current_age }} <br>
+                <label>Дата рождения: </label> {{ viewed_user.participant.birthday }} <br>
+                <label>Класс:</label> {{ viewed_user.participant.current_class }} <br>
+                <label>Медецинские рекомендации:</label> {{ viewed_user.participant.health_issues }} <br>
+                <label>Телефон:</label> {{ viewed_user.participant.phone_number }} <br>
+                <label>Телефон родителей:</label> {{ viewed_user.participant.parent_phone_number }} <br>
+            </div>
+
+        {% endif %}
         {% if viewed_user.id == user.id %}
             <div class="col-md-12">
                 <h2>Статус заявок</h2>
                 {% for ap in viewed_user.participant.application_set.all %}
                     <div class="alert alert-{{ ap.class_status }}" role="alert">
-
                         <b>Мероприятие:</b> {{ ap.event.name }} <br>
                         <b>Статус заявки:</b> {{ ap.text_status }}
                         <form action="{% url 'application' ap.id %}" class="application" method="post">

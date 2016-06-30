@@ -6,12 +6,14 @@
 {% block container %}
     <div class="container">
 
-        {{ form.message.errors }}
+        {{ user_form.message.errors }} <br>
+        {{ participant_form.message.errors }} <br>
         <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
 
             <h2>Основные данные</h2>
-
-            {{ form.as_p }}
+            {{ user_form.as_p }}
+            <h2>Данные участника</h2>
+            {{ participant_form.as_p }}
             {% csrf_token %}
             <input type="submit" value="Сохранить">
         </form>

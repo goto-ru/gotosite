@@ -47,6 +47,7 @@
 
                     {% if request.user.is_authenticated %}
                         <li ><a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+                        <li ><a href="{% url 'sign_out'%}">Выйти</a></li>
                     {% else %}
                         <li><a href="{% url 'sign_in' %}">Sign in</a></li>
                         <li><a href="{% url 'sign_up' %}">Sign up</a></li>

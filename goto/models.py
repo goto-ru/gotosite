@@ -24,11 +24,13 @@ class GotoUser(User):
 
 class Participant(GotoUser):
     # Personal data
-    graduation_year = models.IntegerField(blank=True)
-    birthday = models.DateField(default=date.today)
+    graduation_year = models.IntegerField(blank=True, default=2016)
     city = models.CharField(max_length=40, default='Москва', blank=True)
     citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
-    phone_number = models.CharField(max_length=40, null=True, blank=True)
+
+    birthday = models.DateField(default=date.today)
+    phone_number = models.CharField(max_length=40,  blank=True)
+    parent_phone_number = models.CharField(max_length=40,  blank=True)
     health_issues = models.TextField(default='Никаких', blank=True)
 
     # Public data
@@ -36,9 +38,10 @@ class Participant(GotoUser):
     experience = models.TextField(blank=True)
 
     def current_age(self):
-        return (self.birthday - date.today()).days // 365
+        return (date.today()-self.birthday).days // 365
 
     def current_class(self):
+
         left = self.graduation_year - date.today().year
         if date.today().month < 5:
             left += 1
@@ -50,6 +53,9 @@ class Participant(GotoUser):
     class Meta():
         verbose_name = 'Participant'
         verbose_name_plural = 'Participants'
+        permissions = (
+            ('view_personal_data', 'Can view personal data'),
+        )
 
 
 class Expert(GotoUser):
@@ -112,6 +118,8 @@ class Application(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
+    class Meta:
+        ordering = ['-date_created']
 
     def text_status(self):
         return self.status_to_text[self.status]

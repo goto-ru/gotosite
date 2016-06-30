@@ -42,12 +42,6 @@ def experts(req):
     return render(req, 'users.html', {'users': experts})
 
 
-# @login_required()
-# def profile(req):
-#     user = GotoUser.objects.get(pk=req.user.pk)
-#     return render(req, 'profile.html', {'user': user,})
-
-
 def application_fill(req, event_id):
     user = GotoUser.objects.get(pk=req.user.pk)
     event = Event.objects.get(pk=event_id)
@@ -102,22 +96,28 @@ def application(req, id):
 
 def profile_edit(req):
     user = GotoUser.objects.get(pk=req.user.pk)
-    form = ProfileEditForm(req.POST or None, req.FILES or None, instance=user)
+    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+    base_context = {'user': user, 'user_form': user_form}
+    if user.participant:
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
+        base_context['participant_form'] = participant_form
 
     if req.method == 'POST':
         # create a form instance and populate it with data from the request:
 
         # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/profile')
-        else:
-            pass
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        pass
-    return render(req, 'edit.html', {'user': user, 'form': form})
 
+        if user_form.is_valid():
+            user_form.save()
+        else:
+            return render(req, 'edit.html', base_context)
+        if user.participant and participant_form.is_valid():
+            participant_form.save()
+        else:
+            return render(req, 'edit.html', base_context)
+
+        return HttpResponseRedirect('/')
+    return render(req, 'edit.html', base_context)
 
 def about_us(req):
     pass

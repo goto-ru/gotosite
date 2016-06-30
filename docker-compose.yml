@@ -1,11 +1,15 @@
 web:
   build: .
   environment:
-    - BOT_ENV=production
-  volumes:
-    - /var/log/language-learner:/root/bot/logs
+    - ENV=production
+  ports:
+    - "8001:8000"
   links:
-    - db
+    - db:postgres
   restart: always
+  command: 'python3 manage.py runserver'
 db:
-  image: mongo
+  image: postgres
+  restart: always
+  environment:
+    - POSTGRES_PASSWORD=password
