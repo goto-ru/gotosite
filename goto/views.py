@@ -6,6 +6,7 @@ from goto.models import *
 from django.contrib.auth.decorators import login_required
 import datetime
 
+from django.core.urlresolvers import reverse
 from .forms import *
 
 
@@ -19,12 +20,12 @@ def index(req):
 
 def upcoming(req):
     events = Event.objects.filter(end_date__gte=datetime.date.today()).order_by('begin_date')
-    return render(req, 'events.html', {'events': events})
+    return render(req, 'events.html', {'events': events, 'title': 'Ближайшие события'})
 
 
 def archive(req):
     events = Event.objects.filter(end_date__lt=datetime.date.today()).order_by('-end_date')
-    return render(req, 'events.html', {'events': events})
+    return render(req, 'events.html', {'events': events, 'title': 'Архив событий'})
 
 
 def event_by_id(req, id):
@@ -34,12 +35,13 @@ def event_by_id(req, id):
 
 def participants(req):
     participants = Participant.objects.all()
-    return render(req, 'users.html', {'users': participants})
+    return render(req, 'users.html', {'users': participants, 'title': 'Участники'})
 
 
 def experts(req):
     experts = Expert.objects.all()
-    return render(req, 'users.html', {'users': experts})
+
+    return render(req, 'users.html', {'users': experts, 'title': 'Эксперты'})
 
 
 def application_fill(req, event_id):
@@ -94,30 +96,39 @@ def application(req, id):
     return render(req, 'application.html', base_context)
 
 
-def profile_edit(req):
-    user = GotoUser.objects.get(pk=req.user.pk)
-    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+def render_profile_edit(req, user):
+    user_form = UserEditForm(instance=user)
     base_context = {'user': user, 'user_form': user_form}
     if user.participant:
-        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
+        participant_form = ParticipantEditForm(instance=user.participant)
         base_context['participant_form'] = participant_form
+    return render(req, 'edit.html', base_context)
 
+@login_required()
+def profile_edit(req):
+    user = GotoUser.objects.get(pk=req.user.pk)
+    user_form = UserEditForm(req.POST, req.FILES or None)
+    user_form.instance = user
+    participant_form = ParticipantEditForm(req.POST, req.FILES or None)
+    participant_form.instance = user
     if req.method == 'POST':
-        # create a form instance and populate it with data from the request:
-
-        # check whether it's valid:
 
         if user_form.is_valid():
+            # print(req.FILES['profile_picture'])
+            # user.profile_picture = req.FILES['profile_picture']
+            # user.save()
+            # print(user.profile_picture)
             user_form.save()
         else:
-            return render(req, 'edit.html', base_context)
+            return render_profile_edit(req, user)
         if user.participant and participant_form.is_valid():
             participant_form.save()
         else:
-            return render(req, 'edit.html', base_context)
+            return render_profile_edit(req, user)
 
-        return HttpResponseRedirect('/')
-    return render(req, 'edit.html', base_context)
+        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
+    return render_profile_edit(req, user)
+
 
 def about_us(req):
     pass

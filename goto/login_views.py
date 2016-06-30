@@ -22,6 +22,8 @@ def sign_up(req):
             return HttpResponseServerError()
         user.email = email
         user.username = email
+        user.first_name = req.POST['first_name']
+        user.last_name = req.POST['last_name']
         user.set_password(password)
         user.save()
         user_log = authenticate(username=email, password=password)

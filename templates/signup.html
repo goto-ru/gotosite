@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block container %}
-    <div class="container">
+    <div class="container main-container">
         <div class="col-md-12">
             <h1>Регистрация</h1>
             {% if err %}
@@ -19,14 +19,13 @@
             {% endif %}
             <form action="{% url 'sign_up' %}" method="post">
                 {% csrf_token %}
-                First name: <input type="text" name="first_name"> <br>
-                Last name:  <input type="text" name="email"> <br>
-                Email: <input type="email" name="email"> <br>
-                Password: <input type="password" name="password"> <br>
-                Type: <select name="type">
-                        <option value="participant">Participant</option>
-                        <option value="staff">Staff</option>
-                        <option value="expert">Expert</option>
+                Имя: <input type="text" name="first_name" required> <br>
+                Фамилия:  <input type="text" name="last_name" required> <br>
+                Email: <input type="email" name="email" required> <br>
+                Password: <input type="password" name="password" required> <br>
+                Тип аккаунта: <select name="type">
+                        <option value="participant">Участник</option>
+                        <option value="expert">Эксперт</option>
                     </select> <br>
                 <input type="submit">
             </form>

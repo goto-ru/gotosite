@@ -1,19 +1,19 @@
 {% extends 'base_site.html' %}
 {% block title %}
-    GoTo
+    GoTo: {{ title }}
 {% endblock %}
 
 {% block container %}
-    <div class="container">
+    <div class="container main-container">
 
         <div class="col-md-12">
 
-            <h1>Участники</h1>
+            <h1>{{ title }}</h1>
         </div>
         {% for u in users %}
             <div class="col-md-3">
 
-                <h4><a href="{% url 'user_detail' u.pk %}">{{ u.last_name }} {{ u.first_name }}</a></h4>
+                <h4><a href="{% url 'user_detail' u.pk %}">{{ u.first_name }} {{ u.last_name }}</a></h4>
 {#                <img src="/{{ u.profile_picture }}" class="batch_profile"/>#}
 
 
