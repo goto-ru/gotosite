@@ -2,3 +2,4 @@ django
 django-nested-inline
 gunicorn
 psycopg2
+Pillow

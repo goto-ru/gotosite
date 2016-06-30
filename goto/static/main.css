@@ -15,7 +15,7 @@
   max-height: 150%; }
 
 body {
-  background-color: #418F7A; }
+  background-color: white; }
 
 .modal-footer {
   background-color: white;
@@ -28,19 +28,19 @@ body {
   font-size: 15px; }
 
 .container.main-container {
-  background-color: #418F7A; }
+  background-color: white; }
   .container.main-container div {
     background-color: white;
     padding: 10px;
     border-right: 10px;
     border-style: solid;
-    border-color: #418F7A; }
+    border-color: white; }
 
 .box {
   background-color: white; }
 
 .btn-info {
-  background-color: #418F7A;
+  background-color: white;
   color: white; }
 
 .modal-footer {
@@ -67,5 +67,8 @@ body {
 
 .auth-nav {
   margin-left: 5%; }
+
+label {
+  font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */

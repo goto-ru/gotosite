@@ -1,4 +1,6 @@
 $primary-color: #418F7A;
+$primary-color: white;
+
 
 .profile_img {
   width: 200px;
@@ -103,4 +105,7 @@ body {
 
 .auth-nav {
   margin-left: 5%;
+}
+label {
+  font-weight: bold;
 }

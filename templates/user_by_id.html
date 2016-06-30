@@ -8,8 +8,12 @@
         <div class="col-md-12">
             <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}
                 {% if viewed_user.id == user.id %}
-                    <a class="btn btn-default btn-sm"
-                       href="{% url 'profile_edit' %}">Редактировать</a>
+                    <a class="btn btn-default btn-lg"
+                       href="{% url 'profile_edit' %}">
+                    <span class="glyphicon glyphicon-pencil" >
+
+                    </span>
+                    </a>
                 {% endif %}
             </h1>
 
