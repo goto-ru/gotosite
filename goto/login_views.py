@@ -5,6 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 from goto.models import *
 from django.contrib.auth.decorators import login_required
 
+from django.core.urlresolvers import reverse
+
 
 def sign_up(req):
     if req.POST:
@@ -28,7 +30,8 @@ def sign_up(req):
         user.save()
         user_log = authenticate(username=email, password=password)
         login(req, user_log)
-        return render(req, 'signup.html', {'info': "Successfully created!"})
+        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
+        #return render(req, 'signup.html', {'info': "Successfully created!"})
 
     else:
         return render(req, 'signup.html')
@@ -42,7 +45,7 @@ def sign_in(req):
         if user is not None:
             if user.is_active:
                 login(req, user)
-                return render(req, 'login.html', {'info': 'Logged in!'})
+                return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
             else:
                 return render(req, 'login.html', {'err': 'Account is disabled'})
         else:
