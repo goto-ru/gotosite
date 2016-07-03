@@ -10,6 +10,7 @@ RUN apt-get build-dep -y python-imaging
 RUN apt-get install -y libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
 RUN pip3 install --upgrade pip
 RUN ln -s /usr/bin/nodejs /usr/bin/node
+EXPOSE 8000
 RUN npm install bower -g
 ADD . /root/app
 RUN pip3 install -r /root/app/requirements.txt --upgrade

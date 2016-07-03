@@ -1,13 +1,15 @@
 web:
   build: .
   environment:
-    - ENV=production
+    - ENV=postgres
   ports:
     - "8001:8000"
   links:
     - db:postgres
+  volumes:
+    - .:/root/app
   restart: always
-  command: '2python3 manage.py runserver'
+  command: 'python3 manage.py runserver 0.0.0.0:8000 -v 3'
 db:
   image: postgres
   restart: always
