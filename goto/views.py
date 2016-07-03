@@ -82,7 +82,8 @@ def project_by_id(req, id):
     return render(req, 'project_by_id.html', base_context)
 
 def projects(req):
-    pass
+    projects = Project.objects.all()
+    return render(req, 'projects.html', {'projects': projects})
 
 
 @login_required()

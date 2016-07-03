@@ -14,7 +14,8 @@
         <div class="col-md-8 box">
             <p><a href="{{ project.link }}">{{ project.link }}</a> </p>
             <p>{{ project.description }} </p>
-            <p>Сделано в рамках мероприятия <a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a></p>
+            <p>Сделано в рамках мероприятия
+                "<a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a>"</p>
         </div>
 
 
