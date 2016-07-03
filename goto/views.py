@@ -105,6 +105,7 @@ def render_profile_edit(req, user):
         base_context['participant_form'] = participant_form
     return render(req, 'edit.html', base_context)
 
+
 @login_required()
 def profile_edit(req):
     user = GotoUser.objects.get(pk=req.user.pk)
@@ -141,10 +142,16 @@ def page(req, slug):
 
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
-    comments = None
-    # if user.participant:
-    #     if req.user.has_perm('view_private_comment'):
-    #         comments = user.participant.comments.all()
-    #     else:
-    #         comments = user.participant.comments.filter(is_private=False)
-    return render(req, 'user_by_id.html', {'viewed_user': user, 'comments': comments})
+    base_context = {'viewed_user': user}
+    # comments = None
+    try:
+        if user.participant:
+            if req.user.has_perm('view_private_comment'):
+                base_context['private_comments'] = user.participant.comments.filter(is_private=True)
+            else:
+                base_context['public_comments'] = user.participant.comments.filter(is_private=False)
+    except user.DoesNotExist:
+        pass
+    # acc should be typeB if account only has typeA and typeB subclasses
+
+    return render(req, 'user_by_id.html', base_context)

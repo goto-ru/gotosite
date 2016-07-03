@@ -10,7 +10,7 @@
                 {% if viewed_user.id == user.id %}
                     <a class="btn btn-default btn-lg"
                        href="{% url 'profile_edit' %}">
-                    <span class="glyphicon glyphicon-pencil" >
+                    <span class="glyphicon glyphicon-pencil">
 
                     </span>
                     </a>
@@ -63,7 +63,7 @@
                 </div>
 
             {% endif %}
-            {% if viewed_user.id == user.id and viewed_user.participant%}
+            {% if viewed_user.id == user.id and participant in viewed_user %}
                 <div class="col-md-12">
                     <h2>Статус заявок</h2>
                     {% for ap in viewed_user.participant.application_set.all %}
@@ -85,6 +85,46 @@
                         </div>
                     {% endfor %}
                 </div>
+            {% endif %}
+            {% if viewed_user.participant %}
+                <div class="col-md-12">
+                    <h2>Отзывы об участнике</h2>
+                    <div class="container">
+                        {% if public_comments|length > 0 %}
+
+                            {% for comment in public_comments %}
+                                <div class="col-md-4">
+                                    <p>
+                                        comment.text
+                                    </p>
+                                    <i>comment.author</i>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            Нет отзывов
+                        {% endif %}
+                    </div>
+                </div>
+                {% if perms.goto.view_private_comment %}
+                    <div class="col-md-12">
+                    <h2>Приватные отзывы об участнике</h2>
+                    <div class="container">
+                        {% if public_comments|length > 0 %}
+
+                            {% for comment in public_comments %}
+                                <div class="col-md-4">
+                                    <p>
+                                        comment.text
+                                    </p>
+                                    <i>comment.author</i>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            Нет приватных отзывов
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>
