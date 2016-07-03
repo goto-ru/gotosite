@@ -63,7 +63,7 @@
                 </div>
 
             {% endif %}
-            {% if viewed_user.id == user.id %}
+            {% if viewed_user.id == user.id and viewed_user.participant%}
                 <div class="col-md-12">
                     <h2>Статус заявок</h2>
                     {% for ap in viewed_user.participant.application_set.all %}

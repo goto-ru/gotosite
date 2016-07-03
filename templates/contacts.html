@@ -1,0 +1,139 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="page-header">
+            <h1>GoTo</h1>
+        </div>
+{#            <div style="width: 34.4058%;" class="col">#}
+{#                <div class="cont">#}
+{#                    <div class="node widget widget-grid node1217">#}
+{#                        <style>.node1217 a {#}
+{#                            color: rgb(25, 230, 179);#}
+{#                        }</style>#}
+{#                        <div style="color: rgb(13, 13, 13); border-radius: 0px;" class="wrapper1">#}
+{#                            <div style="padding: 15px 5px;" class="wrapper2">#}
+{#                                <div class="grid valign-middle paddings-20px xs-wrap">#}
+{#                                    <div class="gridwrap">#}
+{#                                        <div style="width: 30.0695%;" class="col">#}
+{#                                            <div class="cont">#}
+{#                                                <div class="node widget widget-block node1228">#}
+{#                                                    <style>.node1228 a {#}
+{#                                                        color: rgb(25, 230, 179);#}
+{#                                                    }</style>#}
+{#                                                    <div style="color: rgb(245, 251, 250); border-radius: 0px; background-color: rgb(67, 180, 152);"#}
+{#                                                         class="wrapper1">#}
+{#                                                        <div style="padding: 5px;" class="wrapper2">#}
+{#                                                            <div class="cont">#}
+{#                                                                <div class="node widget widget-paragraph node1259">#}
+{#                                                                    <style>.node1259 a {#}
+{#                                                                        color: rgb(230, 25, 25);#}
+{#                                                                    }</style>#}
+{#                                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px; background-color: rgb(255, 255, 255);"#}
+{#                                                                         class="wrapper1">#}
+{#                                                                        <div style="padding: 5px;" class="wrapper2">#}
+{#                                                                            <div class="xs-force-center">#}
+{#                                                                                <p style="text-align: center;">#}
+{#                                                                                    <span style="font-size: 36px;"><strong>24</strong></span>#}
+{#                                                                                </p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{#                                                                <div class="node widget widget-paragraph node1260">#}
+{#                                                                    <style>.node1260 a {#}
+{#                                                                        color: rgb(25, 230, 179);#}
+{#                                                                    }</style>#}
+{#                                                                    <div style="color: rgb(245, 251, 250); border-radius: 0px;"#}
+{#                                                                         class="wrapper1">#}
+{#                                                                        <div style="padding: 5px;" class="wrapper2">#}
+{#                                                                            <div class="xs-force-center">#}
+{#                                                                                <p style="text-align: center; line-height: 1;">#}
+{#                                                                                    <em><span#}
+{#                                                                                            style="font-family: georgia, palatino;">июня</span></em>#}
+{#                                                                                </p>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div style="width: 69.9305%;" class="col">#}
+{#                                            <div class="cont">#}
+{#                                                <div class="node widget widget-paragraph node1229">#}
+{#                                                    <style>.node1229 a {#}
+{#                                                        color: rgb(25, 230, 179);#}
+{#                                                    }</style>#}
+{#                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"#}
+{#                                                         class="wrapper1">#}
+{#                                                        <div style="padding: 5px;" class="wrapper2">#}
+{#                                                            <div class="xs-force-center">#}
+{#                                                                <p>#}
+{#                                                                    <strong>GoToHack</strong>#}
+{#                                                                </p></div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="node widget widget-paragraph node1230">#}
+{#                                                    <style>.node1230 a {#}
+{#                                                        color: rgb(25, 230, 179);#}
+{#                                                    }</style>#}
+{#                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"#}
+{#                                                         class="wrapper1">#}
+{#                                                        <div style="padding: 5px;" class="wrapper2">#}
+{#                                                            <div class="xs-force-center">#}
+{#                                                                <p>Анализ Данных</p>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div data-action="formmodal" class="node widget widget-button node1231">#}
+{#                                                    <style>.node1231 a {#}
+{#                                                        color: rgb(25, 230, 179);#}
+{#                                                    }</style>#}
+{#                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"#}
+{#                                                         class="wrapper1">#}
+{#                                                        <div style="text-align: left; padding: 5px;"#}
+{#                                                             class="wrapper2 xs-force-center macros-metabutton">#}
+{#                                                            <div class="macros-button">#}
+{#                                                                <div class="btnwrap">#}
+{#                                                                    <div><input type="button"#}
+{#                                                                                style="border-radius: 0px; border-color: rgb(54, 146, 123); color: rgb(3, 9, 8); background-color: rgba(60, 162, 137, 0.2);"#}
+{#                                                                                data-modal="form" data-ga_action=""#}
+{#                                                                                data-ga_category="" data-ym_goal=""#}
+{#                                                                                value="Принять участие" data-id=""#}
+{#                                                                                class="btn btn-transparent dec"#}
+{#                                                                                data-action="modal">#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="macros-modal"></div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!--amkdmasokdmaokmdokasmdomaspdkmaskdm;oasmd;okasmd;okmaso;dkms;okmd;omas-->#}
+{#                </div>#}
+{#            </div>#}
+
+        <div class="col-md-12">
+
+            <a href="{% url 'upcoming_events' %}">Ближайшие события</a>
+        </div>
+
+
+    </div>
+{% endblock %}

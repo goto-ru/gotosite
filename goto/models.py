@@ -29,8 +29,8 @@ class Participant(GotoUser):
     citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
 
     birthday = models.DateField(default=date.today)
-    phone_number = models.CharField(max_length=40,  blank=True)
-    parent_phone_number = models.CharField(max_length=40,  blank=True)
+    phone_number = models.CharField(max_length=40, blank=True)
+    parent_phone_number = models.CharField(max_length=40, blank=True)
     health_issues = models.TextField(default='Никаких', blank=True)
 
     # Public data
@@ -38,7 +38,7 @@ class Participant(GotoUser):
     experience = models.TextField(blank=True)
 
     def current_age(self):
-        return (date.today()-self.birthday).days // 365
+        return (date.today() - self.birthday).days // 365
 
     def current_class(self):
 
@@ -53,9 +53,7 @@ class Participant(GotoUser):
     class Meta():
         verbose_name = 'Participant'
         verbose_name_plural = 'Participants'
-        permissions = (
-            ('view_personal_data', 'Can view personal data'),
-        )
+
 
 
 class Expert(GotoUser):
@@ -64,6 +62,11 @@ class Expert(GotoUser):
     class Meta():
         verbose_name = 'Expert'
         verbose_name_plural = 'Experts'
+        permissions = (
+            ('view_personal_data', 'Can view personal data'),
+            ('leave_private_comments', 'Can leave private comments'),
+            ('view_private_comment', 'Can view private comments'),
+        )
 
 
 class Page(models.Model):
@@ -118,6 +121,7 @@ class Application(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
+
     class Meta:
         ordering = ['-date_created']
 
@@ -159,3 +163,29 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=256)
+    description = models.TextField(blank=True)
+    link = models.URLField()
+    maintainers = models.ManyToManyField(Participant)
+    supervisor = models.ForeignKey(Expert)
+    event = models.ForeignKey(Event)
+
+    def __str__(self):
+        return self.title
+
+
+class ParticipantComment(models.Model):
+    text = models.TextField(blank=True)
+    participant = models.ForeignKey(Participant, related_name='comments')
+    author = models.ForeignKey(GotoUser, related_name='left_participant_comments')
+    is_private = models.BooleanField(default=True)
+
+
+class ProjectComment(models.Model):
+    text = models.TextField(blank=True)
+    project = models.ForeignKey(Project)
+    author = models.ForeignKey(GotoUser, related_name='left_project_comments')
+    is_private = models.BooleanField(default=True)

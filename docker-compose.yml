@@ -7,7 +7,7 @@ web:
   links:
     - db:postgres
   restart: always
-  command: 'python3 manage.py runserver'
+  command: '2python3 manage.py runserver'
 db:
   image: postgres
   restart: always

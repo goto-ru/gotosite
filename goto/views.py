@@ -35,6 +35,7 @@ def event_by_id(req, id):
 
 def participants(req):
     participants = Participant.objects.all()
+
     return render(req, 'users.html', {'users': participants, 'title': 'Участники'})
 
 
@@ -131,7 +132,7 @@ def profile_edit(req):
 
 
 def about_us(req):
-    pass
+    return render(req, 'about.html')
 
 
 def page(req, slug):
@@ -140,4 +141,10 @@ def page(req, slug):
 
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
-    return render(req, 'user_by_id.html', {'viewed_user': user})
+    comments = None
+    # if user.participant:
+    #     if req.user.has_perm('view_private_comment'):
+    #         comments = user.participant.comments.all()
+    #     else:
+    #         comments = user.participant.comments.filter(is_private=False)
+    return render(req, 'user_by_id.html', {'viewed_user': user, 'comments': comments})
