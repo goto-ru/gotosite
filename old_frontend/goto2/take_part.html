@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+<style>
+    .more_info-popup{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .text_choce{
+        color: white;
+        text-align: center;
+        font-size: 30px;
+        padding: 10px;
+        cursor: pointer;
+        border: 2px solid #fff;
+        margin: 20px;
+    }
+</style>
+<script>
+    var first_choice = 0;
+    function edit_choice_first(new_choice){
+        first_choice = new_choice;
+    }
+</script>
+    <div class="more_info-popup" style="display: block">
+        <a class="modal-close" onclick="$('.more_info-popup').css('display','none')" style="cursor: pointer">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgaWQ9IlBhZ2UtMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMSwxIEwzMC45OTksMzEgTTMxLDEgTDEuMDAxLDMxIiBpZD0iSW1wb3J0ZWQtTGF5ZXJzIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyIvPjwvZz48L3N2Zz4=">
+        </a>
+        <div class="first_choice" style="margin: 0 auto; display: block; text-align: center">
+            <h1 style="color: white; text-align: center; font-size: 40px">
+                Принять участие
+            </h1>
+            <a onclick="edit_choice_first(1); $('.first_choice').css('display','none'); $('.second_choice').css('display','block')" class="text_choce">
+                Летняя школа 21.09
+            </a><br><br><br>
+
+            <a onclick="edit_choice_first(2); $('.first_choice').css('display','none'); $('.second_choice').css('display','block')" class="text_choce">
+                Летняя школа 21.09
+            </a><br><br><br>
+
+            <a onclick="edit_choice_first(3); $('.first_choice').css('display','none'); $('.second_choice').css('display','block')" class="text_choce">
+                Летняя школа 21.09
+            </a><br><br><br>
+        </div>
+        <div class="second_choice" style="display: none; text-align: center">
+            <h1 style="color: white; text-align: center; font-size: 40px">
+                Выберете направление
+            </h1>
+                    <a onclick="$.post('',{'first':first_choice,'second': 1}); $('.more_info-popup').css('display','none');" class="text_choce">
+                Робототехника
+            </a><br><br><br>
+
+            <a onclick="$.post('',{'first':first_choice,'second': 1}); $('.more_info-popup').css('display','none');" class="text_choce">
+                Программирование
+            </a><br><br><br>
+        </div>
+    </div>
+</body>
+</html>

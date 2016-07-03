@@ -1,0 +1,6 @@
+.one-width{
+    flex: 1;
+    display: table-cell;
+    background: white;
+
+}
