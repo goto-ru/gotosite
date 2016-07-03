@@ -1,0 +1,25 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    {{ project.title }}
+
+{% endblock %}
+
+{% block container %}
+    <div class="container main-container">
+        <div class="page-header">
+            <h1>{{ project.title }} </h1>
+
+        </div>
+
+        <div class="col-md-8 box">
+            <p><a href="{{ project.link }}">{{ project.link }}</a> </p>
+            <p>{{ project.description }} </p>
+            <p>Сделано в рамках мероприятия <a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a></p>
+        </div>
+
+
+    </div>
+
+
+    </div>
+{% endblock %}

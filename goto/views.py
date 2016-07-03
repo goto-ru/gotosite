@@ -76,6 +76,15 @@ def application_fill(req, event_id):
         return render(req, 'fill_application.html', base_cotext)
 
 
+def project_by_id(req, id):
+    project = Project.objects.get(pk=id)
+    base_context = {'project': project}
+    return render(req, 'project_by_id.html', base_context)
+
+def projects(req):
+    pass
+
+
 @login_required()
 def application(req, id):
     app = Application.objects.get(pk=id)

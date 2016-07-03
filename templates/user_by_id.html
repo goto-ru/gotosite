@@ -87,11 +87,30 @@
                 </div>
             {% endif %}
             {% if viewed_user.participant %}
+
+                <div class="col-md-12">
+                    <h2>Проекты, сделанные этим участником</h2>
+                    <div class="container">
+                        {% if viewed_user.participant.projects.all|length > 0 %}
+
+                            {% for project in viewed_user.participant.projects.all %}
+                                <div class="alert alert-info" role="alert">
+                                    <a
+                                        href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
+                                    <b>Мероприятие:</b> {{ project.event }} <br>
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Нет проектов, созданных этим участником</p>
+                        {% endif %}
+                    </div>
+
+                </div>
                 <div class="col-md-12">
                     <h2>Отзывы об участнике</h2>
                     <div class="container">
                         {% if public_comments|length > 0 %}
-
                             {% for comment in public_comments %}
                                 <div class="col-md-4">
                                     <p>
@@ -107,25 +126,26 @@
                 </div>
                 {% if perms.goto.view_private_comment %}
                     <div class="col-md-12">
-                    <h2>Приватные отзывы об участнике</h2>
-                    <div class="container">
-                        {% if public_comments|length > 0 %}
+                        <h2>Приватные отзывы об участнике</h2>
+                        <div class="container">
+                            {% if public_comments|length > 0 %}
 
-                            {% for comment in public_comments %}
-                                <div class="col-md-4">
-                                    <p>
-                                        comment.text
-                                    </p>
-                                    <i>comment.author</i>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            Нет приватных отзывов
-                        {% endif %}
+                                {% for comment in public_comments %}
+                                    <div class="col-md-4">
+                                        <p>
+                                            comment.text
+                                        </p>
+                                        <i>comment.author</i>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                Нет приватных отзывов
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
                 {% endif %}
             {% endif %}
+
         {% endif %}
     </div>
 {% endblock %}

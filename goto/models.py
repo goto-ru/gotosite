@@ -168,8 +168,8 @@ class Answer(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=256)
     description = models.TextField(blank=True)
-    link = models.URLField()
-    maintainers = models.ManyToManyField(Participant)
+    link = models.URLField(blank=True)
+    maintainers = models.ManyToManyField(Participant, related_name='projects')
     supervisor = models.ForeignKey(Expert)
     event = models.ForeignKey(Event)
 

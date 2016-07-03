@@ -22,7 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    url(r'^about-us/$', views.about_us, name='about_us'),
+    url(r'^contacts/$', views.about_us, name='contacts'),
     url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='index'),
+
     # Auth
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
     url(r'^signin/$', login_views.sign_in, name='sign_in'),
@@ -36,12 +39,13 @@ urlpatterns = [
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
-    # Participant
+    # Users
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
-    url(r'^about-us/$', views.about_us, name='about_us'),
-    url(r'^contacts/$', views.about_us, name='contacts'),
+    # Projects
+    url(r'^projects/$', views.projects, name='projects'),
+    url(r'^project/(?P<id>\d+)/$', views.project_by_id, name='project_detail'),
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),
