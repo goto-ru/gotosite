@@ -20,29 +20,29 @@ def index(req):
 
 def upcoming(req):
     events = Event.objects.filter(end_date__gte=datetime.date.today()).order_by('begin_date')
-    return render(req, 'events.html', {'events': events, 'title': 'Ближайшие события'})
+    return render(req, 'events/events.html', {'events': events, 'title': 'Ближайшие события'})
 
 
 def archive(req):
     events = Event.objects.filter(end_date__lt=datetime.date.today()).order_by('-end_date')
-    return render(req, 'events.html', {'events': events, 'title': 'Архив событий'})
+    return render(req, 'events/events.html', {'events': events, 'title': 'Архив событий'})
 
 
 def event_by_id(req, id):
     e = Event.objects.get(pk=id)
-    return render(req, 'event_by_id.html', {'event': e})
+    return render(req, 'events/event_by_id.html', {'event': e})
 
 
 def participants(req):
     participants = Participant.objects.all()
 
-    return render(req, 'users.html', {'users': participants, 'title': 'Участники'})
+    return render(req, 'user/users.html', {'users': participants, 'title': 'Участники'})
 
 
 def experts(req):
     experts = Expert.objects.all()
 
-    return render(req, 'users.html', {'users': experts, 'title': 'Эксперты'})
+    return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
 def application_fill(req, event_id):
@@ -112,7 +112,7 @@ def render_profile_edit(req, user):
     if user.participant:
         participant_form = ParticipantEditForm(instance=user.participant)
         base_context['participant_form'] = participant_form
-    return render(req, 'edit.html', base_context)
+    return render(req, 'user/edit.html', base_context)
 
 
 @login_required()
@@ -163,4 +163,4 @@ def user_by_id(req, id):
         pass
     # acc should be typeB if account only has typeA and typeB subclasses
 
-    return render(req, 'user_by_id.html', base_context)
+    return render(req, 'user/user_by_id.html', base_context)
