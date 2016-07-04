@@ -83,8 +83,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+DEBUG = True
 if env == 'debug':
-    DEBUG = True
     DATABASES['default']['HOST'] = '127.0.0.1'
 else:
     ALLOWED_HOSTS = ['localhost']

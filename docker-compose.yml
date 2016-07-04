@@ -1,11 +1,11 @@
 web:
   build: .
   environment:
-    - ENV=postgres
+    - ENV=production
   ports:
     - "8001:8000"
   links:
-    - db:postgres
+    - db:db
   volumes:
     - .:/root/app
   restart: always
