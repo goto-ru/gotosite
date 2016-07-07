@@ -1,74 +1,135 @@
 .profile_img {
-  width: 200px; }
+    width: 200px;
+}
 
 .batch_profile {
-  height: 200px; }
+    height: 200px;
+}
 
 .application {
-  float: right;
-  vertical-align: middle; }
+    float: right;
+    vertical-align: middle;
+}
+
+.navbar{
+    -webkit-box-shadow: none;
+    padding: 15px;
+}
 
 .edit-button {
-  float: right; }
+    float: right;
+}
 
 .logo {
-  max-height: 150%; }
+    max-height: 150%;
+}
 
 body {
-  background-color: white; }
+    background-color: white;
+}
 
 .modal-footer {
-  background-color: white;
-  margin-top: 20px; }
+    background-color: white;
+    margin-top: 20px;
+}
 
 .container {
-  background-color: white;
-  padding-bottom: 20px;
-  font-family: "Open Sans Light", sans-serif;
-  font-size: 15px; }
+    background-color: white;
+    padding-bottom: 20px;
+    font-family: "Open Sans Light", sans-serif;
+    font-size: 15px;
+}
 
 .container.main-container {
-  background-color: white; }
-  .container.main-container div {
+    background-color: white;
+}
+
+.container.main-container div {
     background-color: white;
     padding: 10px;
     border-right: 10px;
     border-style: solid;
-    border-color: white; }
+    border-color: white;
+}
 
 .box {
-  background-color: white; }
+    background-color: white;
+}
 
 .btn-info {
-  background-color: white;
-  color: white; }
+    background-color: white;
+    color: white;
+}
 
 .modal-footer {
-  text-align: left; }
+    text-align: left;
+}
 
 .contacts {
-  text-align: right; }
+    text-align: right;
+    line-height: 1.4;
+}
 
-.bot-logo {
-  max-height: 100px; }
+.contacts h5{
+    margin: 3px;
+}
 
-.bot-text {
-  font-size: 11px; }
+.bot-text img{
+    float: left;
+    max-height: 70px;
+    padding-right: 10px;
+}
+
+.bot-text p{
+    float: left;
+    max-width: 300px;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.hr{
+    background: rgb(67, 180, 152);
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+}
 
 .navbar-nav {
-  font-size: 14px;
-  text-transform: uppercase; }
+    font-size: 14px;
+    text-transform: uppercase;
+}
 
 .navbar-brand {
-  padding: 0; }
-  .navbar-brand img {
+    padding: 0;
+}
+
+.navbar-brand img {
     max-height: 63px;
-    margin-left: 20%; }
+    margin-left: 20%;
+}
 
 .auth-nav {
-  margin-left: 5%; }
+    margin-left: 5%;
+}
 
 label {
-  font-weight: bold; }
+    font-weight: bold;
+}
 
 /*# sourceMappingURL=main.css.map */
+
+.login-btn {
+    margin-top: 2%;
+}
+
+input {
+    width: 100%;
+}
+
+a {
+    cursor: pointer;
+}
+
+.footer-mail {
+    color: rgb(230, 25, 25);
+}

@@ -1,139 +1,253 @@
 {% extends 'base_site.html' %}
-{% block title %}
-    GoTo
+{% block header %}
+    <div class="header">
+          {% include 'navigation.html' %}
+
+        <div class="container" style="background: none;">
+            <div class="xs-force-center header-text">
+                <p>GoTo <br>
+                    Серия меропритий
+                </p>
+                <input class="header-btn btn btn-transparent btn-xl inc" type="button"
+                       value="Принять участие">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 {% endblock %}
 
 {% block container %}
-    <div class="container">
-        <div class="page-header">
-            <h1>GoTo</h1>
-        </div>
-            <div style="width: 34.4058%;" class="col">
-                <div class="cont">
-                    <div class="node widget widget-grid node1217">
-                        <style>.node1217 a {
-                            color: rgb(25, 230, 179);
-                        }</style>
-                        <div style="color: rgb(13, 13, 13); border-radius: 0px;" class="wrapper1">
-                            <div style="padding: 15px 5px;" class="wrapper2">
-                                <div class="grid valign-middle paddings-20px xs-wrap">
-                                    <div class="gridwrap">
-                                        <div style="width: 30.0695%;" class="col">
-                                            <div class="cont">
-                                                <div class="node widget widget-block node1228">
-                                                    <style>.node1228 a {
-                                                        color: rgb(25, 230, 179);
-                                                    }</style>
-                                                    <div style="color: rgb(245, 251, 250); border-radius: 0px; background-color: rgb(67, 180, 152);"
-                                                         class="wrapper1">
-                                                        <div style="padding: 5px;" class="wrapper2">
-                                                            <div class="cont">
-                                                                <div class="node widget widget-paragraph node1259">
-                                                                    <style>.node1259 a {
-                                                                        color: rgb(230, 25, 25);
-                                                                    }</style>
-                                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px; background-color: rgb(255, 255, 255);"
-                                                                         class="wrapper1">
-                                                                        <div style="padding: 5px;" class="wrapper2">
-                                                                            <div class="xs-force-center">
-                                                                                <p style="text-align: center;">
-                                                                                    <span style="font-size: 36px;"><strong>24</strong></span>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="node widget widget-paragraph node1260">
-                                                                    <style>.node1260 a {
-                                                                        color: rgb(25, 230, 179);
-                                                                    }</style>
-                                                                    <div style="color: rgb(245, 251, 250); border-radius: 0px;"
-                                                                         class="wrapper1">
-                                                                        <div style="padding: 5px;" class="wrapper2">
-                                                                            <div class="xs-force-center">
-                                                                                <p style="text-align: center; line-height: 1;">
-                                                                                    <em><span
-                                                                                            style="font-family: georgia, palatino;">июня</span></em>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="width: 69.9305%;" class="col">
-                                            <div class="cont">
-                                                <div class="node widget widget-paragraph node1229">
-                                                    <style>.node1229 a {
-                                                        color: rgb(25, 230, 179);
-                                                    }</style>
-                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"
-                                                         class="wrapper1">
-                                                        <div style="padding: 5px;" class="wrapper2">
-                                                            <div class="xs-force-center">
-                                                                <p>
-                                                                    <strong>GoToHack</strong>
-                                                                </p></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="node widget widget-paragraph node1230">
-                                                    <style>.node1230 a {
-                                                        color: rgb(25, 230, 179);
-                                                    }</style>
-                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"
-                                                         class="wrapper1">
-                                                        <div style="padding: 5px;" class="wrapper2">
-                                                            <div class="xs-force-center">
-                                                                <p>Анализ Данных</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div data-action="formmodal" class="node widget widget-button node1231">
-                                                    <style>.node1231 a {
-                                                        color: rgb(25, 230, 179);
-                                                    }</style>
-                                                    <div style="color: rgb(13, 13, 13); border-radius: 0px;"
-                                                         class="wrapper1">
-                                                        <div style="text-align: left; padding: 5px;"
-                                                             class="wrapper2 xs-force-center macros-metabutton">
-                                                            <div class="macros-button">
-                                                                <div class="btnwrap">
-                                                                    <div><input type="button"
-                                                                                style="border-radius: 0px; border-color: rgb(54, 146, 123); color: rgb(3, 9, 8); background-color: rgba(60, 162, 137, 0.2);"
-                                                                                data-modal="form" data-ga_action=""
-                                                                                data-ga_category="" data-ym_goal=""
-                                                                                value="Принять участие" data-id=""
-                                                                                class="btn btn-transparent dec"
-                                                                                data-action="modal">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="macros-modal"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--amkdmasokdmaokmdokasmdomaspdkmaskdm;oasmd;okasmd;okmaso;dkms;okmd;omas-->
+    {% load staticfiles %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+
+    <div class="destinations">
+        <h1>Направления</h1>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
                 </div>
             </div>
-
-        <div class="col-md-12">
-
-            <a href="{% url 'upcoming_events' %}">Ближайшие события</a>
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h1.jpg" %}>
+            </div>
         </div>
 
+        <div class="container destination">
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h2.jpg" %}>
+            </div>
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
 
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h3.jpg" %}>
+            </div>
+        </div>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h4.jpg" %}>
+            </div>
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="clearfix"></div>
+
+    <div class="container news">
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc" value="Все новости">
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row features">
+        <div style="background: none" class="container">
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-5">
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="container subscribe">
+        <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
+            лекциях,
+            курсах и спецпредложениях.</p>
+        <form>
+            <input class="email" type="email" placeholder="Электронная почта*">
+            <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="container partners">
+        <div class="row">
+            <h1>Партнёры</h1>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/mfti.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/krok.gif" %}>
+            </div>
+
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/intel.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/hse.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/mfti.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/nts.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/rvk.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/amperka.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/innopols.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/rambler.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/blastim.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/codeforces.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/abitur.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/cat.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/golograph.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/cossa.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/popmech.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/newtonew.png" %}>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
 {% endblock %}
+
+

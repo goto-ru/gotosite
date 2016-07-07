@@ -5,7 +5,7 @@
 
 {% block container %}
     <div class="container main-container">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h1>Вход</h1>
 
             <form action="{% url 'sign_in' %}" method="post">
@@ -21,7 +21,7 @@
                            type="password" name="password">
                 </fieldset>
 
-                <input type="submit" class="btn btn-default" value="Войти">
+                <input type="submit" class="btn btn-default login-btn" value="Войти">
             </form>
         </div>
 
