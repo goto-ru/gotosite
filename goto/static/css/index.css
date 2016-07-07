@@ -112,7 +112,7 @@
     border-top-color: rgb(255, 255, 255);
 }
 
-.feature h6{
+.feature h6 {
     color: white;
     text-transform: capitalize;
     font-size: 24px;
@@ -120,40 +120,44 @@
     margin-bottom: 0;
 }
 
-.feature p{
+.feature p {
     line-height: 1.2;
     padding-bottom: 3%;
     color: white;
 }
 
-.email{
+.email {
     border: 2px solid #696969;
     width: 200px;
 }
 
-.subscribe{
+.subscribe {
     margin-top: 5%;
     text-align: center;
 }
-.subscribe p{
+
+.subscribe p {
     text-align: center;
     font-size: 26px;
     line-height: 1.1;
 }
 
-.partners h1{
+.partners h1 {
     text-align: center;
     margin-bottom: 2%;
 }
-.partners{
+
+.partners {
     margin-top: 5%;
 }
-.partner img{
+
+.partner img {
     max-width: 200px;
     max-height: 100px;
     padding: 10px;
 }
-.partner{
+
+.partner {
     text-align: center;
     height: 100px;
 }

@@ -9,3 +9,4 @@ A new version of GoTo's website. Kind of a tailored CRM, based on Django.
 .. |landscape_io| image:: https://landscape.io/github/goto-ru/gotosite/master/landscape.svg?style=flat
         :target: https://landscape.io/github/goto-ru/gotosite/master
         :alt: Code Health
+

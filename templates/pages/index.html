@@ -1,66 +1,24 @@
-{% extends 'base.html' %}
-{% block container %}
-    {% load staticfiles %}
-    <link href="{% static 'css/index.css' %}" rel="stylesheet">
-
+{% extends 'base_site.html' %}
+{% block header %}
     <div class="header">
+          {% include 'navigation.html' %}
+
         <div class="container" style="background: none;">
-            <nav style="padding: 30px 0;" class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs1-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="{% url 'index' %}"> <img style="margin: 0" class="logo"
-                                                                               src="{% static 'img/logo.png' %}">
-                        </a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right auth-nav">
-                            {% if request.user.is_authenticated %}
-                                <li>
-                                    <a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }}</a>
-                                </li>
-                                <li><a href="{% url 'sign_out' %}">Выйти</a></li>
-                            {% else %}
-
-                                <li><a href="{% url 'sign_in' %}">Вход</a></li>
-                                <li><a href="{% url 'sign_up' %}">Регистрация</a></li>
-
-                            {% endif %}
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{% url 'school' %}">Школа</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'hackathon' %}">Хакатон</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'intensive' %}">Интенсив</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'lectoriy' %}">Лекторий</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{% url 'about_us' %}">О нас</a></li>
-                            <li role="separator" class="divider"></li>
-
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
             <div class="xs-force-center header-text">
                 <p>GoTo <br>
                     Серия меропритий
                 </p>
-                <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc" value="Принять участие">
+                <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc"
+                       value="Принять участие">
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
+{% endblock %}
+
+{% block container %}
+    {% load staticfiles %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
 
     <div class="destinations">
         <h1>Направления</h1>
@@ -292,25 +250,4 @@
 
 {% endblock %}
 
-{% block footer %}
-    <div class="hr"></div>
-    <div class="footer">
-        <div style="padding-top: 5px; padding-bottom: 6px;">
-            <div class="container">
-                <div class="col-md-6 bot-text">
-                    <img src="{% static 'img/logo.png' %}">
 
-                    <p>Образовательный проект, посвященный проектной деятельности в различных
-                    высокотехнологических областях. Использование визуальных материалов только с согласия
-                    создателей проекта. Все права защищены.</p>
-
-                </div>
-                <div class="col-md-6 contacts">
-                    <h5>Контакты</h5>
-                    +7 (985) 2443226<br>
-                    <a class="footer-mail" href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
