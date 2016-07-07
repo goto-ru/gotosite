@@ -4,88 +4,121 @@
 {% endblock %}
 
 {% block container %}
+    <style>
+        .profile-left {
+            text-align: center;
+        }
+
+        .save-block {
+            text-align: right;
+        }
+    </style>
     <div class="container">
-        <div class="col-md-12">
-            <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}
-                {% if viewed_user.id == user.id %}
-                    <a class="btn btn-default btn-lg"
-                       href="{% url 'profile_edit' %}">
-                    <span class="glyphicon glyphicon-pencil" >
-
-                    </span>
-                    </a>
-                {% endif %}
-            </h1>
-
-
-        </div>
-
-        <div class="col-md-3">
-            <img src="/media/{{ viewed_user.profile_picture }}" align="left" hspace="5" vspace="5" class="profile_img"
+        {#        Contacts and photo#}
+        <div class="col-md-3 profile-left">
+            <img src="/media/{{ viewed_user.profile_picture }}" align="middle" hspace="5" vspace="5" class="profile_img"
                  alt="{{ viewed_user.first_name }} {{ viewed_user.last_name }}"/>
-        </div>
-        <div class="col-md-9">
-            <label>Пол:</label> {{ viewed_user.sex }} <br>
-            <label>Организация:</label> {{ viewed_user.organization }} <br>
+            <div class="col-md-12">
+                <h3>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h3>
+                <p><b>Email:</b> <a href="mailto:{{ viewed_user.email }}">{{ viewed_user.email }}</a></p>
 
+                {% if viewed_user.vk %}
+                    <p><b>VK:</b> <a href="{{ viewed_user.vk }}">{{ viewed_user.vk }}</a></p>
+                {% endif %}
+
+                {% if viewed_user.github %}
+                    <p><b>Github:</b> <a href="{{ viewed_user.github }}">{{ viewed_user.github }}</a></p>
+                {% endif %}
+            </div>
+        </div>
+
+        {#        Data that can see everyone#}
+        <div class="col-md-5">
             {% if viewed_user.participant %}
-                <label>Город проживания:</label> {{ viewed_user.participant.city }} <br>
-                <label>Страна проживания:</label> {{ viewed_user.participant.citizenship }} <br>
-                <label>Языки и технологии:</label> {{ viewed_user.participant.programming_languages }} <br>
-                <label>Опыт в программировании:</label> {{ viewed_user.participant.experience }} <br>
+
+                <label>Город проживания:</label>
+                <input class="form-control" value="{{ viewed_user.participant.city }}"> <br>
+
+                <label>Языки и технологии:</label>
+                <textarea class="form-control"> {{ viewed_user.participant.programming_languages }} </textarea> <br>
+
+                <label>Опыт в программировании:</label>
+                <input class="form-control" value="{{ viewed_user.participant.experience }}"> <br>
+
             {% endif %}
+
             {% if viewed_user.expert %}
-                <label>Должность:</label> {{ viewed_user.expert.position }} <br>
+
+                <label>Организация:</label> <input class="form-control" value="{{ viewed_user.organization }}"> <br>
+
+                <label>Должность:</label> <input class="form-control" value="{{ viewed_user.expert.position }}"> <br>
             {% endif %}
-            <b>О себе:</b> {{ viewed_user.about }}
+
+            <label>О себе:</label>
+            <textarea class="form-control">{{ viewed_user.about }}</textarea>
+
         </div>
 
-        <div class="col-md-9">
-            <h3>Контакты</h3>
-            <p><b>Email:</b> <a href="mailto:{{ viewed_user.email }}">{{ viewed_user.email }}</a></p>
-            {% if viewed_user.vk %}
-                <p><b>VK:</b> <a href="{{ viewed_user.vk }}">{{ viewed_user.vk }}</a></p>
-            {% endif %}
-            {% if viewed_user.github %}
-                <p><b>Github:</b> <a href="{{ viewed_user.github }}">{{ viewed_user.github }}</a></p>
-            {% endif %}
-        </div>
+        {#    Personal data for events#}
         {% if viewed_user.participant %}
             {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
-                <div class="col-md-9">
-                    <h3>Личные данные</h3>
+                <div class="col-md-4">
+
                     <label>Полных лет:</label> {{ viewed_user.participant.current_age }} <br>
-                    <label>Дата рождения: </label> {{ viewed_user.participant.birthday }} <br>
-                    <label>Класс:</label> {{ viewed_user.participant.current_class }} <br>
-                    <label>Медецинские рекомендации:</label> {{ viewed_user.participant.health_issues }} <br>
-                    <label>Телефон:</label> {{ viewed_user.participant.phone_number }} <br>
-                    <label>Телефон родителей:</label> {{ viewed_user.participant.parent_phone_number }} <br>
+
+                    <label>Дата рождения: </label>
+                    <input type="date" class="form-control" value="{{ viewed_user.participant.birthday }}"> <br>
+
+                    <label>Год окончания учёбы:</label> {{ viewed_user.participant.current_class }} <br>
+
+                    <label>Медецинские рекомендации:</label>
+                    <input class="form-control" value="{{ viewed_user.participant.health_issues }}"> <br>
+
+                    <label>Телефон:</label>
+                    <input class="form-control" value="{{ viewed_user.participant.phone_number }}"> <br>
+
+                    <label>Телефон родителей:</label>
+                    <input class="form-control" value="{{ viewed_user.participant.parent_phone_number }}"> <br>
+
+                    <label>Страна проживания:</label>
+                    <input class="form-control" value="{{ viewed_user.participant.citizenship }}"> <br>
+
+                    <label>Пол:</label> {{ viewed_user.sex }} <br>
                 </div>
 
             {% endif %}
-            {% if viewed_user.id == user.id %}
-                <div class="col-md-12">
-                    <h2>Статус заявок</h2>
-                    {% for ap in viewed_user.participant.application_set.all %}
-                        <div class="alert alert-{{ ap.class_status }}" role="alert">
-                            <b>Мероприятие:</b> {{ ap.event.name }} <br>
-                            <b>Статус заявки:</b> {{ ap.text_status }}
-                            <form action="{% url 'application' ap.id %}" class="application" method="post">
-                                <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
-                                    заявку</a>
-                                {% if ap.status == 1 %}
-                                    <input type="submit" class="btn btn-default btn-sm" name="confirm"
-                                           value="Подтвердить">
-                                    <input type="submit" class="btn btn-default btn-sm" name="reject"
-                                           value="Отозвать заявку">
-                                {% endif %}
-                                {% csrf_token %}
-                            </form>
 
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+        {% endif %}
+
+        {% if  viewed_user.id == user.id %}
+            <div class="col-md-12 save-block">
+                <a> Сохранить изменения </a>
+            </div>
+        {% endif %}
+
+        {% if viewed_user.id == user.id %}
+            <div class="col-md-12">
+                <h2>Статус заявок</h2>
+                {% for ap in viewed_user.participant.application_set.all %}
+                    <div class="alert alert-{{ ap.class_status }}" role="alert">
+                        <b>Мероприятие:</b> {{ ap.event.name }} <br>
+                        <b>Статус заявки:</b> {{ ap.text_status }}
+                        <form action="{% url 'application' ap.id %}" class="application" method="post">
+                            <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
+                                заявку</a>
+                            {% if ap.status == 1 %}
+                                <input type="submit" class="btn btn-default btn-sm" name="confirm"
+                                       value="Подтвердить">
+                                <input type="submit" class="btn btn-default btn-sm" name="reject"
+                                       value="Отозвать заявку">
+                            {% endif %}
+                            {% csrf_token %}
+                        </form>
+
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
+
 {% endblock %}
