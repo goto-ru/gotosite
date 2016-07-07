@@ -85,7 +85,7 @@ DATABASES = {
 }
 if env == 'debug':
     DEBUG = True
-    DATABASES['default']['HOST'] = '127.0.0.1'
+    DATABASES['default']['HOST'] = 'localhost'
 else:
     ALLOWED_HOSTS = ['localhost']
 

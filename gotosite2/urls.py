@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
     url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='index'),
     # Auth
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
@@ -40,8 +39,15 @@ urlpatterns = [
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
-    url(r'^about-us/$', views.about_us, name='about_us'),
     url(r'^contacts/$', views.about_us, name='contacts'),
+
+    # Pages
+    url(r'^hackathon/$', views.hackathon, name='hackathon'),
+    url(r'^school/$', views.school, name='school'),
+    url(r'^intensive/$', views.intensive, name='intensive'),
+    url(r'^lectoriy/$', views.lectoriy, name='lectoriy'),
+    url(r'^about-us/$', views.about_us, name='about_us'),
+    url(r'^$', views.index, name='index'),
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),

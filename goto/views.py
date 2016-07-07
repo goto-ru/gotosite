@@ -15,7 +15,7 @@ from .forms import *
 
 def index(req):
     context_dictionary = {}
-    return render(req, 'index.html', context_dictionary)
+    return render(req, 'pages/index.html', context_dictionary)
 
 
 def upcoming(req):
@@ -131,8 +131,19 @@ def profile_edit(req):
 
 
 def about_us(req):
-    pass
+    return render(req, 'pages/about_us.html')
 
+def hackathon(req):
+    return render(req, 'pages/hackathon.html')
+
+def school(req):
+    return render(req, 'pages/school.html')
+
+def intensive(req):
+    return render(req, 'pages/intensive.html')
+
+def lectoriy(req):
+    return render(req, 'pages/lectoriy.html')
 
 def page(req, slug):
     return render(req, 'pages/%s.html' % (slug,))
