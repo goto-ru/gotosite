@@ -171,6 +171,7 @@ def user_by_id(req, id):
 
 
 def assignment(req, id):
+    'view assignment'
     assignment = get_object_or_404(Assignment, pk=id)
     base_context = {'assignment': assignment}
     if req.user.gotouser.participant:
