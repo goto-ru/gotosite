@@ -41,6 +41,5 @@ admin.site.register(Event, EventAdmin)
 
 for model in models:
     admin.site.register(model)
-1
 
 # Register your models here.
