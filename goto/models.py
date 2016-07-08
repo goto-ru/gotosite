@@ -183,16 +183,26 @@ class ParticipantComment(models.Model):
     is_private = models.BooleanField(default=True)
 
 
+    def __str__(self):
+        return self.text
+
+
 class ProjectComment(models.Model):
     text = models.TextField(blank=True)
     project = models.ForeignKey(Project)
     author = models.ForeignKey(GotoUser, related_name='left_project_comments')
     is_private = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.text
+
 
 class Assignment(models.Model):
     title = models.CharField(max_length=256)
     text = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 
 class Solution(models.Model):
