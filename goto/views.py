@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponseServerError, HttpResponseRedirect
 
 from django.contrib.auth import login, logout, authenticate
@@ -81,6 +81,7 @@ def project_by_id(req, id):
     base_context = {'project': project}
     return render(req, 'project_by_id.html', base_context)
 
+
 def projects(req):
     projects = Project.objects.all()
     return render(req, 'projects.html', {'projects': projects})
@@ -115,7 +116,8 @@ def render_profile_edit(req, user):
         base_context['participant_form'] = participant_form
     return render(req, 'user/edit.html', base_context)
 
-#Comment
+
+# Comment
 
 @login_required()
 def profile_edit(req):
@@ -166,3 +168,32 @@ def user_by_id(req, id):
     # acc should be typeB if account only has typeA and typeB subclasses
 
     return render(req, 'user/user_by_id.html', base_context)
+
+
+def assignment(req, id):
+    assignment = get_object_or_404(Assignment, pk=id)
+    base_context = {'assignment': assignment}
+    if req.user.gotouser.participant:
+        base_context['solutions'] = Solution.objects.filter(assignment=assignment,
+                                                            participant=req.user.gotouser.participant).all()
+    return render(req, 'solution/assignment.html', base_context)
+
+
+@login_required()
+def apply_solution(req, id):
+    if req.POST:
+        participant = get_object_or_404(Participant, pk=req.user.pk)
+        s = Solution()
+        if req.FILES:
+            s.file = req.FILES['file']
+        s.participant_comment = req.POST['comment']
+        s.participant = participant
+        s.assignment = get_object_or_404(Assignment, id=id)
+        s.date_posted = datetime.datetime.now()
+        s.save()
+    return HttpResponseRedirect(reverse('assignment', args=[id]))
+
+
+def view_solution(req, id):
+    solution = get_object_or_404(Solution, pk=id)
+    return render(req, 'solution/solution.html', {'solution': solution})
