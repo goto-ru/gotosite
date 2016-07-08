@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 
 from django.core.urlresolvers import reverse
-from .forms import *
+# from .forms import *
 
 
 # Create your views here.
