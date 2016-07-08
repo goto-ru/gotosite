@@ -3,13 +3,18 @@ from datetime import date
 from django.contrib.auth.models import User
 
 
-class GotoUser(User):
+class GotoUser(models.Model):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
+    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, blank=True, null=True)
     SEX = (('M', 'Male'),
            ('F', 'Female'),
            ('N', 'Can\'t say'),)
     sex = models.CharField(choices=SEX, default='M', max_length=2)
+    first_name_tmp = models.CharField(max_length=40)
+    last_name_tmp = models.CharField(max_length=40)
+    email_tmp = models.EmailField(blank=True)
     surname = models.CharField(max_length=40, blank=True)
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
@@ -18,8 +23,8 @@ class GotoUser(User):
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
-    def __str__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+    # def __str__(self):
+    #     return '%s %s' % (self.first_name, self.last_name)
 
 
 class Participant(GotoUser):
@@ -181,7 +186,6 @@ class ParticipantComment(models.Model):
     participant = models.ForeignKey(Participant, related_name='comments')
     author = models.ForeignKey(GotoUser, related_name='left_participant_comments')
     is_private = models.BooleanField(default=True)
-
 
     def __str__(self):
         return self.text
