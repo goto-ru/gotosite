@@ -1,0 +1,46 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    {{ assignment.title }}
+{% endblock %}
+
+{% block container %}
+    <div class="container main-container">
+        <div class="page-header">
+            <h1>{{ assignment.title }} </h1>
+        </div>
+
+        <div class="col-md-12 box">
+            <p>{{ assignment.text }}</p>
+
+        </div>
+        <div class="col-md-12">
+            <form method="POST" action="{% url 'apply_solution' assignment.id %}" enctype="multipart/form-data">
+                <fieldset>
+                    <label for="fileInput">Файл</label>
+                    <input id="fileInput" type="file" name="file">
+                </fieldset>
+                <fieldset>
+                    <label for="commentInput">Комментарий</label>
+                    <input id="commentInput" class="form-control" type="text" name="comment">
+                </fieldset>
+                {% csrf_token %}
+                <input type="submit" class="btn btn-default login-btn" value="Отправить">
+            </form>
+        </div>
+        {% if solutions %}
+            <div class="col-md-12">
+                <h2>Мои решения</h2>
+                {% for s in solutions %}
+                    <h4>Решение от {{ s.date_posted|date }}</h4>
+                    {{ s.participant_comment  }}
+
+
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+
+    </div>
+{% endblock %}
