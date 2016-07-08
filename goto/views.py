@@ -182,6 +182,7 @@ def assignment(req, id):
 
 @login_required()
 def apply_solution(req, id):
+    """Only participants"""
     if req.POST:
         participant = get_object_or_404(Participant, pk=req.user.pk)
         s = Solution()
