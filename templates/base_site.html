@@ -1,102 +1,31 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block header %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs1-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'index' %}"> <img class="logo" src="{% static 'img/logo.png' %}">
-                </a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right auth-nav">
-
-                    {% if request.user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
-                        </li>
-                        <li><a href="{% url 'sign_out' %}">Выйти</a></li>
-                    {% else %}
-                        <li><a href="{% url 'sign_in' %}">Sign in</a></li>
-                        <li><a href="{% url 'sign_up' %}">Sign up</a></li>
-
-                    {% endif %}
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'upcoming_events' %}">Ближайшие события</a></li>
-                    <li><a href="{% url 'archive_events' %}">Архив</a></li>
-                    <li><a href="{% url 'participants' %}">Участники</a></li>
-                    <li><a href="{% url 'experts' %}">Эксперты</a></li>
-                    <li><a href="{% url 'projects' %}">Проекты</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{% url 'about_us' %}">О нас</a></li>
-                    <li><a href="{% url 'contacts' %}">Контакты</a></li>
-                    <li role="separator" class="divider"></li>
-
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <div class="container-fluid">
-        {% if err %}
-            <div class="alert alert-danger" role="alert">
-                {{ err }}
-            </div>
-        {% endif %}
-        {% if info %}
-            <div class="alert alert-info" role="alert">
-                {{ info }}
-            </div>
-        {% endif %}
-    </div>
-
+    {% include 'navigation.html' %}
 
 {% endblock %}
 
 {% block footer %}
-
-
-
+    <div class="hr"></div>
     <div class="footer">
-
-        <div style="color: rgb(245, 251, 250); background-color: rgb(67, 180, 152);
-        padding-top: 1px; padding-bottom: 1px;">
-            <div class="macros-header"></div>
-        </div>
-
         <div style="padding-top: 5px; padding-bottom: 6px;">
             <div class="container">
-                <div class="col-md-2">
-                    <img class="bot-logo" src="{% static 'img/logo.png' %}">
-                </div>
-                <div class="col-md-3 bot-text">
+                <div class="col-md-6 bot-text">
+                    <img src="{% static 'img/logo.png' %}">
 
-                    Образовательный проект, посвященный проектной деятельности в различных
-                    высокотехнологических областях. Использование визуальных материалов только с согласия
-                    создателей проекта. Все права защищены.
+                    <p>Образовательный проект, посвященный проектной деятельности в различных
+                        высокотехнологических областях. Использование визуальных материалов только с согласия
+                        создателей проекта. Все права защищены.</p>
 
                 </div>
-                <div class="col-md-7 contacts">
-                    <h4>Контакты</h4>
+                <div class="col-md-6 contacts">
+                    <h5>Контакты</h5>
                     +7 (985) 2443226<br>
-                    <a href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
+                    <a class="footer-mail" href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
 
 {% endblock %}

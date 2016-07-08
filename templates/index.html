@@ -1,15 +1,171 @@
 {% extends 'base_site.html' %}
-{% block title %}
-    GoTo
+{% block header %}
+    <div class="header">
+          {% include 'navigation.html' %}
+
+        <div class="container" style="background: none;">
+            <div class="xs-force-center header-text">
+                <p>GoTo <br>
+                    Серия меропритий
+                </p>
+                <input class="header-btn btn btn-transparent btn-xl inc" type="button"
+                       value="Принять участие">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 {% endblock %}
 
 {% block container %}
-    <div class="container">
-        <div class="page-header">
-            <h1>GoTo</h1>
+    {% load staticfiles %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+
+    <div class="destinations">
+        <h1>Направления</h1>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h1.jpg" %}>
+            </div>
         </div>
 
-        <div class="col-md-12">
+
+        <div class="container destination">
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h2.jpg" %}>
+            </div>
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h3.jpg" %}>
+            </div>
+        </div>
+
+        <div class="container destination">
+            <div class="col-md-6 destination-img">
+                <img src={% static "img/destinations/h4.jpg" %}>
+            </div>
+            <div class="col-md-6 destination-text">
+                <h3>Хакатон</h3>
+                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
+                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
+                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
+                    предложение повторяется n раз.</p>
+
+                <div class="col-md-12 destination-about">
+                    <p>Школьные каникулы</p>
+                    <a>Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="container news">
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <div class="col-md-3 article">
+            <img src={% static "img/news/n1.jpg" %}>
+            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
+            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
+        </div>
+
+        <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc" value="Все новости">
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row features">
+        <div style="background: none" class="container">
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-5">
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+                <div class="white-hr"></div>
+
 
             <p>
 
@@ -28,8 +184,92 @@
                 непрерывное общение.
 
             </p>
+
+                <div class="features-mini">
+                    <div class="feature">
+                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-
     </div>
+    <div class="clearfix"></div>
+
+    <div class="container subscribe">
+        <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
+            лекциях,
+            курсах и спецпредложениях.</p>
+        <form>
+            <input class="email" type="email" placeholder="Электронная почта*">
+            <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="container partners">
+        <div class="row">
+            <h1>Партнёры</h1>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/mfti.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/krok.gif" %}>
+            </div>
+
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/intel.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/hse.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/mfti.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/nts.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/rvk.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/amperka.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/innopols.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/rambler.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/blastim.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/codeforces.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/abitur.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/cat.jpg" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/golograph.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/cossa.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/popmech.png" %}>
+            </div>
+            <div class="col-md-2 partner">
+                <img src={% static "img/partners/newtonew.png" %}>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
 {% endblock %}
+
+
