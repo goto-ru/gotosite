@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+from .subscribe_views import  *
 
 
 class GotoUser(User):
@@ -32,6 +33,20 @@ class Participant(GotoUser):
     phone_number = models.CharField(max_length=40, blank=True)
     parent_phone_number = models.CharField(max_length=40, blank=True)
     health_issues = models.TextField(default='Никаких', blank=True)
+    _subscribed_to_email = models.BooleanField(default=False)
+
+    @property
+    def subscribed_to_email(self):
+        return self._subscribed_to_email
+
+    @subscribed_to_email.setter
+    def subscribed_to_email(self, val):
+        if val:
+            mailchimp_subscribe(self.email)
+        else:
+            mailchimp_unsubscribe(self.email)
+        self._subscribed_to_email = val
+
 
     # Public data
     programming_languages = models.TextField(blank=True, )
@@ -182,7 +197,6 @@ class ParticipantComment(models.Model):
     author = models.ForeignKey(GotoUser, related_name='left_participant_comments')
     is_private = models.BooleanField(default=True)
 
-
     def __str__(self):
         return self.text
 
@@ -217,3 +231,7 @@ class Solution(models.Model):
     score = models.FloatField(default=0)
     expert_public_comment = models.CharField(max_length=1000, blank=True, null=True)
     expert_private_comment = models.CharField(max_length=1000, blank=True, null=True)
+
+
+class Subscriber(models.Model):
+    email = models.EmailField(primary_key=True)
