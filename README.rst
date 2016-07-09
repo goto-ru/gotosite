@@ -21,14 +21,15 @@ Setting up
 For development
 Dependencies: python3, postgres
 1. git clone https://github.com/goto-ru/gotosite/
-2. cd gotosite
-3. pip3 install -r requirements.txt
-4. python3 manage.py migrate
-5. python3 runserver
+#. cd gotosite
+#. pip3 install -r requirements.txt
+#. python3 manage.py migrate
+#. python3 runserver
 
 For production
 Dependencies: docker, docker-compose
 1. git clone https://github.com/goto-ru/gotosite/
-2. docker-compose up -d --build
+#. docker-compose up -d --build
    Service will become available at 0.0.0.0:8001
-3. (Optionally) for CI you can set up https://github.com/Omrigan/flask-github-ci
+#. (Optionally) for CI you can set up https://github.com/Omrigan/flask-github-ci
+
