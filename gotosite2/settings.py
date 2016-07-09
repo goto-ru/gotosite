@@ -86,9 +86,10 @@ DATABASES = {
 DEBUG = True
 
 if env == 'debug':
-    DATABASES['default']['HOST'] = '127.0.0.1'
     from .private_settings.debug_settings import *
+    DATABASES['default']['HOST'] = '127.0.0.1'
 else:
+    from .private_settings.production_settings import *
     ALLOWED_HOSTS = ['localhost']
 
 # Password validation
