@@ -1,0 +1,3 @@
+[submodule "gotosite2/private_settings"]
+	path = gotosite2/private_settings
+	url = https://github.com/Omrigan/gotosite-private-settings

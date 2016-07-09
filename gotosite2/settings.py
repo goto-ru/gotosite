@@ -84,8 +84,10 @@ DATABASES = {
     }
 }
 DEBUG = True
+
 if env == 'debug':
     DATABASES['default']['HOST'] = '127.0.0.1'
+    from .private_settings.debug_settings import *
 else:
     ALLOWED_HOSTS = ['localhost']
 
