@@ -171,6 +171,7 @@ def user_by_id(req, id):
 
 
 def assignment(req, id):
+    """view assignment"""
     assignment = get_object_or_404(Assignment, pk=id)
     base_context = {'assignment': assignment}
     if req.user.gotouser.participant:
@@ -181,6 +182,7 @@ def assignment(req, id):
 
 @login_required()
 def apply_solution(req, id):
+    """Only participants"""
     if req.POST:
         participant = get_object_or_404(Participant, pk=req.user.pk)
         s = Solution()
