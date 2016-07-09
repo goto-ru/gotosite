@@ -23,8 +23,8 @@ class GotoUser(models.Model):
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
-    # def __str__(self):
-    #     return '%s %s' % (self.first_name, self.last_name)
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
 
 
 class Participant(GotoUser):

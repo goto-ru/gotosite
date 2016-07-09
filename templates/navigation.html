@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav navbar-right auth-nav">
                 {% if request.user.is_authenticated %}
                     <li>
-                        <a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }}</a>
+                        <a href="{% url 'user_detail' user.gotouser.pk %}">{{ request.user.gotouser.first_name }}</a>
                     </li>
                     <li><a href="{% url 'sign_out' %}">Выйти</a></li>
                 {% else %}
