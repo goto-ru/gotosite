@@ -8,6 +8,7 @@ import datetime
 
 from django.core.urlresolvers import reverse
 from .forms import *
+import requests
 
 
 # Create your views here.
@@ -116,8 +117,6 @@ def render_profile_edit(req, user):
         base_context['participant_form'] = participant_form
     return render(req, 'user/edit.html', base_context)
 
-
-# Comment
 
 @login_required()
 def profile_edit(req):
