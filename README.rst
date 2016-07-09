@@ -36,6 +36,6 @@ Dependencies: docker, docker-compose
 
 1. git clone https://github.com/goto-ru/gotosite/
 #. docker-compose up -d --build
-Service will become available at 0.0.0.0:8001
+   Service will become available at 0.0.0.0:8001
 #. (Optionally) for CI you can set up https://github.com/Omrigan/flask-github-ci
 
