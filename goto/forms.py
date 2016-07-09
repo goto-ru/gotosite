@@ -6,8 +6,8 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = GotoUser
         fields = [
-            'last_name_tmp',
-            'first_name_tmp',
+            'last_name',
+            'first_name',
 
             'surname',
             'organization',

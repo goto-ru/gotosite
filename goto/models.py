@@ -12,9 +12,9 @@ class GotoUser(models.Model):
            ('F', 'Female'),
            ('N', 'Can\'t say'),)
     sex = models.CharField(choices=SEX, default='M', max_length=2)
-    first_name_tmp = models.CharField(max_length=40)
-    last_name_tmp = models.CharField(max_length=40)
-    email_tmp = models.EmailField(blank=True)
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
+    email = models.EmailField(blank=True)
     surname = models.CharField(max_length=40, blank=True)
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
