@@ -103,7 +103,7 @@ class Event(models.Model):
 
     price = models.CharField(max_length=400, blank=True)
     target_auditory = models.CharField(max_length=400, blank=True)
-    format = models.CharField(max_length=400, blank=True)
+    format = models.CharField(max_length=400, blank=True, choices=FORMATS)
     place = models.CharField(max_length=400, blank=True)
 
     begin_date = models.DateField(default=date.today)
