@@ -8,13 +8,18 @@
 
         <div class="col-md-12">
             <h1>{{ title }}</h1>
+            {% if events|length == 0 %}
+                <p>Нет событий</p>
+
+            {% endif %}
         </div>
+
         {% for e in events %}
             <div class="col-md-4">
                 <h3>{{ e.name }} </h3>
                 <p>{{ e.short_description }} </p>
-            <b>{{ e.begin_date }} - {{ e.end_date }}</b>
-            <a href="{% url 'event_detail' e.pk %}">Подробнее</a>
+                <b>{{ e.begin_date }} - {{ e.end_date }}</b>
+                <a href="{% url 'event_detail' e.pk %}">Подробнее</a>
             </div>
         {% endfor %}
 

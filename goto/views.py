@@ -24,6 +24,21 @@ def upcoming(req):
     return render(req, 'events/events.html', {'events': events, 'title': 'Ближайшие события'})
 
 
+def schools(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='school').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Школы'})
+
+
+def hackathons(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='hackathon').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Хакатоны'})
+
+
+def lectures(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='lecture').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Лекции'})
+
+
 def archive(req):
     events = Event.objects.filter(end_date__lt=datetime.date.today()).order_by('-end_date')
     return render(req, 'events/events.html', {'events': events, 'title': 'Архив событий'})

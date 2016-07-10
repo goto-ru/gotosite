@@ -92,6 +92,11 @@ class Page(models.Model):
 
 
 class Event(models.Model):
+    FORMATS = (
+        ('school', 'Школа'),
+        ('hackathon', 'Хакатон'),
+        ('lecture', 'Лекция'),
+    )
     name = models.CharField(max_length=256, )
     short_description = models.CharField(max_length=512, blank=True)
     full_description = models.TextField(blank=True)

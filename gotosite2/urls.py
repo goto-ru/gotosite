@@ -35,6 +35,10 @@ urlpatterns = [
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
+    url(r'^schools/$', views.schools, name='schools'),
+    url(r'^hackathons/$', views.hackathons, name='hackathons'),
+    url(r'^lectures/$', views.lectures, name='lectures'),
+
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
