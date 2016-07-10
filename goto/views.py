@@ -60,15 +60,19 @@ def experts(req):
 
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
+
 @login_required()
 def application_fill(req, event_id):
-    if not req.user.is_authenticated():
-        return render(req, 'fill_application.html', {'err': 'Please login as participant to fill application!'})
-    user = GotoUser.objects.get(pk=req.user.pk)
     event = Event.objects.get(pk=event_id)
-    base_cotext = {'user': user, 'event': event}
-    if not user.is_authenticated() or user.participant is None:
-        base_cotext.update({'err': 'Please login as participant to fill application!'})
+    base_cotext = {'event': event}
+    if not req.user.is_authenticated():
+        base_cotext['err'] = 'Пожалуйста, войдите как участник, чтобы подать заявку!'
+        return render(req, 'events/events.html', base_cotext)
+    user = GotoUser.objects.get(pk=req.user.pk)
+    base_cotext['user'] = user
+    if user.participant is None:
+        base_cotext.update({'err': 'Пожалуйста, '
+                                   'войдите как участник, чтобы подать заявку!'})
         return render(req, 'fill_application.html', base_cotext)
     a = Application.objects.filter(participant=user.participant, event=event)
     if a.count() > 0:
