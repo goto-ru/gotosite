@@ -9,14 +9,14 @@
             <h1>{{ event.name }} </h1>
 
         </div>
-        {#        <div class="row">#}
         <div class="col-md-8 box">
             <p>{{ event.full_description }} </p>
 
             {% if user.gotouser.participant %}
                 <a class="btn btn-default btn-lg" href="{% url 'application_fill' event.pk %}">Подать заявку</a>
             {% else %}
-                <a class="btn btn-warning btn-lg" href="{% url 'sign_up'%}">Войдите как участник, чтобы подать заявку</a>
+                <a class="btn btn-warning btn-lg" href="{% url 'sign_up' %}">Войдите как участник, чтобы подать
+                    заявку</a>
             {% endif %}
 
         </div>

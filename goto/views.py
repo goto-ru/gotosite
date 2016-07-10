@@ -76,7 +76,7 @@ def application_fill(req, event_id):
         return render(req, 'fill_application.html', base_cotext)
     a = Application.objects.filter(participant=user.participant, event=event)
     if a.count() > 0:
-        base_cotext.update({'err': 'You already posted an application!'})
+        base_cotext.update({'err': 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.'})
         return render(req, 'fill_application.html', base_cotext)
     if req.method == 'POST':
         app = Application()
