@@ -60,8 +60,10 @@ def experts(req):
 
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
-
+@login_required()
 def application_fill(req, event_id):
+    if not req.user.is_authenticated():
+        return render(req, 'fill_application.html', {'err': 'Please login as participant to fill application!'})
     user = GotoUser.objects.get(pk=req.user.pk)
     event = Event.objects.get(pk=event_id)
     base_cotext = {'user': user, 'event': event}
