@@ -10,17 +10,26 @@
             <h1>{{ project.title }} </h1>
 
         </div>
+    {{ project.maintainers.all }}
+{{ req.user.gotouser.participant }}
+        {% if req.user.gotouser.participant in project.maintainers.all %}
+            <form action="{% url 'project_detail' project.id %}" method="post">
 
-        <div class="col-md-8 box">
-            <p><a href="{{ project.link }}">{{ project.link }}</a> </p>
-            <p>{{ project.description }} </p>
-            <p>Сделано в рамках мероприятия
-                "<a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a>"</p>
-        </div>
+             <input type="submit" value="Сохранить">
+            </form>
 
+        {% else %}
+            <div class="col-md-12 box">
+123
+                <p><a href="{{ project.link }}">{{ project.link }}</a></p>
+                <p>{{ project.description }} </p>
+                {% if project.event %}
+                    <p>Сделано в рамках мероприятия
+                        "<a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a>"</p>
+                {% endif %}
+            </div>
+        {% endif %}
 
     </div>
 
-
-    </div>
 {% endblock %}

@@ -63,7 +63,7 @@
                 </div>
 
             {% endif %}
-            {% if viewed_user.id == user.id and viewed_user.participant  %}
+            {% if viewed_user.id == user.id and viewed_user.participant %}
                 <div class="col-md-12">
                     <h2>Статус заявок</h2>
                     {% for ap in viewed_user.participant.application_set.all %}
@@ -96,13 +96,18 @@
                             {% for project in viewed_user.participant.projects.all %}
                                 <div class="alert alert-info" role="alert">
                                     <a
-                                        href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
+                                            href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
                                     <b>Мероприятие:</b> {{ project.event }} <br>
 
                                 </div>
                             {% endfor %}
                         {% else %}
                             <p>Нет проектов, созданных этим участником</p>
+                        {% endif %}
+                        {% if viewed_user.id == user.id %}
+                            <a class="btn btn-default btn-lg"
+                               href="{% url 'project_create' %}">Добавить проект</a>
+
                         {% endif %}
                     </div>
 

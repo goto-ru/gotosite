@@ -186,12 +186,12 @@ class Answer(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=256, default='Пустой проект')
     description = models.TextField(blank=True)
     link = models.URLField(blank=True)
     maintainers = models.ManyToManyField(Participant, related_name='projects')
-    supervisor = models.ForeignKey(Expert)
-    event = models.ForeignKey(Event)
+    supervisor = models.ForeignKey(Expert, blank=True, null=True)
+    event = models.ForeignKey(Event, blank=True, null=True)
 
     def __str__(self):
         return self.title

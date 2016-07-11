@@ -104,6 +104,15 @@ def project_by_id(req, id):
     return render(req, 'project_by_id.html', base_context)
 
 
+@login_required()
+def project_create(req, ):
+    project = Project()
+    project.save()
+    project.maintainers.add(req.user.gotouser.participant)
+    project.save()
+    return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+
+
 def projects(req):
     projects = Project.objects.all()
     return render(req, 'projects.html', {'projects': projects})
