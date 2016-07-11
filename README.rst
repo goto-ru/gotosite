@@ -25,6 +25,7 @@ Dependencies: python3, postgres
 
 1. git clone https://github.com/goto-ru/gotosite/
 #. cd gotosite
+#. git submodule init
 #. pip3 install -r requirements.txt
 #. python3 manage.py migrate
 #. python3 runserver
@@ -37,4 +38,3 @@ Dependencies: docker, docker-compose
 1. git clone https://github.com/goto-ru/gotosite/
 2. docker-compose up -d --build **Service will become available at 0.0.0.0:8001**
 3. (Optionally) for CI you can set up https://github.com/Omrigan/flask-github-ci
-
