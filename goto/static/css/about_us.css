@@ -1,16 +1,131 @@
-span{
-    text-align: center;
-    font-weight: 300;
-    font-size: 48px;
+.squares {
+    position: relative;
+    overflow: auto;
+    display: block;
 }
 
-.desc{
+h1 {
+    text-align: center;
+}
+
+.green_square {
+    background: #00b498;
+    padding: 4%;
+}
+
+.green_square h2 {
+    text-align: center;
+}
+
+.green_square p {
+    font-size: 15px;
+}
+
+.image_square {
+    height: inherit;
+    width: 50%;
+}
+
+.whitespace {
+    margin-top: 5%;
+}
+
+.yellow {
+    color: #f3ea67;
+}
+
+.purple {
+    color: #603d8b;
+}
+
+.orange {
+    color: #f58568;
+}
+
+.orange-background {
+    background: #f58568;
+}
+
+.green {
+    color: #00b498;
+}
+
+.green-background {
+    background-color: #00b498;
+}
+
+.white {
     color: white;
 }
 
-svg{
-    z-index: -1;
+.timegrid {
+    background: white;
+    margin: 2%;
+    border: 2px solid whitesmoke;
 }
-.in-desc{
-    background: none;
+
+.time {
+    font-size: 25px;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.time-col {
+    padding: 3%;
+}
+
+.description {
+    padding: 3%;
+}
+
+.staff {
+    margin: 3%;
+    background: white;
+    position: relative;
+}
+
+.staff img {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.staff h3 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.height-fix {
+    height: inherit;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.int{
+    font-size: 50px;
+    margin-bottom: 0;
+}
+.int-description{
+    font-size: 18px;
+}
+.ponte{
+    text-align: center;
+}
+
+.partner{
+    display: block !important;
 }

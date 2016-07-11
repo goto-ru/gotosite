@@ -46,6 +46,10 @@ urlpatterns = [
     # Projects
     url(r'^projects/$', views.projects, name='projects'),
     url(r'^project/(?P<id>\d+)/$', views.project_by_id, name='project_detail'),
+    # Assignments
+    url(r'^assignment/(?P<id>\d+)/$', views.assignment, name='assignment'),
+    url(r'^assignment/apply/(?P<id>\d+)/$', views.apply_solution, name='apply_solution'),
+    url(r'^solution/(?P<id>\d+)/$', views.view_solution, name='solution'),
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),
