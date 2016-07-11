@@ -185,8 +185,8 @@
         <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
             лекциях,
             курсах и спецпредложениях.</p>
-        <form>
-            <input class="email" type="email" placeholder="Электронная почта*">
+        <form action="{% url 'subscribe' %}" method="get">
+            <input class="email" type="email" name="email" placeholder="Электронная почта*">
             <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
         </form>
     </div>

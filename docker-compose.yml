@@ -9,7 +9,6 @@ web:
   volumes:
     - .:/root/app
   restart: always
-  command: 'python3 manage.py runserver 0.0.0.0:8000 -v 3'
 db:
   image: postgres
   restart: always

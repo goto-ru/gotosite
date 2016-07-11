@@ -8,6 +8,7 @@ import datetime
 
 from django.core.urlresolvers import reverse
 from .forms import *
+import requests
 
 
 # Create your views here.
@@ -21,6 +22,21 @@ def index(req):
 def upcoming(req):
     events = Event.objects.filter(end_date__gte=datetime.date.today()).order_by('begin_date')
     return render(req, 'events/events.html', {'events': events, 'title': 'Ближайшие события'})
+
+
+def schools(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='school').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Школы'})
+
+
+def hackathons(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='hackathon').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Хакатоны'})
+
+
+def lectures(req):
+    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='lecture').order_by('begin_date')
+    return render(req, 'events/events.html', {'events': events, 'title': 'Лекции'})
 
 
 def archive(req):
@@ -45,16 +61,22 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
+@login_required()
 def application_fill(req, event_id):
-    user = GotoUser.objects.get(pk=req.user.pk)
     event = Event.objects.get(pk=event_id)
-    base_cotext = {'user': user, 'event': event}
-    if not user.is_authenticated() or user.participant is None:
-        base_cotext.update({'err': 'Please login as participant to fill application!'})
+    base_cotext = {'event': event}
+    if not req.user.is_authenticated():
+        base_cotext['err'] = 'Пожалуйста, войдите как участник, чтобы подать заявку!'
+        return render(req, 'events/events.html', base_cotext)
+    user = GotoUser.objects.get(pk=req.user.pk)
+    base_cotext['user'] = user
+    if user.participant is None:
+        base_cotext.update({'err': 'Пожалуйста, '
+                                   'войдите как участник, чтобы подать заявку!'})
         return render(req, 'fill_application.html', base_cotext)
     a = Application.objects.filter(participant=user.participant, event=event)
     if a.count() > 0:
-        base_cotext.update({'err': 'You already posted an application!'})
+        base_cotext.update({'err': 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.'})
         return render(req, 'fill_application.html', base_cotext)
     if req.method == 'POST':
         app = Application()
@@ -116,8 +138,6 @@ def render_profile_edit(req, user):
         base_context['participant_form'] = participant_form
     return render(req, 'user/edit.html', base_context)
 
-
-# Comment
 
 @login_required()
 def profile_edit(req):

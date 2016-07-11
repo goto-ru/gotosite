@@ -15,6 +15,8 @@ __pycache__/
 # C extensions
 *.so
 media
+
+!media/profile_pictures/no-photo.jpg
 db.sqlite3
 
 # Distribution / packaging

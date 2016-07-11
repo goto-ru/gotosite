@@ -23,15 +23,18 @@ def sign_up(req):
         else:
             return HttpResponseServerError()
         user.email = email
+        if type == 'participant':
+            user.subscribed_to_email = True
         user.username = email
         user.first_name = req.POST['first_name']
         user.last_name = req.POST['last_name']
+
         user.set_password(password)
         user.save()
         user_log = authenticate(username=email, password=password)
         login(req, user_log)
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-        #return render(req, 'signup.html', {'info': "Successfully created!"})
+        # return render(req, 'signup.html', {'info': "Successfully created!"})
 
     else:
         return render(req, 'signup.html')

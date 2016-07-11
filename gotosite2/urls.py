@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from goto import views, login_views
+from goto import views, login_views, subscribe_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -35,6 +35,10 @@ urlpatterns = [
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
+    url(r'^schools/$', views.schools, name='schools'),
+    url(r'^hackathons/$', views.hackathons, name='hackathons'),
+    url(r'^lectures/$', views.lectures, name='lectures'),
+
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
@@ -50,6 +54,10 @@ urlpatterns = [
     url(r'^assignment/(?P<id>\d+)/$', views.assignment, name='assignment'),
     url(r'^assignment/apply/(?P<id>\d+)/$', views.apply_solution, name='apply_solution'),
     url(r'^solution/(?P<id>\d+)/$', views.view_solution, name='solution'),
+
+    # Subscribe
+    url(r'^subscribe/$', subscribe_views.subscribe, name='subscribe'),
+    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe')
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),
