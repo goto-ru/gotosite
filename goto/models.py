@@ -96,7 +96,7 @@ class Event(models.Model):
         ('school', 'Школа'),
         ('hackathon', 'Хакатон'),
         ('lecture', 'Лекция'),
-        ('other', 'Лекция'),
+        ('other', 'Другое'),
     )
     name = models.CharField(max_length=256, )
     short_description = models.CharField(max_length=512, blank=True)

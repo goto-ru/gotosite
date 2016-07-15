@@ -1,0 +1,189 @@
+[
+  {
+    "model": "goto.event",
+    "pk": 1,
+    "fields": {
+      "name": "\u0418\u044e\u043d\u044c\u0441\u043a\u0430\u044f \u0441\u043c\u0435\u043d\u0430 GoTo",
+      "short_description": "",
+      "full_description": "",
+      "price": "",
+      "target_auditory": "",
+      "format": "school",
+      "place": "",
+      "begin_date": "2016-08-10",
+      "end_date": "2016-09-10",
+      "pages": [],
+      "questions": []
+    }
+  },
+  {
+    "model": "goto.partner",
+    "pk": 1,
+    "fields": {
+      "name": "\u0420\u0430\u043c\u0431\u043b\u0435\u0440",
+      "link": "http://www.rambler.ru/",
+      "image": "partners/rambler.png"
+    }
+  },
+  {
+    "model": "goto.partner",
+    "pk": 2,
+    "fields": {
+      "name": "\u041a\u0440\u043e\u043a",
+      "link": "http://www.croc.ru/",
+      "image": "partners/krok.gif"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$24000$itm4UavGPjvm$AWrDeGyzUIxcyqrZYevzwIFlrShqHMcKwFjwAc+uo/w=",
+      "last_login": "2016-07-15T14:32:55.745Z",
+      "is_superuser": true,
+      "username": "omrigann@gmail.com",
+      "first_name": "\u041e\u043b\u0435\u0433",
+      "last_name": "\u0412\u0430\u0441\u0438\u043b\u044c\u0435\u0432",
+      "email": "omrigann@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2016-07-09T15:02:25Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "password",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ivan",
+      "first_name": "\u0418\u0432\u0430\u043d",
+      "last_name": "\u0411\u0438\u0431\u043b\u043e\u0432",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2016-07-15T14:01:01Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "goto.gotouser",
+    "pk": 1,
+    "fields": {
+      "sex": "M",
+      "surname": "",
+      "vk": "",
+      "github": "",
+      "about": "",
+      "profile_picture": "profile_pictures/no-photo.jpg",
+      "organization": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "goto.gotouser",
+    "pk": 3,
+    "fields": {
+      "sex": "M",
+      "surname": "",
+      "vk": "",
+      "github": "",
+      "about": "",
+      "profile_picture": "profile_pictures/no-photo.jpg",
+      "organization": "GoTo",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "goto.participant",
+    "pk": 1,
+    "fields": {
+      "graduation_year": 2016,
+      "city": "\u041c\u043e\u0441\u043a\u0432\u0430",
+      "citizenship": "\u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0430\u044f \u0424\u0435\u0434\u0435\u0440\u0430\u0446\u0438\u044f",
+      "birthday": "2016-07-09",
+      "phone_number": "",
+      "parent_phone_number": "",
+      "health_issues": "\u041d\u0438\u043a\u0430\u043a\u0438\u0445",
+      "_subscribed_to_email": true,
+      "programming_languages": "",
+      "experience": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "goto.expert",
+    "pk": 3,
+    "fields": {
+      "short_description": "",
+      "position": "\u041f\u0440\u0435\u043f\u043e\u0434\u0430\u0432\u0430\u0442\u0435\u043b\u044c",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "goto.project",
+    "pk": 7,
+    "fields": {
+      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+      "description": "",
+      "link": "",
+      "supervisor": null,
+      "event": null,
+      "maintainers": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "goto.project",
+    "pk": 8,
+    "fields": {
+      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+      "description": "",
+      "link": "",
+      "supervisor": null,
+      "event": null,
+      "maintainers": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "goto.project",
+    "pk": 9,
+    "fields": {
+      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+      "description": "",
+      "link": "",
+      "supervisor": null,
+      "event": null,
+      "maintainers": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "goto.settings",
+    "pk": 1,
+    "fields": {
+      "index_partners": [
+        2
+      ],
+      "about_us_partners": [
+        2,
+        1
+      ],
+      "about_us_team": [
+        3
+      ]
+    }
+  }
+]
