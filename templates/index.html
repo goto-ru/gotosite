@@ -4,7 +4,7 @@
 {% endblock %}
 {% block header %}
     <div class="header">
-          {% include 'navigation.html' %}
+        {% include 'navigation.html' %}
 
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
@@ -195,61 +195,12 @@
     <div class="container partners">
         <div class="row">
             <h1>Партнёры</h1>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/krok.gif" %}>
-            </div>
+            {% for p in partners.all %}
+                <div class="col-md-2 partner">
+                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                </div>
 
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/intel.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/hse.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/nts.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rvk.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/amperka.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/innopols.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rambler.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/blastim.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/codeforces.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/abitur.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cat.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/golograph.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cossa.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/popmech.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/newtonew.png" %}>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="clearfix"></div>

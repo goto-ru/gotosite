@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
-from .subscribe_views import  *
+from .subscribe_views import *
 
 
 class GotoUser(User):
@@ -47,7 +47,6 @@ class Participant(GotoUser):
             mailchimp_unsubscribe(self.email)
         self._subscribed_to_email = val
 
-
     # Public data
     programming_languages = models.TextField(blank=True, )
     experience = models.TextField(blank=True)
@@ -71,6 +70,7 @@ class Participant(GotoUser):
 
 
 class Expert(GotoUser):
+    short_description = models.CharField(max_length=256, blank=True)
     position = models.CharField(max_length=140, null=True, blank=True)
 
     class Meta():
@@ -241,3 +241,29 @@ class Solution(models.Model):
 
 class Subscriber(models.Model):
     email = models.EmailField(primary_key=True)
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=512)
+    link = models.URLField()
+    image = models.ImageField(upload_to='partners')
+
+    def __str__(self):
+        return self.name
+
+
+class Settings(models.Model):
+    index_partners = models.ManyToManyField(Partner, blank=True,  related_name='index_partners')
+    about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='about_us_partners')
+    about_us_team = models.ManyToManyField(Expert, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(Settings, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
