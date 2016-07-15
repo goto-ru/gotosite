@@ -15,7 +15,7 @@ class GotoUser(User):
     vk = models.URLField(max_length=240, default='', blank=True)
     github = models.URLField(max_length=240, default='', blank=True)
     about = models.TextField(blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/no-photo.jpg',
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='no-photo.jpg',
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
 
@@ -246,7 +246,7 @@ class Subscriber(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=512)
     link = models.URLField()
-    image = models.ImageField(upload_to='partners')
+    image = models.ImageField(upload_to='partners', default='no-photo.jpg')
 
     def __str__(self):
         return self.name
