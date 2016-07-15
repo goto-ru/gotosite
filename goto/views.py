@@ -15,7 +15,8 @@ import requests
 
 
 def index(req):
-    context_dictionary = {}
+    s = Settings.objects.get()
+    context_dictionary = {'partners': s.index_partners}
     return render(req, 'index.html', context_dictionary)
 
 
@@ -166,7 +167,9 @@ def profile_edit(req):
 
 
 def about_us(req):
-    return render(req, 'about.html')
+    s = Settings.objects.get()
+    context_dictionary = {'partners': s.about_us_partners, 'team': s.about_us_team}
+    return render(req, 'about.html', context_dictionary)
 
 
 def page(req, slug):

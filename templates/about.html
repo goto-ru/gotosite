@@ -179,80 +179,20 @@
         <div class="orange-background container">
             <h1 class="white">Команда</h1>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
+                {% for e in team.all %}
+                    <div class="col-md-6">
+                        <div class="staff row">
+                            <div class="staff-avatar col-md-4">
+                                <img src="/media/{{ e.profile_picture }}">
+                            </div>
+                            <div class="col-md-8">
+                                <h3>{{ e.first_name }} {{ e.last_name }}</h3>
+                                <p>{{ e.short_description}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
 
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="staff row">
-                        <div class="staff-avatar col-md-4">
-                            <img src="">
-                        </div>
-                        <div class="col-md-8"><h3>Александр Пупкин</h3>
-                            <p>Более 20 лет опыта продаж в интернете, владелец собственного прибыльного бизнеса.
-                                Тренирует
-                                более 200 человек в год, кототорые создали или вывели свой бизнес на новый уровен</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -282,62 +222,12 @@
     </div>
     <div class="container partners">
         <h1>Партнёры</h1>
-        <div class="row">
+        {% for p in partners.all %}
             <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/krok.gif" %}>
+                <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
             </div>
 
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/intel.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/hse.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/nts.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rvk.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/amperka.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/innopols.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rambler.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/blastim.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/codeforces.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/abitur.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cat.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/golograph.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cossa.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/popmech.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/newtonew.png" %}>
-            </div>
-        </div>
+        {% endfor %}
+    </div>
     </div>
 {% endblock %}
