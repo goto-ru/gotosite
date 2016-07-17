@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http.response import HttpResponseServerError, HttpResponseRedirect
+from django.http.response import HttpResponseServerError, HttpResponseRedirect, HttpResponseForbidden
 
 from django.contrib.auth import login, logout, authenticate
 from goto.models import *
@@ -47,7 +47,34 @@ def archive(req):
 
 def event_by_id(req, id):
     e = Event.objects.get(pk=id)
-    return render(req, 'events/event_by_id.html', {'event': e})
+    base_context = {'event': e}
+    try:
+        p = req.user.gotouser.participant
+    except AttributeError:
+        p = None
+    if p:
+        a = p.application_set.filter(event=e)
+        if a.count() > 0:
+            base_context['application'] = a[0]
+    return render(req, 'events/event_by_id.html', base_context)
+
+
+def event_participants(req, id):
+    e = Event.objects.get(pk=id)
+    try:
+        p = req.user.gotouser.participant
+    except AttributeError:
+        p = None
+    if p:
+        a = p.application_set.filter(event=e)
+        if a.count() > 0 and (a[0].status == 1 or a[0].status == 3):
+
+            base_context = {'event': e,
+                            'invited': e.application_set.filter(status=1).all(),
+                            'confirmed': e.application_set.filter(status=3).all()}
+            return render(req, 'events/event_participants.html', base_context)
+        else:
+            return HttpResponseForbidden()
 
 
 def participants(req):

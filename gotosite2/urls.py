@@ -41,6 +41,8 @@ urlpatterns = [
 
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
+    url(r'^event/(?P<id>\d+)/participants$', views.event_participants, name='event_participants'),
+
     url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
     # Users

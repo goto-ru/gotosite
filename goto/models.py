@@ -123,7 +123,7 @@ class Event(models.Model):
 
 
 class Application(models.Model):
-    status_to_text = meta_status = {
+    status_to_text = {
         0: 'Ожидает рассмотрения',
         1: 'Одобрена',
         2: 'Отклонена',
