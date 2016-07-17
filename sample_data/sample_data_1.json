@@ -139,48 +139,6 @@
     }
   },
   {
-    "model": "goto.project",
-    "pk": 7,
-    "fields": {
-      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
-      "description": "",
-      "link": "",
-      "supervisor": null,
-      "event": null,
-      "maintainers": [
-        1
-      ]
-    }
-  },
-  {
-    "model": "goto.project",
-    "pk": 8,
-    "fields": {
-      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
-      "description": "",
-      "link": "",
-      "supervisor": null,
-      "event": null,
-      "maintainers": [
-        1
-      ]
-    }
-  },
-  {
-    "model": "goto.project",
-    "pk": 9,
-    "fields": {
-      "title": "\u041f\u0443\u0441\u0442\u043e\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
-      "description": "",
-      "link": "",
-      "supervisor": null,
-      "event": null,
-      "maintainers": [
-        1
-      ]
-    }
-  },
-  {
     "model": "goto.solution",
     "pk": 1,
     "fields": {
