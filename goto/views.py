@@ -172,6 +172,10 @@ def about_us(req):
     return render(req, 'about.html', context_dictionary)
 
 
+def info(req):
+    return render(req, 'info.html', {})
+
+
 def page(req, slug):
     return render(req, 'pages/%s.html' % (slug,))
 

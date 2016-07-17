@@ -18,6 +18,7 @@ class GotoUser(User):
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='no-photo.jpg',
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -253,7 +254,7 @@ class Partner(models.Model):
 
 
 class Settings(models.Model):
-    index_partners = models.ManyToManyField(Partner, blank=True,  related_name='index_partners')
+    index_partners = models.ManyToManyField(Partner, blank=True, related_name='index_partners')
     about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='about_us_partners')
     about_us_team = models.ManyToManyField(Expert, blank=True)
 
