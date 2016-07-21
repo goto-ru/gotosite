@@ -26,6 +26,7 @@ Dependencies: python3, postgres
 1. git clone https://github.com/goto-ru/gotosite/
 #. cd gotosite
 #. git submodule init
+#. git submodule update
 #. pip3 install -r requirements.txt
 #. python3 manage.py migrate
 #. python3 runserver
