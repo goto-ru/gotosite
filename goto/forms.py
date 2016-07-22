@@ -30,3 +30,13 @@ class ParticipantEditForm(forms.ModelForm):
                   'health_issues',
                   'programming_languages',
                   'experience']
+
+class ProjectEditForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title',
+                  'description',
+                  'link',
+                  'maintainers',
+                  'supervisor',
+                  'event']

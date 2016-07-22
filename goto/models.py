@@ -191,8 +191,9 @@ class Project(models.Model):
     description = models.TextField(blank=True)
     link = models.URLField(blank=True)
     maintainers = models.ManyToManyField(Participant, related_name='projects')
-    supervisor = models.ForeignKey(Expert, blank=True)
-    event = models.ForeignKey(Event, blank=True)
+    supervisor = models.ForeignKey(Expert, blank=True, null=True)
+    event = models.ForeignKey(Event, blank=True, null=True)
+
 
     def __str__(self):
         return self.title

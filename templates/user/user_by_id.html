@@ -63,46 +63,57 @@
                 </div>
 
             {% endif %}
-            {% if viewed_user.id == user.id and viewed_user.participant  %}
-                <div class="col-md-12">
-                    <h2>Статус заявок</h2>
-                    {% for ap in viewed_user.participant.application_set.all %}
-                        <div class="alert alert-{{ ap.class_status }}" role="alert">
-                            <b>Мероприятие:</b> {{ ap.event.name }} <br>
-                            <b>Статус заявки:</b> {{ ap.text_status }}
-                            <form action="{% url 'application' ap.id %}" class="application" method="post">
-                                <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
-                                    заявку</a>
-                                {% if ap.status == 1 %}
-                                    <input type="submit" class="btn btn-default btn-sm" name="confirm"
-                                           value="Подтвердить">
-                                    <input type="submit" class="btn btn-default btn-sm" name="reject"
-                                           value="Отозвать заявку">
-                                {% endif %}
-                                {% csrf_token %}
-                            </form>
-
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
             {% if viewed_user.participant %}
+                {% if viewed_user.id == user.id %}
+                    <div class="col-md-12">
+                        <h2>Статус заявок</h2>
+                        {% for ap in viewed_user.participant.application_set.all %}
+                            <div class="alert alert-{{ ap.class_status }}" role="alert">
+                                <b>Мероприятие:</b> {{ ap.event.name }} <br>
+                                <b>Статус заявки:</b> {{ ap.text_status }}
+                                <form action="{% url 'application' ap.id %}" class="buttons-right" method="post">
+                                    <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
+                                        заявку</a>
+                                    {% if ap.status == 1 %}
+                                        <input type="submit" class="btn btn-default btn-sm" name="confirm"
+                                               value="Подтвердить">
+                                        <input type="submit" class="btn btn-default btn-sm" name="reject"
+                                               value="Отозвать заявку">
+                                    {% endif %}
+                                    {% csrf_token %}
+                                </form>
 
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="col-md-12">
                     <h2>Проекты, сделанные этим участником</h2>
                     <div class="container">
                         {% if viewed_user.participant.projects.all|length > 0 %}
-
                             {% for project in viewed_user.participant.projects.all %}
                                 <div class="alert alert-info" role="alert">
-                                    <a
-                                        href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
+
+                                    <a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
+                                    {% if viewed_user.id == user.id %}
+                                        <div class="buttons-right">
+                                            <a class="btn btn-default btn-sm"
+                                               href="{% url 'project_edit' project.id %}">Реадктировать</a>
+                                            <a class="btn btn-default btn-sm"
+                                               href="{% url 'project_delete' project.id %}">Удалить</a>
+                                        </div>
+                                    {% endif %}
                                     <b>Мероприятие:</b> {{ project.event }} <br>
 
                                 </div>
                             {% endfor %}
                         {% else %}
                             <p>Нет проектов, созданных этим участником</p>
+                        {% endif %}
+                        {% if viewed_user.id == user.id %}
+                            <a class="btn btn-default btn-lg"
+                               href="{% url 'project_create' %}">Добавить проект</a>
+
                         {% endif %}
                     </div>
 

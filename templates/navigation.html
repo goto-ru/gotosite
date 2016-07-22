@@ -43,17 +43,14 @@
     </div>
 
 </nav>
-
+<div class="hr"></div>
 <div class="container-fluid">
-    {% if err %}
-        <div class="alert alert-danger" role="alert">
-            {{ err }}
+    {% for message in messages %}
+     <div class="alert {{ message.tags }}" role="alert">
+            {{ message }}
         </div>
-    {% endif %}
 
-    {% if info %}
-        <div class="alert alert-info" role="alert">
-            {{ info }}
-        </div>
-    {% endif %}
+    {% endfor %}
+
+
 </div>

@@ -9,6 +9,7 @@ import datetime
 from django.core.urlresolvers import reverse
 from .forms import *
 import requests
+from django.contrib import messages
 
 
 # Create your views here.
@@ -130,6 +131,47 @@ def project_by_id(req, id):
     project = Project.objects.get(pk=id)
     base_context = {'project': project}
     return render(req, 'project_by_id.html', base_context)
+
+
+
+@login_required()
+def project_create(req, ):
+    if req.POST:
+        project_form = ProjectEditForm(req.POST)
+        project_form.save()
+        return HttpResponseRedirect(reverse('project_detail', args=[project_form.instance.id]))
+    else:
+        project_form = ProjectEditForm()
+        return render(req, 'project_create.html', {'project_form': project_form})
+
+
+@login_required()
+def project_edit(req, id):
+    project = Project(pk=id)
+    if not (req.user.gotouser.participant and req.user.gotouser.participant in project.maintainers.all()):
+        messages.error(req, 'У вас недостаточно прав для изменения этого проекта')
+        return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+    if req.POST:
+        project_form = ProjectEditForm(req.POST)
+        project_form.instance = project
+        project_form.save()
+        messages.add_message(req, 'Изменения внесены')
+        return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+    else:
+        project_form = ProjectEditForm()
+        project_form.instance = project
+        return render(req, 'project_by_id.html', {'project_form': project_form})
+
+
+@login_required()
+def project_delete(req, id):
+    project = Project(pk=id)
+    if not (req.user.gotouser.participant and req.user.gotouser.participant in project.maintainers.all()):
+        messages.error(req,'У вас недостаточно прав для удаления этого проекта')
+        return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+    project.delete()
+    messages.info(req, 'Успешо удалено')
+    return HttpResponseRedirect(reverse('user_detail', args=[req.user.id]))
 
 
 def projects(req):
