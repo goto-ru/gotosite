@@ -2,6 +2,18 @@
 {% load staticfiles %}
 {% block header %}
     {% include 'navigation.html' %}
+    <div class="hr"></div>
+    <div class="container-fluid">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
 
 {% endblock %}
 
