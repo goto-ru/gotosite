@@ -28,6 +28,7 @@ Dependencies: python3, postgres
 #. git submodule init
 #. pip3 install -r requirements.txt
 #. python3 manage.py migrate
+#. python3 manage.py loaddata sample_data/sample_data_1.json
 #. python3 runserver
 
 For production
