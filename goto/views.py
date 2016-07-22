@@ -133,7 +133,6 @@ def project_by_id(req, id):
     return render(req, 'project_by_id.html', base_context)
 
 
-
 @login_required()
 def project_create(req, ):
     if req.POST:
@@ -147,7 +146,7 @@ def project_create(req, ):
 
 @login_required()
 def project_edit(req, id):
-    project = Project(pk=id)
+    project = Project.objects.get(pk=id)
     if not (req.user.gotouser.participant and req.user.gotouser.participant in project.maintainers.all()):
         messages.error(req, 'У вас недостаточно прав для изменения этого проекта')
         return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
@@ -155,19 +154,19 @@ def project_edit(req, id):
         project_form = ProjectEditForm(req.POST)
         project_form.instance = project
         project_form.save()
-        messages.add_message(req, 'Изменения внесены')
+        messages.info(req, 'Изменения внесены')
         return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
     else:
-        project_form = ProjectEditForm()
-        project_form.instance = project
-        return render(req, 'project_by_id.html', {'project_form': project_form})
+        project_form = ProjectEditForm(instance=project)
+        return render(req, 'project_edit.html', {'project_form': project_form,
+                                                 'project': project})
 
 
 @login_required()
 def project_delete(req, id):
     project = Project(pk=id)
     if not (req.user.gotouser.participant and req.user.gotouser.participant in project.maintainers.all()):
-        messages.error(req,'У вас недостаточно прав для удаления этого проекта')
+        messages.error(req, 'У вас недостаточно прав для удаления этого проекта')
         return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
     project.delete()
     messages.info(req, 'Успешо удалено')
