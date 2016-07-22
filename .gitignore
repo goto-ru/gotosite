@@ -11,12 +11,13 @@ gen### Python template
 __pycache__/
 *.py[cod]
 *$py.class
+*.sass-cache
 
-# C extensions
-*.so
-media
+old_frontend/goto2/media
+media/profile_pictures
+media/solutions
+media/partners
 
-!media/profile_pictures/no-photo.jpg
 db.sqlite3
 
 # Distribution / packaging
