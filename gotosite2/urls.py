@@ -48,9 +48,11 @@ urlpatterns = [
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
     # Projects
+    url(r'^project/create$', views.project_create, name='project_create'),
     url(r'^projects/$', views.projects, name='projects'),
     url(r'^project/(?P<id>\d+)/$', views.project_by_id, name='project_detail'),
-    url(r'^project/$', views.project_create, name='project_create'),
+    url(r'^project/edit/(?P<id>\d+)/$', views.project_edit, name='project_edit'),
+    url(r'^project/delete/(?P<id>\d+)/$', views.project_delete, name='project_delete'),
 
     # Assignments
     url(r'^assignment/(?P<id>\d+)/$', views.assignment, name='assignment'),

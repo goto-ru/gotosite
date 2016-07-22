@@ -186,7 +186,7 @@ class Answer(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=256, default='Пустой проект')
+    title = models.CharField(max_length=256)
     description = models.TextField(blank=True)
     link = models.URLField(blank=True)
     maintainers = models.ManyToManyField(Participant, related_name='projects')

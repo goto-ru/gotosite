@@ -10,17 +10,17 @@
             <h1>{{ project.title }} </h1>
 
         </div>
-    {{ project.maintainers.all }}
-{{ req.user.gotouser.participant }}
+        {{ project.maintainers.all }}
+        {{ req.user.gotouser.participant }}
         {% if req.user.gotouser.participant in project.maintainers.all %}
             <form action="{% url 'project_detail' project.id %}" method="post">
 
-             <input type="submit" value="Сохранить">
+                <input type="submit" value="Сохранить">
             </form>
 
         {% else %}
             <div class="col-md-12 box">
-123
+
                 <p><a href="{{ project.link }}">{{ project.link }}</a></p>
                 <p>{{ project.description }} </p>
                 {% if project.event %}
