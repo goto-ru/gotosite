@@ -28,8 +28,8 @@ urlpatterns = [
 
     # Auth
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
-    url(r'^signin/$', login_views.sign_in, name='sign_in'),
-    url(r'^signout/$', login_views.sign_out, name='sign_out'),
+    url(r'^login/$', login_views.sign_in, name='sign_in'),
+    url(r'^logout/$', login_views.sign_out, name='sign_out'),
     # url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 

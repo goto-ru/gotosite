@@ -113,6 +113,22 @@ def project_create(req, ):
     return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
 
 
+@login_required()
+def project_edit(req, id):
+    project = Project()
+    project.save()
+    project.maintainers.add(req.user.gotouser.participant)
+    project.save()
+    return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+
+
+@login_required()
+def project_delete(req, id):
+    project = Project(pk=id)
+    project.delete()
+    return HttpResponseRedirect(reverse('project_detail', args=[project.id]))
+
+
 def projects(req):
     projects = Project.objects.all()
     return render(req, 'projects.html', {'projects': projects})

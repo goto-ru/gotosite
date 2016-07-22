@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.urlresolvers import reverse
 
+from django.contrib import messages
+
 
 def sign_up(req):
     if req.POST:
@@ -15,7 +17,8 @@ def sign_up(req):
         email = req.POST.get('email')
 
         if GotoUser.objects.filter(email=email).count() > 0:
-            return render(req, 'signup.html', {'err': 'This email already exists!'})
+            messages.error(req, 'Email уже зарегестрирован!')
+            return render(req, 'signup.html')
         if type == 'participant':
             user = Participant()
         elif type == 'expert':
@@ -33,8 +36,9 @@ def sign_up(req):
         user.save()
         user_log = authenticate(username=email, password=password)
         login(req, user_log)
+        messages.info('Аккаунт успешно создан')
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-        # return render(req, 'signup.html', {'info': "Successfully created!"})
+
 
     else:
         return render(req, 'signup.html')
@@ -50,9 +54,12 @@ def sign_in(req):
                 login(req, user)
                 return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
             else:
-                return render(req, 'login.html', {'err': 'Account is disabled'})
+
+                messages.error(req, 'Аккаунт отключен')
+                return render(req, 'login.html')
         else:
-            return render(req, 'login.html', {'err': 'There is no such account'})
+            messages.error(req, 'Нет такого аккаунта')
+            return render(req, 'login.html')
     else:
         return render(req, 'login.html')
 
