@@ -1,3 +1,7 @@
+html{
+    overflow-x: hidden;
+}
+
 .profile_img {
     width: 200px;
 }
@@ -95,6 +99,22 @@ body {
     display: block;
 }
 
+.white-hr {
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: rgb(255, 255, 255);
+}
+
+
+.black-hr {
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: rgb(77, 77, 77);
+}
+
+
 .navbar-nav {
     font-size: 14px;
     text-transform: uppercase;
@@ -185,6 +205,10 @@ a {
     color: white;
 }
 
+.white-background{
+    background: white !important;
+}
+
 .header {
     background-image: url('/static/img/header.jpg');
     background-size: cover;
@@ -216,4 +240,7 @@ a {
     margin-bottom: 2%;
 }
 
+.desc{
+    padding: 3%;
+}
 /*# sourceMappingURL=main.css.map */

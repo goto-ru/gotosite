@@ -27,7 +27,9 @@ def upcoming(req):
 
 
 def schools(req):
-    return render(req, 'schools.html')
+    s = Settings.objects.get()
+    context_dictionary = {'partners': s.index_partners}
+    return render(req, 'schools.html', context_dictionary)
 
 
 def hackathons(req):
