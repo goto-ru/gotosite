@@ -1,0 +1,11 @@
+.navbar {
+    background: none;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.cards{
+    display: none;
+}

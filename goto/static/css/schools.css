@@ -1,0 +1,63 @@
+.navbar {
+    background: none;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.card {
+  position: relative;
+  float: left;
+  padding-bottom: 45%;
+  width: 100%;
+}
+
+.card-title{
+    font-size: 27px;
+    color: white;
+    text-align: left;
+    line-height: 1.3;
+    padding: 10% 5%;
+}
+
+.card-time{
+    font-size: 25px;
+    color: white;
+    text-align: right;
+    margin: 0 2%;
+
+}
+
+.card__front,
+.card__back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.card__front,
+.card__back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.3s;
+          transition: transform 0.3s;
+}
+
+
+.card__back {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card.effect__hover:hover .card__front {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card.effect__hover:hover .card__back {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
