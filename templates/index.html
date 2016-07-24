@@ -102,31 +102,25 @@
     <div class="clearfix"></div>
 
     <div class="container news">
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+        <div class="row">
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+            {% for article in articles %}
+                <div class="col-md-12 box">
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+                    <div class="col-md-3 article">
+                        <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
+                            <h6>{{ article.title }}</h6> </a>
+                            <p>{{ article.description }}</p>
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+                    </div>
 
-        <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc" value="Все новости">
+                </div>
+            {% endfor %}
+
+
+        </div>
+     <a class="btn btn-info" href="{% url 'mm_about' %}">Все новости</a>
+        <input class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
     </div>
     <div class="clearfix"></div>
 

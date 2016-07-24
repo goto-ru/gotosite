@@ -26,7 +26,7 @@ body {
 
 .container {
   background-color: white;
-  font-family: "Open Sans Light",sans-serif;
+  font-family: "Open Sans Light", sans-serif;
   font-size: 15px;
   padding-bottom: 20px; }
 
@@ -102,6 +102,15 @@ a {
 
 .footer-mail {
   color: #e61919; }
+
+.article h6 {
+  font-size: 18px;
+  text-align: left; }
+.article p {
+  line-height: 1.2;
+  text-align: left; }
+.article img {
+  width: 100%; }
 
 .partners h1 {
   margin-bottom: 2%;

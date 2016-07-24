@@ -17,8 +17,13 @@ from django.contrib import messages
 
 def index(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.index_partners}
+    context_dictionary = {'partners': s.index_partners, 'articles': MassMediaArticle.objects.all()}
     return render(req, 'index.html', context_dictionary)
+
+
+def mm_about(req):
+    context_dictionary = {'articles': MassMediaArticle.objects.all()}
+    return render(req, 'mm-articles.html', context_dictionary)
 
 
 def upcoming(req):

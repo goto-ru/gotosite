@@ -194,7 +194,6 @@ class Project(models.Model):
     supervisor = models.ForeignKey(Expert, blank=True, null=True)
     event = models.ForeignKey(Event, blank=True, null=True)
 
-
     def __str__(self):
         return self.title
 
@@ -269,3 +268,13 @@ class Settings(models.Model):
             return cls.objects.get()
         except cls.DoesNotExist:
             return cls()
+
+
+class MassMediaArticle(models.Model):
+    title = models.CharField(max_length=256)
+    description = models.CharField(max_length=256)
+    link = models.URLField()
+    image = models.ImageField(upload_to='mm-pictures')
+
+    def __str__(self):
+        return self.title

@@ -86,15 +86,7 @@
     border-color: rgb(66, 158, 132);
 }
 
-.article h6 {
-    font-size: 18px;
-    text-align: left;
-}
 
-.article p {
-    line-height: 1.2;
-    text-align: left;
-}
 
 .features {
     background: url("/static/img/wallpaper.jpg");

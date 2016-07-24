@@ -4,7 +4,8 @@ from goto.models import *
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner]
+models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
+          MassMediaArticle]
 
 admin.site.register(Permission)
 

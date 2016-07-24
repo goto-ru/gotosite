@@ -1,0 +1,31 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    {{ project.title }}
+
+{% endblock %}
+
+{% block container %}
+    <div class="container main-container">
+        <div class="page-header">
+            <h1>СМИ о нас </h1>
+
+        </div>
+
+        {% for article in articles %}
+            <div class="col-md-12 box">
+
+                <div class="col-md-3 article">
+                    <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
+                        <h6>{{ article.title }}</h6></a>
+                    <p>{{ article.description }}</p>
+
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+    </div>
+{% endblock %}

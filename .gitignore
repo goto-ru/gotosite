@@ -14,9 +14,7 @@ __pycache__/
 *.sass-cache
 
 old_frontend/goto2/media
-media/profile_pictures
-media/solutions
-media/partners
+media/*/
 
 db.sqlite3
 

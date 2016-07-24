@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about-us/$', views.about_us, name='about_us'),
     url(r'^info/$', views.info, name='info'),
+    url(r'^mm-about/$', views.mm_about, name='mm_about'),
     url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='page'),
 
     # Auth
