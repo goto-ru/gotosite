@@ -32,8 +32,9 @@ def upcoming(req):
 
 
 def schools(req):
-    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='school').order_by('begin_date')
-    return render(req, 'events/events.html', {'events': events, 'title': 'Школы'})
+    s = Settings.objects.get()
+    context_dictionary = {'partners': s.index_partners}
+    return render(req, 'schools.html', context_dictionary)
 
 
 def hackathons(req):
