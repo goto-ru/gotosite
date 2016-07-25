@@ -91,6 +91,8 @@ body {
     margin-bottom: 5px;
     padding-bottom: 1px;
     padding-top: 1px;
+    width: 100%;
+    display: block;
 }
 
 .navbar-nav {
