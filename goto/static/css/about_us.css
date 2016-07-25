@@ -26,38 +26,6 @@ h1 {
     width: 50%;
 }
 
-.whitespace {
-    margin-top: 5%;
-}
-
-.yellow {
-    color: #f3ea67;
-}
-
-.purple {
-    color: #603d8b;
-}
-
-.orange {
-    color: #f58568;
-}
-
-.orange-background {
-    background: #f58568;
-}
-
-.green {
-    color: #00b498;
-}
-
-.green-background {
-    background-color: #00b498;
-}
-
-.white {
-    color: white;
-}
-
 .timegrid {
     background: white;
     margin: 2%;
