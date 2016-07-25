@@ -38,8 +38,9 @@ def hackathons(req):
 
 
 def lectures(req):
-    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='lecture').order_by('begin_date')
-    return render(req, 'events/events.html', {'events': events, 'title': 'Лекции'})
+    s = Settings.objects.get()
+    context_dictionary = {'partners': s.index_partners}
+    return render(req, 'lectoriy.html', context_dictionary)
 
 
 def archive(req):
