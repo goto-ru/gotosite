@@ -28,8 +28,8 @@ Dependencies: docker, docker-compose
 3.  `git submodule init`
 4.  `git submodule update`
 5.  `docker-compose up -d –build`
-6.  `docker-compose exec web python3 manage.py loaddata sample\_data/sample\_data\_1.json`
-  **Service will become available at 0.0.0.0:8001**
+6.  `docker-compose exec web python3 manage.py loaddata sample_data/sample_data_1.json`
+    **Service will become available at 0.0.0.0:8001**
 7.  (Optionally) for CI you can set up <https://github.com/Omrigan/flask-github-ci>
 
 [GoTo project]: https://img.shields.io/badge/GoTo-project-4bb89b.svg
