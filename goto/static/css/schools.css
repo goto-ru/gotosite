@@ -155,8 +155,6 @@ h1, h2, h3, h4, h6 {
 }
 
 .school {
-    background: white;
-    border: 2px solid rgb(207, 207, 207);
     line-height: 1.4;
     padding: 3%;
     text-align: center;
@@ -183,4 +181,14 @@ h1, h2, h3, h4, h6 {
 .smoke {
     border-color: rgb(207, 207, 207);
     color: rgb(64, 64, 64);
+}
+
+.school-card {
+    background: white;
+    border: 2px solid rgb(207, 207, 207);
+    height: 100%;
+}
+.take-part{
+    font-size: 14px;
+    max-width: 140px;
 }

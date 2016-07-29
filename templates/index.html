@@ -119,7 +119,7 @@
 
 
         </div>
-            <input onclick="window.location = '{% url 'mm_about' %}'" class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
+            <input type='button' onclick="window.location = '{% url 'mm_about' %}'" class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
     </div>
     <div class="clearfix"></div>
 
@@ -179,8 +179,17 @@
             лекциях,
             курсах и спецпредложениях.</p>
         <form action="{% url 'subscribe' %}" method="get">
-            <input class="email" type="email" name="email" placeholder="Электронная почта*">
-            <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+            <table align="center" class="demotable">
+                <tr>
+                    <td valign="middle">
+                        <input class="email" type="email" name="email" placeholder="Электронная почта*">
+                    </td>
+                    <td valign="middle">
+                        <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+                    </td>
+
+                </tr>
+            </table>
         </form>
     </div>
     <div class="clearfix"></div>

@@ -1,0 +1,221 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo Лекторий
+{% endblock %}
+{% block header %}
+    <div class="header">
+        {% include 'navigation.html' %}
+
+        <div class="container" style="background: none;">
+            <div class="xs-force-center header-text">
+                <p>GoTo <br>
+                    Серия лекций для заинтересованных.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+
+{% block container %}
+    {% load staticfiles %}
+    <link class="orange-css" rel="stylesheet" href="{% static 'css/lectoriy.css' %}" type="text/css"/>
+
+    <div class="green-background">
+        <div class="container green-background">
+            <div class="row big-box">
+                <div class="col-md-7 white-background">
+                    <h3 class="orange-item">Лекторий</h3>
+                    <p class="orange-item">Программа выстроена вокруг двух кейсов, которые позволяют
+                        на практике разобрать самые часто встречающиеся бизнес-задачи
+                        в области big data. Слушатели изучают алгоритмы и осваивают
+                        технологии на реальных данных, в реальных кластерах
+                        и в контексте бизнес-задач, актуальных здесь и сейчас. Программа выстроена вокруг двух кейсов,
+                        которые позволяют
+                        на практике разобрать самые часто встречающиеся бизнес-задачи
+                        в области big data. Слушатели изучают алгоритмы и осваивают
+                        технологии на реальных данных, в реальных кластерах
+                        и в контексте бизнес-задач, актуальных здесь и сейчас.</p>
+                </div>
+
+                <div class="col-md-1"></div>
+                <div class="col-md-4 white-background">
+                    <div class="feature orange-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr orange-item"></div>
+
+                    <div class="feature orange-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr orange-item"></div>
+
+                    <div class="feature green-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr green-item"></div>
+
+                    <div class="feature">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background: whitesmoke">
+        <div style="background: whitesmoke;" class="container">
+            <div class="whitespace"></div>
+            <h2>Лекции</h2>
+            <div class="whitespace"></div>
+
+            <div style="margin-top: 2%" class="row">
+                <div class="col-md-4 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="/static/img/logo.png">
+
+                            <h6>Название лекции</h6>
+                            <p class="desc-school">
+                                Мини описание лекции, которая на карточке... Мини описание лекции, которая на
+                                карточке...
+                                Мини описание лекции, которая на карточке...
+                            </p>
+                            <p style="text-align: right" class="desc-school">16 марта</p>
+                            <div style="text-align: center">
+                                <input class="header-btn-little header-btn" type="button"
+                                       value="Принять участие">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="/static/img/logo.png">
+
+                            <h6>Название лекции</h6>
+                            <p class="desc-school">
+                                Мини описание лекции, которая на карточке... Мини описание лекции, которая на
+                                карточке...
+                                Мини описание лекции, которая на карточке...
+                            </p>
+                            <p style="text-align: right" class="desc-school">16 марта</p>
+                            <div style="text-align: center">
+                                <p class="gone"> Лекция состоялась</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="/static/img/logo.png">
+
+                            <h6>Название лекции</h6>
+                            <p class="desc-school">
+                                Мини описание лекции, которая на карточке... Мини описание лекции, которая на
+                                карточке...
+                                Мини описание лекции, которая на карточке...
+                            </p>
+                            <p style="text-align: right" class="desc-school">16 марта</p>
+                            <div style="text-align: center">
+                                <p class="gone"> Лекция состоялась</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="/static/img/logo.png">
+
+                            <h6>Название лекции</h6>
+                            <p class="desc-school">
+                                Мини описание лекции, которая на карточке... Мини описание лекции, которая на
+                                карточке...
+                                Мини описание лекции, которая на карточке...
+                            </p>
+                            <p style="text-align: right" class="desc-school">16 марта</p>
+                            <div style="text-align: center">
+                                <p class="gone"> Лекция состоялась</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="/static/img/logo.png">
+
+                            <h6>Название лекции</h6>
+                            <p class="desc-school">
+                                Мини описание лекции, которая на карточке... Мини описание лекции, которая на
+                                карточке...
+                                Мини описание лекции, которая на карточке...
+                            </p>
+                            <p style="text-align: right" class="desc-school">16 марта</p>
+                            <div style="text-align: center">
+                                <p class="gone"> Лекция состоялась</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix whitecpace"></div>
+
+    <div class="container subscribe">
+        <p> Предложити тему следующей лекции.</p>
+        <form action="{% url 'subscribe' %}" method="get">
+            <table align="center" class="demotable">
+                <tr>
+                    <td valign="middle">
+                        <input class="email" type="email" name="email" placeholder="Анализ данных*">
+                    </td>
+                    <td valign="middle">
+                        <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

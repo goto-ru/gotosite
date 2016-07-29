@@ -1,34 +1,3 @@
-.header {
-    background-image: url('/static/img/header.jpg');
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-}
-
-.header-text {
-    color: white;
-}
-
-.header-btn {
-    border-radius: 0;
-    color: rgb(255, 255, 255);
-    background-color: rgba(255, 255, 255, 0.2);
-    max-width: 200px;
-    font-size: 21px;
-    padding: 0.6%;
-    border: 2px solid white;
-    margin-bottom: 5%;
-}
-
-.header-text p {
-    color: white !important;
-    font-size: 45px;
-    line-height: 1.5;
-    font-weight: 100;
-    margin-top: 20%;
-    margin-bottom: 2%;
-}
-
 .navbar {
     background: none;
 }
@@ -37,11 +6,115 @@
     color: white !important;
 }
 
-.bigblock{
-    background: rgb(65, 143, 122);
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.bigblock-features{
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.big-box {
+    margin: 3% 0;
+}
+
+.feature {
+    line-height: 1.1;
+}
+
+.vector-description {
+    padding: 3%;
+}
+
+.white-background {
+    background: white !important;
+}
+
+.vector-description h3 {
+    text-align: center;
+}
+
+h1, h2, h3, h4, h6 {
+    text-align: center;
+}
+
+.header-btn-big {
+    margin-top: 3%;
+    max-width: 250px;
+    font-size: 27px;
+}
+
+.header-btn-little {
+    padding: 10px 15px;
+    margin-top: 3%;
+    max-width: 140px;
+    font-size: 14px;
+    border-color: rgb(207, 207, 207);
+    color: rgb(64, 64, 64);
+}
+
+.school {
+    line-height: 1.4;
+    padding: 3%;
+    text-align: center;
+}
+
+.school p {
+    text-align: left;
+    margin-bottom: 7px;
+    color: #4f4f4f;
+}
+
+.school h6 {
+    font-weight: 300;
+    color: black;
+    text-align: left;
+    font-size: 18px;
+}
+
+.school img {
+    max-width: 100%;
+    height: auto;
+}
+
+.smoke {
+    border-color: rgb(207, 207, 207);
+    color: rgb(64, 64, 64);
+}
+
+.school-card {
+    background: white;
+    border: 2px solid rgb(207, 207, 207);
     height: 100%;
-    border: 2px solid rgb(65, 143, 122);
+}
+
+.gone{
+    font-size: 18px;
+    text-align: center !important;
+    padding-top: 15px;
+}
+
+.email {
+    border: 2px solid #696969;
+    width: 200px;
+}
+
+.subscribe {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.subscribe p {
+    text-align: center;
+    font-size: 36px;
+    line-height: 1.1;
+}
+
+.top-fix{
+    margin-top: 10px;
 }
