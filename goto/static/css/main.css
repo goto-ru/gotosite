@@ -1,9 +1,8 @@
-html{
-    overflow-x: hidden;
-}
-
 .profile_img {
   width: 200px; }
+
+.white-background {
+  background: white !important; }
 
 .batch_profile {
   height: 200px; }
@@ -77,22 +76,6 @@ body {
   margin-bottom: 5px;
   padding-bottom: 1px;
   padding-top: 1px; }
-
-.white-hr {
-    width: 100%;
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: rgb(255, 255, 255);
-}
-
-
-.black-hr {
-    width: 100%;
-    border-top-style: solid;
-    border-top-width: 3px;
-    border-top-color: rgb(77, 77, 77);
-}
-
 
 .navbar-nav {
   font-size: 14px;
@@ -172,10 +155,6 @@ a {
 .white {
   color: white; }
 
-.white-background{
-    background: white !important;
-}
-
 .header {
   background-image: url("/static/img/header.jpg");
   background-size: cover;
@@ -203,7 +182,7 @@ a {
   margin-top: 20%;
   margin-bottom: 2%; }
 
-.desc{
-    padding: 3%;
-}
+.white-background {
+  background: white !important; }
+
 /*# sourceMappingURL=main.css.map */
