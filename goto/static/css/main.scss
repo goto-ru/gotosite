@@ -239,3 +239,10 @@ a {
 .white-background{
     background: white !important;
 }
+
+.black-hr {
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: rgb(77, 77, 77);
+}
