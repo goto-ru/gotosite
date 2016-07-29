@@ -1,5 +1,7 @@
 .navbar {
     background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 .navbar a {
@@ -102,4 +104,29 @@
     text-align: center;
     font-size: 26px;
     line-height: 1.1;
+}
+
+.vector-description {
+    padding: 5%;
+}
+
+.vector-description h3 {
+    text-align: center;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h6 {
+    text-align: center;
 }

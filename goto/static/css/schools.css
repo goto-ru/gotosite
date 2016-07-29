@@ -1,5 +1,7 @@
 .navbar {
     background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;3
 }
 
 .navbar a {
@@ -86,7 +88,7 @@
 }
 
 .vector-description {
-    padding: 3%;
+    padding: 5%;
 }
 
 .vector-description h3 {
@@ -188,7 +190,8 @@ h1, h2, h3, h4, h6 {
     border: 2px solid rgb(207, 207, 207);
     height: 100%;
 }
-.take-part{
+
+.take-part {
     font-size: 14px;
     max-width: 140px;
 }
