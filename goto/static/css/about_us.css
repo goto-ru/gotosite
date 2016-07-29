@@ -50,15 +50,18 @@ h1 {
     margin: 3%;
     background: white;
     position: relative;
+    min-height: 150px;
 }
 
 .staff img {
     width: 150px;
     height: 150px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+}
+.staff-avatar table{
+    height: 100%;
+}
+.staff-avatar td{
+    vertical-align: middle;
 }
 
 .staff h3 {

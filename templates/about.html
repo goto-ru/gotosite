@@ -182,15 +182,24 @@
                 {% for e in team.all %}
                     <div class="col-md-6">
                         <div class="staff row">
+
                             <div class="staff-avatar col-md-4">
-                                <img src="/media/{{ e.profile_picture }}">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="/media/{{ e.profile_picture }}">
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="col-md-8">
                                 <h3>{{ e.first_name }} {{ e.last_name }}</h3>
-                                <p>{{ e.short_description}}</p>
+                                <p>{{ e.short_description }}</p>
                             </div>
                         </div>
                     </div>
+
                 {% endfor %}
 
             </div>
