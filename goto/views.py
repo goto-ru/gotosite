@@ -38,8 +38,7 @@ def schools(req):
 
 
 def hackathons(req):
-    events = Event.objects.filter(end_date__gte=datetime.date.today(), format='hackathon').order_by('begin_date')
-    return render(req, 'events/events.html', {'events': events, 'title': 'Хакатоны'})
+    return render(req, 'hackathon.html')
 
 
 def lectures(req):

@@ -1,0 +1,14 @@
+.description{
+    margin: 150px 100px;
+    text-align: right;
+}
+
+.description h5{
+    text-align: left;
+    font-size: 25px;
+}
+
+.description p{
+    text-align: left;
+    font-size: 21px;
+}
