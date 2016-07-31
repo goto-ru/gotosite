@@ -250,7 +250,6 @@
             <div class="whitespace"></div>
             <h2>Преподаватели</h2>
             <div class="whitespace"></div>
-            {#        {{ s.current_left_school.experts }}#}
             {% for e in s.current_left_school.experts %}
                 <div class="col-md-6">
                     <div class="row">
@@ -260,10 +259,8 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h3>Бибилов Иван</h3>
-                            <p>Преподаватель направления прикладного программирования.
-                                Преподаватель направления прикладного программирования.
-                                Преподаватель направления прикладного программирования.</p>
+                            <h3>{{ e.last_name }} {{ e.first_name }}</h3>
+                            <p>{{ e.short_description }}</p>
                         </div>
                     </div>
                 </div>
@@ -273,34 +270,27 @@
     </div>
 
     <!-- Вопросы и ответы -->
-    <div class="container questions">
-        <h2>Вопросы и ответы</h2>
+    {% if s.current_left_school.faquestions.all|length > 0 %}
 
-        <a><p onclick="$('#answer0').toggle()">
-            Вопрос 1
-        </p></a>
-        <span style="display: none;" id="answer0">
-            Ответ 1
+        <div class="container questions">
+            <h2>Вопросы и ответы</h2>
+            {% for q in s.current_left_school.faquestions.all %}
+                <a><p onclick="$('#answer{{ forloop.counter0 }}').toggle()">
+                    q.question
+                </p></a>
+                <span style="display: none;" id="answer{{ forloop.counter0 }}">
+            q.answer
         </span>
+            {% endfor %}
 
-        <a><p onclick="$('#answer1').toggle()">
-            Вопрос 2
-        </p></a>
-        <span style="display: none;" id="answer1">
-            Ответ 2
-        </span>
+        </div>
 
-        <a><p onclick="$('#answer2').toggle()">
-            Вопрос 3
-        </p></a>
-        <span style="display: none;" id="answer2">
-            Ответ 3
-        </span>
-    </div>
     <div class="clearfix whitespace"></div>
 
+    {% endif %}
     <div style="background: whitesmoke">
         <div style="background: whitesmoke;" class="container">
+        <h2>Прошедшие мероприятия</h2>
             {% for ar in archive %}
                 <div style="margin-top: 2%" class="col-md-4">
                     <div class="school-card school">
@@ -308,10 +298,10 @@
 
                         <h6>{{ ar.event.name }}</h6>
                         <p class="desc-school">
-                            Даты: {{ ar.begin_date  }}- {{  ar.end_date }}
+                            Даты: {{ ar.begin_date }}- {{ ar.end_date }}
                         </p>
                         <p class="desc-school">
-                            Место проведения: {{  ar.event.place}}
+                            Место проведения: {{ ar.event.place }}
                         </p>
                         <div style="text-align: center">
                             <input class="header-btn-little header-btn" type="button"

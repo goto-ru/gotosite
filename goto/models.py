@@ -85,6 +85,12 @@ class Expert(GotoUser):
         )
 
 
+class FAQuestion(models.Model):
+    question = models.CharField(max_length=512)
+    answer = models.CharField(max_length=1024)
+    question_author = models.ForeignKey(GotoUser, blank=True, null=True)
+
+
 class Page(models.Model):
     name = models.CharField(max_length=256)
     slug = models.SlugField(max_length=256, unique=True)
@@ -111,14 +117,15 @@ class Event(models.Model):
     partners = models.ManyToManyField('Partner')
 
     pages = models.ManyToManyField(Page, blank=True)
-    questions = models.ManyToManyField('Question', blank=True)
+    applier_questions = models.ManyToManyField('Question', blank=True)
+
+    faquestions = models.ManyToManyField(FAQuestion)
 
     def experts(self):
         ret = set()
         for ar in self.arrangements.all():
             ret |= set(ar.experts.all())
         return ret
-
 
     def __str__(self):
         return self.name
