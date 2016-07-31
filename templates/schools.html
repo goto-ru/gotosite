@@ -33,13 +33,13 @@
                 <div onclick="load_orange()" class="card effect__hover">
                     <div class="card__front green-background">
                         <div class="card__text">
-                            <p class="card-title">Городская <br> летняя школа</p>
-                            <p class="card-time">25.09.99</p>
+                            <p class="card-title">{{ s.current_left_school.name }}</p>
+                            <p class="card-time">{{ s.current_left_school.short_description }}</p>
                         </div>
                     </div>
                     <div class="card__back green-background">
                         <div class="card__text">
-                            <p class="card-title">Городская <br> летняя школа</p>
+                            <p class="card-title">{{ s.current_left_school.name }}</p>
                             <p class="card-time">Подробнее</p>
                         </div>
                     </div>
@@ -74,21 +74,12 @@
         <div class="container colored">
             <div class="row big-box">
                 <div class="col-md-7 white-background orange-item">
-                    <h3 class="orange-item">Летняя выездная школа</h3>
+                    <h3 class="green-item">{{ s.current_left_school.name }}</h3>
+                    <p class="green-item">{{ s.current_left_school.full_description }}</p>
+
+
+                    <h3 class="orange-item">Летняя городская школа</h3>
                     <p class="orange-item">Программа выстроена вокруг двух кейсов, которые позволяют
-                        на практике разобрать самые часто встречающиеся бизнес-задачи
-                        в области big data. Слушатели изучают алгоритмы и осваивают
-                        технологии на реальных данных, в реальных кластерах
-                        и в контексте бизнес-задач, актуальных здесь и сейчас. Программа выстроена вокруг двух кейсов,
-                        которые позволяют
-                        на практике разобрать самые часто встречающиеся бизнес-задачи
-                        в области big data. Слушатели изучают алгоритмы и осваивают
-                        технологии на реальных данных, в реальных кластерах
-                        и в контексте бизнес-задач, актуальных здесь и сейчас.</p>
-
-
-                    <h3 class="green-item">Летняя городская школа</h3>
-                    <p class="green-item">Программа выстроена вокруг двух кейсов, которые позволяют
                         на практике разобрать самые часто встречающиеся бизнес-задачи
                         в области big data. Слушатели изучают алгоритмы и осваивают
                         технологии на реальных данных, в реальных кластерах
@@ -99,6 +90,52 @@
 
                 <div class="col-md-1"></div>
                 <div class="col-md-4 white-background">
+                    <div class="green-item">
+                        <div class="feature ">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5>Для кого?</h5>
+                                    <p>{{ s.current_left_school.target_auditory }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Сколько стоит?</h5>
+                                    <p>{{ s.current_left_school.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Когда?</h5>
+
+                                    {% for a in s.current_left_school.arrangements.all %}
+                                        <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="feature orange-item">
                         <div class="row">
                             <div class="col-md-4">
@@ -127,32 +164,6 @@
                     </div>
                     <div class="black-hr orange-item"></div>
 
-                    <div class="feature green-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr green-item"></div>
-
-                    <div class="feature">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
 
                     <div style="text-align: left">
                         <input class="take-part header-btn-little header-btn" type="button"
@@ -164,94 +175,34 @@
     </div>
     <div class="clearfix whitespace"></div>
 
-    <!-- Направления -->
-    <div class="orange-item">
-        <h2>Направления</h2>
-        <div class="whitespace"></div>
-        <div class="row">
-            <div class="vector-description col-md-6">
-                <h3>Робототехника</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
 
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-            </div>
-
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-        </div>
-
-        <div class="row">
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-            <div class="vector-description col-md-6">
-                <h3>Прикладное программирование</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
-
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-            </div>
-        </div>
-
-    </div>
+    <h2>Направления</h2>
+    <div class="whitespace"></div>
 
     <div class="green-item">
-        <h2>Направления</h2>
-        <div class="whitespace"></div>
-        <div class="row">
-            <div class="vector-description col-md-6">
-                <h3>Машинное обучение</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
+        {% for d in s.current_left_school.departments.all %}
+            <div class="row">
+                {% if forloop.counter0|divisibleby:2 == 0 %}
+                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+                {% endif %}
+                <div class="vector-description col-md-6">
+                    <h3>{{ d.title }}</h3>
 
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
+                    <p>{{ d.description }}</p>
+                </div>
+                {% if forloop.counter0|divisibleby:2 == 1 %}
+                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+                {% endif %}
             </div>
-
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-        </div>
-
-        <div class="row">
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-            <div class="vector-description col-md-6">
-                <h3>Анализ данных</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
-
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-            </div>
-        </div>
+        {% endfor %}
+    </div>
+    <div class="orange-item">
 
     </div>
+
+
+
+
 
     <!-- To Do статичный блок -->
     <div class="colored">
@@ -292,17 +243,20 @@
     </div>
 
     <!-- Преподаватели -->
+    {#   FIXME: create a class?#}
     <div style="background: whitesmoke">
+
         <div style="background: whitesmoke" class="container">
             <div class="whitespace"></div>
             <h2>Преподаватели</h2>
             <div class="whitespace"></div>
-            <div class="row">
+            {#        {{ s.current_left_school.experts }}#}
+            {% for e in s.current_left_school.experts %}
                 <div class="col-md-6">
                     <div class="row">
                         <div class="staff col-md-4">
                             <div class="helper">
-                                <img class="staff-avatar" src="/static/img/staff-example.jpg">
+                                <img class="staff-avatar" src="{{ e.profile_picture.url }}">
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -313,22 +267,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="staff col-md-4">
-                            <div class="helper">
-                                <img class="staff-avatar" src="/static/img/staff-example.jpg">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h3>Бибилов Иван</h3>
-                            <p>Преподаватель направления прикладного программирования.
-                                Преподаватель направления прикладного программирования.
-                                Преподаватель направления прикладного программирования.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            {% endfor %}
         </div>
     </div>
 
@@ -361,72 +301,28 @@
 
     <div style="background: whitesmoke">
         <div style="background: whitesmoke;" class="container">
-            <div style="margin-top: 2%" class="row">
-                <div class="col-md-4">
-                    <div class="col-md-12 school-card">
-                        <div class="school">
-                            <img src="/static/img/logo.png">
+            {% for ar in archive %}
+                <div style="margin-top: 2%" class="col-md-4">
+                    <div class="school-card school">
+                        <img src="/static/img/logo.png">
 
-                            <h6>GoToCamp 27/09/1999</h6>
-                            <p class="desc-school">
-                                Даты: 03.10 - 04.12
-                            </p>
-                            <p class="desc-school">
-                                Место проведения: ул. Большая филевская
-                            </p>
-                            <div style="text-align: center">
-                                <input class="header-btn-little header-btn" type="button"
-                                       value="Подробнее">
-                            </div>
+                        <h6>{{ ar.event.name }}</h6>
+                        <p class="desc-school">
+                            Даты: {{ ar.begin_date  }}- {{  ar.end_date }}
+                        </p>
+                        <p class="desc-school">
+                            Место проведения: {{  ar.event.place}}
+                        </p>
+                        <div style="text-align: center">
+                            <input class="header-btn-little header-btn" type="button"
+                                   value="Подробнее">
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="col-md-12 school-card">
-                        <div class="school">
-                            <img src="/static/img/logo.png">
 
-                            <h6>GoToCamp 27/09/1999</h6>
-                            <p class="desc-school">
-                                Формат: выездная
-                            </p>
-                            <p class="desc-school">
-                                Даты: 03.10 - 04.12
-                            </p>
-                            <p class="desc-school">
-                                Место проведения: ул. Большая филевская
-                            </p>
-                            <div style="text-align: center">
-                                <input class="header-btn-little header-btn" type="button"
-                                       value="Подробнее">
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="col-md-12 school-card">
-                        <div class="school">
-                            <img src="/static/img/logo.png">
+            {% endfor %}
 
-                            <h6>GoToCamp 27/09/1999</h6>
-                            <p class="desc-school">
-                                Формат: выездная
-                            </p>
-                            <p class="desc-school">
-                                Даты: 03.10 - 04.12
-                            </p>
-                            <p class="desc-school">
-                                Место проведения: ул. Большая филевская
-                            </p>
-                            <div style="text-align: center">
-                                <input class="header-btn-little header-btn" type="button"
-                                       value="Подробнее">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center">
+            <div style="text-align: center" class="col-md-12">
                 <input class="header-btn-big header-btn smoke" type="button"
                        value="Просмотреть все">
             </div>
@@ -438,7 +334,7 @@
         <h2>Партнёры</h2>
         <div class="whitespace"></div>
         <div class="row">
-            {% for p in partners.all %}
+            {% for p in s.current_left_school.partners.all %}
                 <div class="col-md-2 partner">
                     <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
                 </div>

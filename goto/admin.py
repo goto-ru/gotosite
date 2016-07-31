@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import Permission, User
 from goto.models import *
+from django.contrib.admin import StackedInline, TabularInline, ModelAdmin
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+
+from filer.admin.imageadmin import *
 
 models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
           MassMediaArticle]
@@ -33,19 +36,36 @@ class ApplicationInline(NestedStackedInline):
     extra = 0
 
 
+class ExpertInline(NestedStackedInline):
+    model = Experting
+    extra = 0
+
+
 class ArrangementInline(NestedStackedInline):
     model = Arrangement
-    inlines = [ApplicationInline]
+    # inlines = [ExpertInline, ApplicationInline]
+    # fk_name = 'answers'
+    extra = 0
+
+
+class DepartmentsInline(NestedStackedInline):
+    model = Departments
     # fk_name = 'answers'
     extra = 0
 
 
 class EventAdmin(NestedModelAdmin):
     model = Event
-    inlines = [ArrangementInline]
+    inlines = [DepartmentsInline, ArrangementInline]
+
+
+class ArrangementAdmin(NestedModelAdmin):
+    model = Arrangement
+    inlines = [ExpertInline]
 
 
 admin.site.register(Event, EventAdmin)
+admin.site.register(Arrangement, ArrangementAdmin)
 
 for model in models:
     admin.site.register(model)

@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 from .subscribe_views import *
+from filer.fields.image import FilerImageField
 
 
 class GotoUser(User):
@@ -107,9 +108,17 @@ class Event(models.Model):
     target_auditory = models.CharField(max_length=400, blank=True)
     format = models.CharField(max_length=400, blank=True, choices=FORMATS)
     place = models.CharField(max_length=400, blank=True)
+    partners = models.ManyToManyField('Partner')
 
     pages = models.ManyToManyField(Page, blank=True)
     questions = models.ManyToManyField('Question', blank=True)
+
+    def experts(self):
+        ret = set()
+        for ar in self.arrangements.all():
+            ret |= set(ar.experts.all())
+        return ret
+
 
     def __str__(self):
         return self.name
@@ -132,6 +141,7 @@ class Arrangement(models.Model):
 class Departments(models.Model):
     event = models.ForeignKey(Event, related_name='departments')
     title = models.CharField(max_length=256)
+    image = FilerImageField(blank=True, null=True)
     description = models.TextField()
 
 
@@ -181,7 +191,7 @@ class Experting(models.Model):
     status = models.IntegerField(choices=STATUSES, default=0)
 
     def __str__(self):
-        return '%s on %s' % (self.expert, self.event)
+        return '%s on %s' % (self.expert, self.arrangement)
 
 
 class Question(models.Model):

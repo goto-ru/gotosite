@@ -33,7 +33,10 @@ def upcoming(req):
 
 def schools(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.index_partners}
+    archive = Arrangement.objects.filter(event__format='school').order_by(
+        '-end_date').all()
+    context_dictionary = {'s': s, 'archive': archive}
+
     return render(req, 'schools.html', context_dictionary)
 
 
