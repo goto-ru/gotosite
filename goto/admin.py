@@ -27,21 +27,28 @@ class QuestionInline(NestedStackedInline):
 
 class ApplicationInline(NestedStackedInline):
     model = Application
-    inlines = [AnswerInline]
+    inlines = [QuestionInline]
     # fk_name = 'answers'
     max_num = 0
     extra = 0
 
 
+class ArrangementInline(NestedStackedInline):
+    model = Arrangement
+    inlines = [ApplicationInline]
+    # fk_name = 'answers'
+    extra = 0
+
+
 class EventAdmin(NestedModelAdmin):
     model = Event
-    inlines = [ApplicationInline]
+    inlines = [ArrangementInline]
 
 
 admin.site.register(Event, EventAdmin)
 
 for model in models:
     admin.site.register(model)
-1
+
 
 # Register your models here.

@@ -108,10 +108,6 @@ class Event(models.Model):
     format = models.CharField(max_length=400, blank=True, choices=FORMATS)
     place = models.CharField(max_length=400, blank=True)
 
-    begin_date = models.DateField(default=date.today)
-    end_date = models.DateField(default=date.today)
-    participants = models.ManyToManyField(Participant, through='Application')
-    experts = models.ManyToManyField(Expert, through='Experting')
     pages = models.ManyToManyField(Page, blank=True)
     questions = models.ManyToManyField('Question', blank=True)
 
@@ -120,6 +116,23 @@ class Event(models.Model):
 
     class Meta:
         verbose_name_plural = 'Events'
+
+
+class Arrangement(models.Model):
+    event = models.ForeignKey(Event, related_name='arrangements')
+    begin_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
+    participants = models.ManyToManyField(Participant, through='Application')
+    experts = models.ManyToManyField(Expert, through='Experting')
+
+    def __str__(self):
+        return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
+
+
+class Departments(models.Model):
+    event = models.ForeignKey(Event, related_name='departments')
+    title = models.CharField(max_length=256)
+    description = models.TextField()
 
 
 class Application(models.Model):
@@ -138,7 +151,8 @@ class Application(models.Model):
         3: 'success',
         4: 'danger',
     }
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE)
+    department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
@@ -153,11 +167,11 @@ class Application(models.Model):
         return self.status_to_class[self.status]
 
     def __str__(self):
-        return '%s on %s' % (self.participant, self.event)
+        return '%s on %s' % (self.participant, self.arrangement)
 
 
 class Experting(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE)
     expert = models.ForeignKey(Expert, on_delete=models.CASCADE)
     STATUSES = [
         (0, 'In discuss'),
@@ -192,7 +206,7 @@ class Project(models.Model):
     link = models.URLField(blank=True)
     maintainers = models.ManyToManyField(Participant, related_name='projects')
     supervisor = models.ForeignKey(Expert, blank=True, null=True)
-    event = models.ForeignKey(Event, blank=True, null=True)
+    event = models.ForeignKey(Arrangement, blank=True, null=True)
 
     def __str__(self):
         return self.title
