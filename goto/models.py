@@ -272,6 +272,9 @@ class Settings(models.Model):
     about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='about_us_partners')
     about_us_team = models.ManyToManyField(Expert, blank=True)
 
+    current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_1')
+    current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_2')
+
     def save(self, *args, **kwargs):
         self.__class__.objects.exclude(id=self.id).delete()
         super(Settings, self).save(*args, **kwargs)
