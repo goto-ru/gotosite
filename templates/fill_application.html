@@ -6,18 +6,21 @@
 {% block container %}
     <div class="container">
 
-        <h2>Подача заявки на мероприятие "{{ event.name }}"</h2>
+        <h2>Подача заявки на мероприятие "{{ arrangement.event.name }}"</h2>
         Перед подачей заявки убедитесь, что у вас в профиле указана актуальная информация!
-        <form action="{% url 'application_fill' event.pk %}" method="post" enctype="multipart/form-data">
-            <p><label>Имя, Фамилия</label> <input disabled value="{{ user.first_name }} {{ user.last_name }}"></p>
+        <form action="{% url 'application_fill' arrangement.pk department.pk %}" method="post"
+              enctype="multipart/form-data">
+            <p><label for="name">Имя, Фамилия</label>
+                <input disabled value="{{ user.first_name }} {{ user.last_name }}" id="name"></p>
+
             <h3>Дополнительные вопросы</h3>
-
-
-                {% for q in event.questions.all %}
+            {% if arrangement.event.applier_questions %}
+                {% for q in arrangement.event.applier_questions.all %}
                     <p><label>{{ q.text }}</label> <br> <input name="question{{ q.id }}"></p>
                 {% endfor %}
-{#                <p>Дополнительных вопросов нет </p>#}
-
+            {% else %}
+                <p>Дополнительных вопросов нет </p>
+            {% endif %}
             {% csrf_token %}
             <input type="submit" value="Подать заявку">
         </form>

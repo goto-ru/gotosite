@@ -44,7 +44,8 @@ urlpatterns = [
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     url(r'^event/(?P<id>\d+)/participants$', views.event_participants, name='event_participants'),
 
-    url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
+    url(r'^application/fill/(?P<arrangement_id>\d+)/(?P<department_id>\d+)/$', views.application_fill,
+        name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
     # Users
     url(r'^participants/$', views.participants, name='participants'),

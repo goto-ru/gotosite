@@ -119,7 +119,8 @@ class Event(models.Model):
     pages = models.ManyToManyField(Page, blank=True)
     applier_questions = models.ManyToManyField('Question', blank=True)
 
-    faquestions = models.ManyToManyField(FAQuestion)
+    faquestions = models.ManyToManyField(FAQuestion, blank=True)
+    main_image = FilerImageField(blank=True, null=True)
 
     def experts(self):
         ret = set()
@@ -145,7 +146,7 @@ class Arrangement(models.Model):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
 
 
-class Departments(models.Model):
+class Department(models.Model):
     event = models.ForeignKey(Event, related_name='departments')
     title = models.CharField(max_length=256)
     image = FilerImageField(blank=True, null=True)
@@ -169,7 +170,7 @@ class Application(models.Model):
         4: 'danger',
     }
     arrangement = models.ForeignKey(Arrangement, on_delete=models.CASCADE)
-    department = models.ForeignKey(Departments, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
@@ -223,7 +224,7 @@ class Project(models.Model):
     link = models.URLField(blank=True)
     maintainers = models.ManyToManyField(Participant, related_name='projects')
     supervisor = models.ForeignKey(Expert, blank=True, null=True)
-    event = models.ForeignKey(Arrangement, blank=True, null=True)
+    arrangement = models.ForeignKey(Arrangement, blank=True, null=True)
 
     def __str__(self):
         return self.title

@@ -48,15 +48,15 @@ class ArrangementInline(NestedStackedInline):
     extra = 0
 
 
-class DepartmentsInline(NestedStackedInline):
-    model = Departments
+class DepartmentInline(NestedStackedInline):
+    model = Department
     # fk_name = 'answers'
     extra = 0
 
 
 class EventAdmin(NestedModelAdmin):
     model = Event
-    inlines = [DepartmentsInline, ArrangementInline]
+    inlines = [DepartmentInline, ArrangementInline]
 
 
 class ArrangementAdmin(NestedModelAdmin):

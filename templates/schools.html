@@ -290,11 +290,11 @@
     {% endif %}
     <div style="background: whitesmoke">
         <div style="background: whitesmoke;" class="container">
-        <h2>Прошедшие мероприятия</h2>
+        <h2>Прошедшие школы</h2>
             {% for ar in archive %}
                 <div style="margin-top: 2%" class="col-md-4">
                     <div class="school-card school">
-                        <img src="/static/img/logo.png">
+                        <img src="{{ ar.event.main_image.url }}">
 
                         <h6>{{ ar.event.name }}</h6>
                         <p class="desc-school">
