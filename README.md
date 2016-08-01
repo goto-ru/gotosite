@@ -33,7 +33,4 @@ Dependencies: docker, docker-compose
 7.  (Optionally) for CI you can set up <https://github.com/Omrigan/flask-github-ci>
 
 [GoTo project]: https://img.shields.io/badge/GoTo-project-4bb89b.svg
-[![GoTo project]]: https://github.com/goto-ru/
 [Code Health]: https://landscape.io/github/goto-ru/gotosite/master/landscape.svg?style=flat
-[![Code Health]]: https://landscape.io/github/goto-ru/gotosite/master
-
