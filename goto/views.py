@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http.response import HttpResponseServerError, HttpResponseRedirect, HttpResponseForbidden
+from django.http.response import HttpResponseServerError, HttpResponseRedirect, HttpResponseForbidden, \
+    HttpResponseBadRequest
 
 from django.contrib.auth import login, logout, authenticate
 from goto.models import *
@@ -33,7 +34,10 @@ def upcoming(req):
 
 def schools(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.index_partners}
+    archive = Arrangement.objects.filter(event__format='school').order_by(
+        '-end_date').all()
+    context_dictionary = {'s': s, 'archive': archive}
+
     return render(req, 'schools.html', context_dictionary)
 
 
@@ -42,8 +46,11 @@ def hackathons(req):
 
 
 def lectures(req):
-    s = Settings.objects.get()
-    context_dictionary = {'partners': s.index_partners}
+    lectures = Event.objects.filter(format='lecture')
+    upcoming_lectures = lectures.filter(arrangements__begin_date__gte=date.today())
+    archive_lectures = lectures.filter(arrangements__end_date__lt=date.today())
+    context_dictionary = {'upcoming_lectures': upcoming_lectures,
+                          'archive_lectures': archive_lectures}
     return render(req, 'lectoriy.html', context_dictionary)
 
 
@@ -97,37 +104,39 @@ def experts(req):
 
 
 @login_required()
-def application_fill(req, event_id):
-    event = Event.objects.get(pk=event_id)
-    base_cotext = {'event': event}
+def application_fill(req, arrangement_id, department_id):
+    arrangement = Arrangement.objects.get(pk=arrangement_id)
+    department = Department.objects.get(pk=department_id)
+    base_cotext = {'arrangement': arrangement, 'department': department}
     if not req.user.is_authenticated():
-        base_cotext['err'] = 'Пожалуйста, войдите как участник, чтобы подать заявку!'
+        messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'events/events.html', base_cotext)
     user = GotoUser.objects.get(pk=req.user.pk)
     base_cotext['user'] = user
     if user.participant is None:
-        base_cotext.update({'err': 'Пожалуйста, '
-                                   'войдите как участник, чтобы подать заявку!'})
+        messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'fill_application.html', base_cotext)
-    a = Application.objects.filter(participant=user.participant, event=event)
+    a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
     if a.count() > 0:
-        base_cotext.update({'err': 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.'})
+        messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
         return render(req, 'fill_application.html', base_cotext)
+    if arrangement.event != department.event:
+        return HttpResponseBadRequest()
     if req.method == 'POST':
         app = Application()
-        app.event = event
+        app.arrangement = arrangement
+        app.department = department
         app.participant = user.participant
         app.date_created = datetime.datetime.now()
         app.save()
-
-        for q in event.questions.all():
+        for q in arrangement.event.questions.all():
             text = req.POST['question%s' % q.pk]
             ans = Answer()
             ans.application = app
             ans.question = q
             ans.text = text
             ans.save()
-        base_cotext.update({'info': 'Successfully accepted!'})
+        messages.add_message("Заявка успешно принята")
         return render(req, 'fill_application.html', base_cotext)
     else:
         return render(req, 'fill_application.html', base_cotext)

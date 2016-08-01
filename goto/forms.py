@@ -39,4 +39,4 @@ class ProjectEditForm(forms.ModelForm):
                   'link',
                   'maintainers',
                   'supervisor',
-                  'event']
+                  'arrangement']

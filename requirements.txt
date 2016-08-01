@@ -4,3 +4,5 @@ gunicorn
 psycopg2
 Pillow
 requests
+django-jinja
+django-filer
