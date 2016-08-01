@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from goto import views, login_views
+from goto import views, login_views, subscribe_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,29 +23,49 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^about-us/$', views.about_us, name='about_us'),
-    url(r'^contacts/$', views.about_us, name='contacts'),
-    url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='index'),
+    url(r'^info/$', views.info, name='info'),
+    url(r'^mm-about/$', views.mm_about, name='mm_about'),
+    url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='page'),
 
     # Auth
     url(r'^signup/$', login_views.sign_up, name='sign_up'),
-    url(r'^signin/$', login_views.sign_in, name='sign_in'),
-    url(r'^signout/$', login_views.sign_out, name='sign_out'),
+    url(r'^login/$', login_views.sign_in, name='sign_in'),
+    url(r'^logout/$', login_views.sign_out, name='sign_out'),
     # url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
+    url(r'^schools/$', views.schools, name='schools'),
+    url(r'^hackathons/$', views.hackathons, name='hackathons'),
+    url(r'^lectures/$', views.lectures, name='lectures'),
+
     url(r'^archive/$', views.archive, name='archive_events'),
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
-    url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill, name='application_fill'),
+    url(r'^event/(?P<id>\d+)/participants$', views.event_participants, name='event_participants'),
+
+    url(r'^application/fill/(?P<arrangement_id>\d+)/(?P<department_id>\d+)/$', views.application_fill,
+        name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
     # Users
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
     url(r'^user/(?P<id>\d+)/$', views.user_by_id, name='user_detail'),
     # Projects
+    url(r'^project/create$', views.project_create, name='project_create'),
     url(r'^projects/$', views.projects, name='projects'),
     url(r'^project/(?P<id>\d+)/$', views.project_by_id, name='project_detail'),
+    url(r'^project/edit/(?P<id>\d+)/$', views.project_edit, name='project_edit'),
+    url(r'^project/delete/(?P<id>\d+)/$', views.project_delete, name='project_delete'),
+
+    # Assignments
+    url(r'^assignment/(?P<id>\d+)/$', views.assignment, name='assignment'),
+    url(r'^assignment/apply/(?P<id>\d+)/$', views.apply_solution, name='apply_solution'),
+    url(r'^solution/(?P<id>\d+)/$', views.view_solution, name='solution'),
+
+    # Subscribe
+    url(r'^subscribe/$', subscribe_views.subscribe, name='subscribe'),
+    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe')
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),

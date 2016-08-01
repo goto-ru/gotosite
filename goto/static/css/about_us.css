@@ -1,16 +1,102 @@
-span{
+.squares {
+    position: relative;
+    overflow: auto;
+    display: block;
+}
+
+h1 {
     text-align: center;
-    font-weight: 300;
-    font-size: 48px;
 }
 
-.desc{
-    color: white;
+.green_square {
+    background: #00b498;
+    padding: 4%;
 }
 
-svg{
-    z-index: -1;
+.green_square h2 {
+    text-align: center;
 }
-.in-desc{
-    background: none;
+
+.green_square p {
+    font-size: 15px;
+}
+
+.image_square {
+    height: inherit;
+    width: 50%;
+}
+
+.timegrid {
+    background: white;
+    margin: 2%;
+    border: 2px solid whitesmoke;
+}
+
+.time {
+    font-size: 25px;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.time-col {
+    padding: 3%;
+}
+
+.description {
+    padding: 3%;
+}
+
+.staff {
+    margin: 3%;
+    background: white;
+    position: relative;
+    min-height: 150px;
+}
+
+.staff img {
+    width: 150px;
+    height: 150px;
+}
+.staff-avatar table{
+    height: 100%;
+}
+.staff-avatar td{
+    vertical-align: middle;
+}
+
+.staff h3 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.height-fix {
+    height: inherit;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.int{
+    font-size: 50px;
+    margin-bottom: 0;
+}
+.int-description{
+    font-size: 18px;
+}
+.ponte{
+    text-align: center;
+}
+
+.partner{
+    display: block !important;
 }

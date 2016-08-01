@@ -1,0 +1,335 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo  Школы
+{% endblock %}
+{% block header %}
+    <div class="header">
+        {% include 'navigation.html' %}
+
+        <div class="container" style="background: none;">
+            <div class="xs-force-center header-text">
+                <p>GoTo <br>
+                    Серия выездных и городских школ.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+
+{% block container %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% load staticfiles %}
+    <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
+    <link href="{% static 'css/schools.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'js/camp.js' %}"></script>
+
+    <div class="whitespace"></div>
+    <!-- Карточки -->
+    <div class="container cards">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div onclick="load_orange()" class="card effect__hover">
+                    <div class="card__front green-background">
+                        <div class="card__text">
+                            <p class="card-title">{{ s.current_left_school.name }}</p>
+                            <p class="card-time">{{ s.current_left_school.short_description }}</p>
+                        </div>
+                    </div>
+                    <div class="card__back green-background">
+                        <div class="card__text">
+                            <p class="card-title">{{ s.current_left_school.name }}</p>
+                            <p class="card-time">Подробнее</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div onclick="load_green()" class="card effect__hover">
+                    <div class="card__front orange-background">
+                        <div class="card__text">
+                            <p class="card-title">Выездные <br> летние школы</p>
+                            <p class="card-time">25.09.99</p>
+                        </div>
+                    </div>
+                    <div onclick="" class="card__back orange-background">
+                        <div class="card__text">
+                            <p class="card-title">Выездные <br> летние школы</p>
+                            <p class="card-time">Подробнее</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="clearfix whitespace"></div>
+
+
+    <!-- Фичи -->
+    <div class="colored">
+        <div class="container colored">
+            <div class="row big-box">
+                <div class="col-md-7 white-background orange-item">
+                    <h3 class="green-item">{{ s.current_left_school.name }}</h3>
+                    <p class="green-item">{{ s.current_left_school.full_description }}</p>
+
+
+                    <h3 class="orange-item">Летняя городская школа</h3>
+                    <p class="orange-item">Программа выстроена вокруг двух кейсов, которые позволяют
+                        на практике разобрать самые часто встречающиеся бизнес-задачи
+                        в области big data. Слушатели изучают алгоритмы и осваивают
+                        технологии на реальных данных, в реальных кластерах
+                        и в контексте бизнес-задач, актуальных здесь и сейчас.</p>
+
+
+                </div>
+
+                <div class="col-md-1"></div>
+                <div class="col-md-4 white-background">
+                    <div class="green-item">
+                        <div class="feature ">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5>Для кого?</h5>
+                                    <p>{{ s.current_left_school.target_auditory }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Сколько стоит?</h5>
+                                    <p>{{ s.current_left_school.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Когда?</h5>
+
+                                    {% for a in s.current_left_school.arrangements.all %}
+                                        <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature orange-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr orange-item"></div>
+
+                    <div class="feature orange-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
+                                <p>3 месяца <br> 2 раза в неделю</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr orange-item"></div>
+
+
+                    <div style="text-align: left">
+                        <input class="take-part header-btn-little header-btn" type="button"
+                               value="Принять участие">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix whitespace"></div>
+
+
+    <h2>Направления</h2>
+    <div class="whitespace"></div>
+
+    <div class="green-item">
+        {% for d in s.current_left_school.departments.all %}
+            <div class="row">
+                {% if forloop.counter0|divisibleby:2 == 0 %}
+                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+                {% endif %}
+                <div class="vector-description col-md-6">
+                    <h3>{{ d.title }}</h3>
+
+                    <p>{{ d.description }}</p>
+                </div>
+                {% if forloop.counter0|divisibleby:2 == 1 %}
+                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="orange-item">
+
+    </div>
+
+
+
+
+
+    <!-- To Do статичный блок -->
+    <div class="colored">
+        <div class="container colored">
+            <div class="whitespace"></div>
+            <h2 class="white">Что нужно сделать для участия?</h2>
+            <div class="whitespace"></div>
+            <div class="row">
+                <div class="col-md-3 todo">
+                    <img align="middle" src="/static/img/test-icon-white.png">
+                    <h5 class="white">Получить договор</h5>
+                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
+                </div>
+
+                <div class="col-md-3 todo">
+                    <img align="middle" src="/static/img/test-icon-white.png">
+                    <h5 class="white">Получить договор</h5>
+                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
+                </div>
+
+                <div class="col-md-3 todo">
+                    <img align="middle" src="/static/img/test-icon-white.png">
+                    <h5 class="white">Получить договор</h5>
+                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
+                </div>
+
+                <div class="col-md-3 todo">
+                    <img align="middle" src="/static/img/test-icon-white.png">
+                    <h5 class="white">Получить договор</h5>
+                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
+                </div>
+            </div>
+            <div style="text-align: center">
+                <input class="header-btn-big header-btn" type="button"
+                       value="Принять участие">
+            </div>
+        </div>
+    </div>
+
+    <!-- Преподаватели -->
+    {#   FIXME: create a class?#}
+    <div style="background: whitesmoke">
+
+        <div style="background: whitesmoke" class="container">
+            <div class="whitespace"></div>
+            <h2>Преподаватели</h2>
+            <div class="whitespace"></div>
+            {% for e in s.current_left_school.experts %}
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="staff col-md-4">
+                            <div class="helper">
+                                <img class="staff-avatar" src="{{ e.profile_picture.url }}">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{{ e.last_name }} {{ e.first_name }}</h3>
+                            <p>{{ e.short_description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Вопросы и ответы -->
+    {% if s.current_left_school.faquestions.all|length > 0 %}
+
+        <div class="container questions">
+            <h2>Вопросы и ответы</h2>
+            {% for q in s.current_left_school.faquestions.all %}
+                <a><p onclick="$('#answer{{ forloop.counter0 }}').toggle()">
+                    q.question
+                </p></a>
+                <span style="display: none;" id="answer{{ forloop.counter0 }}">
+            q.answer
+        </span>
+            {% endfor %}
+
+        </div>
+
+    <div class="clearfix whitespace"></div>
+
+    {% endif %}
+    <div style="background: whitesmoke">
+        <div style="background: whitesmoke;" class="container">
+        <h2>Прошедшие школы</h2>
+            {% for ar in archive %}
+                <div style="margin-top: 2%" class="col-md-4">
+                    <div class="school-card school">
+                        <img src="{{ ar.event.main_image.url }}">
+
+                        <h6>{{ ar.event.name }}</h6>
+                        <p class="desc-school">
+                            Даты: {{ ar.begin_date }}- {{ ar.end_date }}
+                        </p>
+                        <p class="desc-school">
+                            Место проведения: {{ ar.event.place }}
+                        </p>
+                        <div style="text-align: center">
+                            <input class="header-btn-little header-btn" type="button"
+                                   value="Подробнее">
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+            <div style="text-align: center" class="col-md-12">
+                <input class="header-btn-big header-btn smoke" type="button"
+                       value="Просмотреть все">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix whitespace"></div>
+
+    <div style="margin-top: 0" class="container partners">
+        <h2>Партнёры</h2>
+        <div class="whitespace"></div>
+        <div class="row">
+            {% for p in s.current_left_school.partners.all %}
+                <div class="col-md-2 partner">
+                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

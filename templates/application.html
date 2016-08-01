@@ -5,7 +5,7 @@
 
 {% block container %}
     <div class="container">
-        <h2>Заявка участника <a href="{% url 'user_detail' application.participant.id %}">{{ application.participant }}</a> на мероприятие "{{ application.event }}"</h2>
+        <h2>Заявка участника <a href="{% url 'user_detail' application.participant.id %}">{{ application.participant }}</a> на мероприятие "{{ application.arrangement.event }}"</h2>
         <h3>Личные данные</h3>
         <label>Фамилия Имя Отчество:</label> {{ application.participant.last_name }}
         {{ application.participant.first_name }} {{ application.participant.surname}} <br>

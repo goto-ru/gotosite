@@ -1,7 +1,10 @@
 {% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
 {% block header %}
     <div class="header">
-          {% include 'navigation.html' %}
+        {% include 'navigation.html' %}
 
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
@@ -20,114 +23,76 @@
     {% load staticfiles %}
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
 
-    <div class="destinations">
-        <h1>Направления</h1>
+     <div class="orange-item">
+        <h2>Направления</h2>
+        <div class="whitespace"></div>
+        <div class="row">
+            <div class="vector-description col-md-6">
+                <a href=""><h3>Летние школы</h3></a>
+                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
+                    обучения из 2 блоков:
 
-        <div class="container destination">
-            <div class="col-md-6 destination-text">
-                <h3>Хакатон</h3>
-                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
-                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
-                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
-                    предложение повторяется n раз.</p>
+                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
+                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
+                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
+                    обработки текста (NLP).
 
-                <div class="col-md-12 destination-about">
-                    <p>Школьные каникулы</p>
-                    <a>Подробнее</a>
-                </div>
+                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
+                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
+                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
+                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
+                <a href=""><p style="text-align: right">Ближайшая школа</p></a>
             </div>
-            <div class="col-md-6 destination-img">
-                <img src={% static "img/destinations/h1.jpg" %}>
+
+            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
+        </div>
+
+        <div class="row">
+            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
+            <div class="vector-description col-md-6">
+                <a><h3>Хакатоны</h3></a>
+                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
+                    обучения из 2 блоков:
+
+                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
+                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
+                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
+                    обработки текста (NLP).
+
+                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
+                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
+                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
+                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
+                <a href=""><p style="text-align: right">Ближайший хакатон</p></a>
             </div>
         </div>
 
-
-        <div class="container destination">
-            <div class="col-md-6 destination-img">
-                <img src={% static "img/destinations/h2.jpg" %}>
-            </div>
-            <div class="col-md-6 destination-text">
-                <h3>Хакатон</h3>
-                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
-                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
-                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
-                    предложение повторяется n раз.</p>
-
-                <div class="col-md-12 destination-about">
-                    <p>Школьные каникулы</p>
-                    <a>Подробнее</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container destination">
-            <div class="col-md-6 destination-text">
-                <h3>Хакатон</h3>
-                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
-                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
-                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
-                    предложение повторяется n раз.</p>
-
-                <div class="col-md-12 destination-about">
-                    <p>Школьные каникулы</p>
-                    <a>Подробнее</a>
-                </div>
-            </div>
-            <div class="col-md-6 destination-img">
-                <img src={% static "img/destinations/h3.jpg" %}>
-            </div>
-        </div>
-
-        <div class="container destination">
-            <div class="col-md-6 destination-img">
-                <img src={% static "img/destinations/h4.jpg" %}>
-            </div>
-            <div class="col-md-6 destination-text">
-                <h3>Хакатон</h3>
-                <p>Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n
-                    раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это предложение
-                    повторяется n раз. Это предложение повторяется n раз. Это предложение повторяется n раз. Это
-                    предложение повторяется n раз.</p>
-
-                <div class="col-md-12 destination-about">
-                    <p>Школьные каникулы</p>
-                    <a>Подробнее</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="clearfix"></div>
-
+    <h2>Последние новости</h2>
     <div class="container news">
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+        <div class="row">
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+            {% for article in articles %}
+                <div class="col-md-12 box">
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+                    <div class="col-md-3 article">
+                        <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
+                            <h6>{{ article.title }}</h6> </a>
+                            <p>{{ article.description }}</p>
 
-        <div class="col-md-3 article">
-            <img src={% static "img/news/n1.jpg" %}>
-            <h6>Тяжела и неказиста жизнь простого программиста.</h6>
-            <p>Эта новость о том, как тяжела и неказиста жизнь простого программиста. Удачи.</p>
-        </div>
+                    </div>
 
-        <input class="header-btn" type="button" class="btn btn-transparent btn-xl inc" value="Все новости">
+                </div>
+            {% endfor %}
+
+
+        </div>
+            <input type='button' onclick="window.location = '{% url 'mm_about' %}'" class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
     </div>
     <div class="clearfix"></div>
 
-    <div class="row features">
+    <div class="features">
         <div style="background: none" class="container">
             <div class="col-md-7">
 
@@ -166,25 +131,6 @@
                 </div>
                 <div class="white-hr"></div>
 
-
-            <p>
-
-                Образовательные программы GoTo помогают школьникам со всей России воплощать в жизнь самые смелые идеи,
-                получать знания у практикующих специалистов и предпринимателей, находить единомышленников и обрести
-                мотивацию к дальнейшему саморазвитию.
-
-                Участник каждой школы, лагеря или хакатона GoTo получает возможность реализовать проект или провести
-                исследование в сфере IT и робототехники. Участники распределяются по командам, в которых они вместе
-                пройдут все этапы развития проекта – от идеи до реализации. Работу над проектами курируют преподаватели
-                лучших университетов страны и эксперты ведущих компаний: МФТИ, ВШЭ, Иннополис, Яндекс, КРОК, Microsoft,
-                Nival, Rambler&Co, Intel и др. Помимо работы над проектом в программе представлены мастер-классы и
-                лекции экспертов из самых перспективных областей: программная инженерия, анализ данных, биоинформатика,
-                нейротехнологии, искусственный интеллект, промдизайн и т.д., а также экскурсии в компании,
-                профориентационные игры, квесты, инженерные соревнования, тренинги, самые интересные площадки города и
-                непрерывное общение.
-
-            </p>
-
                 <div class="features-mini">
                     <div class="feature">
                         <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
@@ -201,71 +147,32 @@
         <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
             лекциях,
             курсах и спецпредложениях.</p>
-        <form>
-            <input class="email" type="email" placeholder="Электронная почта*">
-            <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+        <form action="{% url 'subscribe' %}" method="get">
+            <table align="center" class="demotable">
+                <tr>
+                    <td valign="middle">
+                        <input class="email" type="email" name="email" placeholder="Электронная почта*">
+                    </td>
+                    <td valign="middle">
+                        <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
+                    </td>
+
+                </tr>
+            </table>
         </form>
     </div>
     <div class="clearfix"></div>
 
     <div class="container partners">
+        <h2  style="text-align: center;">Партнёры</h2>
+        <div class="whitespace"></div>
         <div class="row">
-            <h1>Партнёры</h1>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/krok.gif" %}>
-            </div>
+            {% for p in partners.all %}
+                <div class="col-md-2 partner">
+                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                </div>
 
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/intel.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/hse.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/mfti.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/nts.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rvk.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/amperka.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/innopols.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/rambler.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/blastim.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/codeforces.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/abitur.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cat.jpg" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/golograph.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/cossa.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/popmech.png" %}>
-            </div>
-            <div class="col-md-2 partner">
-                <img src={% static "img/partners/newtonew.png" %}>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="clearfix"></div>

@@ -22,15 +22,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'iwz6w2xk$e6tn)ka2d3ugi26*f^9_slx40oadsg^8=#4v=zg^='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+LOGIN_URL = '/login'
 ALLOWED_HOSTS = []
 
 # Application definition
+from django.contrib.messages import constants
 
 INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'goto', 'nested_inline'
+    'django.contrib.messages', 'django.contrib.staticfiles', 'goto', 'nested_inline', 'django_jinja', 'filer',
+    'easy_thumbnails'
 ]
+MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
+MESSAGE_TAGS = {
+    constants.ERROR: 'alert-danger',
+    constants.INFO: 'alert-info'
+}
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,6 +66,20 @@ TEMPLATES = [
             ],
         },
     },
+    # {
+    #     'BACKEND': 'django_jinja.backend.Jinja2',
+    #     'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    #     'APP_DIRS': True,
+    #     'OPTIONS': {
+    #         "match_extension": ".html",
+    #         # 'context_processors': [
+    #         #     'django.template.context_processors.debug',
+    #         #     'django.template.context_processors.request',
+    #         #     'django.contrib.auth.context_processors.auth',
+    #         #     'django.contrib.messages.context_processors.messages',
+    #         # ],
+    #     },
+    # },
 ]
 
 DATE_FORMAT = 'd.m.Y'
@@ -81,15 +102,19 @@ DATABASES = {
         'PASSWORD': 'password',
         'HOST': 'db',
         'PORT': '5432',
+
     }
 }
 DEBUG = True
+
 if env == 'debug':
+    from .private_settings.debug_settings import *
+
     DATABASES['default']['HOST'] = '127.0.0.1'
 else:
+    from .private_settings.production_settings import *
+
     ALLOWED_HOSTS = ['localhost']
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

@@ -1,0 +1,28 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    Информация о школах
+{% endblock %}
+
+{% block container %}
+    <div class="container main-container">
+        <div class="page-header">
+            <h1>Инфорация о школах</h1>
+        </div>
+
+        <div class="col-md-12 box">
+            <ul>
+                <li><a href="{% url 'participants' %}">Все участники</a></li>
+                <li><a href="{% url 'experts' %}">Все эксперты</a></li>
+                <li><a href="{% url 'projects' %}">Все проекты</a></li>
+            </ul>
+        </div>
+        <div class="col-md-12">
+        Platform version sprint2
+        </div>
+
+
+    </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+    {% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container main-container">
+        <div class="page-header">
+            <h1>Участники на мероприятия "{{ event.name }}"</h1>
+
+        </div>
+        <div class="col-md-12 box">
+            <h3>Подтвержденные участники</h3>
+            {% for a in confirmed %}
+               <a href="{% url 'user_detail' a.participant.pk %}">{{ a.participant }}</a>
+
+            {% endfor %}
+            <h3>Приглашеннеые участники</h3>
+            {% for a in invited %}
+               <a href="{% url 'user_detail' a.participant.pk %}">{{ a.participant }}</a>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+{% endblock %}
