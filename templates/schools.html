@@ -50,18 +50,19 @@
                 <div onclick="load_green()" class="card effect__hover">
                     <div class="card__front orange-background">
                         <div class="card__text">
-                            <p class="card-title">Выездные <br> летние школы</p>
-                            <p class="card-time">25.09.99</p>
+                            <p class="card-title">{{ s.current_right_school.name }}</p>
+                            <p class="card-time">{{ s.current_right_school.short_description }}</p>
                         </div>
                     </div>
-                    <div onclick="" class="card__back orange-background">
+                    <div class="card__back orange-background">
                         <div class="card__text">
-                            <p class="card-title">Выездные <br> летние школы</p>
+                            <p class="card-title">{{ s.current_right_school.name }}</p>
                             <p class="card-time">Подробнее</p>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         </div>
 
@@ -70,227 +71,15 @@
 
 
     <!-- Фичи -->
-    <div class="colored">
-        <div class="container colored">
-            <div class="row big-box">
-                <div class="col-md-7 white-background orange-item">
-                    <h3 class="green-item">{{ s.current_left_school.name }}</h3>
-                    <p class="green-item">{{ s.current_left_school.full_description }}</p>
-
-
-                    <h3 class="orange-item">Летняя городская школа</h3>
-                    <p class="orange-item">Программа выстроена вокруг двух кейсов, которые позволяют
-                        на практике разобрать самые часто встречающиеся бизнес-задачи
-                        в области big data. Слушатели изучают алгоритмы и осваивают
-                        технологии на реальных данных, в реальных кластерах
-                        и в контексте бизнес-задач, актуальных здесь и сейчас.</p>
-
-
-                </div>
-
-                <div class="col-md-1"></div>
-                <div class="col-md-4 white-background">
-                    <div class="green-item">
-                        <div class="feature ">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img src="">
-                                </div>
-                                <div class="col-md-8">
-                                    <h5>Для кого?</h5>
-                                    <p>{{ s.current_left_school.target_auditory }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="black-hr "></div>
-
-                        <div class="feature">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img src="">
-                                </div>
-
-                                <div class="col-md-8">
-                                    <h5>Сколько стоит?</h5>
-                                    <p>{{ s.current_left_school.price }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="black-hr "></div>
-
-                        <div class="feature">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img src="">
-                                </div>
-
-                                <div class="col-md-8">
-                                    <h5>Когда?</h5>
-
-                                    {% for a in s.current_left_school.arrangements.all %}
-                                        <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature orange-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr orange-item"></div>
-
-                    <div class="feature orange-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr orange-item"></div>
-
-
-                    <div style="text-align: left">
-                        <input class="take-part header-btn-little header-btn" type="button"
-                               value="Принять участие">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix whitespace"></div>
-
-
-    <h2>Направления</h2>
-    <div class="whitespace"></div>
-
     <div class="green-item">
-        {% for d in s.current_left_school.departments.all %}
-            <div class="row">
-                {% if forloop.counter0|divisibleby:2 == 0 %}
-                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
-                {% endif %}
-                <div class="vector-description col-md-6">
-                    <h3>{{ d.title }}</h3>
-
-                    <p>{{ d.description }}</p>
-                </div>
-                {% if forloop.counter0|divisibleby:2 == 1 %}
-                    <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
-                {% endif %}
-            </div>
-        {% endfor %}
+        {% include 'events/event_partitial.html' with event=s.current_left_school %}
     </div>
     <div class="orange-item">
-
+        {% include 'events/event_partitial.html' with event=s.current_right_school %}
     </div>
-
-
-
-
-
-    <!-- To Do статичный блок -->
-    <div class="colored">
-        <div class="container colored">
-            <div class="whitespace"></div>
-            <h2 class="white">Что нужно сделать для участия?</h2>
-            <div class="whitespace"></div>
-            <div class="row">
-                <div class="col-md-3 todo">
-                    <img align="middle" src="/static/img/test-icon-white.png">
-                    <h5 class="white">Получить договор</h5>
-                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
-                </div>
-
-                <div class="col-md-3 todo">
-                    <img align="middle" src="/static/img/test-icon-white.png">
-                    <h5 class="white">Получить договор</h5>
-                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
-                </div>
-
-                <div class="col-md-3 todo">
-                    <img align="middle" src="/static/img/test-icon-white.png">
-                    <h5 class="white">Получить договор</h5>
-                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
-                </div>
-
-                <div class="col-md-3 todo">
-                    <img align="middle" src="/static/img/test-icon-white.png">
-                    <h5 class="white">Получить договор</h5>
-                    <p class="white">После того, как вы подали заявку вы получите договор.</p>
-                </div>
-            </div>
-            <div style="text-align: center">
-                <input class="header-btn-big header-btn" type="button"
-                       value="Принять участие">
-            </div>
-        </div>
-    </div>
-
-    <!-- Преподаватели -->
-    {#   FIXME: create a class?#}
-    <div style="background: whitesmoke">
-
-        <div style="background: whitesmoke" class="container">
-            <div class="whitespace"></div>
-            <h2>Преподаватели</h2>
-            <div class="whitespace"></div>
-            {% for e in s.current_left_school.experts %}
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="staff col-md-4">
-                            <div class="helper">
-                                <img class="staff-avatar" src="{{ e.profile_picture.url }}">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h3>{{ e.last_name }} {{ e.first_name }}</h3>
-                            <p>{{ e.short_description }}</p>
-                        </div>
-                    </div>
-                </div>
-
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Вопросы и ответы -->
-    {% if s.current_left_school.faquestions.all|length > 0 %}
-
-        <div class="container questions">
-            <h2>Вопросы и ответы</h2>
-            {% for q in s.current_left_school.faquestions.all %}
-                <a><p onclick="$('#answer{{ forloop.counter0 }}').toggle()">
-                    q.question
-                </p></a>
-                <span style="display: none;" id="answer{{ forloop.counter0 }}">
-            q.answer
-        </span>
-            {% endfor %}
-
-        </div>
-
-    <div class="clearfix whitespace"></div>
-
-    {% endif %}
     <div style="background: whitesmoke">
         <div style="background: whitesmoke;" class="container">
-        <h2>Прошедшие школы</h2>
+            <h2>Прошедшие школы</h2>
             {% for ar in archive %}
                 <div style="margin-top: 2%" class="col-md-4">
                     <div class="school-card school">

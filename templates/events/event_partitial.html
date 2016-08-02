@@ -1,0 +1,172 @@
+<div class="colored">
+    <div class="container colored">
+        <div class="row big-box">
+            <div class="col-md-7 white-background">
+                <h3 class="">{{ event.name }}</h3>
+                <p class="">{{ event.full_description }}</p>
+
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-4 white-background">
+                <div class="">
+                    <div class="feature ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+                            <div class="col-md-8">
+                                <h5>Для кого?</h5>
+                                <p>{{ event.target_auditory }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr "></div>
+
+                    <div class="feature">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>Сколько стоит?</h5>
+                                <p>{{ event.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="black-hr "></div>
+
+                    <div class="feature">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>Когда?</h5>
+
+                                {% for a in event.arrangements.all %}
+                                    <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: left">
+                    <input class="take-part header-btn-little header-btn" type="button"
+                           value="Принять участие">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix whitespace"></div>
+
+
+<h2>Направления</h2>
+<div class="whitespace"></div>
+
+<div class="">
+    {% for d in event.departments.all %}
+        <div class="row">
+            {% if forloop.counter0|divisibleby:2 == 0 %}
+                <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+            {% endif %}
+            <div class="vector-description col-md-6">
+                <h3>{{ d.title }}</h3>
+
+                <p>{{ d.description }}</p>
+            </div>
+            {% if forloop.counter0|divisibleby:2 == 1 %}
+                <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+
+
+<!-- To Do статичный блок -->
+<div class="colored">
+    <div class="container colored">
+        <div class="whitespace"></div>
+        <h2 class="white">Что нужно сделать для участия?</h2>
+        <div class="whitespace"></div>
+        <div class="row">
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <input class="header-btn-big header-btn" type="button"
+                   value="Принять участие">
+        </div>
+    </div>
+</div>
+
+<!-- Преподаватели -->
+{#   FIXME: create a class?#}
+<div style="background: whitesmoke">
+
+    <div style="background: whitesmoke" class="container">
+        <div class="whitespace"></div>
+        <h2>Преподаватели</h2>
+        <div class="whitespace"></div>
+        {% for e in event.experts %}
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="staff col-md-4">
+                        <div class="helper">
+                            <img class="staff-avatar" src="{{ e.profile_picture.url }}">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>{{ e.last_name }} {{ e.first_name }}</h3>
+                        <p>{{ e.short_description }}</p>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Вопросы и ответы -->
+{% if event.faquestions.all|length > 0 %}
+    <div class="container questions">
+        <h2>Вопросы и ответы</h2>
+        {% for q in event.faquestions.all %}
+            <a><p onclick="$('#answer{{ forloop.counter0 }}').toggle()">
+                q.question
+            </p></a>
+            <span style="display: none;" id="answer{{ forloop.counter0 }}">
+            q.answer
+        </span>
+        {% endfor %}
+
+    </div>
+    <div class="clearfix whitespace"></div>
+{% endif %}
