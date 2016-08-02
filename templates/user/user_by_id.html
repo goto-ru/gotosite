@@ -69,7 +69,7 @@
                         <h2>Статус заявок</h2>
                         {% for ap in viewed_user.participant.application_set.all %}
                             <div class="alert alert-{{ ap.class_status }}" role="alert">
-                                <b>Мероприятие:</b> {{ ap.event.name }} <br>
+                                <b>Мероприятие:</b> {{ ap.arrangement.event.name }} <br>
                                 <b>Статус заявки:</b> {{ ap.text_status }}
                                 <form action="{% url 'application' ap.id %}" class="buttons-right" method="post">
                                     <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
