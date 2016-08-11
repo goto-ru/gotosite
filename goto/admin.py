@@ -69,9 +69,6 @@ admin.site.register(Arrangement, ArrangementAdmin)
 
 for model in models:
     admin.site.register(model)
-<<<<<<< HEAD
-=======
 
->>>>>>> release/sprint2
 
 # Register your models here.

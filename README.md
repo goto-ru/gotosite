@@ -14,7 +14,7 @@ Dependencies: python3, postgres
 3.  `git submodule init`
 4.  `git submodule update`
 5.  `pip3 install -r requirements.txt`
-6.  Here you need to run docker with postgres (`sudo docker run -p 5432:5432 postgres`) Don’t forget to run docker background.
+6.  Here you need to run docker with postgres (`sudo docker run -p 5432:5432 postgres`) Don’t forget to run docker in background.
 7.  `python3 manage.py migrate`
 8.  `python3 manage.py loaddata sample_data/sample_data_1.json`
 9.  `python3 manage.py runserver`
