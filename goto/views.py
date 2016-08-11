@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 
 from django.core.urlresolvers import reverse
+
 from .forms import *
 import requests
 from django.contrib import messages
