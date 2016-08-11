@@ -109,16 +109,5 @@
     </div>
     <div class="clearfix whitespace"></div>
 
-    <div style="margin-top: 0" class="container partners">
-        <h2>Партнёры</h2>
-        <div class="whitespace"></div>
-        <div class="row">
-            {% for p in s.current_left_school.partners.all %}
-                <div class="col-md-2 partner">
-                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
-                </div>
 
-            {% endfor %}
-        </div>
-    </div>
 {% endblock %}
