@@ -126,7 +126,7 @@ class Event(models.Model):
 
     def experts(self):
         ret = set()
-        for ar in self.arrangements.prefetch_related('arrangements').all():
+        for ar in self.arrangements.prefetch_related('experts').all():
             ret |= set(ar.experts.all())
         return ret
 

@@ -25,6 +25,7 @@ SECRET_KEY = 'iwz6w2xk$e6tn)ka2d3ugi26*f^9_slx40oadsg^8=#4v=zg^='
 LOGIN_URL = '/login'
 ALLOWED_HOSTS = []
 
+
 # Application definition
 from django.contrib.messages import constants
 
@@ -153,3 +154,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
+STATIC_ROOT = 'static/'
+
