@@ -6,3 +6,4 @@ Pillow
 requests
 django-jinja
 django-filer
+django-allauth

@@ -25,15 +25,30 @@ SECRET_KEY = 'iwz6w2xk$e6tn)ka2d3ugi26*f^9_slx40oadsg^8=#4v=zg^='
 LOGIN_URL = '/login'
 ALLOWED_HOSTS = []
 
-
 # Application definition
 from django.contrib.messages import constants
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'goto', 'nested_inline', 'django_jinja', 'filer',
-    'easy_thumbnails'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'goto',
+    'nested_inline',
+    'django_jinja',
+    'filer',
+    'easy_thumbnails',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.vk',
 ]
+SITE_ID = 1
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
     constants.ERROR: 'alert-danger',
@@ -82,6 +97,17 @@ TEMPLATES = [
     #     },
     # },
 ]
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+AUTHENTICATION_BACKENDS = (
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
 
 DATE_FORMAT = 'd.m.Y'
 
@@ -155,4 +181,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
-
