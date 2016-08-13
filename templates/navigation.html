@@ -20,11 +20,11 @@
                     <li>
                         <a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }}</a>
                     </li>
-                    <li><a href="{% url 'sign_out' %}">Выйти</a></li>
+                    <li><a href="{% url 'account_logout' %}">Выйти</a></li>
                 {% else %}
 
-                    <li><a href="{% url 'sign_in' %}">Вход</a></li>
-                    <li><a href="{% url 'sign_up' %}">Регистрация</a></li>
+                    <li><a href="{% url 'account_login' %}">Вход</a></li>
+                    <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
 
                 {% endif %}
             </ul>

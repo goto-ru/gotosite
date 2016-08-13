@@ -48,7 +48,21 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.vk',
 ]
-SITE_ID = 2
+SITE_ID = 3
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'omrigan'
+EMAIL_HOST_PASSWORD = 'Send8597'
+
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
     constants.ERROR: 'alert-danger',
@@ -141,7 +155,7 @@ if env == 'debug':
 else:
     from .private_settings.production_settings import *
     ALLOWED_HOSTS = ['localhost']
-    HOSTNAME='goto.omrigan.info'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
