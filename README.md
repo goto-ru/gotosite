@@ -22,7 +22,7 @@ Dependencies: python3, postgres
 
 Dependencies: docker, docker-compose
 
-1.  `git clone <https://github.com/goto-ru/gotosite/>`
+1.  `git clone https://github.com/goto-ru/gotosite/`
 2.  `cd gotosite`
 3.  `git submodule init`
 4.  `git submodule update`
