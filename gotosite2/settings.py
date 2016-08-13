@@ -140,8 +140,8 @@ if env == 'debug':
     DATABASES['default']['HOST'] = '127.0.0.1'
 else:
     from .private_settings.production_settings import *
-
     ALLOWED_HOSTS = ['localhost']
+    HOSTNAME='goto.omrigan.info'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
