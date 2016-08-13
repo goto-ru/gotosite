@@ -9,7 +9,6 @@ ADD requirements.txt /root/app/requirements.txt
 RUN pip3 install -r /root/app/requirements.txt
 ADD . /root/app
 RUN python3 manage.py collectstatic --noinput
-ADD mainsite.conf /etc/nginx/sites-enabled
 ADD nginx.conf /etc/nginx
 ENV ENV=production
 CMD ./startup.sh
