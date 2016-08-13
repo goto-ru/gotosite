@@ -11,9 +11,16 @@
         <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
 
             <h2>Основные данные</h2>
-            {{ user_form.as_p }}
-            <h2>Данные участника</h2>
-            {{ participant_form.as_p }}
+            <label for="{{ user_form.last_name.id_for_label }}">Фамилия</label>{{ user_form.last_name }}
+            <label for="{{ user_form.first_name.id_for_label }}">Имя</label>{{ user_form.first_name }}
+            <label for="{{ user_form.surname.id_for_label }}">Отчество</label>{{ user_form.surname }}
+
+            <label for="{{ user_form.organization.id_for_label }}">Организация</label>{{ user_form.organization }}
+            <label for="{{ user_form.organization.id_for_label }}">Пол</label>{{ user_form.gender}}
+
+            {% if participant_form %}
+                <h2>Данные участника</h2>
+            {% endif %}
             {% csrf_token %}
             <input type="submit" value="Сохранить">
         </form>

@@ -230,8 +230,9 @@ def profile_edit(req):
     user = GotoUser.objects.get(pk=req.user.pk)
     user_form = UserEditForm(req.POST, req.FILES or None)
     user_form.instance = user
-    participant_form = ParticipantEditForm(req.POST, req.FILES or None)
-    participant_form.instance = user
+    if user.participant:
+        participant_form = ParticipantEditForm(req.POST, req.FILES or None)
+        participant_form.instance = user.participant
     if req.method == 'POST':
 
         if user_form.is_valid():
@@ -242,10 +243,11 @@ def profile_edit(req):
             user_form.save()
         else:
             return render_profile_edit(req, user)
-        if user.participant and participant_form.is_valid():
-            participant_form.save()
-        else:
-            return render_profile_edit(req, user)
+        if user.participant:
+            if participant_form.is_valid():
+                participant_form.save()
+            else:
+                return render_profile_edit(req, user)
 
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
     return render_profile_edit(req, user)
@@ -274,16 +276,22 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
-    # comments = None
+
     try:
         if user.participant:
+            if req.user.pk == user.pk:
+                if not user.participant.profile_completed():
+                    messages.error(req, 'Профиль не заполнен до конца!')
+                if user.participant.current_age() < 18 and \
+                        len(user.participant.parent_phone_number) == 0:
+                    messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
+
             if req.user.has_perm('view_private_comment'):
                 base_context['private_comments'] = user.participant.comments.filter(is_private=True)
             else:
                 base_context['public_comments'] = user.participant.comments.filter(is_private=False)
     except user.DoesNotExist:
         pass
-    # acc should be typeB if account only has typeA and typeB subclasses
 
     return render(req, 'user/user_by_id.html', base_context)
 

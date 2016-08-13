@@ -25,14 +25,22 @@ SECRET_KEY = 'iwz6w2xk$e6tn)ka2d3ugi26*f^9_slx40oadsg^8=#4v=zg^='
 LOGIN_URL = '/login'
 ALLOWED_HOSTS = []
 
-
 # Application definition
 from django.contrib.messages import constants
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'goto', 'nested_inline', 'django_jinja', 'filer',
-    'easy_thumbnails'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'goto',
+    'nested_inline',
+    'django_jinja',
+    'filer',
+    'easy_thumbnails',
+    'social.apps.django_app.default',
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
@@ -64,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -106,6 +116,14 @@ DATABASES = {
 
     }
 }
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.yahoo.YahooOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 DEBUG = True
 
 if env == 'debug':
@@ -155,4 +173,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
-

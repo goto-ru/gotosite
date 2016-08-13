@@ -36,7 +36,7 @@ def sign_up(req):
         user.save()
         user_log = authenticate(username=email, password=password)
         login(req, user_log)
-        messages.info('Аккаунт успешно создан')
+        messages.info(req, 'Аккаунт успешно создан')
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
 
 
