@@ -5,9 +5,10 @@ from .subscribe_views import *
 from filer.fields.image import FilerImageField
 
 
-class GotoUser(User):
+class GotoUser(models.Model):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
+    user = models.OneToOneField(User, related_name='gotouser')
     SEX = (('M', 'Male'),
            ('F', 'Female'),
            ('N', 'Can\'t say'),)
@@ -22,7 +23,7 @@ class GotoUser(User):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+        return 'Gotouser of %s %s' % (self.user.first_name, self.user.last_name)
 
 
 class Participant(GotoUser):
