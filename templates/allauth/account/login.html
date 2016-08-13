@@ -1,0 +1,36 @@
+{% extends "base_site.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}{% trans "Войти" %}{% endblock %}
+
+{% block container %}
+    <div class="container">
+
+        <h1>{% trans "Войти" %}</h1>
+
+        {% get_providers as socialaccount_providers %}
+        {% for provider in socialaccount_providers %}
+            <a title="{{ provider.name }}" class="socialaccount_provider {{ provider.id }}"
+               href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{ provider.name }}</a>
+
+        {% endfor %}
+
+
+        <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <a class="button secondaryAction"
+               href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+        </form>
+
+    </div>
+{% endblock %}

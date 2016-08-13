@@ -84,7 +84,7 @@ TEMPLATES = [
     },
     # {
     #     'BACKEND': 'django_jinja.backend.Jinja2',
-    #     'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    #     'DIRS': [os.path.join(BASE_DIR, 'allauth')],
     #     'APP_DIRS': True,
     #     'OPTIONS': {
     #         "match_extension": ".html",
