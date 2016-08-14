@@ -1,3 +1,7 @@
+html, body{
+  overflow-x: hidden !important;
+}
+
 .profile_img {
   width: 200px; }
 
@@ -194,4 +198,13 @@ a {
   min-height: 40px;
 }
 
+.mobile-sheet{
+  z-index: 100;
+  position: fixed;
+  right: -300px;
+  top: 0;
+  bottom: 0;
+  padding: 25px;
 
+  background-color: #152136;
+}
