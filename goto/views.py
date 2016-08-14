@@ -43,7 +43,8 @@ def schools(req):
 
 
 def hackathons(req):
-    return render(req, 'hackathon.html')
+    s = Settings.objects.get()
+    return render(req, 'hackathon.html', {'s': s})
 
 
 def lectures(req):

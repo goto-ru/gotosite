@@ -294,6 +294,7 @@ class Settings(models.Model):
 
     current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_1')
     current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_2')
+    current_hackathon = models.ForeignKey(Event, blank=True, null=True, related_name='settings_3')
 
     def save(self, *args, **kwargs):
         self.__class__.objects.exclude(id=self.id).delete()
