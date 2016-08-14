@@ -7,7 +7,7 @@
     <div class="container main-container">
         <div class="col-md-6">
             <h1>Вход</h1>
-
+            <a href="{% url 'social:begin' 'github' %}">Github</a>
             <form action="{% url 'sign_in' %}" method="post">
                 {% csrf_token %}
                 <fieldset>

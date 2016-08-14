@@ -8,18 +8,22 @@ from filer.fields.image import FilerImageField
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
-    SEX = (('M', 'Male'),
-           ('F', 'Female'),
-           ('N', 'Can\'t say'),)
-    sex = models.CharField(choices=SEX, default='M', max_length=2)
+    GENDER = (('M', 'Мужской'),
+              ('F', 'Женский'),
+              ('N', 'Не указан'),)
+    gender = models.CharField(choices=GENDER, default='N', max_length=2)
     surname = models.CharField(max_length=40, blank=True)
-    vk = models.URLField(max_length=240, default='', blank=True)
-    github = models.URLField(max_length=240, default='', blank=True)
     about = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='no-photo.jpg',
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
-    verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
+
+    def github(self):
+        try:
+            return self.social_auth.get(provider='github').extra_data['login']
+        except AttributeError:
+            return None
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -27,14 +31,28 @@ class GotoUser(User):
 
 class Participant(GotoUser):
     # Personal data
-    graduation_year = models.IntegerField(blank=True, default=2016)
-    city = models.CharField(max_length=40, default='Москва', blank=True)
-    citizenship = models.CharField(max_length=40, default='Российская Федерация', blank=True)
+    city = models.CharField(max_length=40, blank=True)
+    citizenship = models.CharField(default='Россия', max_length=40, blank=True)
 
-    birthday = models.DateField(default=date.today)
+    graduation_year = models.IntegerField(blank=True, null=True)
+    birthday = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=40, blank=True)
     parent_phone_number = models.CharField(max_length=40, blank=True)
     health_issues = models.TextField(default='Никаких', blank=True)
+
+    programming_languages = models.TextField(blank=True, )
+    experience = models.TextField(blank=True)
+
+    def profile_completed(self):
+        ret = self.graduation_year is not None
+        ret &= self.birthday is not None
+        ret &= len(self.citizenship) > 0
+        ret &= len(self.city) > 0
+        ret &= len(self.phone_number) > 0
+        ret &= len(self.programming_languages) > 0
+        ret &= len(self.experience) > 0
+        return ret
+
     _subscribed_to_email = models.BooleanField(default=False)
 
     @property
@@ -49,14 +67,14 @@ class Participant(GotoUser):
             mailchimp_unsubscribe(self.email)
         self._subscribed_to_email = val
 
-    # Public data
-    programming_languages = models.TextField(blank=True, )
-    experience = models.TextField(blank=True)
-
     def current_age(self):
+        if self.birthday is None:
+            return None
         return (date.today() - self.birthday).days // 365
 
     def current_class(self):
+        if self.graduation_year is None:
+            return None
 
         left = self.graduation_year - date.today().year
         if date.today().month < 5:
@@ -74,6 +92,7 @@ class Participant(GotoUser):
 class Expert(GotoUser):
     short_description = models.CharField(max_length=256, blank=True)
     position = models.CharField(max_length=140, null=True, blank=True)
+    verified = models.BooleanField(default=False)
 
     class Meta():
         verbose_name = 'Expert'

@@ -22,18 +22,9 @@
     <div class="container main-container">
         <div class="col-md-6">
             <h1>Регистрация</h1>
-            {% if err %}
-            <p>
-                {{ err }}
-            </p>
-            {% endif %}
-            {% if info %}
-            <p>
-                {{ info }}
-            </p>
-            {% endif %}
+
             <form action="{% url 'sign_up' %}" method="post">
-                {% csrf_token %}
+
                 <input type="text" placeholder="Имя" name="first_name" required> <br>
                 <input type="text" placeholder="Фамилия" name="last_name" required> <br>
                 <input type="email"  placeholder="Email" name="email" required> <br>
@@ -45,6 +36,8 @@
                     </select> <br>
 
                 <input class="btn btn-default login-btn" type="submit">
+
+                {% csrf_token %}
             </form>
         </div>
 

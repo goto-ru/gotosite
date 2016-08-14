@@ -11,9 +11,24 @@
         <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
 
             <h2>Основные данные</h2>
-            {{ user_form.as_p }}
-            <h2>Данные участника</h2>
-            {{ participant_form.as_p }}
+            <label for="{{ user_form.last_name.id_for_label }}">Фамилия</label>{{ user_form.last_name }}
+            <label for="{{ user_form.first_name.id_for_label }}">Имя</label>{{ user_form.first_name }}
+            <label for="{{ user_form.surname.id_for_label }}">Отчество</label>{{ user_form.surname }}
+
+            <label for="{{ user_form.organization.id_for_label }}">Организация</label>{{ user_form.organization }}
+            <label for="{{ user_form.gender.id_for_label }}">Пол</label> {{ user_form.gender }} <br>
+
+            <label for="{{ user_form.about.id_for_label }}">О себе</label> {{ user_form.about }} <br>
+            <label for="{{ user_form.profile_picture.id_for_label }}">Аватар</label> {{ user_form.profile_picture }}
+
+
+            {% if participant_form %}
+                <h2>Данные участника</h2>
+                <label for="{{ participant_form.city.id_for_label }}">Город</label>{{ participant_form.city }}
+                <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания</label>{{ participant_form.citizenship }}
+                <label for="{{ participant_form.experience.id_for_label }}">Опыт в программировании</label>{{ participant_form.experience }}
+
+            {% endif %}
             {% csrf_token %}
             <input type="submit" value="Сохранить">
         </form>

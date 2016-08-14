@@ -25,14 +25,22 @@ SECRET_KEY = 'iwz6w2xk$e6tn)ka2d3ugi26*f^9_slx40oadsg^8=#4v=zg^='
 LOGIN_URL = '/login'
 ALLOWED_HOSTS = []
 
-
 # Application definition
 from django.contrib.messages import constants
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'goto', 'nested_inline', 'django_jinja', 'filer',
-    'easy_thumbnails'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'goto',
+    'nested_inline',
+    'django_jinja',
+    'filer',
+    'easy_thumbnails',
+    'social.apps.django_app.default',
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
@@ -64,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -83,13 +93,29 @@ TEMPLATES = [
     # },
 ]
 
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.social_user',
+
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    #'goto.login_views.create_user',
+    'social.pipeline.user.create_user',
+
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_USER_MODEL = 'goto.Participant'
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 DATE_FORMAT = 'd.m.Y'
 
 WSGI_APPLICATION = 'gotosite2.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 env = os.getenv('ENV', 'debug')
 DATABASES = {
     # 'default': {
@@ -106,6 +132,14 @@ DATABASES = {
 
     }
 }
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_GITHUB_KEY = '13dacbc29b3229dc6c71'
+SOCIAL_AUTH_GITHUB_SECRET = '503a6f25cf7670611cbb6cadecf30cb8000b3816'
+
 DEBUG = True
 
 if env == 'debug':
@@ -155,4 +189,3 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
-
