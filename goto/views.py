@@ -105,11 +105,10 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-#@login_required()
-def application_fill(req, arrangement_id, department_id):
-    arrangement = Arrangement.objects.get(pk=arrangement_id)
-    department = Department.objects.get(pk=department_id)
-    base_cotext = {'arrangement': arrangement, 'department': department}
+def application_fill(req, event_id):
+    event = Event.objects.get(pk=event_id)
+
+    base_cotext = {'event': event}
     if not req.user.is_authenticated():
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'events/events.html', base_cotext)
@@ -118,27 +117,33 @@ def application_fill(req, arrangement_id, department_id):
     if user.participant is None:
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'fill_application.html', base_cotext)
-    a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
-    if a.count() > 0:
-        messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
-        return render(req, 'fill_application.html', base_cotext)
-    if arrangement.event != department.event:
-        return HttpResponseBadRequest()
+    # a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
+    # if a.count() > 0:
+    #     messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
+    #     return render(req, 'fill_application.html', base_cotext)
+
     if req.method == 'POST':
+        data = req.POST.keys()
+        dep_id = [_.split('_')[1] for _ in data if _.startswith('department')][0]
+        arr_id = [_.split('_')[1] for _ in data if _.startswith('arrangement')][0]
+        department = Department.objects.get(pk=dep_id)
+        arrangement = Arrangement.objects.get(pk=arr_id)
+        if arrangement.event != department.event:
+            return HttpResponseBadRequest()
         app = Application()
         app.arrangement = arrangement
         app.department = department
         app.participant = user.participant
         app.date_created = datetime.datetime.now()
         app.save()
-        for q in arrangement.event.questions.all():
-            text = req.POST['question%s' % q.pk]
+        for q in arrangement.event.applier_questions.all():
+            text = req.POST['question_%s' % q.pk]
             ans = Answer()
             ans.application = app
             ans.question = q
             ans.text = text
             ans.save()
-        messages.add_message("Заявка успешно принята")
+        messages.info(req, "Заявка успешно принята")
         return render(req, 'fill_application.html', base_cotext)
     else:
         return render(req, 'fill_application.html', base_cotext)
