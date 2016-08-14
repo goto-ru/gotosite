@@ -1,5 +1,6 @@
 {% include 'events/event_information.html' with event=event %}
 
+
 <div class="header-head"><h2>Направления</h2></div>
 
 <div class="">
@@ -92,7 +93,12 @@
 {% endif %}
 
 <div style="margin-top: 0" class="container partners">
+<<<<<<< HEAD
     <div class="header-head"><h2>Партнёры</h2></div>
+=======
+    <h2>Партнёры</h2>
+    <div class="whitespace"></div>
+>>>>>>> 9604e36... Application send
     <div class="row">
         {% for p in s.current_left_school.partners.all %}
             <div class="col-md-2 partner">
