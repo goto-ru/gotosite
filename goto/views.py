@@ -104,7 +104,7 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-@login_required()
+#@login_required()
 def application_fill(req, arrangement_id, department_id):
     arrangement = Arrangement.objects.get(pk=arrangement_id)
     department = Department.objects.get(pk=department_id)
