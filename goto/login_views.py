@@ -64,7 +64,25 @@ def sign_in(req):
         return render(req, 'login.html')
 
 
-@login_required
 def sign_out(req):
     logout(req)
     return HttpResponseRedirect('/')
+
+
+USER_FIELDS = ['username', 'email']
+
+
+def create_user(strategy, details, user=None, *args, **kwargs):
+    if user:
+        return {'is_new': False}
+
+    fields = dict((name, kwargs.get(name, details.get(name)))
+                  for name in strategy.setting('USER_FIELDS', USER_FIELDS))
+    print(fields)
+    if not fields:
+        return
+
+    return {
+        'is_new': True,
+        'user': strategy.create_user(**fields)
+    }

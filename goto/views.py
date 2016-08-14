@@ -241,16 +241,19 @@ def profile_edit(req):
             # user.save()
             # print(user.profile_picture)
             user_form.save()
+            user.save()
         else:
             return render_profile_edit(req, user)
         if user.participant:
             if participant_form.is_valid():
                 participant_form.save()
+                user.participant.save()
             else:
                 return render_profile_edit(req, user)
 
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-    return render_profile_edit(req, user)
+    else:
+        return render_profile_edit(req, user)
 
 
 def about_us(req):
@@ -277,12 +280,13 @@ def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
 
+
     try:
         if user.participant:
             if req.user.pk == user.pk:
                 if not user.participant.profile_completed():
                     messages.error(req, 'Профиль не заполнен до конца!')
-                if user.participant.current_age() < 18 and \
+                if user.participant.current_age() and user.participant.current_age() < 18 and \
                         len(user.participant.parent_phone_number) == 0:
                     messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
 

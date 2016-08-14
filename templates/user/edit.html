@@ -16,10 +16,18 @@
             <label for="{{ user_form.surname.id_for_label }}">Отчество</label>{{ user_form.surname }}
 
             <label for="{{ user_form.organization.id_for_label }}">Организация</label>{{ user_form.organization }}
-            <label for="{{ user_form.organization.id_for_label }}">Пол</label>{{ user_form.gender}}
+            <label for="{{ user_form.gender.id_for_label }}">Пол</label> {{ user_form.gender }} <br>
+
+            <label for="{{ user_form.about.id_for_label }}">О себе</label> {{ user_form.about }} <br>
+            <label for="{{ user_form.profile_picture.id_for_label }}">Аватар</label> {{ user_form.profile_picture }}
+
 
             {% if participant_form %}
                 <h2>Данные участника</h2>
+                <label for="{{ participant_form.city.id_for_label }}">Город</label>{{ participant_form.city }}
+                <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания</label>{{ participant_form.citizenship }}
+                <label for="{{ participant_form.experience.id_for_label }}">Опыт в программировании</label>{{ participant_form.experience }}
+
             {% endif %}
             {% csrf_token %}
             <input type="submit" value="Сохранить">

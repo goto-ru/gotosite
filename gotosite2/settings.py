@@ -93,13 +93,29 @@ TEMPLATES = [
     # },
 ]
 
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.social_user',
+
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    #'goto.login_views.create_user',
+    'social.pipeline.user.create_user',
+
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_USER_MODEL = 'goto.Participant'
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 DATE_FORMAT = 'd.m.Y'
 
 WSGI_APPLICATION = 'gotosite2.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 env = os.getenv('ENV', 'debug')
 DATABASES = {
     # 'default': {
@@ -118,11 +134,11 @@ DATABASES = {
 }
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.yahoo.YahooOpenId',
+    'social.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+SOCIAL_AUTH_GITHUB_KEY = '13dacbc29b3229dc6c71'
+SOCIAL_AUTH_GITHUB_SECRET = '503a6f25cf7670611cbb6cadecf30cb8000b3816'
 
 DEBUG = True
 

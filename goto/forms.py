@@ -11,8 +11,6 @@ class UserEditForm(forms.ModelForm):
             'surname',
             'organization',
             'gender',
-            'vk',
-            'github',
             'about',
             'profile_picture', ]
 

@@ -9,17 +9,21 @@ class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
     GENDER = (('M', 'Мужской'),
-           ('F', 'Женский'),
-           ('N', 'Не указан'),)
+              ('F', 'Женский'),
+              ('N', 'Не указан'),)
     gender = models.CharField(choices=GENDER, default='N', max_length=2)
     surname = models.CharField(max_length=40, blank=True)
-    vk = models.URLField(max_length=240, default='', blank=True)
-    github = models.URLField(max_length=240, default='', blank=True)
     about = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='no-photo.jpg',
                                         blank=False, null=False)
     organization = models.CharField(max_length=240, blank=True)
     email_verified = models.BooleanField(default=False)
+
+    def github(self):
+        try:
+            return self.social_auth.get(provider='github').extra_data['login']
+        except AttributeError:
+            return None
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -69,6 +73,8 @@ class Participant(GotoUser):
         return (date.today() - self.birthday).days // 365
 
     def current_class(self):
+        if self.graduation_year is None:
+            return None
 
         left = self.graduation_year - date.today().year
         if date.today().month < 5:
