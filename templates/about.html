@@ -179,7 +179,7 @@
         <div class="orange-background container">
             <h1 class="white">Команда</h1>
             <div class="row">
-                {% for e in team.all %}
+                {% for e in s.about_us_team.all %}
                     <div class="col-md-6">
                         <div class="staff row">
 
@@ -209,29 +209,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 ponte">
-                <p class="int">128</p>
-                <p class="int-description">Проектов сделано детьми.</p>
+                <p class="int">{{ statistics.projects }}</p>
+                <p class="int-description">Проектов сделано детьми</p>
             </div>
 
             <div class="col-md-3 ponte">
-                <p class="int">88</p>
-                <p class="int-description">кг творога съедено.</p>
+                <p class="int">{{ statistics.archive}}</p>
+                <p class="int-description">Мероприятий проведено</p>
             </div>
 
             <div class="col-md-3 ponte">
-                <p class="int">55</p>
-                <p class="int-description">волос выпало.</p>
+                <p class="int">{{ statistics.participants }}</p>
+                <p class="int-description">Участников</p>
             </div>
 
             <div class="col-md-3 ponte">
-                <p class="int">60</p>
-                <p class="int-description">дней ушло на разработку.</p>
+                <p class="int">{{ statistics.experts}}</p>
+                <p class="int-description">Экспертов</p>
             </div>
         </div>
     </div>
     <div class="container partners">
         <h1>Партнёры</h1>
-        {% for p in partners.all %}
+        {% for p in s.about_us_partners.all %}
             <div class="col-md-2 partner">
                 <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
             </div>

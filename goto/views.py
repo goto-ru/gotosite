@@ -253,7 +253,13 @@ def profile_edit(req):
 
 def about_us(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.about_us_partners, 'team': s.about_us_team}
+
+    context_dictionary = {'s': s, 'statistics': {
+        'projects': Project.objects.count(),
+        'archive': Arrangement.objects.filter(end_date__lte=datetime.datetime.now()).count(),
+        'participants': Participant.objects.count(),
+        'experts': Expert.objects.count()
+    }}
     return render(req, 'about.html', context_dictionary)
 
 
