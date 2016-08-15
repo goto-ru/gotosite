@@ -1,5 +1,5 @@
 {% load staticfiles %}
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <nav style="margin-bottom: 0" class="navbar navbar-default">
     <div class="container-fluid" style="background: none;">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,4 +43,28 @@
 
     </div>
 
+    <div class="mobile-sheet">
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'schools' %}">Школa</a></li>
+            <li><a href="{% url 'hackathons' %}">Хакатон</a></li>
+            <li><a href="{% url 'lectures' %}">Лекторий</a></li>
+            <li><a href="{% url 'info' %}">Информация</a></li>
+
+            <li><a href="{% url 'about_us' %}">О нас</a></li>
+            <li role="separator" class="divider"></li>
+
+            <div class="hr"></div>
+            {% if request.user.is_authenticated %}
+                <li>
+                    <a href="{% url 'user_detail' user.id %}">{{ request.user.first_name }}</a>
+                </li>
+                <li><a href="{% url 'sign_out' %}">Выйти</a></li>
+            {% else %}
+
+                <li><a href="{% url 'sign_in' %}">Вход</a></li>
+                <li><a href="{% url 'sign_up' %}">Регистрация</a></li>
+
+            {% endif %}
+        </ul>
+    </div>
 </nav>

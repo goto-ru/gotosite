@@ -4,6 +4,11 @@
     -webkit-box-shadow: none;3
 }
 
+.icon-bar {
+    background-color: white !important;
+}
+
+
 .navbar a {
     color: white !important;
 }

@@ -4,6 +4,10 @@
     -webkit-box-shadow: none;
 }
 
+.icon-bar {
+    background-color: white !important;
+}
+
 .navbar a {
     color: white !important;
 }
@@ -56,8 +60,6 @@
     color: rgb(66, 158, 132);
     border-color: rgb(66, 158, 132);
 }
-
-
 
 .features {
     background: url("/static/img/wallpaper.jpg");
