@@ -7,6 +7,7 @@
 .batch_profile {
   height: 200px; }
 
+
 .application {
   float: right;
   vertical-align: middle; }
@@ -192,6 +193,15 @@ a {
 }
 .firefox-fix-little{
   min-height: 40px;
+}
+.doticon {
+  max-width: 50px;
+  margin: 0 auto;
+  margin-top: 20%;
+  height: auto;
+}
+.feature {
+  height: 25%;
 }
 
 

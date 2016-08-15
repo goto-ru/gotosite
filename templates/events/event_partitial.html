@@ -1,3 +1,6 @@
+{% load staticfiles %}
+<link href="{% static 'css/schools.css' %}" rel="stylesheet">
+
 <div class="colored">
     <div class="container colored">
         <div class="row big-box">
@@ -14,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-4">
 
-                                <i class="glyphicon-alert glyphicon-resize-full"></i>
+                                <img class='doticon' src="{% static 'img/who.png' %}">
                             </div>
                             <div class="col-md-8">
                                 <h5>Для кого?</h5>
@@ -27,7 +30,7 @@
                     <div class="feature">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="">
+                                <img class='doticon' src="{% static 'img/how_much.png' %}">
                             </div>
 
                             <div class="col-md-8">
@@ -41,7 +44,7 @@
                     <div class="feature">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="">
+                                <img class='doticon' src="{% static 'img/when.png' %}">
                             </div>
 
                             <div class="col-md-8">
@@ -54,11 +57,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="feature">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class='doticon' src="{% static 'img/where.png' %}">
+                            </div>
+
+                            <div class="col-md-8">
+                                <h5>Где?</h5>
+
+                                <p>{{ event.place }}</p>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
-{#FIXME!!!#}
-                    <a href="{% url 'application_fill' 1 %}" class="take-part header-btn-little header-btn">Принять участие</a>
+                    {#FIXME!!!#}
+                    <a href="{% url 'application_fill' 1 %}" class="take-part header-btn-little header-btn">Принять
+                        участие</a>
                 </div>
             </div>
         </div>
