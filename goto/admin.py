@@ -4,10 +4,12 @@ from goto.models import *
 from django.contrib.admin import StackedInline, TabularInline, ModelAdmin
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+from django.core.mail import send_mail
 
 from filer.admin.imageadmin import *
 
-models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
+models = [Participant, Expert, Page, Answer, Question,
+          Project, Assignment, Solution, Settings, Partner,
           MassMediaArticle, FAQuestion]
 
 admin.site.register(Permission)
@@ -54,18 +56,46 @@ class DepartmentInline(NestedStackedInline):
     extra = 0
 
 
+@admin.register(Event)
 class EventAdmin(NestedModelAdmin):
     model = Event
     inlines = [DepartmentInline, ArrangementInline]
 
 
+@admin.register(Arrangement)
 class ArrangementAdmin(NestedModelAdmin):
     model = Arrangement
     inlines = [ExpertInline]
 
 
-admin.site.register(Event, EventAdmin)
-admin.site.register(Arrangement, ArrangementAdmin)
+def accept(modeladmin, req, queryset):
+    queryset.update(status=1)
+    event_name = queryset.get().arrangement.event.name
+    send_mail('Подтверждение заявки на мероприятие "%s"' % event_name,
+              'Ваша заявка на мероприятие одобрена. Перейдите по ссылке <такой-то> чтобы подтвердить своё участие',
+              'events@goto.omrigan.info', ['omrigann@gmail.com', 'andr.tvorog@gmail.com'], fail_silently=False)
+
+
+def reject(modeladmin, req, queryset):
+    queryset.update(status=2)
+    # send_email
+
+
+@admin.register(Application)
+class ApplicationAdmin(ModelAdmin):
+    def current_age(self, obj):
+        return obj.participant.current_age()
+
+    def current_class(self, obj):
+        return obj.participant.current_class()
+
+    model = Application
+
+    list_display = ('participant', 'status', 'current_age', 'current_class',)
+    list_filter = ('status', 'arrangement', 'participant__gender')
+    search_fields = ('participant__last_name', 'participant__first_name')
+    actions = [accept, reject]
+
 
 for model in models:
     admin.site.register(model)
