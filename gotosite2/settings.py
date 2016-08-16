@@ -114,6 +114,12 @@ DATE_FORMAT = 'd.m.Y'
 
 WSGI_APPLICATION = 'gotosite2.wsgi.application'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'omrigan'
+EMAIL_HOST_PASSWORD = 'Send8597'
+
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 env = os.getenv('ENV', 'debug')

@@ -73,12 +73,17 @@ def accept(modeladmin, req, queryset):
     event_name = queryset.get().arrangement.event.name
     send_mail('Подтверждение заявки на мероприятие "%s"' % event_name,
               'Ваша заявка на мероприятие одобрена. Перейдите по ссылке <такой-то> чтобы подтвердить своё участие',
-              'events@goto.omrigan.info', ['omrigann@gmail.com', 'andr.tvorog@gmail.com'], fail_silently=False)
+              'events@goto.omrigan.info', [_['participant__email'] for _ in queryset.values('participant__email')],
+              fail_silently=False)
 
 
 def reject(modeladmin, req, queryset):
     queryset.update(status=2)
-    # send_email
+    event_name = queryset.get().arrangement.event.name
+    send_mail('Отклонение заявки на мероприятие "%s"' % event_name,
+              'Ваша заявка на мероприятие одобрена. Перейдите по ссылке <такой-то> чтобы подтвердить своё участие',
+              'events@goto.omrigan.info', [_['participant__email'] for _ in queryset.values('participant__email')],
+              fail_silently=False)
 
 
 @admin.register(Application)
