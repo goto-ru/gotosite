@@ -5,7 +5,6 @@ $(document).ready(function () {
     }
     $(".navbar-toggle").click(function () {
         $('body').animate({right:'150'}, 500);
-        $('.mobile-sheet').animate({right:'0'}, 500);
+        $('.mobile-sheet').toggle().animate({right:'0'}, 500);
     });
-
 });
