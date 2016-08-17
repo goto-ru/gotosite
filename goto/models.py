@@ -89,7 +89,7 @@ class Participant(GotoUser):
             return None
         return (date.today() - self.birthday).days // 365
 
-    def current_class(self):
+    def grade(self):
         if self.graduation_year is None:
             return None
 

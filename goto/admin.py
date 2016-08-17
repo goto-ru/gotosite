@@ -91,12 +91,27 @@ class ApplicationAdmin(ModelAdmin):
     def current_age(self, obj):
         return obj.participant.current_age()
 
-    def current_class(self, obj):
-        return obj.participant.current_class()
+    def grade(self, obj):
+        return obj.participant.grade()
 
+    def city(self, obj):
+        return obj.participant.city
+
+    def stage(self, obj):
+        return str(obj.participant.education_type)
+
+    def status_admin(self, obj):
+        statuses = {
+            0: 'Await',
+            1: 'Accepted',
+            2: 'Rejected',
+            3: 'Confirmed',
+            4: 'Unconfirmed'
+        }
+        return statuses[obj.status]
     model = Application
 
-    list_display = ('participant', 'status', 'current_age', 'current_class',)
+    list_display = ('participant', 'city', 'current_age', 'stage', 'grade', 'status_admin')
     list_filter = ('status', 'arrangement', 'participant__gender')
     search_fields = ('participant__last_name', 'participant__first_name')
     actions = [accept, reject]
