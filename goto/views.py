@@ -117,10 +117,10 @@ def application_fill(req, event_id):
     if user.participant is None:
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'fill_application.html', base_cotext)
-    # a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
-    # if a.count() > 0:
-    #     messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
-    #     return render(req, 'fill_application.html', base_cotext)
+
+    for ap in Application.objects.filter(participant=user.participant, arrangement__event=event):
+        messages.error(req, 'Вы подали заявку на это мероприятие на сроки %s' % (ap.arrangement.get_datedelta(),))
+        return render(req, 'fill_application.html', base_cotext)
 
     if req.method == 'POST':
         data = req.POST.keys()
@@ -130,6 +130,9 @@ def application_fill(req, event_id):
         arrangement = Arrangement.objects.get(pk=arr_id)
         if arrangement.event != department.event:
             return HttpResponseBadRequest()
+        if Application.objects.filter(participant=user.participant, arrangement=arrangement).count() > 0:
+            messages.error(req, 'Вы уже подали заявку на эту смену')
+            return render(req, 'fill_application.html', base_cotext)
         app = Application()
         app.arrangement = arrangement
         app.department = department
@@ -143,8 +146,10 @@ def application_fill(req, event_id):
             ans.question = q
             ans.text = text
             ans.save()
+
         messages.info(req, "Заявка успешно принята")
-        return render(req, 'fill_application.html', base_cotext)
+
+        return HttpResponseRedirect(reverse('application', args=[app.id]))
     else:
         return render(req, 'fill_application.html', base_cotext)
 
@@ -284,7 +289,6 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
-
 
     try:
         if user.participant:

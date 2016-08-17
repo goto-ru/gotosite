@@ -34,7 +34,6 @@ class Participant(GotoUser):
     city = models.CharField(max_length=40, blank=True)
     citizenship = models.CharField(default='Россия', max_length=40, blank=True)
 
-    graduation_year = models.IntegerField(blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=40, blank=True)
     parent_phone_number = models.CharField(max_length=40, blank=True)
@@ -42,6 +41,16 @@ class Participant(GotoUser):
 
     programming_languages = models.TextField(blank=True, )
     experience = models.TextField(blank=True)
+
+    education_types = (
+        ('school', 'Школа'),
+        ('university', 'ВУЗ'),
+        ('other', 'Другое')
+    )
+    education_type = models.CharField(max_length=32, default='school', choices=education_types)
+    education_name = models.CharField(max_length=256, blank=True)
+    education_years = models.IntegerField(default=11)
+    graduation_year = models.IntegerField(blank=True, null=True)
 
     def profile_completed(self):
         ret = self.graduation_year is not None
@@ -77,12 +86,12 @@ class Participant(GotoUser):
             return None
 
         left = self.graduation_year - date.today().year
-        if date.today().month < 5:
-            left += 1
-        cl = 12 - left
-        if cl >= 12:
-            cl = 'Выпустился в %s' % self.graduation_year
-        return cl
+        if date.today().month > 5:
+            left -= 1
+        if left < 0:
+            return 'Выпустился в %s' % self.graduation_year
+        else:
+            return self.education_years - left
 
     class Meta():
         verbose_name = 'Participant'
@@ -162,6 +171,9 @@ class Arrangement(models.Model):
     end_date = models.DateField(default=date.today)
     participants = models.ManyToManyField(Participant, through='Application')
     experts = models.ManyToManyField(Expert, through='Experting')
+
+    def get_datedelta(self):  # TODO adaptive datedelta
+        return "%s-%s" % (self.begin_date, self.end_date)
 
     def __str__(self):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
