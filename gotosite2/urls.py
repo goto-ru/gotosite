@@ -66,7 +66,8 @@ urlpatterns = [
 
     # Subscribe
     url(r'^subscribe/$', subscribe_views.subscribe, name='subscribe'),
-    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe')
+    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe'),
+    url(r'^askletter/(?P<emails>.+)/$', subscribe_views.ask_for_email, name='askletter')
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),

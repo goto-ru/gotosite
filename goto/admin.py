@@ -6,6 +6,7 @@ from django.contrib.admin import StackedInline, TabularInline, ModelAdmin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from django.core.mail import send_mail
 
+from django.core.urlresolvers import reverse
 from filer.admin.imageadmin import *
 from import_export.admin import ImportExportMixin, ImportMixin, ExportMixin
 from import_export import resources
@@ -97,6 +98,7 @@ class ApplicationResource(resources.ModelResource):
         model = Application
         fields = ('participant__first_name', 'participant__last_name', 'participant__city', 'participant__birthday')
 
+
 def export_css(modeladmin, req, queryset):
     s = StringIO()
     s.write(ApplicationResource().export(queryset=queryset).csv)
@@ -104,8 +106,6 @@ def export_css(modeladmin, req, queryset):
     response = HttpResponse(FileWrapper(s), content_type='application/csv')
     response['Content-Disposition'] = datetime.datetime.now().strftime('attachment; filename=Applications-%d.%m.%y.csv')
     return response
-
-
 
 
 @admin.register(Application)
@@ -118,6 +118,12 @@ class ApplicationAdmin(ExportMixin, ModelAdmin):
         response['Content-Disposition'] = datetime.datetime.now().strftime(
             'attachment; filename=Applications-%d.%m.%y.xlsx')
         return response
+
+    def send_custom_email(self, req, queryset):
+        return HttpResponseRedirect(
+            reverse('askletter',
+                    args=[','.join([_['participant__email'] for _ in queryset.values('participant__email')])])
+        )
 
     def current_age(self, obj):
         return obj.participant.current_age()
@@ -158,7 +164,7 @@ class ApplicationAdmin(ExportMixin, ModelAdmin):
         'status_admin')
     list_filter = ('status', 'arrangement', 'participant__gender')
     search_fields = ('participant__last_name', 'participant__first_name')
-    actions = [accept, reject, export_css, export_xlsx]
+    actions = [accept, reject, export_css, export_xlsx, send_custom_email]
 
 
 for model in models:

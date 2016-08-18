@@ -148,7 +148,7 @@ SOCIAL_AUTH_GITHUB_KEY = '13dacbc29b3229dc6c71'
 SOCIAL_AUTH_GITHUB_SECRET = '503a6f25cf7670611cbb6cadecf30cb8000b3816'
 
 DEBUG = True
-
+EMAIL_FROM = 'goto@goto.omrigan.info'
 if env == 'debug':
     from .private_settings.debug_settings import *
 
