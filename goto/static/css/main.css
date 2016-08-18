@@ -260,3 +260,12 @@ a {
     padding: 25px;
     background-color: #152136;
 }
+
+.email {
+    -webkit-box-shadow: None !important;
+    box-shadow: None !important;
+}
+
+.modal-footer{
+    margin-top: 0;
+}

@@ -3,22 +3,19 @@
 {% block header %}
     {% include 'navigation.html' %}
     <div class="hr"></div>
-    <div class="container-fluid">
-        {% for message in messages %}
-            <div class="alert {{ message.tags }}" role="alert">
-                {{ message }}
-            </div>
-
-        {% endfor %}
-
-
-    </div>
+{#    <div class="container-fluid">#}
+{#        {% for message in messages %}#}
+{#            <div class="alert {{ message.tags }}" role="alert">#}
+{#                {{ message }}#}
+{#            </div>#}
+{##}
+{#        {% endfor %}#}
+{#    </div>#}
 
 
 {% endblock %}
 
 {% block footer %}
-    <div class="hr"></div>
     <footer class="modal-footer">
         <div class="footer">
             <div style="padding-top: 5px; padding-bottom: 6px;">

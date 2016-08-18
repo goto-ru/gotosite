@@ -1,38 +1,103 @@
-{% extends 'base_site.html' %}
+{% extends 'base.html' %}
 {% block title %}
     GoTo: редактировать информацию
 {% endblock %}
 
 {% block container %}
+    {% load staticfiles %}
+    <link href="{% static 'css/edit_profile.css' %}" rel="stylesheet">
     <div class="container">
+        <div class="row">
+            {{ user_form.message.errors }} <br>
+            {{ participant_form.message.errors }} <br>
+            <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal">
+                        <label for="{{ user_form.last_name.id_for_label }}">Фамилия:</label>
+                    </div>
+                    <div class="col-md-6 leftal">
+                        {{ user_form.last_name }}
+                    </div>
+                </div>
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal">
+                        <label for="{{ user_form.first_name.id_for_label }}">Имя:</label>
+                    </div>
+                    <div class="col-md-6 leftal">
+                        {{ user_form.first_name }}
+                    </div>
+                </div>
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal">
+                        <label for="{{ user_form.surname.id_for_label }}">Отчество:</label>
+                    </div>
+                    <div class="col-md-6 leftal">
+                        {{ user_form.surname }}
+                    </div>
+                </div>
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal">
+                        <label for="{{ user_form.organization.id_for_label }}">Организация:</label>
+                    </div>
+                    <div class="col-md-6 leftal">
+                        {{ user_form.organization }}
+                    </div>
+                </div>
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal">
+                        <label for="{{ user_form.gender.id_for_label }}">Пол:</label>
+                    </div>
+                    <div class="col-md-6 leftal">
+                        {{ user_form.gender }}
+                    </div>
+                </div>
+                <div class="col-md-6 cell">
+                    <div class="col-md-6 rightal"><label
+                            for="{{ user_form.profile_picture.id_for_label }}">Аватар:</label>
+                    </div>
+                    <div class="col-md-6">{{ user_form.profile_picture }}</div>
+                </div>
+                {% if participant_form %}
+                    <div class="col-md-6 cell">
+                        <div class="col-md-6 rightal">
+                            <label for="{{ participant_form.city.id_for_label }}">Город:</label>
+                        </div>
 
-        {{ user_form.message.errors }} <br>
-        {{ participant_form.message.errors }} <br>
-        <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
+                        <div class="col-md-6 leftal">
+                            {{ participant_form.city }}
+                        </div>
+                    </div>
 
-            <h2>Основные данные</h2>
-            <label for="{{ user_form.last_name.id_for_label }}">Фамилия</label>{{ user_form.last_name }}
-            <label for="{{ user_form.first_name.id_for_label }}">Имя</label>{{ user_form.first_name }}
-            <label for="{{ user_form.surname.id_for_label }}">Отчество</label>{{ user_form.surname }}
+                    <div class="col-md-6 cell">
+                        <div class="col-md-6 rightal">
+                            <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания:</label>
+                        </div>
+                        <div class="col-md-6 leftal">
+                            {{ participant_form.citizenship }}
+                        </div>
+                    </div>
 
-            <label for="{{ user_form.organization.id_for_label }}">Организация</label>{{ user_form.organization }}
-            <label for="{{ user_form.gender.id_for_label }}">Пол</label> {{ user_form.gender }} <br>
-
-            <label for="{{ user_form.about.id_for_label }}">О себе</label> {{ user_form.about }} <br>
-            <label for="{{ user_form.profile_picture.id_for_label }}">Аватар</label> {{ user_form.profile_picture }}
-
-
-            {% if participant_form %}
-                <h2>Данные участника</h2>
-                <label for="{{ participant_form.city.id_for_label }}">Город</label>{{ participant_form.city }}
-                <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания</label>{{ participant_form.citizenship }}
-                <label for="{{ participant_form.experience.id_for_label }}">Опыт в программировании</label>{{ participant_form.experience }}
-
-            {% endif %}
-            {% csrf_token %}
-            <input type="submit" value="Сохранить">
-        </form>
+                    <div class="col-md-6 cell">
+                        <div class="col-md-6 rightal">
+                            <label for="{{ participant_form.experience.id_for_label }}">Опыт программирования:</label>
+                        </div>
+                        <div class="col-md-6 leftal">
+                            {{ participant_form.experience }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 cell">
+                        <div class="col-md-6 rightal"><label for="{{ user_form.about.id_for_label }}">О себе:</label>
+                        </div>
+                        <div class="col-md-6 leftal">{{ user_form.about }}</div>
+                    </div>
+                {% endif %}
 
 
+                {% csrf_token %}
+                <div style="text-align: center" class="col-md-12 cell">
+                    <input type="submit" value="Сохранить">
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

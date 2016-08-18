@@ -1,0 +1,162 @@
+{% extends 'base_site.html' %}
+{% block title %}
+    GoTo
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="col-md-12">
+            <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}
+                {% if viewed_user.id == user.id %}
+                    <a class="btn btn-default btn-lg"
+                       href="{% url 'profile_edit' %}">
+                    <span class="glyphicon glyphicon-pencil">
+
+                    </span>
+                    </a>
+                {% endif %}
+            </h1>
+
+
+        </div>
+
+        <div class="col-md-3">
+            <img src="/media/{{ viewed_user.profile_picture }}" align="left" hspace="5" vspace="5" class="profile_img"
+                 alt="{{ viewed_user.first_name }} {{ viewed_user.last_name }}"/>
+        </div>
+        <div class="col-md-9">
+{#            <label>Пол:</label> {{ viewed_user.gender }} <br>#}
+            <label>Организация:</label> {{ viewed_user.organization }} <br>
+
+            {% if viewed_user.participant %}
+                <label>Город проживания:</label> {{ viewed_user.participant.city }} <br>
+                <label>Страна проживания:</label> {{ viewed_user.participant.citizenship }} <br>
+                <label>Языки и технологии:</label> {{ viewed_user.participant.programming_languages }} <br>
+                <label>Опыт в программировании:</label> {{ viewed_user.participant.experience }} <br>
+            {% endif %}
+            {% if viewed_user.expert %}
+                <label>Должность:</label> {{ viewed_user.expert.position }} <br>
+            {% endif %}
+            <b>О себе:</b> {{ viewed_user.about }}
+        </div>
+
+        <div class="col-md-9">
+            <h3>Контакты</h3>
+            <p><b>Email:</b> <a href="mailto:{{ viewed_user.email }}">{{ viewed_user.email }}</a></p>
+            {% if viewed_user.vk %}
+                <p><b>VK:</b> <a href="{{ viewed_user.vk }}">{{ viewed_user.vk }}</a></p>
+            {% endif %}
+            {% if viewed_user.github %}
+                <p><b>Github:</b> <a href="{{ viewed_user.github }}">{{ viewed_user.github }}</a></p>
+            {% endif %}
+        </div>
+        {% if viewed_user.participant %}
+            {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
+                <div class="col-md-9">
+                    <h3>Личные данные</h3>
+                    <label>Полных лет:</label> {{ viewed_user.participant.current_age }} <br>
+                    <label>Дата рождения: </label> {{ viewed_user.participant.birthday }} <br>
+                    <label>Класс:</label> {{ viewed_user.participant.current_class }} <br>
+                    <label>Медецинские рекомендации:</label> {{ viewed_user.participant.health_issues }} <br>
+                    <label>Телефон:</label> {{ viewed_user.participant.phone_number }} <br>
+                    <label>Телефон родителей:</label> {{ viewed_user.participant.parent_phone_number }} <br>
+                </div>
+
+            {% endif %}
+            {% if viewed_user.participant %}
+                {% if viewed_user.id == user.id %}
+                    <div class="col-md-12">
+                        <h2>Статус заявок</h2>
+                        {% for ap in viewed_user.participant.application_set.all %}
+                            <div class="alert alert-{{ ap.class_status }}" role="alert">
+                                <b>Мероприятие:</b> {{ ap.arrangement.event.name }} <br>
+                                <b>Статус заявки:</b> {{ ap.text_status }}
+                                <form action="{% url 'application' ap.id %}" class="buttons-right" method="post">
+                                    <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
+                                        заявку</a>
+                                    {% if ap.status == 1 %}
+                                        <input type="submit" class="btn btn-default btn-sm" name="confirm"
+                                               value="Подтвердить">
+                                        <input type="submit" class="btn btn-default btn-sm" name="reject"
+                                               value="Отозвать заявку">
+                                    {% endif %}
+                                    {% csrf_token %}
+                                </form>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="col-md-12">
+                    <h2>Проекты, сделанные этим участником</h2>
+                    <div class="container">
+                        {% if viewed_user.participant.projects.all|length > 0 %}
+                            {% for project in viewed_user.participant.projects.all %}
+                                <div class="alert alert-info" role="alert">
+
+                                    <a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
+                                    {% if viewed_user.id == user.id %}
+                                        <div class="buttons-right">
+                                            <a class="btn btn-default btn-sm"
+                                               href="{% url 'project_edit' project.id %}">Реадктировать</a>
+                                            <a class="btn btn-default btn-sm"
+                                               href="{% url 'project_delete' project.id %}">Удалить</a>
+                                        </div>
+                                    {% endif %}
+                                    <b>Мероприятие:</b> {{ project.event }} <br>
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Нет проектов, созданных этим участником</p>
+                        {% endif %}
+                        {% if viewed_user.id == user.id %}
+                            <a class="btn btn-default btn-lg"
+                               href="{% url 'project_create' %}">Добавить проект</a>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <h2>Отзывы об участнике</h2>
+                    <div class="container">
+                        {% if public_comments|length > 0 %}
+                            {% for comment in public_comments %}
+                                <div class="col-md-4">
+                                    <p>
+                                        comment.text
+                                    </p>
+                                    <i>comment.author</i>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            Нет отзывов
+                        {% endif %}
+                    </div>
+                </div>
+                {% if perms.goto.view_private_comment %}
+                    <div class="col-md-12">
+                        <h2>Приватные отзывы об участнике</h2>
+                        <div class="container">
+                            {% if public_comments|length > 0 %}
+
+                                {% for comment in public_comments %}
+                                    <div class="col-md-4">
+                                        <p>
+                                            comment.text
+                                        </p>
+                                        <i>comment.author</i>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                Нет приватных отзывов
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
+    </div>
+{% endblock %}

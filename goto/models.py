@@ -3,7 +3,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from .subscribe_views import *
 from filer.fields.image import FilerImageField
-
+from django import forms
 
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
