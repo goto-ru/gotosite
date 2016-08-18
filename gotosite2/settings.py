@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'filer',
     'easy_thumbnails',
     'social.apps.django_app.default',
+    'import_export'
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {

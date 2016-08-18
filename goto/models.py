@@ -69,6 +69,8 @@ class Participant(GotoUser):
         ret &= len(self.programming_languages) > 0
         ret &= len(self.experience) > 0
         return ret
+    def ever_been_before(self):
+        return self.application_set.filter(status=3).count()>0
 
     _subscribed_to_email = models.BooleanField(default=False)
 
@@ -194,6 +196,8 @@ class Department(models.Model):
     title = models.CharField(max_length=256)
     image = FilerImageField(blank=True, null=True)
     description = models.TextField()
+    def __str__(self):
+        return self.title
 
 
 class Application(models.Model):
