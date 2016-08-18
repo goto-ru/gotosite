@@ -29,14 +29,16 @@
                 </div>
                 <div class="profil-base col-md-9">
                     <div class="inside">
-                        <div class="name">
-                            <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
-                            <h3>Эксперт</h3>
-                            <div class="hr"></div>
-                        </div>
-
                         <div class="features row">
 
+                            <div style="margin-bottom: 20px;" class="col-md-12">
+                                <div class="name">
+                                    <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
+                                    <h3>Эксперт</h3>
+                                    <div class="hr"></div>
+                                </div>
+                            </div>
+                            <br><br>
                             {% if viewed_user.organization|length > 0 %}
                                 <div class="col-md-3 leftal much">
                                     <p>Организация:</p>
@@ -191,6 +193,21 @@
                         <iframe scrolling="no" style="overflow: hidden" id="kik" src="/profile/edit"></iframe>
                     </div>
                 </div>
+
+                <div class="col-md-3">
+                    <div class="inside school">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img class="add-image"
+                                         src="https://cdn4.iconfinder.com/data/icons/mayssam/512/plus-256.png">
+                                    <p>Добавить проект</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="col-md-9 project">
                     <div class="inside row project">
                         <div style="text-align: center" class="col-md-4">

@@ -159,3 +159,12 @@ iframe {
     width: 100%;
     border: none;
 }
+
+.add-image{
+    max-width: 65px;
+    height: auto !important;
+}
+
+table{
+    margin: 0 auto;
+}
