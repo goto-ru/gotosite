@@ -15,7 +15,7 @@ __pycache__/
 
 old_frontend/goto2/media
 media/*/
-static
+#static/
 
 db.sqlite3
 
