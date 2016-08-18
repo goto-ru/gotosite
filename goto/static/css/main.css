@@ -186,3 +186,12 @@ a {
   background: white !important; }
 
 /*# sourceMappingURL=main.css.map */
+
+.firefox-fix{
+  min-height: 100px;
+}
+.firefox-fix-little{
+  min-height: 40px;
+}
+
+
