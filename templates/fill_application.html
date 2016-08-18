@@ -23,7 +23,7 @@
             <div class="hr big"></div>
         </div>
         <div class="col-lg-6 col-lg-offset-3 white-background application-fill">
-            <h2 class="title">Подача заявки на мероприятие <br> "{{ event.name }}"</h2>
+            <h2 class="title">Подача заявки на мероприятие <br> "{{ arrangement.event.name }}"</h2>
 
             <p class="description">Всем привет!<br>
                 Для участия в школе вам необходимо заполнить данную заявку и выполнить отборочное задание, которое вы
@@ -34,30 +34,25 @@
                 взять.</p>
 
             <br>
-            <form href="{% url 'application_fill' event.pk %}" method="post">
+            <form>
                 <p class="question"> Выберете направление.</p>
                 <div class="departments">
-                    {% for dep in event.departments.all %}
-                        <p class="department">
-                            <input class="auto-width" type="radio" name="department_{{ dep.pk }}"> {{ dep.title }}
-                        </p>
-                    {% endfor %}
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Машинное обучение</p>
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Робототехника</p>
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Анализ данных</p>
                 </div>
-                <p class="question">Выберете смену</p>
-                <div class="departments">
-                    {% for ar in event.arrangements.all %}
-                        <p class="department">
-                            <input class="auto-width" type="radio" name="arrangement_{{ ar.pk }}">
-                            {{ ar.begin_date }}-{{ ar.end_date }}
-                        </p>
-                    {% endfor %}
-                </div>
-                {% for q in event.applier_questions.all %}
-                    <p class="question">q.text</p>
-                    <input class="answer" placeholder="Ответ" type="text" name="question_{{ q.pk }}">
-                {% endfor %}
-            {% csrf_token %}
-                <input value="Принять участие" class="take-part header-btn-little header-btn" type="submit">
+
+                <p class="question">Какие языки программирования вы знаете? На каком уровне? Если у вас уже есть опыт в
+                    ML & IoT, опишите его, пожалуйста.</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <p class="question">Участвовали ли вы в олимпиадах, конкурсах, хакатонах в области ИТ? В Каких?</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <p class="question">Какие проекты вы реализовали? Над какими работаете сейчас? Зачем вам эта школа?</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <input value="Принять участие" class="take-part header-btn-little header-btn" type="button">
             </form>
         </div>
     </div>

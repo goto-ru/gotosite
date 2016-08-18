@@ -64,7 +64,7 @@ footer{
     display: none;
 }
 
-input[type='submit']{
+input[type='button']{
     color: #43b498;
     border-color: #43b498;
 }

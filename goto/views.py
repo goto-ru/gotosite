@@ -105,10 +105,11 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-def application_fill(req, event_id):
-    event = Event.objects.get(pk=event_id)
-
-    base_cotext = {'event': event}
+#@login_required()
+def application_fill(req, arrangement_id, department_id):
+    arrangement = Arrangement.objects.get(pk=arrangement_id)
+    department = Department.objects.get(pk=department_id)
+    base_cotext = {'arrangement': arrangement, 'department': department}
     if not req.user.is_authenticated():
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'events/events.html', base_cotext)

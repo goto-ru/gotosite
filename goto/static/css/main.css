@@ -243,30 +243,11 @@ a {
 
 /*# sourceMappingURL=main.css.map */
 
-.firefox-fix {
-    min-height: 100px;
+.firefox-fix{
+  min-height: 100px;
 }
-.doticon {
-  max-width: 50px;
-  margin: 0 auto;
-  margin-top: 20%;
-  height: auto;
-}
-.feature {
-  height: 25%;
+.firefox-fix-little{
+  min-height: 40px;
 }
 
-.firefox-fix-little {
-    min-height: 40px;
-}
 
-.mobile-sheet {
-    z-index: 100;
-    position: fixed;
-    right: -300px;
-    display: none;
-    top: 0;
-    bottom: 0;
-    padding: 25px;
-    background-color: #152136;
-}
