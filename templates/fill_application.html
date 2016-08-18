@@ -2,29 +2,58 @@
 {% block title %}
     Заявка на мероприятие "{{ event.name }}"
 {% endblock %}
+{% block header %}
+    <div class="header">
+        {% include 'navigation.html' %}
+
+        <div class="container" style="background: none;">
+            <div style="height: 300px" class="xs-force-center header-text"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
 
 {% block container %}
-    <div class="container">
+    {% load staticfiles %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fill.css' %}" rel="stylesheet">
 
-        <h2>Подача заявки на мероприятие "{{ arrangement.event.name }}"</h2>
-        Перед подачей заявки убедитесь, что у вас в профиле указана актуальная информация!
-        <form action="{% url 'application_fill' arrangement.pk department.pk %}" method="post"
-              enctype="multipart/form-data">
-            <p><label for="name">Имя, Фамилия</label>
-                <input disabled value="{{ user.first_name }} {{ user.last_name }}" id="name"></p>
+    <div class="row">
+        <div style="padding: 0" class="col-lg-6 col-lg-offset-3 white-background application-fill">
+            <div class="hr big"></div>
+        </div>
+        <div class="col-lg-6 col-lg-offset-3 white-background application-fill">
+            <h2 class="title">Подача заявки на мероприятие <br> "{{ arrangement.event.name }}"</h2>
 
-            <h3>Дополнительные вопросы</h3>
-            {% if arrangement.event.applier_questions %}
-                {% for q in arrangement.event.applier_questions.all %}
-                    <p><label>{{ q.text }}</label> <br> <input name="question{{ q.id }}"></p>
-                {% endfor %}
-            {% else %}
-                <p>Дополнительных вопросов нет </p>
-            {% endif %}
-            {% csrf_token %}
-            <input type="submit" value="Подать заявку">
-        </form>
+            <p class="description">Всем привет!<br>
+                Для участия в школе вам необходимо заполнить данную заявку и выполнить отборочное задание, которое вы
+                получите после заполнения данной формы на указанный email в течение суток после подачи заявки.
+                Заявки принимаются до 23:59 24 июля. Результат высылается в течение недели после сдачи задания.
+                <br>
+                Если вы старше 22 лет, то пробуйте решить задание, пишите нам, возможно, мы найдем возможность вас
+                взять.</p>
 
+            <br>
+            <form>
+                <p class="question"> Выберете направление.</p>
+                <div class="departments">
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Машинное обучение</p>
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Робототехника</p>
+                    <p class="department"><input class="auto-width" type="radio" name="browser"> Анализ данных</p>
+                </div>
 
+                <p class="question">Какие языки программирования вы знаете? На каком уровне? Если у вас уже есть опыт в
+                    ML & IoT, опишите его, пожалуйста.</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <p class="question">Участвовали ли вы в олимпиадах, конкурсах, хакатонах в области ИТ? В Каких?</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <p class="question">Какие проекты вы реализовали? Над какими работаете сейчас? Зачем вам эта школа?</p>
+                <input class="answer" placeholder="Ответ" type="text">
+
+                <input value="Принять участие" class="take-part header-btn-little header-btn" type="button">
+            </form>
+        </div>
     </div>
 {% endblock %}
