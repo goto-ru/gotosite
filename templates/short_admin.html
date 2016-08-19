@@ -1,0 +1,33 @@
+{% extends 'base_site.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Admin shortcuts
+{% endblock %}
+{% block container %}
+    <div class="container">
+        <div class="col-md-4">
+            <h3>Info</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/admin/goto/event/">Events</a></li>
+                <li><a href="/admin/goto/settings/1/change/">Global settings</a></li>
+                <li><a href="/admin/goto/partner/">Partners</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>People management</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="/admin/goto/participant/">Participants</a></li>
+                <li><a href="/admin/goto/expert/">Experts</a></li>
+                <li><a href="/admin/goto/application/">Applications1</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Other</h3>
+            <ul class="nav nav-pills nav-stacked">
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 from django.contrib.messages import constants
 
 INSTALLED_APPS = [
+    #'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     'filer',
     'easy_thumbnails',
     'social.apps.django_app.default',
-    'import_export'
+    'import_export',
+    'adminsortable2',
+    'admin_export'
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
@@ -101,7 +104,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     'social.pipeline.user.get_username',
     'social.pipeline.social_auth.associate_by_email',
-    #'goto.login_views.create_user',
+    # 'goto.login_views.create_user',
     'social.pipeline.user.create_user',
 
     'social.pipeline.social_auth.associate_user',

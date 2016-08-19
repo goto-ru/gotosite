@@ -221,9 +221,10 @@ class Application(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['my_order', '-date_created']
 
     def text_status(self):
         return self.status_to_text[self.status]

@@ -23,6 +23,10 @@ def index(req):
     return render(req, 'index.html', context_dictionary)
 
 
+def admin_shortcuts(req):
+    return render(req, 'short_admin.html')
+
+
 def mm_about(req):
     context_dictionary = {'articles': MassMediaArticle.objects.all()}
     return render(req, 'mm-articles.html', context_dictionary)
@@ -105,7 +109,7 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-#@login_required()
+# @login_required()
 def application_fill(req, arrangement_id, department_id):
     arrangement = Arrangement.objects.get(pk=arrangement_id)
     department = Department.objects.get(pk=department_id)

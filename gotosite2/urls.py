@@ -21,6 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^admin_export/', include("admin_export.urls", namespace="admin_export")),
+    url(r'^admin-shortcuts/$', views.admin_shortcuts, name='admin_shortcuts'),
+
     url(r'^$', views.index, name='index'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^about-us/$', views.about_us, name='about_us'),

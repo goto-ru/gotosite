@@ -5,6 +5,8 @@ from django.contrib.admin import StackedInline, TabularInline, ModelAdmin
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from django.core.mail import send_mail
+from adminsortable2.admin import SortableAdminMixin
+
 
 from django.core.urlresolvers import reverse
 from filer.admin.imageadmin import *
@@ -13,6 +15,8 @@ from import_export import resources
 from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 from io import StringIO
+from django.contrib.admin import AdminSite
+
 import datetime
 
 models = [Participant, Expert, Page, Answer, Question,
@@ -22,25 +26,9 @@ models = [Participant, Expert, Page, Answer, Question,
 admin.site.register(Permission)
 
 
-class AnswerInline(NestedStackedInline):
+class AnswerInline(StackedInline):
     # fields = ['text']
     model = Answer
-    max_num = 0
-    extra = 0
-
-
-class QuestionInline(NestedStackedInline):
-    fields = ['text']
-    model = Question
-    inlines = [AnswerInline]
-    max_num = 0
-    extra = 0
-
-
-class ApplicationInline(NestedStackedInline):
-    model = Application
-    inlines = [QuestionInline]
-    # fk_name = 'answers'
     max_num = 0
     extra = 0
 
@@ -52,20 +40,19 @@ class ExpertInline(NestedStackedInline):
 
 class ArrangementInline(NestedStackedInline):
     model = Arrangement
-    # inlines = [ExpertInline, ApplicationInline]
-    # fk_name = 'answers'
+    inlines = [ExpertInline]
     extra = 0
 
 
 class DepartmentInline(NestedStackedInline):
     model = Department
-    # fk_name = 'answers'
     extra = 0
 
 
 @admin.register(Event)
 class EventAdmin(NestedModelAdmin):
     model = Event
+    filter_horizontal = ('partners',)
     inlines = [DepartmentInline, ArrangementInline]
 
 
@@ -98,6 +85,23 @@ class ApplicationResource(resources.ModelResource):
         model = Application
         fields = ('participant__first_name', 'participant__last_name', 'participant__city', 'participant__birthday')
 
+# admin.py
+class CountryFilter(admin.SimpleListFilter):
+    title = 'Class' # or use _('country') for translated title
+    parameter_name = 'country'
+
+    def lookups(self, request, model_admin):
+        countries = set([c.country for c in model_admin.model.objects.all()])
+        return [(c.id, c.name) for c in countries]
+        # You can also use hardcoded model name like "Country" instead of
+        # "model_admin.model" if this is not direct foreign key filter
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(country__id__exact=self.value())
+        else:
+            return queryset
+
 
 def export_css(modeladmin, req, queryset):
     s = StringIO()
@@ -109,7 +113,7 @@ def export_css(modeladmin, req, queryset):
 
 
 @admin.register(Application)
-class ApplicationAdmin(ExportMixin, ModelAdmin):
+class ApplicationAdmin(SortableAdminMixin, ModelAdmin):
     def export_xlsx(self, req, queryset):
         s = StringIO()
         s.write(ApplicationResource().export(queryset=queryset).xlsx)
@@ -135,34 +139,37 @@ class ApplicationAdmin(ExportMixin, ModelAdmin):
         return obj.participant.city
 
     def stage(self, obj):
-        return str(obj.participant.education_type)
+        return obj.participant.get_education_type_display()
 
     def date_sended(self, obj):
         return obj.date_created.strftime("%b %d")
 
     def status_admin(self, obj):
         statuses = {
-            0: ('Await', '#000'),
-            1: ('Accepted', '#0044FF'),
-            2: ('Rejected', '#990000'),
-            3: ('Confirmed', '#00FF00'),
-            4: ('Unconfirmed', '#990000')
+            0: ('Await', 'info'),
+            1: ('Accepted', 'primary'),
+            2: ('Rejected', 'danger'),
+            3: ('Confirmed', 'success'),
+            4: ('Unconfirmed', 'danger')
         }
 
-        return '<span style="color: {1};">{0}</span>'.format(*statuses[obj.status])
 
-    def ever_been_before(self, obj):
+        return '<h3><span class="label label-{1}" >{0}</span></h3>'.format(*statuses[obj.status])
+
+    def been(self, obj):
         return obj.participant.ever_been_before()
 
-    ever_been_before.boolean = True
+    been.boolean = True
 
     status_admin.allow_tags = True
     model = Application
+    inlines = [AnswerInline]
 
     list_display = (
-        'participant', 'city', 'current_age', 'stage', 'grade', 'date_sended', 'ever_been_before',
+        'participant', 'city', 'current_age', 'stage', 'grade', 'date_sended', 'been',
         'status_admin')
-    list_filter = ('status', 'arrangement', 'participant__gender')
+
+    list_filter = ('status', 'arrangement', 'participant__gender', 'participant__education_type')
     search_fields = ('participant__last_name', 'participant__first_name')
     actions = [accept, reject, export_css, export_xlsx, send_custom_email]
 
@@ -170,5 +177,10 @@ class ApplicationAdmin(ExportMixin, ModelAdmin):
 for model in models:
     admin.site.register(model)
 
+
+class MyAdminSite(AdminSite):
+    site_header = 'Monty Python administration'
+admin_site = MyAdminSite()
+admin_site.register(Expert)
 
 # Register your models here.

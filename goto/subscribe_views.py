@@ -6,6 +6,8 @@ from django.core.mail import send_mail
 from django.contrib import messages
 import hashlib
 from django.http import HttpResponseRedirect
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 
 
@@ -39,7 +41,7 @@ def unsubscribe(req):
     messages.info(req, 'Вы успешно отписаны от рассылки!')
     return HttpResponseRedirect('/')
 
-
+@staff_member_required
 def ask_for_email(req, emails):
 
     if req.POST:
