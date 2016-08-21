@@ -16,8 +16,8 @@ a {
 
 .inside {
     background: white;
-    padding: 20px;
-    margin: 10px;
+    padding: 10px;
+    margin: 8px;
     text-align: center;
     height: 100%;
 }
@@ -56,7 +56,7 @@ a {
 }
 
 .whole {
-    background: #fbfcfe;
+    background: #edeef0;
 }
 
 .hr {
@@ -64,7 +64,7 @@ a {
 }
 
 .name h2 {
-    font-size: 19px;
+    font-size: 34px;
     text-align: left;
     margin: 0;
 }
@@ -104,22 +104,27 @@ a {
     text-align: left !important;
 }
 
+p {
+    color: black;
+    margin-bottom: 0;
+}
+
 .leftal {
     text-align: left;
 }
 
-.row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-}
+/*.row {*/
+/*display: -webkit-box;*/
+/*display: -webkit-flex;*/
+/*display: -ms-flexbox;*/
+/*display: flex;*/
+/*flex-wrap: wrap;*/
+/*}*/
 
-.row > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
-}
+/*.row > [class*='col-'] {*/
+/*display: flex;*/
+/*flex-direction: column;*/
+/*}*/
 
 td {
     vertical-align: middle;
@@ -141,8 +146,12 @@ table {
     text-align: center;
 }
 
-.project img {
-    margin: 0 auto;
+.project h3 {
+    margin: 0;
+}
+
+.project h6 {
+    font-size: 17px;
 }
 
 .project .features {
@@ -160,11 +169,80 @@ iframe {
     border: none;
 }
 
-.add-image{
+.add-image {
     max-width: 65px;
     height: auto !important;
 }
 
-table{
+table {
     margin: 0 auto;
+}
+
+.rightal {
+    text-align: right;
+}
+
+.project p {
+    color: rgba(44, 44, 44, 0.92);
+}
+
+.project-photo {
+    text-align: center;
+}
+
+.project-photo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.project-header {
+    font-size: 28px !important;
+    max-width: 70% !important;
+}
+
+.project-description {
+    width: 100%;
+    min-height: 200px;
+}
+
+.project-maintainers {
+    max-width: 70%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.project-image {
+    border: 1px solid;
+    padding: 20px;
+}
+
+.project-image img {
+    max-width: 100px;
+    height: auto;
+}
+
+.project-add {
+    border-radius: 0;
+    max-width: 200px;
+    font-size: 18px;
+    padding: 0.6%;
+    background: white;
+    border: 2px solid rgb(66, 158, 132);
+    margin-top: 2%;
+    color: rgb(66, 158, 132);
+}
+
+.profileedit{
+    display: none;
+}
+
+.school-project{
+    font-weight: 500;
+    font-size: 19px;
 }

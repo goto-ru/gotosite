@@ -2,6 +2,11 @@ html, body {
     overflow-x: hidden !important;
 }
 
+
+h1, h2, h3, h4, h5, h6, p, a, html, body{
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
 .profile_img {
     width: 200px;
 }
