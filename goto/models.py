@@ -165,6 +165,8 @@ class Arrangement(models.Model):
 
     def __str__(self):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
+    def dates(self):
+        return "%s-%s" % ( self.begin_date, self.end_date)
 
 
 class Department(models.Model):

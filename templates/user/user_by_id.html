@@ -1,10 +1,10 @@
 {% extends 'base_site.html' %}
+{% load staticfiles %}
 {% block title %}
     GoTo
 {% endblock %}
 
 {% block container %}
-    {% load staticfiles %}
     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script type="text/javascript" src="{% static 'js/taggle.js' %}"></script>
@@ -16,11 +16,12 @@
             <div class="row">
                 <div class="profileedit col-md-12">
                     <div class="inside">
-                        <iframe scrolling="no" style="overflow: hidden" id="kik" src="/profile/edit"></iframe>
+                        {% include 'user/edit.html' %}
+                        {#                        <iframe scrolling="no" style="overflow: hidden" id="kik" src="/profile/edit"></iframe>#}
                     </div>
                 </div>
-
                 <div class=" col-md-3">
+
                     <div class="profil-base col-md-12">
                         <div class="inside">
                             <table>
@@ -37,59 +38,30 @@
                             </table>
                         </div>
                     </div>
+                    {% for ap in viewed_user.participant.application_set.all %}
 
-                    <div class="col-md-12">
-                        <div class="inside school">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p class="school-project">Городская школа N13</p>
-                                        <p style="color: green">Заявка принята</p>
-                                        <a>Подтвердить участие</a>
-                                    </td>
-                                </tr>
-                            </table>
+                        <div class="col-md-12">
+                            <div class="inside school">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p class="school-project">{{ ap.arrangement.event.name }}</p>
+                                            {{ ap.arrangement.dates }}
+                                            <p style="color: green">{{ ap.text_status }}</p>
+                                            {% if ap.status == 1 %}
+                                                <a href="{% url 'application_change' ap.id "confirm" %}">Подтвердить
+                                                    участие</a>
+                                                <a href="{% url 'application_change' ap.id "reject" %}">Отозвать
+                                                    заявку</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="inside school">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p class="school-project">Городская школа N13</p>
-                                        <p style="color: green">Заявка принята</p>
-                                        <a>Подтвердить участие</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="inside school">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p class="school-project">Городская школа N13</p>
-                                        <p style="color: green">Заявка принята</p>
-                                        <a>Подтвердить участие</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="inside school">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <p class="school-project">Городская школа N13</p>
-                                        <p style="color: green">Заявка принята</p>
-                                        <a>Подтвердить участие</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    {% endfor %}
+
+
                 </div>
 
                 <div class="col-md-9">
@@ -126,17 +98,7 @@
                                     {% endif %}
                                 {% endif %}
 
-                                {% if viewed_user.participant %}
-                                    {% if  viewed_user.participant.citizenship|length > 0 %}
-                                        <div class="col-md-4 leftal much">
-                                            <p>Страна проживания:</p>
-                                        </div>
-                                        <div class="col-md-8 leftal much">
-                                            <p class="value">{{ viewed_user.participant.citizenship }}</p>
-                                        </div>
-                                        <br>
-                                    {% endif %}
-                                {% endif %}
+
 
                                 {% if viewed_user.participant %}
                                     {% if viewed_user.participant.programming_languages|length %}
@@ -259,7 +221,9 @@
                         <div class="inside row project">
                             <div class="col-md-12 leftal"><input class="project-header" type="text"
                                                                  placeholder="Хератень"></div>
-                            <div class="col-md-12 leftal"><div id="example4"></div></div>
+                            <div class="col-md-12 leftal">
+                                <div id="example4"></div>
+                            </div>
                             <div class="col-md-12 leftal"><input class="project-maintainers" type="text"
                                                                  placeholder="Github"></div>
                             <div class="col-md-8 leftal">
@@ -274,8 +238,8 @@
                                 </div>
                                 <p>Курировал
                                     <select>
-                                    <option>Бибилов Иван</option>
-                                </select></p>
+                                        <option>Бибилов Иван</option>
+                                    </select></p>
                             </div>
 
                             <div class="col-md-12">
@@ -287,7 +251,9 @@
 
                     <div class="col-md-12 project">
                         <div class="inside row project">
-                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"></h3></div>
+                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto"
+                                                                            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                            </h3></div>
                             <div class="col-md-12 leftal"><h5>Творожков Андрей, Васильев Олег</h5></div>
                             <div class="col-md-12"><p class="leftal">Это описание проекта настолько замечательное, что
                                 его просто нет,
@@ -302,7 +268,9 @@
 
                     <div class="col-md-12 project">
                         <div class="inside row project">
-                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"></h3></div>
+                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto"
+                                                                            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                            </h3></div>
                             <div class="col-md-12 leftal"><h5>Творожков Андрей, Васильев Олег</h5></div>
                             <div class="col-md-8">
                                 <table>
@@ -328,6 +296,31 @@
                             </div>
                         </div>
                     </div>
+
+                    {% if perms.goto.view_private_comment %}
+                        <div class="col-md-12">
+                            <div class="inside">
+
+
+                                <h2>Приватные отзывы об участнике</h2>
+
+                                {% if public_comments|length > 0 %}
+
+                                    {% for comment in public_comments %}
+                                        <div class="col-md-4">
+                                            <p>
+                                                comment.text
+                                            </p>
+                                            <i>comment.author</i>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    Нет приватных отзывов
+                                {% endif %}
+                            </div>
+                            12
+                        </div>
+                    {% endif %}
                 </div>
 
             </div>
