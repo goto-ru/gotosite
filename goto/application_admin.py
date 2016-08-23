@@ -16,20 +16,10 @@ from wsgiref.util import FileWrapper
 from io import StringIO
 from django.contrib.admin import AdminSite
 import datetime, csv
+from goto.resources import ApplicationResource
 
 
-class ApplicationResource(resources.ModelResource):
-    class Meta:
-        model = Application
-        fields = tuple(('%s' % (f.name,) for f in Application._meta.get_fields())) + \
-                 tuple(('participant__%s' % (f.name,) for f in Participant._meta.get_fields()))
-        # fields = ('participant__first_name', 'participant__last_name', 'participant__city', 'participant__birthday')
 
-    def get_export_order(self):
-        # order = tuple(self._meta.export_order or ())
-        ret = self.current_fields
-        return ret
-        # return order + tuple(k for k in self.fields.keys() if k not in order)
 
 
 class GradeFilter(admin.SimpleListFilter):
@@ -72,45 +62,26 @@ class ApplicationAdmin(SortableAdminMixin, ModelAdmin):
                     args=[','.join([_['participant__email'] for _ in queryset.values('participant__email')])])
         )
 
-    def export_generic(description="Export selected objects as CSV file", children_fields=None, file_format='csv',
-                       fields=None, exclude=None, header=True):
+    def export_css(self, req, queryset):
+        s = StringIO()
+        s.write(ApplicationResource().export(queryset=queryset).csv)
+        s.seek(0)
+        response = HttpResponse(FileWrapper(s), content_type='application/csv')
+        response['Content-Disposition'] = datetime.datetime.now().strftime(
+            'attachment; filename=Applications-%d.%m.%y.csv')
+        return response
+
+
+
+    def export(modeladmin, request, queryset):
         """
-        This function returns an export csv action
-        'fields' and 'exclude' work like in django ModelForm
-        'header' is whether or not to output the column names as the first row
+        Generic csv export admin action.
+        based on http://djangosnippets.org/snippets/1697/
         """
+        request.session['ids']=[inst.pk for inst in queryset.all()]
+        request.session.modified = True
+        return HttpResponseRedirect(reverse('export'))
 
-        def export(modeladmin, request, queryset):
-            """
-            Generic csv export admin action.
-            based on http://djangosnippets.org/snippets/1697/
-            """
-            opts = modeladmin.model._meta
-            field_names = set([field.name for field in opts.fields])
-            if children_fields:
-                for c in children_fields:
-                    child = getattr(modeladmin.model, c).field.model
-                    child_field_names = set(["%s__%s" % (c, field.name) for field in child._meta.fields])
-                    field_names |= child_field_names
-            if fields:
-                fieldset = set(fields)
-                field_names = field_names & fieldset
-            elif exclude:
-                excludeset = set(exclude)
-                field_names = field_names - excludeset
-
-            response = HttpResponse(mimetype='text/csv')
-            response['Content-Disposition'] = 'attachment; filename=%s.csv' % opts.replace('.', '_')
-
-            writer = csv.writer(response)
-            if header:
-                writer.writerow(list(field_names))
-            for obj in queryset:
-                writer.writerow([getattr(obj, field) for field in field_names])
-            return response
-
-        export.short_description = description
-        return export
 
     def current_age(self, obj):
         return obj.participant.current_age()
@@ -164,4 +135,4 @@ class ApplicationAdmin(SortableAdminMixin, ModelAdmin):
                    )
     search_fields = ('participant__last_name', 'participant__first_name')
     list_display_links = tuple()
-    actions = [accept, reject, export_csv, export_xlsx, send_custom_email]
+    actions = [accept, reject, export, send_custom_email]

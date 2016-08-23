@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^admin_export/', include("admin_export.urls", namespace="admin_export")),
+    url(r'^export/', views.export, name='export'),
     url(r'^admin-shortcuts/$', views.admin_shortcuts, name='admin_shortcuts'),
 
     url(r'^$', views.index, name='index'),

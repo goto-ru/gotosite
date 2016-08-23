@@ -339,3 +339,31 @@ def apply_solution(req, id):
 def view_solution(req, id):
     solution = get_object_or_404(Solution, pk=id)
     return render(req, 'solution/solution.html', {'solution': solution})
+from io import StringIO, BytesIO
+from goto.resources import ApplicationResource
+from django.http import HttpResponse
+
+from wsgiref.util import FileWrapper
+
+@staff_member_required()
+def export(req):
+    r = ApplicationResource()
+
+    if req.POST:
+        r.current_fields = [_[6:] for _ in req.POST if _.startswith('field_')]
+        file_format = req.POST['format'].lower()
+        exp = r.export(queryset=Application.objects.filter(pk__in=req.session['ids']))
+        if file_format=='csv':
+            s = StringIO()
+            s.write(exp.csv)
+        if file_format == 'xlsx':
+            s = BytesIO()
+            s.write(exp.xlsx)
+
+        s.seek(0)
+        response = HttpResponse(FileWrapper(s), content_type='text/%s'%file_format)
+        response['Content-Disposition'] = datetime.datetime.now().strftime(
+            'attachment; filename=Applications-%d.%m.%y.') + file_format
+        return response
+    else:
+        return render(req, 'export_fields.html', {'fields': r._meta.fields})
