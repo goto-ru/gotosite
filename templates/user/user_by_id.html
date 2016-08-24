@@ -256,13 +256,15 @@
                         <div class="col-md-12 project">
                             <div class="inside row project">
                                 <div class="col-md-12 leftal"><h3>{{ project.title }}
-                                    <img style="height: 30px; width: auto"
-                                         src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                                    <a href="{{ project.link }}">
+                                        <img style="height: 30px; width: auto"
+                                             src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                                    </a>
                                 </h3></div>
                                 <div class="col-md-12 leftal">
                                     <h5>
                                         {% for m in project.maintainers.all %}
-                                            <a href="{% url 'user_detail' m.id %}">{{ m  }}</a>
+                                            <a href="{% url 'user_detail' m.id %}">{{ m }}</a>
                                         {% endfor %}
                                     </h5>
                                 </div>

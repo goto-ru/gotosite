@@ -23,3 +23,8 @@ $(document).ready(function () {
         $('.togmuch').toggle();
     }
 });
+
+function took() {
+$('.much').css('display', 'none').toggle();
+$('.togmuch').toggle();
+}

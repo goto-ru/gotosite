@@ -231,9 +231,8 @@ def application_change(req, id, method):
     else:
         return HttpResponseForbidden()
 
-        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-    else:
-        return render_profile_edit(req, user)
+    return HttpResponseRedirect(reverse('user_detail', args=[app.user.id]))
+
 
 
 def about_us(req):

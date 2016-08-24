@@ -351,6 +351,17 @@ class Settings(models.Model):
             return cls.objects.get()
         except cls.DoesNotExist:
             return cls()
+class Step(models.Model):
+    event = models.ForeignKey(Event)
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
+
+class Day(models.Model):
+    date = models.DateTimeField()
+    content = models.TextField()
+
+    def verbous_title(self):
+        return date.weekday()
 
 
 class MassMediaArticle(models.Model):
