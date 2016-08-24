@@ -120,3 +120,12 @@ h1, h2, h3, h4, h6 {
 .top-fix{
     margin-top: 30px;
 }
+
+td{
+    vertical-align: middle;
+}
+
+table{
+    margin: 0 auto;
+    height: 100%;
+}

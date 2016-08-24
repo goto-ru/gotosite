@@ -21,12 +21,11 @@
     {% load staticfiles %}
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
 
-     <div class="orange-item">
+    <div class="orange-item">
 
-        <div class="whitespace"></div>
         <div class="row">
             <div class="vector-description col-md-6">
-                <a href=""><h3>Летние школы</h3></a>
+                <a href="/schools"><h3>Летние школы</h3></a>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -39,16 +38,16 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <a href=""><p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);">Ближайшая школа</p></a>
+                <a href=""><p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);">Принять участие</p>
+                </a>
             </div>
 
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
         </div>
-
         <div class="row">
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
             <div class="vector-description col-md-6">
-                <a><h3>Хакатоны</h3></a>
+                <a href="/hackathons"><h3>Хакатоны</h3></a>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -61,32 +60,52 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <a href=""><p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);">Ближайший хакатон</p></a>
+                <a href=""><p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);">Принять участие</p>
+                </a>
             </div>
         </div>
+        <div class="row">
+            <div class="vector-description col-md-6">
+                <a href="/hackathons"><h3>Лекторий</h3></a>
+                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
+                    обучения из 2 блоков:
 
+                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
+                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
+                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
+                    обработки текста (NLP).
+
+                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
+                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
+                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
+                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
+                <a href=""><p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);">Принять участие</p>
+                </a>
+            </div>
+            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
+        </div>
     </div>
     <div class="clearfix"></div>
-    <h2>Последние новости</h2>
+    <div class="header-head"><h2>Последние новости</h2></div>
     <div class="container news">
         <div class="row">
-
-            {% for article in articles %}
-                <div class="col-md-12 box">
-
-                    <div class="col-md-3 article">
-                        <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
-                            <h6>{{ article.title }}</h6> </a>
-                            <p>{{ article.description }}</p>
-
-                    </div>
-
+            {% for article in articles|slice:':3 ' %}
+                <div class="col-md-4 article">
+                    <a href="{{ article.url }}">
+                        <table>
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    <img src="/media/{{ article.image }}">
+                                </td>
+                            </tr>
+                        </table>
+                        <h6>{{ article.title }}</h6></a>
+                    <p>{{ article.description }}</p>
                 </div>
             {% endfor %}
-
-
         </div>
-            <input type='button' onclick="window.location = '{% url 'mm_about' %}'" class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
+        <input type='button' onclick="window.location = '{% url 'mm_about' %}'"
+               class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
     </div>
     <div class="clearfix"></div>
 
@@ -162,12 +181,18 @@
     <div class="clearfix"></div>
 
     <div class="container partners">
-        <h2  style="text-align: center;">Партнёры</h2>
+        <h2 style="text-align: center;">Партнёры</h2>
         <div class="whitespace"></div>
         <div class="row">
             {% for p in partners.all %}
                 <div class="col-md-2 partner">
-                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                    <table class="partner-tbl">
+                        <tr>
+                            <td style="vertical-align: middle">
+                                <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
             {% endfor %}

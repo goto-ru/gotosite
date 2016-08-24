@@ -2,8 +2,7 @@ html, body {
     overflow-x: hidden !important;
 }
 
-
-h1, h2, h3, h4, h5, h6, p, a, html, body{
+h1, h2, h3, h4, h5, h6, p, a, html, body {
     font-family: 'Ubuntu', sans-serif !important;
 }
 
@@ -163,14 +162,13 @@ a {
     text-align: center;
 }
 
-.partners {
-    margin-top: 5%;
-}
-
 .partner img {
     max-height: 100px;
     max-width: 200px;
-    padding: 10px;
+    padding: 20px;
+}
+.partner-tbl{
+    margin: 0 auto;
 }
 
 .partner {
@@ -271,6 +269,22 @@ a {
     box-shadow: None !important;
 }
 
-.modal-footer{
+.modal-footer {
     margin-top: 0;
+}
+
+.article img {
+    max-width: 300px;
+    max-height: 150px;
+}
+
+.article table {
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+}
+
+.header-head{
+    margin-top: 100px;
+    margin-bottom: 100px;
 }

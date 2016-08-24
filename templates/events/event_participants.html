@@ -1,4 +1,4 @@
-    {% extends 'base_site.html' %}
+{% extends 'base_site.html' %}
 {% block title %}
     GoTo
 {% endblock %}
@@ -19,10 +19,6 @@
                <a href="{% url 'user_detail' a.participant.pk %}">{{ a.participant }}</a>
 
             {% endfor %}
-
-
         </div>
-
-
     </div>
 {% endblock %}

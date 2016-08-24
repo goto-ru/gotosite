@@ -329,3 +329,6 @@ def apply_solution(req, id):
 def view_solution(req, id):
     solution = get_object_or_404(Solution, pk=id)
     return render(req, 'solution/solution.html', {'solution': solution})
+
+def test_hackathon(req):
+    return render(req, 'hackathon_template.html')
