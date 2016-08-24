@@ -8,7 +8,7 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from filer.admin.imageadmin import *
 
 models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
-          MassMediaArticle, FAQuestion]
+          MassMediaArticle, FAQuestion, ParticipantComment]
 
 admin.site.register(Permission)
 
