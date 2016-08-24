@@ -18,58 +18,56 @@ from django.contrib.admin import AdminSite
 
 import datetime
 
-
 models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
-          MassMediaArticle, FAQuestion, ParticipantComment]
+          MassMediaArticle, FAQuestion, ParticipantComment, Step]
 
 admin.site.register(Permission)
 
 from .application_admin import *
 
-class AnswerInline(StackedInline):
-    # fields = ['text']
-    model = Answer
-    max_num = 0
-    extra = 0
 
 
-class ExpertInline(NestedStackedInline):
+
+class ExpertInline(TabularInline):
     model = Experting
     extra = 0
 
 
-class ArrangementInline(NestedStackedInline):
+class ArrangementInline(TabularInline):
     model = Arrangement
-    inlines = [ExpertInline]
+    #inlines = [ExpertInline]
     extra = 0
 
 
-class DepartmentInline(NestedStackedInline):
+class DepartmentInline(TabularInline):
     model = Department
     extra = 0
 
 
+# class StepInline(TabularInline):
+#     model = Step
+#     extra = 0
+
+class DayInline(TabularInline):
+    model = Day
+    extra = 0
+
+
 @admin.register(Event)
-class EventAdmin(NestedModelAdmin):
+class EventAdmin(ModelAdmin):
     model = Event
-    filter_horizontal = ('partners',)
+    filter_horizontal = ('partners','steps')
     inlines = [DepartmentInline, ArrangementInline]
 
 
 @admin.register(Arrangement)
-class ArrangementAdmin(NestedModelAdmin):
+class ArrangementAdmin(ModelAdmin):
     model = Arrangement
-    inlines = [ExpertInline]
-
+    inlines = [ExpertInline, DayInline]
 
 
 models = [Participant, Expert, Page, Answer, Question,
           Project, Assignment, Solution, Settings, Partner,
-          MassMediaArticle, FAQuestion]
+          MassMediaArticle, FAQuestion, Step]
 for model in models:
     admin.site.register(model)
-
-
-
-
-

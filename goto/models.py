@@ -145,6 +145,7 @@ class Event(models.Model):
         ('other', 'Другое'),
     )
     name = models.CharField(max_length=256, )
+    slug = models.SlugField(unique=True)
     short_description = models.CharField(max_length=512, blank=True)
     full_description = models.TextField(blank=True)
 
@@ -157,10 +158,13 @@ class Event(models.Model):
     pages = models.ManyToManyField(Page, blank=True)
     applier_questions = models.ManyToManyField('Question', blank=True)
 
+    steps = models.ManyToManyField('Step', blank=True,  related_name='events')
     faquestions = models.ManyToManyField(FAQuestion, blank=True)
     main_image = FilerImageField(blank=True, null=True)
     lon = models.FloatField(blank=True, null=True)
     lat = models.FloatField(blank=True, null=True)
+
+
 
     def experts(self):
         ret = set()
@@ -357,9 +361,12 @@ class Settings(models.Model):
         except cls.DoesNotExist:
             return cls()
 class Step(models.Model):
-    event = models.ForeignKey(Event, related_name='steps')
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=512)
+    picture = FilerImageField(blank=True,null=True)
+
+    def __str__(self):
+        return self.title
 
 class Day(models.Model):
     arrangement = models.ForeignKey(Arrangement, related_name='days')

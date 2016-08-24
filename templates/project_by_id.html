@@ -16,7 +16,7 @@
             <p>{{ project.description }} </p>
             {% if project.event %}
                 <p>Сделано в рамках мероприятия
-                    "<a href="{% url 'event_detail' project.event.pk %}">{{ project.event }}</a>"</p>
+                    "<a href="{% url 'event_detail' project.event.slug %}">{{ project.event }}</a>"</p>
             {% endif %}
         </div>
 

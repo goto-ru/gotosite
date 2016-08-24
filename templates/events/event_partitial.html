@@ -115,30 +115,16 @@
         <h2 class="white">Что нужно сделать для участия?</h2>
         <div class="whitespace"></div>
         <div class="row">
-{#            {% for s in event. %}#}
-            <div class="col-md-3 todo">
-                <img align="middle" src="/static/img/test-icon-white.png">
-                <h5 class="white">Получить договор</h5>
-                <p class="white">После того, как вы подали заявку вы получите договор.</p>
-            </div>
+            {% for s in event.steps.all %}
+                <div class="col-md-3 todo">
+                    {% if s.picture %}
+                        <img align="middle" src="{{ s.picture.url }}">
+                    {% endif %}
+                    <h5 class="white">{{ s.title }}</h5>
+                    <p class="white">{{ s.description }}</p>
+                </div>
+            {% endfor %}
 
-            <div class="col-md-3 todo">
-                <img align="middle" src="/static/img/test-icon-white.png">
-                <h5 class="white">Получить договор</h5>
-                <p class="white">После того, как вы подали заявку вы получите договор.</p>
-            </div>
-
-            <div class="col-md-3 todo">
-                <img align="middle" src="/static/img/test-icon-white.png">
-                <h5 class="white">Получить договор</h5>
-                <p class="white">После того, как вы подали заявку вы получите договор.</p>
-            </div>
-
-            <div class="col-md-3 todo">
-                <img align="middle" src="/static/img/test-icon-white.png">
-                <h5 class="white">Получить договор</h5>
-                <p class="white">После того, как вы подали заявку вы получите договор.</p>
-            </div>
         </div>
         <div style="text-align: center">
             <input class="header-btn-big header-btn" type="button"
