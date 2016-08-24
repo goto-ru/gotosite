@@ -25,6 +25,6 @@ $(document).ready(function () {
 });
 
 function took() {
-$('.much').css('display', 'none').toggle();
-$('.togmuch').toggle();
+    $('.much').css('display', 'none').toggle();
+    $('.togmuch').toggle();
 }
