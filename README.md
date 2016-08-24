@@ -10,6 +10,10 @@ Dependencies: python3, postgres
 
 1.  `git clone https://github.com/goto-ru/gotosite/`
 2.  `cd gotosite`
+2.  `pip3 install virtualenv`
+2.  `virtualenv -p python3.5 env`
+2.  You need to run following command every time you start terminal and operate with local project
+`source env/bin/activate`
 3.  `git submodule init`
 4.  `git submodule update`
 5.  `pip3 install -r requirements.txt`

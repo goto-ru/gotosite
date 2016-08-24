@@ -33,7 +33,6 @@ urlpatterns = [
     url(r'^login/$', login_views.sign_in, name='sign_in'),
     url(r'^logout/$', login_views.sign_out, name='sign_out'),
     # url(r'^profile/$', views.profile, name='profile'),
-    url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
@@ -46,9 +45,10 @@ urlpatterns = [
     url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
     url(r'^event/(?P<id>\d+)/participants$', views.event_participants, name='event_participants'),
 
-    url(r'^application/fill/(?P<arrangement_id>\d+)/(?P<department_id>\d+)/$', views.application_fill,
+    url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill,
         name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
+    url(r'^application/(?P<id>\d+)/(?P<method>\w*)$', views.application_change, name='application_change'),
     # Users
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),

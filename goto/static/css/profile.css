@@ -9,7 +9,18 @@ p, h1, h2, h3, h4, h5, h6 {
 a {
     cursor: pointer !important;
 }
-
+p.info {
+    color: blue;
+}
+p.success{
+    color: green;
+}
+p.warning{
+    color: yellow;
+}
+p.danger{
+    color: red;
+}
 .desc {
     padding: 3%;
 }

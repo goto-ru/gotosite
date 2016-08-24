@@ -28,13 +28,20 @@ class GotoUser(User):
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
 
+    def get_me(self):
+        if self.participant:
+            return self.participant
+        elif self.expert:
+            return self.expert
+        else:
+            return self
+
 
 class Participant(GotoUser):
     # Personal data
     city = models.CharField(max_length=40, blank=True)
     citizenship = models.CharField(default='Россия', max_length=40, blank=True)
 
-    graduation_year = models.IntegerField(blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=40, blank=True)
     parent_phone_number = models.CharField(max_length=40, blank=True)
@@ -42,6 +49,16 @@ class Participant(GotoUser):
 
     programming_languages = models.TextField(blank=True, )
     experience = models.TextField(blank=True)
+
+    education_types = (
+        ('school', 'Школа'),
+        ('university', 'ВУЗ'),
+        ('other', 'Другое')
+    )
+    education_type = models.CharField(max_length=32, default='school', choices=education_types)
+    education_name = models.CharField(max_length=256, blank=True)
+    education_years = models.IntegerField(default=11)
+    graduation_year = models.IntegerField(blank=True, null=True)
 
     def profile_completed(self):
         ret = self.graduation_year is not None
@@ -77,12 +94,12 @@ class Participant(GotoUser):
             return None
 
         left = self.graduation_year - date.today().year
-        if date.today().month < 5:
-            left += 1
-        cl = 12 - left
-        if cl >= 12:
-            cl = 'Выпустился в %s' % self.graduation_year
-        return cl
+        if date.today().month > 5:
+            left -= 1
+        if left < 0:
+            return 'Выпустился в %s' % self.graduation_year
+        else:
+            return self.education_years - left
 
     class Meta():
         verbose_name = 'Participant'
@@ -163,8 +180,13 @@ class Arrangement(models.Model):
     participants = models.ManyToManyField(Participant, through='Application')
     experts = models.ManyToManyField(Expert, through='Experting')
 
+    def get_datedelta(self):  # TODO adaptive datedelta
+        return "%s-%s" % (self.begin_date, self.end_date)
+
     def __str__(self):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
+    def dates(self):
+        return "%s-%s" % ( self.begin_date, self.end_date)
 
 
 class Department(models.Model):
@@ -185,7 +207,7 @@ class Application(models.Model):
     STATUSES = list(status_to_text.items())
     status_to_class = {
         0: 'info',
-        1: 'warning',
+        1: 'info',
         2: 'danger',
         3: 'success',
         4: 'danger',
@@ -246,9 +268,13 @@ class Project(models.Model):
     maintainers = models.ManyToManyField(Participant, related_name='projects')
     supervisor = models.ForeignKey(Expert, blank=True, null=True)
     arrangement = models.ForeignKey(Arrangement, blank=True, null=True)
+    pricture = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+    def maintainers_str(self):
+        return ", ".join(self.maintainers)
 
 
 class ParticipantComment(models.Model):
@@ -307,13 +333,13 @@ class Partner(models.Model):
 
 
 class Settings(models.Model):
-    index_partners = models.ManyToManyField(Partner, blank=True, related_name='index_partners')
-    about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='about_us_partners')
+    index_partners = models.ManyToManyField(Partner, blank=True, related_name='+')
+    about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='+')
     about_us_team = models.ManyToManyField(Expert, blank=True)
 
-    current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_1')
-    current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_2')
-    current_hackathon = models.ForeignKey(Event, blank=True, null=True, related_name='settings_3')
+    current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='+')
+    current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='+')
+    current_hackathon = models.ForeignKey(Event, blank=True, null=True, related_name='+')
 
     def save(self, *args, **kwargs):
         self.__class__.objects.exclude(id=self.id).delete()
@@ -325,6 +351,17 @@ class Settings(models.Model):
             return cls.objects.get()
         except cls.DoesNotExist:
             return cls()
+class Step(models.Model):
+    event = models.ForeignKey(Event)
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
+
+class Day(models.Model):
+    date = models.DateTimeField()
+    content = models.TextField()
+
+    def verbous_title(self):
+        return date.weekday()
 
 
 class MassMediaArticle(models.Model):

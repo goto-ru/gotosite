@@ -216,44 +216,23 @@ def application(req, id):
     return render(req, 'application.html', base_context)
 
 
-def render_profile_edit(req, user):
-    user_form = UserEditForm(instance=user)
-    base_context = {'user': user, 'user_form': user_form}
-    if user.participant:
-        participant_form = ParticipantEditForm(instance=user.participant)
-        base_context['participant_form'] = participant_form
-    return render(req, 'user/edit.html', base_context)
-
-
 @login_required()
-def profile_edit(req):
-    user = GotoUser.objects.get(pk=req.user.pk)
-    user_form = UserEditForm(req.POST, req.FILES or None)
-    user_form.instance = user
-    if user.participant:
-        participant_form = ParticipantEditForm(req.POST, req.FILES or None)
-        participant_form.instance = user.participant
-    if req.method == 'POST':
-
-        if user_form.is_valid():
-            # print(req.FILES['profile_picture'])
-            # user.profile_picture = req.FILES['profile_picture']
-            # user.save()
-            # print(user.profile_picture)
-            user_form.save()
-            user.save()
-        else:
-            return render_profile_edit(req, user)
-        if user.participant:
-            if participant_form.is_valid():
-                participant_form.save()
-                user.participant.save()
-            else:
-                return render_profile_edit(req, user)
-
-        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
+def application_change(req, id, method):
+    app = Application.objects.get(id=id)
+    if req.user.id == app.participant.id:
+        if app.status == 1:
+            if method=='confirm' :
+                app.status = 3
+                messages.info(req, 'Заявка успешно подтвержденна')
+            elif method=='reject':
+                app.status = 4
+                messages.info(req, 'Заявка успешно отозвана')
+            app.save()
     else:
-        return render_profile_edit(req, user)
+        return HttpResponseForbidden()
+
+    return HttpResponseRedirect(reverse('user_detail', args=[app.user.id]))
+
 
 
 def about_us(req):
@@ -279,6 +258,33 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
+
+    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+    base_context['user_form'] = user_form
+
+    if user.participant:
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user)
+        base_context['participant_form'] = participant_form
+
+    if req.method == 'POST':
+        if user.id != req.user.gotouser.id:
+            return HttpResponseForbidden()
+        # user_form = UserEditForm(req.POST, req.FILES or None, instance=user)
+        #
+        # if user.participant:
+        #     participant_form = ParticipantEditForm(req.POST, req.FILES or None, instance=user)
+
+        if user_form.is_valid():
+            # print(req.FILES['profile_picture'])
+            # user.profile_picture = req.FILES['profile_picture']
+            # user.save()
+            # print(user.profile_picture)
+            user_form.save()
+            if user.participant:
+                if participant_form.is_valid():
+                    participant_form.save()
+        return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+
 
 
     try:
