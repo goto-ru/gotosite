@@ -45,9 +45,9 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <p class="school-project">{{ ap.arrangement.event.name }}</p>
+                                            <p class="school-project ">{{ ap.arrangement.event.name }}</p>
                                             {{ ap.arrangement.dates }}
-                                            <p style="color: green">{{ ap.text_status }}</p>
+                                            <p class="{{ ap.class_status }}">{{ ap.text_status }}</p>
                                             {% if ap.status == 1 %}
                                                 <a href="{% url 'application_change' ap.id "confirm" %}">Подтвердить
                                                     участие</a>
@@ -72,7 +72,12 @@
                                 <div style="margin-bottom: 20px;" class="col-md-12">
                                     <div class="name">
                                         <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
-                                        <h3>Эксперт</h3>
+                                        {% if viewed_user.participant %}
+                                            <h3>Участник</h3>
+                                        {% elif viewed_user.expert %}
+                                            <h3>Эксперт</h3>
+                                        {% endif %}
+
                                         <div class="hr"></div>
                                     </div>
                                 </div>
@@ -247,55 +252,52 @@
                             </div>
                         </div>
                     </div>
+                    {% for project in viewed_user.participant.projects.all %}
+                        <div class="col-md-12 project">
+                            <div class="inside row project">
+                                <div class="col-md-12 leftal"><h3>{{ project.title }}
+                                    <img style="height: 30px; width: auto"
+                                         src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                                </h3></div>
+                                <div class="col-md-12 leftal">
+                                    <h5>
+                                        {% for m in project.maintainers.all %}
+                                            <a href="{% url 'user_detail' m.id %}">{{ m  }}</a>
+                                        {% endfor %}
+                                    </h5>
+                                </div>
+                                {% if project.picture %}
+                                    <div class="col-md-8">
+                                        <p class="leftal">{{ project.description }}</p>1
+                                    </div>
 
 
-                    <div class="col-md-12 project">
-                        <div class="inside row project">
-                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto"
-                                                                            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
-                            </h3></div>
-                            <div class="col-md-12 leftal"><h5>Творожков Андрей, Васильев Олег</h5></div>
-                            <div class="col-md-12"><p class="leftal">Это описание проекта настолько замечательное, что
-                                его просто нет,
-                                но оно адекватное, а не как у Олега с Алёной обычно бывает... В общем это супер пупер
-                                проект вся документация на гите, подписывайтесь, ставьте лайки и вообще вы крутые
-                                ^_^</p></div>
-                            <div class="col-md-12">
-                                <p class="rightal">Курировал Бибилов Иван</p>
+                                    <div class="col-md-4 project-photo">
+                                        <img src="{{ project.picture.url }}">
+
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-12">
+                                        <p class="leftal">{{ project.description }}</p>
+                                    </div>
+                                {% endif %}
+                                <div class="col-md-12">
+                                    {% if project.supervisor %}
+                                        <p class="rightal">Курировал <a
+                                                href="{% url 'user_detail' project.supervisor.id %}">{{ project.supervisor }}</a>
+                                        </p>
+                                    {% endif %}
+                                    {% if project.supervisor %}
+                                        <p class="rightal">Начато в рамках мероприятия "<a
+                                                href="{% url 'user_detail' project.supervisor.id %}">{{ project.arrangement.event }}"</a>
+                                        </p>
+                                    {% endif %}
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
-                    <div class="col-md-12 project">
-                        <div class="inside row project">
-                            <div class="col-md-12 leftal"><h3>Хератень <img style="height: 30px; width: auto"
-                                                                            src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
-                            </h3></div>
-                            <div class="col-md-12 leftal"><h5>Творожков Андрей, Васильев Олег</h5></div>
-                            <div class="col-md-8">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td style="vertical-align: middle"><p class="leftal">Это описание проекта
-                                            настолько замечательное, что
-                                            его просто нет,
-                                            но оно адекватное, а не как у Олега с Алёной обычно бывает... В общем это
-                                            супер пупер
-                                            проект вся документация на гите, подписывайтесь, ставьте лайки и вообще вы
-                                            крутые
-                                            ^_^</p>
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-md-4 project-photo">
-                                <img src="">
-                                <p>Курировал Бибилов Иван</p>
-                            </div>
-                        </div>
-                    </div>
 
                     {% if perms.goto.view_private_comment %}
                         <div class="col-md-12">
@@ -318,7 +320,7 @@
                                     Нет приватных отзывов
                                 {% endif %}
                             </div>
-                            12
+
                         </div>
                     {% endif %}
                 </div>

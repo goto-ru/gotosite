@@ -256,18 +256,18 @@ def page(req, slug):
 
 
 def user_by_id(req, id):
-    user = GotoUser.objects.get(pk=id)
+    user = GotoUser.objects.get(pk=id).get_me()
     base_context = {'viewed_user': user}
 
     user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
     base_context['user_form'] = user_form
 
     if user.participant:
-        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user)
         base_context['participant_form'] = participant_form
 
     if req.method == 'POST':
-        if user != req.user.gotouser:
+        if user.id != req.user.gotouser.id:
             return HttpResponseForbidden()
         # user_form = UserEditForm(req.POST, req.FILES or None, instance=user)
         #
@@ -280,11 +280,12 @@ def user_by_id(req, id):
             # user.save()
             # print(user.profile_picture)
             user_form.save()
-
             if user.participant:
                 if participant_form.is_valid():
                     participant_form.save()
-                    return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+        return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+
+
 
     try:
         if user.participant:
