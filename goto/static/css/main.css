@@ -14,7 +14,6 @@ html, body {
     height: 200px;
 }
 
-
 .application {
     float: right;
     vertical-align: middle;
@@ -250,4 +249,13 @@ a {
   min-height: 40px;
 }
 
-
+.mobile-sheet {
+    z-index: 100;
+    position: fixed;
+    right: -300px;
+    display: none;
+    top: 0;
+    bottom: 0;
+    padding: 25px;
+    background-color: #152136;
+}

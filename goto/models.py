@@ -3,7 +3,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from .subscribe_views import *
 from filer.fields.image import FilerImageField
-
+from django import forms
 
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
@@ -27,6 +27,14 @@ class GotoUser(User):
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
+
+    def get_me(self):
+        if self.participant:
+            return self.participant
+        elif self.expert:
+            return self.expert
+        else:
+            return self
 
 
 class Participant(GotoUser):
@@ -177,6 +185,8 @@ class Arrangement(models.Model):
 
     def __str__(self):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
+    def dates(self):
+        return "%s-%s" % ( self.begin_date, self.end_date)
 
 
 class Department(models.Model):
@@ -197,7 +207,7 @@ class Application(models.Model):
     STATUSES = list(status_to_text.items())
     status_to_class = {
         0: 'info',
-        1: 'warning',
+        1: 'info',
         2: 'danger',
         3: 'success',
         4: 'danger',
@@ -258,9 +268,13 @@ class Project(models.Model):
     maintainers = models.ManyToManyField(Participant, related_name='projects')
     supervisor = models.ForeignKey(Expert, blank=True, null=True)
     arrangement = models.ForeignKey(Arrangement, blank=True, null=True)
+    pricture = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+    def maintainers_str(self):
+        return ", ".join(self.maintainers)
 
 
 class ParticipantComment(models.Model):
@@ -319,13 +333,13 @@ class Partner(models.Model):
 
 
 class Settings(models.Model):
-    index_partners = models.ManyToManyField(Partner, blank=True, related_name='index_partners')
-    about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='about_us_partners')
+    index_partners = models.ManyToManyField(Partner, blank=True, related_name='+')
+    about_us_partners = models.ManyToManyField(Partner, blank=True, related_name='+')
     about_us_team = models.ManyToManyField(Expert, blank=True)
 
-    current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_1')
-    current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='settings_2')
-    current_hackathon = models.ForeignKey(Event, blank=True, null=True, related_name='settings_3')
+    current_left_school = models.ForeignKey(Event, blank=True, null=True, related_name='+')
+    current_right_school = models.ForeignKey(Event, blank=True, null=True, related_name='+')
+    current_hackathon = models.ForeignKey(Event, blank=True, null=True, related_name='+')
 
     def save(self, *args, **kwargs):
         self.__class__.objects.exclude(id=self.id).delete()

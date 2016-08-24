@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="{% static 'css/lectoriy.css' %}" type="text/css"/>
 
     <div style="background: whitesmoke">
-        <div style="background: whitesmoke;" class="container">
+        {% if upcoming_lectures|length > 0 %}
+            <div style="background: whitesmoke;" class="container">
             {% for l in upcoming_lectures %}
                 <div style="margin-top: 2%" class="col-md-12 top-fix school-card container">
                 <div class="row">
@@ -41,23 +42,24 @@
 
                 </div>
             {% endfor %}
-            </div>
-            {% for l in archive_lectures%}
-                <div class="col-md-4 top-fix">
-                    <div class="col-md-12 school-card">
-                        <div class="school">
-                            <img src="{{ l.main_image.url }}">
-                            <h6>{{ l.name }}</h6>
-                            <p class="desc-school">
+        </div>
+        {% endif %}
+        {% for l in archive_lectures %}
+            <div class="col-md-4 top-fix">
+                <div class="col-md-12 school-card">
+                    <div class="school">
+                        <img src="{{ l.main_image.url }}">
+                        <h6>{{ l.name }}</h6>
+                        <p class="desc-school">
                             {{ l.short_description }}
-                            </p>
-                            <br>
-                            <p style="float: right;" class="desc-school">{{ l.begin_date }}</p>
-                            <p style="float: left;" class="desc-school"> Лекция состоялась</p>
-                        </div>
+                        </p>
+                        <br>
+                        <p style="float: right;" class="desc-school">{{ l.begin_date }}</p>
+                        <p style="float: left;" class="desc-school"> Лекция состоялась</p>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
 
         </div>
     </div>

@@ -1,0 +1,70 @@
+hr {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+
+.col-md-3 {
+    text-align: right;
+}
+
+input[type='text'] {
+    padding: 5px 9px 7px;
+    border-radius: 1px;
+    box-sizing: border-box;
+    border: 1px solid #d3d9de;
+    color: black;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+    width: 100%;
+}
+
+.leftal {
+    text-align: left;
+}
+
+.rightal {
+    text-align: right;
+}
+
+iframe {
+    overflow: hidden;
+}
+
+.cell {
+    padding: 5px;
+}
+
+textarea {
+    width: 100% !important;
+    height: 5em !important;
+}
+
+select {
+    width: 100%;
+    padding: 5px 9px 7px;
+    border: 1px solid #d3d9de;
+    color: black;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+    border-radius: 1px;
+    background-color: white;
+}
+
+label {
+    font-weight: 300 !important;
+    font-size: 12px;
+}
+
+input[type='submit'] {
+    border-radius: 0;
+    max-width: 200px;
+    font-size: 18px;
+    padding: 0.6%;
+    background: white;
+    border: 2px solid rgb(66, 158, 132);
+    margin-bottom: 5%;
+    color: rgb(66, 158, 132);
+}

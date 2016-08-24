@@ -118,39 +118,28 @@ def application_fill(req, arrangement_id, department_id):
     if user.participant is None:
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'fill_application.html', base_cotext)
-
-    for ap in Application.objects.filter(participant=user.participant, arrangement__event=event):
-        messages.error(req, 'Вы подали заявку на это мероприятие на сроки %s' % (ap.arrangement.get_datedelta(),))
+    a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
+    if a.count() > 0:
+        messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
         return render(req, 'fill_application.html', base_cotext)
-
+    if arrangement.event != department.event:
+        return HttpResponseBadRequest()
     if req.method == 'POST':
-        data = req.POST.keys()
-        dep_id = [_.split('_')[1] for _ in data if _.startswith('department')][0]
-        arr_id = [_.split('_')[1] for _ in data if _.startswith('arrangement')][0]
-        department = Department.objects.get(pk=dep_id)
-        arrangement = Arrangement.objects.get(pk=arr_id)
-        if arrangement.event != department.event:
-            return HttpResponseBadRequest()
-        if Application.objects.filter(participant=user.participant, arrangement=arrangement).count() > 0:
-            messages.error(req, 'Вы уже подали заявку на эту смену')
-            return render(req, 'fill_application.html', base_cotext)
         app = Application()
         app.arrangement = arrangement
         app.department = department
         app.participant = user.participant
         app.date_created = datetime.datetime.now()
         app.save()
-        for q in arrangement.event.applier_questions.all():
-            text = req.POST['question_%s' % q.pk]
+        for q in arrangement.event.questions.all():
+            text = req.POST['question%s' % q.pk]
             ans = Answer()
             ans.application = app
             ans.question = q
             ans.text = text
             ans.save()
-
-        messages.info(req, "Заявка успешно принята")
-
-        return HttpResponseRedirect(reverse('application', args=[app.id]))
+        messages.add_message("Заявка успешно принята")
+        return render(req, 'fill_application.html', base_cotext)
     else:
         return render(req, 'fill_application.html', base_cotext)
 
@@ -227,40 +216,20 @@ def application(req, id):
     return render(req, 'application.html', base_context)
 
 
-def render_profile_edit(req, user):
-    user_form = UserEditForm(instance=user)
-    base_context = {'user': user, 'user_form': user_form}
-    if user.participant:
-        participant_form = ParticipantEditForm(instance=user.participant)
-        base_context['participant_form'] = participant_form
-    return render(req, 'user/edit.html', base_context)
-
-
 @login_required()
-def profile_edit(req):
-    user = GotoUser.objects.get(pk=req.user.pk)
-    user_form = UserEditForm(req.POST, req.FILES or None)
-    user_form.instance = user
-    if user.participant:
-        participant_form = ParticipantEditForm(req.POST, req.FILES or None)
-        participant_form.instance = user.participant
-    if req.method == 'POST':
-
-        if user_form.is_valid():
-            # print(req.FILES['profile_picture'])
-            # user.profile_picture = req.FILES['profile_picture']
-            # user.save()
-            # print(user.profile_picture)
-            user_form.save()
-            user.save()
-        else:
-            return render_profile_edit(req, user)
-        if user.participant:
-            if participant_form.is_valid():
-                participant_form.save()
-                user.participant.save()
-            else:
-                return render_profile_edit(req, user)
+def application_change(req, id, method):
+    app = Application.objects.get(id=id)
+    if req.user.id == app.participant.id:
+        if app.status == 1:
+            if method=='confirm' :
+                app.status = 3
+                messages.info(req, 'Заявка успешно подтвержденна')
+            elif method=='reject':
+                app.status = 4
+                messages.info(req, 'Заявка успешно отозвана')
+            app.save()
+    else:
+        return HttpResponseForbidden()
 
         return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
     else:
@@ -290,6 +259,34 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
+
+    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+    base_context['user_form'] = user_form
+
+    if user.participant:
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user)
+        base_context['participant_form'] = participant_form
+
+    if req.method == 'POST':
+        if user.id != req.user.gotouser.id:
+            return HttpResponseForbidden()
+        # user_form = UserEditForm(req.POST, req.FILES or None, instance=user)
+        #
+        # if user.participant:
+        #     participant_form = ParticipantEditForm(req.POST, req.FILES or None, instance=user)
+
+        if user_form.is_valid():
+            # print(req.FILES['profile_picture'])
+            # user.profile_picture = req.FILES['profile_picture']
+            # user.save()
+            # print(user.profile_picture)
+            user_form.save()
+            if user.participant:
+                if participant_form.is_valid():
+                    participant_form.save()
+        return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+
+
 
     try:
         if user.participant:
