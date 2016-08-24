@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 from django.contrib.messages import constants
 
 INSTALLED_APPS = [
+    #'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,9 @@ INSTALLED_APPS = [
     'filer',
     'easy_thumbnails',
     'social.apps.django_app.default',
+    'import_export',
+    'adminsortable2',
+    'admin_export'
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
@@ -100,7 +104,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     'social.pipeline.user.get_username',
     'social.pipeline.social_auth.associate_by_email',
-    #'goto.login_views.create_user',
+    # 'goto.login_views.create_user',
     'social.pipeline.user.create_user',
 
     'social.pipeline.social_auth.associate_user',
@@ -113,6 +117,12 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 DATE_FORMAT = 'd.m.Y'
 
 WSGI_APPLICATION = 'gotosite2.wsgi.application'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'omrigan'
+EMAIL_HOST_PASSWORD = 'Send8597'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -141,7 +151,7 @@ SOCIAL_AUTH_GITHUB_KEY = '13dacbc29b3229dc6c71'
 SOCIAL_AUTH_GITHUB_SECRET = '503a6f25cf7670611cbb6cadecf30cb8000b3816'
 
 DEBUG = True
-
+EMAIL_FROM = 'goto@goto.omrigan.info'
 if env == 'debug':
     from .private_settings.debug_settings import *
 

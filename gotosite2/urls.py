@@ -21,6 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^export/', views.export, name='export'),
+    url(r'^admin-shortcuts/$', views.admin_shortcuts, name='admin_shortcuts'),
+
     url(r'^$', views.index, name='index'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^about-us/$', views.about_us, name='about_us'),
@@ -66,7 +69,8 @@ urlpatterns = [
 
     # Subscribe
     url(r'^subscribe/$', subscribe_views.subscribe, name='subscribe'),
-    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe')
+    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe'),
+    url(r'^askletter/(?P<emails>.+)/$', subscribe_views.ask_for_email, name='askletter')
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),

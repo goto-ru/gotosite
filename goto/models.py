@@ -69,6 +69,8 @@ class Participant(GotoUser):
         ret &= len(self.programming_languages) > 0
         ret &= len(self.experience) > 0
         return ret
+    def ever_been_before(self):
+        return self.application_set.filter(status=3).count()>0
 
     _subscribed_to_email = models.BooleanField(default=False)
 
@@ -89,7 +91,7 @@ class Participant(GotoUser):
             return None
         return (date.today() - self.birthday).days // 365
 
-    def current_class(self):
+    def grade(self):
         if self.graduation_year is None:
             return None
 
@@ -194,6 +196,8 @@ class Department(models.Model):
     title = models.CharField(max_length=256)
     image = FilerImageField(blank=True, null=True)
     description = models.TextField()
+    def __str__(self):
+        return self.title
 
 
 class Application(models.Model):
@@ -217,9 +221,10 @@ class Application(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUSES, default=0)
     date_created = models.DateTimeField()
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['my_order', '-date_created']
 
     def text_status(self):
         return self.status_to_text[self.status]
