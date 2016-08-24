@@ -352,11 +352,12 @@ class Settings(models.Model):
         except cls.DoesNotExist:
             return cls()
 class Step(models.Model):
-    event = models.ForeignKey(Event)
+    event = models.ForeignKey(Event, related_name='steps')
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=512)
 
 class Day(models.Model):
+    arrangement = models.ForeignKey(Arrangement, related_name='days')
     date = models.DateTimeField()
     content = models.TextField()
 
