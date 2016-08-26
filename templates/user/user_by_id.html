@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>
                                             <p class="school-project ">{{ ap.arrangement.event.name }}</p>
-                                            {{ ap.arrangement.dates }}
+                                            <p class="school-date">{{ ap.arrangement.dates }}</p>
                                             <p class="{{ ap.class_status }}">{{ ap.text_status }}</p>
                                             {% if ap.status == 1 %}
                                                 <a href="{% url 'application_change' ap.id "confirm" %}">Подтвердить
@@ -302,13 +302,12 @@
 
 
                     {% if perms.goto.view_private_comment %}
-                        <div class="col-md-12">
-                            <div class="inside">
+                        {% if public_comments|length > 0 %}
+                            <div class="col-md-12 takeout">
+                                <div class="inside">
 
 
-                                <h2>Приватные отзывы об участнике</h2>
-
-                                {% if public_comments|length > 0 %}
+                                    <h2>Отзывы об участнике</h2>
 
                                     {% for comment in public_comments %}
                                         <div class="col-md-4">
@@ -318,12 +317,10 @@
                                             <i>comment.author</i>
                                         </div>
                                     {% endfor %}
-                                {% else %}
-                                    Нет приватных отзывов
-                                {% endif %}
-                            </div>
+                                </div>
 
-                        </div>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
 

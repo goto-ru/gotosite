@@ -11,15 +11,19 @@ a {
 }
 p.info {
     color: blue;
+    font-size: 14px;
 }
 p.success{
     color: green;
+    font-size: 14px;
 }
 p.warning{
     color: yellow;
+    font-size: 14px;
 }
 p.danger{
     color: red;
+    font-size: 14px;
 }
 .desc {
     padding: 3%;
@@ -255,5 +259,15 @@ select {
 
 .school-project{
     font-weight: 500;
-    font-size: 19px;
+    font-size: 16px;
+}
+
+.school-date{
+    font-size: 14px;
+}
+
+.takeout h2{
+    font-size: 24px;
+    padding: 5px;
+    text-align: left;
 }

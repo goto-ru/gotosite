@@ -285,6 +285,23 @@ a {
 }
 
 .header-head{
-    margin-top: 100px;
-    margin-bottom: 100px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.yellow-background{
+    background: #F3ED70;
+}
+
+a{
+    color: unset !important;
+}
+
+a:hover{
+    color: rgb(67, 180, 152) !important;
+    text-decoration: none !important;
+}
+
+p{
+    line-height: 1.2 !important;
 }
