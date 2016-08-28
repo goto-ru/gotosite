@@ -1,0 +1,33 @@
+#map-outside{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.43);
+    z-index: 100000;
+    display: none;
+}
+
+#map{
+    width: 80vw;
+    height: 80vh;
+    margin: 0 auto;
+    background: white;
+}
+
+table{
+    width: 100vw;
+    height: 100vh;
+}
+
+i{
+    position: absolute;
+    color: white;
+    top: 10px;
+    right: 10px;
+}
+
+i:hover{
+    color: rgb(67, 180, 152);
+}

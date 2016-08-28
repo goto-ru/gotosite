@@ -19,6 +19,7 @@
 
 {% block container %}
     {% load staticfiles %}
+    {% include 'helpers/map.html' %}
     <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
     <link href="{% static 'css/schools.css' %}" rel="stylesheet">
     <script type="text/javascript" src="{% static 'js/camp.js' %}"></script>
@@ -62,10 +63,7 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
         <div class="clearfix whitespace"></div>
     {% endif %}
@@ -78,8 +76,8 @@
         {% include 'events/event_partitial.html' with event=s.current_right_school %}
     </div>
 
-    <div style="background: whitesmoke">
-        <div style="background: whitesmoke;" class="container">
+    <div>
+        <div class="container">
             <div class="header-head"><h2>Прошедшие школы</h2></div>
             {% for ar in archive %}
                 <div style="margin-top: 2%" class="col-md-4">
@@ -102,14 +100,12 @@
 
                 </div>
             {% endfor %}
-        {% if  archive|length > 3%}
-            <div style="text-align: center" class="col-md-12">
-                <input class="header-btn-big header-btn smoke" type="button"
-                       value="Просмотреть все">
-            </div>
-        {% endif %}
+            {% if  archive|length > 3 %}
+                <div style="text-align: center" class="col-md-12">
+                    <input class="header-btn-big header-btn smoke" type="button"
+                           value="Просмотреть все">
+                </div>
+            {% endif %}
         </div>
     </div>
-
-
 {% endblock %}

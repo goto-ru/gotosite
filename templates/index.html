@@ -8,9 +8,7 @@
 
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
-                <p>GoTo <br>
-                    Серия меропритий
-                </p>
+                <p>GoTo<br>образовательные программы</p>
             </div>
         </div>
     </div>
@@ -20,9 +18,7 @@
 {% block container %}
     {% load staticfiles %}
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
-
     <div class="orange-item">
-
         <div class="row">
             <div class="vector-description col-md-6">
                 <h3><a href="/schools">Летние школы</a></h3>
@@ -38,7 +34,7 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a href="">Принять участие</a>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
                 </p>
             </div>
 
@@ -47,7 +43,7 @@
         <div class="row">
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
             <div class="vector-description col-md-6">
-               <h3> <a href="/hackathons">Хакатоны</a></h3>
+                <h3><a href="/hackathons">Хакатоны</a></h3>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -60,13 +56,14 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-               <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"> <a href="">Принять участие</a></p>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
+                </p>
 
             </div>
         </div>
         <div class="row">
             <div class="vector-description col-md-6">
-                <a href="/hackathons"><h3>Лекторий</h3></a>
+                <h3><a href="/hackathons">Лекторий</a></h3>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -79,7 +76,8 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a href="">Принять участие</a></p>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
+                </p>
 
             </div>
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
@@ -99,7 +97,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <h6>{{ article.title }}</h6></a>
+                        <h6><a  href="{{ article.url }}">{{ article.title }}</a></h6></a>
                     <p>{{ article.description }}</p>
                 </div>
             {% endfor %}

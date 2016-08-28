@@ -131,5 +131,32 @@ h1, h2, h3, h4, h6 {
 }
 
 .header{
-    height: 70vh;
+    height: 100vh;
+    position: relative;
+}
+
+.white-hr{
+    height: 2px;
+    width: 100%;
+    background: white;
+}
+
+.white-text{
+    position: relative;
+    margin-top: -4vw;
+    width: 80vw;
+    background: white;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.white-text h1{
+    padding-top: 10vw;
+    font-size: 50px;
+    text-align: left;
+}
+
+.gotic-text{
+
 }
