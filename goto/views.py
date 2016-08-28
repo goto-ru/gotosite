@@ -65,18 +65,12 @@ def archive(req):
     return render(req, 'events/events.html', {'events': events, 'title': 'Архив событий'})
 
 
-def event_by_id(req, id):
-    e = Event.objects.get(pk=id)
-    base_context = {'event': e}
-    try:
-        p = req.user.gotouser.participant
-    except AttributeError:
-        p = None
-    if p:
-        a = p.application_set.filter(event=e)
-        if a.count() > 0:
-            base_context['application'] = a[0]
-    return render(req, 'events/event_by_id.html', base_context)
+def event_by_id(req, slug):
+    e = Event.objects.get(slug=slug)
+    base_context = {'event': e, 's': Settings.objects.get()}
+
+
+    return render(req, 'hackathon_template.html', base_context)
 
 
 def event_participants(req, id):

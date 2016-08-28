@@ -76,7 +76,7 @@
                     </div>
                     <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
                         {% if request.user.is_authenticated %}
-                            <a href="" class="take-part header-btn-little header-btn">Принять участие</a>
+                            <a href="{% url 'event_detail' event.slug  %}" class="take-part header-btn-little header-btn">Принять участие</a>
                         {% else %}
                             <a href="{% url 'sign_in' %}" class="take-part header-btn-little header-btn">Принять
                                 участие</a>

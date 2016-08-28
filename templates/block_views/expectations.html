@@ -1,0 +1,16 @@
+<div class="container orange-background">
+    <div class="header-head"><h3 class="give-me">{{ block.title }}</h3></div>
+    <div class="row">
+        {% for e in block.entities.all %}
+            <div class="col-md-2 feature-get">
+                {% if e.picture %}
+                    <img src="{{ e.picture.url }}">
+                {% endif %}
+                {% if e.title %}
+                    <p>Школьник или студент <br> 15-18 лет</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+

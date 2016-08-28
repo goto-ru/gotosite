@@ -3,6 +3,11 @@
 {% block title %}
     GoTo Хакатон
 {% endblock %}
+{% block header %}
+    {% include 'navigation.html' %}
+
+
+{% endblock %}
 
 
 {% block container %}
@@ -33,62 +38,10 @@
     </div>
     {% include 'events/event_information.html' with event=s.current_hackathon %}
 
-    <div class="orange-background">
-        <div class="container orange-background">
-            <div class="header-head"><h3 class="give-me">Что ждёт участников?</h3></div>
-            <div class="row">
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/3ls.png">
-                    <p>Лекции и воркшопы</p>
-                </div>
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/9ls.png">
-                    <p>Единомышленники
-                        и новые идеи</p>
-                </div>
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/1ls.png">
-                    <p>Вкусная еда и
-                        печеньки</p>
-                </div>
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/2ls.png">
-                    <p>Презентации
-                        проектов</p>
-                </div>
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/4ls.png">
-                    <p>Призы и
-                        сувениры</p>
-                </div>
-                <div class="col-md-2 feature-get">
-                    <img src="http://goto.msk.ru/hackathon/images/5ls.png">
-                    <p>Эмоции и
-                        позитив</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="header-head"><h3 style="color: #717171" class="give-me">Участие в хакатоне</h3></div>
-        <div class="col-md-3 feature-get-black">
-            <img src="http://goto.msk.ru/hackathon/images/1.png">
-            <p>Школьник или студент <br> 15-18 лет</p>
-        </div>
-        <div class="col-md-3 feature-get-black">
-            <img src="http://goto.msk.ru/hackathon/images/2.png">
-            <p>Умение программировать <br> хотя бы на одном языке</p>
-        </div>
-        <div class="col-md-3 feature-get-black">
-            <img src="http://goto.msk.ru/hackathon/images/3.png">
-            <p>Базовые знания алгоритмов и структур данных</p>
-        </div>
-        <div class="col-md-3 feature-get-black">
-            <img src="http://goto.msk.ru/hackathon/images/4.png">
-            <p>Представление о <br> базах данных</p>
-        </div>
-    </div>
+    {% for block in event.blocks.all     %}
+        {% include "block_views/"|add:block.design|add:".html" %}
+    {% endfor %}
     <div class="container">
         <div class="help">
             <img src="http://goto.msk.ru/hackathon/images/download.png">

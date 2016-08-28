@@ -5,6 +5,7 @@ from .subscribe_views import *
 from filer.fields.image import FilerImageField
 from django import forms
 
+
 class GotoUser(User):
     # last_name = models.CharField(max_length=40, blank=True)
     # first_name = models.CharField(max_length=40, blank=True)
@@ -69,8 +70,9 @@ class Participant(GotoUser):
         ret &= len(self.programming_languages) > 0
         ret &= len(self.experience) > 0
         return ret
+
     def ever_been_before(self):
-        return self.application_set.filter(status=3).count()>0
+        return self.application_set.filter(status=3).count() > 0
 
     _subscribed_to_email = models.BooleanField(default=False)
 
@@ -158,13 +160,11 @@ class Event(models.Model):
     pages = models.ManyToManyField(Page, blank=True)
     applier_questions = models.ManyToManyField('Question', blank=True)
 
-    steps = models.ManyToManyField('Step', blank=True,  related_name='events')
+    steps = models.ManyToManyField('Step', blank=True, related_name='events')
     faquestions = models.ManyToManyField(FAQuestion, blank=True)
     main_image = FilerImageField(blank=True, null=True)
     lon = models.FloatField(blank=True, null=True)
     lat = models.FloatField(blank=True, null=True)
-
-
 
     def experts(self):
         ret = set()
@@ -179,6 +179,27 @@ class Event(models.Model):
         verbose_name_plural = 'Events'
 
 
+class Block(models.Model):
+    DESIGNS = [('prizes', 'Призы'),
+               ('result', 'Итоги'),
+               ('requirements', 'Требования'),
+               ('expectations', 'Ожидания')]
+    event = models.ForeignKey(Event, related_name='blocks')
+    title = models.CharField(max_length=240)
+    admin_title = models.CharField(max_length=240)
+    design = models.CharField(choices=DESIGNS, max_length=240)
+
+    def __str__(self):
+        return self.admin_title
+
+class BlockEntity(models.Model):
+    block = models.ForeignKey(Block, related_name='entities')
+    picture = FilerImageField()
+    title = models.CharField(max_length=240, blank=True)
+    description = models.CharField(max_length=1024, blank=True)
+
+
+
 class Arrangement(models.Model):
     event = models.ForeignKey(Event, related_name='arrangements')
     begin_date = models.DateField(default=date.today)
@@ -191,8 +212,9 @@ class Arrangement(models.Model):
 
     def __str__(self):
         return "%s %s-%s" % (self.event, self.begin_date, self.end_date)
+
     def dates(self):
-        return "%s-%s" % ( self.begin_date, self.end_date)
+        return "%s-%s" % (self.begin_date, self.end_date)
 
 
 class Department(models.Model):
@@ -200,6 +222,7 @@ class Department(models.Model):
     title = models.CharField(max_length=256)
     image = FilerImageField(blank=True, null=True)
     description = models.TextField()
+
     def __str__(self):
         return self.title
 
@@ -360,13 +383,16 @@ class Settings(models.Model):
             return cls.objects.get()
         except cls.DoesNotExist:
             return cls()
+
+
 class Step(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=512)
-    picture = FilerImageField(blank=True,null=True)
+    picture = FilerImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title
+
 
 class Day(models.Model):
     arrangement = models.ForeignKey(Arrangement, related_name='days')

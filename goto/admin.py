@@ -66,6 +66,17 @@ class ArrangementAdmin(ModelAdmin):
     inlines = [ExpertInline, DayInline]
 
 
+class BlockEntityAdmin(TabularInline):
+    model = BlockEntity
+    extra = 0
+
+@admin.register(Block)
+class BlockAdmin(ModelAdmin):
+    model = Block
+    inlines = [BlockEntityAdmin]
+
+
+
 models = [Participant, Expert, Page, Answer, Question,
           Project, Assignment, Solution, Settings, Partner,
           MassMediaArticle, FAQuestion, Step]
