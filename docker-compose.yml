@@ -3,11 +3,9 @@ web:
   environment:
     - ENV=production
   ports:
-    - "8001:8000"
+    - "8001:80"
   links:
     - db:db
-  volumes:
-    - .:/root/app
   restart: always
 db:
   image: postgres

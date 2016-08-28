@@ -1,0 +1,73 @@
+{#{% if event.name|length > 0 %}#}
+<div class="colored">
+    <div class="container colored">
+        <div class="row big-box">
+            <div style="padding: 0" class="col-md-8">
+                <div class="inside-information  white-background">
+                    <h3 class="">{{ event.name }}</h3>
+                    <p class="">{{ event.full_description }} <a onclick="load_map(30,60, 8, 'Тут пихаем html для подписи на <br> маркере')">Проходить всё будет тут</a></p>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="inside-information  white-background">
+                    <div class="">
+                        <div class="feature ">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <i class="glyphicon-alert glyphicon-resize-full"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <h5>Для кого?</h5>
+                                    <p>{{ event.target_auditory }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Сколько стоит?</h5>
+                                    <p>{{ event.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Когда?</h5>
+
+                                    {% for a in event.arrangements.all %}
+                                        <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
+                        {% if request.user.is_authenticated %}
+                            <a href="" class="take-part header-btn-little header-btn">Принять участие</a>
+                        {% else %}
+                            <a href="{% url 'sign_in' %}" class="take-part header-btn-little header-btn">Принять
+                                участие</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#{% endif %}#}

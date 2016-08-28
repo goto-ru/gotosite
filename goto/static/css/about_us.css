@@ -46,29 +46,6 @@ h1 {
     padding: 3%;
 }
 
-.staff {
-    margin: 3%;
-    background: white;
-    position: relative;
-    min-height: 150px;
-}
-
-.staff img {
-    width: 150px;
-    height: 150px;
-}
-.staff-avatar table{
-    height: 100%;
-}
-.staff-avatar td{
-    vertical-align: middle;
-}
-
-.staff h3 {
-    text-align: center;
-    font-size: 22px;
-}
-
 .height-fix {
     height: inherit;
 }

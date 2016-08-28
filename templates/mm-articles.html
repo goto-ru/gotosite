@@ -1,29 +1,27 @@
 {% extends 'base_site.html' %}
-{% block title %}
-    {{ project.title }}
 
+{% load staticfiles %}
+
+{% block title %}
+    GoTo | СМИ о нас
 {% endblock %}
 
 {% block container %}
+    <link href="{% static 'css/mm-articles.css' %}" rel="stylesheet">
     <div class="container main-container">
-        <div class="page-header">
-            <h1>СМИ о нас </h1>
-
-        </div>
-
-        {% for article in articles %}
-            <div class="col-md-12 box">
-
-                <div class="col-md-3 article">
-                    <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
-                        <h6>{{ article.title }}</h6></a>
-                    <p>{{ article.description }}</p>
-
-                </div>
-
-            </div>
-        {% endfor %}
-
+        <table class="article">
+            {% for article in articles %}
+                <tr>
+                    <td style="vertical-align: middle">
+                        <a href="{{ article.url }}"><img src="/media/{{ article.image }}"></a>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <a href="{{ article.url }}"><h6>{{ article.title }}</h6></a>
+                        <p>{{ article.description }}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 
 

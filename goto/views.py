@@ -43,7 +43,8 @@ def schools(req):
 
 
 def hackathons(req):
-    return render(req, 'hackathon.html')
+    s = Settings.objects.get()
+    return render(req, 'hackathon.html', {'s': s})
 
 
 def lectures(req):
@@ -104,7 +105,7 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-@login_required()
+#@login_required()
 def application_fill(req, arrangement_id, department_id):
     arrangement = Arrangement.objects.get(pk=arrangement_id)
     department = Department.objects.get(pk=department_id)
@@ -215,44 +216,34 @@ def application(req, id):
     return render(req, 'application.html', base_context)
 
 
-def render_profile_edit(req, user):
-    user_form = UserEditForm(instance=user)
-    base_context = {'user': user, 'user_form': user_form}
-    if user.participant:
-        participant_form = ParticipantEditForm(instance=user.participant)
-        base_context['participant_form'] = participant_form
-    return render(req, 'user/edit.html', base_context)
-
-
 @login_required()
-def profile_edit(req):
-    user = GotoUser.objects.get(pk=req.user.pk)
-    user_form = UserEditForm(req.POST, req.FILES or None)
-    user_form.instance = user
-    participant_form = ParticipantEditForm(req.POST, req.FILES or None)
-    participant_form.instance = user
-    if req.method == 'POST':
+def application_change(req, id, method):
+    app = Application.objects.get(id=id)
+    if req.user.id == app.participant.id:
+        if app.status == 1:
+            if method=='confirm' :
+                app.status = 3
+                messages.info(req, 'Заявка успешно подтвержденна')
+            elif method=='reject':
+                app.status = 4
+                messages.info(req, 'Заявка успешно отозвана')
+            app.save()
+    else:
+        return HttpResponseForbidden()
 
-        if user_form.is_valid():
-            # print(req.FILES['profile_picture'])
-            # user.profile_picture = req.FILES['profile_picture']
-            # user.save()
-            # print(user.profile_picture)
-            user_form.save()
-        else:
-            return render_profile_edit(req, user)
-        if user.participant and participant_form.is_valid():
-            participant_form.save()
-        else:
-            return render_profile_edit(req, user)
+    return HttpResponseRedirect(reverse('user_detail', args=[app.user.id]))
 
-        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-    return render_profile_edit(req, user)
 
 
 def about_us(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.about_us_partners, 'team': s.about_us_team}
+
+    context_dictionary = {'s': s, 'statistics': {
+        'projects': Project.objects.count(),
+        'archive': Arrangement.objects.filter(end_date__lte=datetime.datetime.now()).count(),
+        'participants': Participant.objects.count(),
+        'experts': Expert.objects.count()
+    }}
     return render(req, 'about.html', context_dictionary)
 
 
@@ -267,16 +258,50 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
-    # comments = None
+
+    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+    base_context['user_form'] = user_form
+
+    if user.participant:
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user)
+        base_context['participant_form'] = participant_form
+
+    if req.method == 'POST':
+        if user.id != req.user.gotouser.id:
+            return HttpResponseForbidden()
+        # user_form = UserEditForm(req.POST, req.FILES or None, instance=user)
+        #
+        # if user.participant:
+        #     participant_form = ParticipantEditForm(req.POST, req.FILES or None, instance=user)
+
+        if user_form.is_valid():
+            # print(req.FILES['profile_picture'])
+            # user.profile_picture = req.FILES['profile_picture']
+            # user.save()
+            # print(user.profile_picture)
+            user_form.save()
+            if user.participant:
+                if participant_form.is_valid():
+                    participant_form.save()
+        return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+
+
+
     try:
         if user.participant:
+            if req.user.pk == user.pk:
+                if not user.participant.profile_completed():
+                    messages.error(req, 'Профиль не заполнен до конца!')
+                if user.participant.current_age() and user.participant.current_age() < 18 and \
+                        len(user.participant.parent_phone_number) == 0:
+                    messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
+
             if req.user.has_perm('view_private_comment'):
                 base_context['private_comments'] = user.participant.comments.filter(is_private=True)
             else:
                 base_context['public_comments'] = user.participant.comments.filter(is_private=False)
     except user.DoesNotExist:
         pass
-    # acc should be typeB if account only has typeA and typeB subclasses
 
     return render(req, 'user/user_by_id.html', base_context)
 
@@ -310,3 +335,6 @@ def apply_solution(req, id):
 def view_solution(req, id):
     solution = get_object_or_404(Solution, pk=id)
     return render(req, 'solution/solution.html', {'solution': solution})
+
+def test_hackathon(req):
+    return render(req, 'hackathon_template.html')

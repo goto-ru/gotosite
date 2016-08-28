@@ -22,102 +22,27 @@
     <link rel="stylesheet" href="{% static 'css/lectoriy.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'css/hackathon.css' %}" type="text/css"/>
 
-    <div class="green-background">
-        <div class="container green-background">
-            <div class="row big-box">
-                <div class="col-md-7 white-background">
-                    <h3 class="orange-item">Хакатоны</h3>
-                    <p class="orange-item">Программа выстроена вокруг двух кейсов, которые позволяют
-                        на практике разобрать самые часто встречающиеся бизнес-задачи
-                        в области big data. Слушатели изучают алгоритмы и осваивают
-                        технологии на реальных данных, в реальных кластерах
-                        и в контексте бизнес-задач, актуальных здесь и сейчас. Программа выстроена вокруг двух кейсов,
-                        которые позволяют
-                        на практике разобрать самые часто встречающиеся бизнес-задачи
-                        в области big data. Слушатели изучают алгоритмы и осваивают
-                        технологии на реальных данных, в реальных кластерах
-                        и в контексте бизнес-задач, актуальных здесь и сейчас.</p>
-                </div>
+    <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
+    {% include 'events/event_information.html' with event=s.current_hackathon %}
 
-                <div class="col-md-1"></div>
-                <div class="col-md-4 white-background">
-                    <div class="feature orange-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr orange-item"></div>
-
-                    <div class="feature orange-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr orange-item"></div>
-
-                    <div class="feature green-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="black-hr green-item"></div>
-
-                    <div class="feature">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="">
-                            </div>
-
-                            <div class="col-md-8">
-                                <h5>ДЛИТЕЛЬНОСТЬ</h5>
-                                <p>3 месяца <br> 2 раза в неделю</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="row">
         <div class="col-md-6">
             <div class="description">
-                <a><h5>GoToHack Анализ данных</h5></a>
+                <h5><a>GoToHack Анализ данных</a></h5>
                 <p>26.09.2015</p>
-                <input class="header-btn-little header-btn" type="button"
-                       value="Принять учатсие">
+                <a class="header-btn-little header-btn" type="button">Подробнее</a>
             </div>
         </div>
         <div class="col-md-6 orange-background"></div>
         <div class="col-md-6 orange-background"></div>
         <div class="col-md-6">
             <div class="description">
-                <a><h5>GoToHack Анализ данных</h5></a>
+                <h5><a>GoToHack Анализ данных</a></h5>
                 <p>26.09.2015</p>
-                <input class="header-btn-little header-btn" type="button"
-                       value="Принять участие">
+                <a class="header-btn-little header-btn" type="button"
+                       >Подробнее</a>
             </div>
         </div>
     </div>

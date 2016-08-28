@@ -1,162 +1,330 @@
 {% extends 'base_site.html' %}
+{% load staticfiles %}
 {% block title %}
     GoTo
 {% endblock %}
 
 {% block container %}
-    <div class="container">
-        <div class="col-md-12">
-            <h1>{{ viewed_user.first_name }} {{ viewed_user.last_name }}
-                {% if viewed_user.id == user.id %}
-                    <a class="btn btn-default btn-lg"
-                       href="{% url 'profile_edit' %}">
-                    <span class="glyphicon glyphicon-pencil">
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="{% static 'js/taggle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+    <link href="{% static 'css/taggle.css' %}" rel="stylesheet">
 
-                    </span>
-                    </a>
-                {% endif %}
-            </h1>
-
-
-        </div>
-
-        <div class="col-md-3">
-            <img src="/media/{{ viewed_user.profile_picture }}" align="left" hspace="5" vspace="5" class="profile_img"
-                 alt="{{ viewed_user.first_name }} {{ viewed_user.last_name }}"/>
-        </div>
-        <div class="col-md-9">
-            <label>Пол:</label> {{ viewed_user.sex }} <br>
-            <label>Организация:</label> {{ viewed_user.organization }} <br>
-
-            {% if viewed_user.participant %}
-                <label>Город проживания:</label> {{ viewed_user.participant.city }} <br>
-                <label>Страна проживания:</label> {{ viewed_user.participant.citizenship }} <br>
-                <label>Языки и технологии:</label> {{ viewed_user.participant.programming_languages }} <br>
-                <label>Опыт в программировании:</label> {{ viewed_user.participant.experience }} <br>
-            {% endif %}
-            {% if viewed_user.expert %}
-                <label>Должность:</label> {{ viewed_user.expert.position }} <br>
-            {% endif %}
-            <b>О себе:</b> {{ viewed_user.about }}
-        </div>
-
-        <div class="col-md-9">
-            <h3>Контакты</h3>
-            <p><b>Email:</b> <a href="mailto:{{ viewed_user.email }}">{{ viewed_user.email }}</a></p>
-            {% if viewed_user.vk %}
-                <p><b>VK:</b> <a href="{{ viewed_user.vk }}">{{ viewed_user.vk }}</a></p>
-            {% endif %}
-            {% if viewed_user.github %}
-                <p><b>Github:</b> <a href="{{ viewed_user.github }}">{{ viewed_user.github }}</a></p>
-            {% endif %}
-        </div>
-        {% if viewed_user.participant %}
-            {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
-                <div class="col-md-9">
-                    <h3>Личные данные</h3>
-                    <label>Полных лет:</label> {{ viewed_user.participant.current_age }} <br>
-                    <label>Дата рождения: </label> {{ viewed_user.participant.birthday }} <br>
-                    <label>Класс:</label> {{ viewed_user.participant.current_class }} <br>
-                    <label>Медецинские рекомендации:</label> {{ viewed_user.participant.health_issues }} <br>
-                    <label>Телефон:</label> {{ viewed_user.participant.phone_number }} <br>
-                    <label>Телефон родителей:</label> {{ viewed_user.participant.parent_phone_number }} <br>
-                </div>
-
-            {% endif %}
-            {% if viewed_user.participant %}
-                {% if viewed_user.id == user.id %}
-                    <div class="col-md-12">
-                        <h2>Статус заявок</h2>
-                        {% for ap in viewed_user.participant.application_set.all %}
-                            <div class="alert alert-{{ ap.class_status }}" role="alert">
-                                <b>Мероприятие:</b> {{ ap.event.name }} <br>
-                                <b>Статус заявки:</b> {{ ap.text_status }}
-                                <form action="{% url 'application' ap.id %}" class="buttons-right" method="post">
-                                    <a class="btn btn-default btn-sm" href="{% url 'application' ap.pk %}">Посмотреть
-                                        заявку</a>
-                                    {% if ap.status == 1 %}
-                                        <input type="submit" class="btn btn-default btn-sm" name="confirm"
-                                               value="Подтвердить">
-                                        <input type="submit" class="btn btn-default btn-sm" name="reject"
-                                               value="Отозвать заявку">
-                                    {% endif %}
-                                    {% csrf_token %}
-                                </form>
-
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="col-md-12">
-                    <h2>Проекты, сделанные этим участником</h2>
-                    <div class="container">
-                        {% if viewed_user.participant.projects.all|length > 0 %}
-                            {% for project in viewed_user.participant.projects.all %}
-                                <div class="alert alert-info" role="alert">
-
-                                    <a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a> <br>
-                                    {% if viewed_user.id == user.id %}
-                                        <div class="buttons-right">
-                                            <a class="btn btn-default btn-sm"
-                                               href="{% url 'project_edit' project.id %}">Реадктировать</a>
-                                            <a class="btn btn-default btn-sm"
-                                               href="{% url 'project_delete' project.id %}">Удалить</a>
-                                        </div>
-                                    {% endif %}
-                                    <b>Мероприятие:</b> {{ project.event }} <br>
-
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <p>Нет проектов, созданных этим участником</p>
-                        {% endif %}
-                        {% if viewed_user.id == user.id %}
-                            <a class="btn btn-default btn-lg"
-                               href="{% url 'project_create' %}">Добавить проект</a>
-
-                        {% endif %}
-                    </div>
-
-                </div>
-                <div class="col-md-12">
-                    <h2>Отзывы об участнике</h2>
-                    <div class="container">
-                        {% if public_comments|length > 0 %}
-                            {% for comment in public_comments %}
-                                <div class="col-md-4">
-                                    <p>
-                                        comment.text
-                                    </p>
-                                    <i>comment.author</i>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            Нет отзывов
-                        {% endif %}
+    <div class="whole">
+        <div style="background: none" class="container">
+            <div class="row">
+                <div class="profileedit col-md-12">
+                    <div class="inside">
+                        {% include 'user/edit.html' %}
+                        {#                        <iframe scrolling="no" style="overflow: hidden" id="kik" src="/profile/edit"></iframe>#}
                     </div>
                 </div>
-                {% if perms.goto.view_private_comment %}
-                    <div class="col-md-12">
-                        <h2>Приватные отзывы об участнике</h2>
-                        <div class="container">
-                            {% if public_comments|length > 0 %}
+                <div class=" col-md-3">
 
-                                {% for comment in public_comments %}
-                                    <div class="col-md-4">
-                                        <p>
-                                            comment.text
-                                        </p>
-                                        <i>comment.author</i>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                Нет приватных отзывов
-                            {% endif %}
+                    <div class="profil-base col-md-12">
+                        <div class="inside">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="/media/{{ viewed_user.profile_picture }}">
+                                        {% if viewed_user.id == user.id %}
+                                            <div onclick="edit()" class="edit">
+                                                Редактировать
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                {% endif %}
-            {% endif %}
+                    {% for ap in viewed_user.participant.application_set.all %}
 
-        {% endif %}
+                        <div class="col-md-12">
+                            <div class="inside school">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p class="school-project ">{{ ap.arrangement.event.name }}</p>
+                                            <p class="school-date">{{ ap.arrangement.dates }}</p>
+                                            <p class="{{ ap.class_status }}">{{ ap.text_status }}</p>
+                                            {% if ap.status == 1 %}
+                                                <a href="{% url 'application_change' ap.id "confirm" %}">Подтвердить
+                                                    участие</a>
+                                                <a href="{% url 'application_change' ap.id "reject" %}">Отозвать
+                                                    заявку</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+                <div class="col-md-9">
+                    <div class="profil-base col-md-12">
+                        <div class="inside">
+                            <div class="features row">
+
+                                <div style="margin-bottom: 20px;" class="col-md-12">
+                                    <div class="name">
+                                        <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
+                                        {% if viewed_user.participant %}
+                                            <h3>Участник</h3>
+                                        {% elif viewed_user.expert %}
+                                            <h3>Эксперт</h3>
+                                        {% endif %}
+
+                                        <div class="hr"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                {% if viewed_user.organization|length > 0 %}
+                                    <div class="col-md-4 leftal much">
+                                        <p>Организация:</p>
+                                    </div>
+                                    <div class="col-md-8 leftal much">
+                                        <p class="value">{{ viewed_user.organization }}</p>
+                                    </div>
+                                    <br>
+                                {% endif %}
+                                {% if viewed_user.participant %}
+                                    {% if viewed_user.participant.city|length > 0 %}
+                                        <div class="col-md-4 leftal much">
+                                            <p>Город проживания:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value">{{ viewed_user.participant.city }}</p>
+                                        </div>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+
+
+
+                                {% if viewed_user.participant %}
+                                    {% if viewed_user.participant.programming_languages|length %}
+                                        <div class="col-md-4 leftal much">
+                                            <p>Языки и технологии:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value">{{ viewed_user.participant.programming_languages }}</p>
+                                        </div>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+                                {% if viewed_user.participant %}
+                                    {% if viewed_user.participant.experience|length %}
+                                        <div class="col-md-4 leftal much">
+                                            <p>Опыт в программировании:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value"> {{ viewed_user.participant.experience }} </p>
+                                        </div>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if viewed_user.expert %}
+                                    {% if viewed_user.expert.position|length %}
+                                        <div class="col-md-4 leftal much">
+                                            <p>Должность:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value">{{ viewed_user.expert.position }}</p>
+                                        </div>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if viewed_user.about|length > 0 %}
+                                    <div class="col-md-4 leftal much">
+                                        <p>О себе:</p>
+                                    </div>
+                                    <div class="col-md-8 leftal much">
+                                        <p class="value">{{ viewed_user.about }}</p>
+                                    </div>
+                                    <br>
+                                {% endif %}
+                                {% if viewed_user.participant %}
+                                    {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
+                                        {% if viewed_user.expert.position|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Полных лет:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.expert.position }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+
+                                        {% if viewed_user.participant.birthday|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Дата рождения: </p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.birthday }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+
+                                        {% if viewed_user.participant.current_class|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Класс:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.current_class }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+
+                                        {% if viewed_user.participant.health_issues|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Медецинские рекомендации:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.health_issues }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+
+                                        {% if  viewed_user.participant.phone_number|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Телефон:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.phone_number }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+
+
+                                        {% if viewed_user.participant.parent_phone_number|length > 0 %}
+                                            <div class="col-md-4 leftal much">
+                                                <p>Телефон родителей:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.parent_phone_number }}</p>
+                                            </div>
+                                            <br>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="col-md-12">
+                                    <br>
+                                    <a onclick="took()" class="togmuch">Подробнее</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 profileedit project">
+                        <div class="inside row project">
+                            <div class="col-md-12 leftal"><input class="project-header" type="text"
+                                                                 placeholder="Хератень"></div>
+                            <div class="col-md-12 leftal">
+                                <div id="example4"></div>
+                            </div>
+                            <div class="col-md-12 leftal"><input class="project-maintainers" type="text"
+                                                                 placeholder="Github"></div>
+                            <div class="col-md-8 leftal">
+                                <textarea placeholder="Описание вашего замечательного проекта"
+                                          class="project-description"></textarea>
+                            </div>
+                            <div class="col-md-4 project-photo">
+
+                                <div class="project-image">
+                                    <input style="display: none" type="file" id="imgupload"/>
+                                    <img src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/upload-256.png">
+                                </div>
+                                <p>Курировал
+                                    <select>
+                                        <option>Бибилов Иван</option>
+                                    </select></p>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="project-add" value="Добавить проект" type="submit">
+                            </div>
+                        </div>
+                    </div>
+                    {% for project in viewed_user.participant.projects.all %}
+                        <div class="col-md-12 project">
+                            <div class="inside row project">
+                                <div class="col-md-12 leftal"><h3>{{ project.title }}
+                                    <a href="{{ project.link }}">
+                                        <img style="height: 30px; width: auto"
+                                             src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                                    </a>
+                                </h3></div>
+                                <div class="col-md-12 leftal">
+                                    <h5>
+                                        {% for m in project.maintainers.all %}
+                                            <a href="{% url 'user_detail' m.id %}">{{ m }}</a>
+                                        {% endfor %}
+                                    </h5>
+                                </div>
+                                {% if project.picture %}
+                                    <div class="col-md-8">
+                                        <p class="leftal">{{ project.description }}</p>1
+                                    </div>
+
+
+                                    <div class="col-md-4 project-photo">
+                                        <img src="{{ project.picture.url }}">
+
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-12">
+                                        <p class="leftal">{{ project.description }}</p>
+                                    </div>
+                                {% endif %}
+                                <div class="col-md-12">
+                                    {% if project.supervisor %}
+                                        <p class="rightal">Курировал <a
+                                                href="{% url 'user_detail' project.supervisor.id %}">{{ project.supervisor }}</a>
+                                        </p>
+                                    {% endif %}
+                                    {% if project.supervisor %}
+                                        <p class="rightal">Начато в рамках мероприятия "<a
+                                                href="{% url 'user_detail' project.supervisor.id %}">{{ project.arrangement.event }}"</a>
+                                        </p>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                    {% if perms.goto.view_private_comment %}
+                        {% if public_comments|length > 0 %}
+                            <div class="col-md-12 takeout">
+                                <div class="inside">
+
+
+                                    <h2>Отзывы об участнике</h2>
+
+                                    {% for comment in public_comments %}
+                                        <div class="col-md-4">
+                                            <p>
+                                                comment.text
+                                            </p>
+                                            <i>comment.author</i>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
     </div>
 {% endblock %}

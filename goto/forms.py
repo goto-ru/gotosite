@@ -8,12 +8,9 @@ class UserEditForm(forms.ModelForm):
         fields = [
             'last_name',
             'first_name',
-
             'surname',
             'organization',
-            'sex',
-            'vk',
-            'github',
+            'gender',
             'about',
             'profile_picture', ]
 
@@ -30,6 +27,7 @@ class ParticipantEditForm(forms.ModelForm):
                   'health_issues',
                   'programming_languages',
                   'experience']
+
 
 class ProjectEditForm(forms.ModelForm):
     class Meta:

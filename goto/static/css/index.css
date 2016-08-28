@@ -4,6 +4,10 @@
     -webkit-box-shadow: none;
 }
 
+.icon-bar {
+    background-color: white !important;
+}
+
 .navbar a {
     color: white !important;
 }
@@ -49,15 +53,12 @@
 
 .news {
     text-align: center;
-    margin-top: 5%;
 }
 
 .news input {
     color: rgb(66, 158, 132);
     border-color: rgb(66, 158, 132);
 }
-
-
 
 .features {
     background: url("/static/img/wallpaper.jpg");
@@ -102,8 +103,14 @@
     padding: 5%;
 }
 
+.vector-description p {
+    font-size: 16px;
+}
+
 .vector-description h3 {
     text-align: center;
+    font-size: 42px;
+    padding-bottom: 20px;
 }
 
 .row {
@@ -121,4 +128,35 @@
 
 h1, h2, h3, h4, h6 {
     text-align: center;
+}
+
+.header{
+    height: 100vh;
+    position: relative;
+}
+
+.white-hr{
+    height: 2px;
+    width: 100%;
+    background: white;
+}
+
+.white-text{
+    position: relative;
+    margin-top: -4vw;
+    width: 80vw;
+    background: white;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.white-text h1{
+    padding-top: 10vw;
+    font-size: 50px;
+    text-align: left;
+}
+
+.gotic-text{
+
 }

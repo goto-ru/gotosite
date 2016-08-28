@@ -1,0 +1,117 @@
+{% include 'events/event_information.html' with event=event %}
+
+<div class="header-head"><h2>Направления</h2></div>
+
+<div class="">
+    {% for d in event.departments.all %}
+        <div class="row">
+            {% if forloop.counter0|divisibleby:2 == 0 %}
+                <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+            {% endif %}
+            <div class="vector-description col-md-6">
+                <h3>{{ d.title }}</h3>
+
+                <p>{{ d.description }}</p>
+            </div>
+            {% if forloop.counter0|divisibleby:2 == 1 %}
+                <div style="background: url('{{ d.image.url }}')" class="vector-image col-md-6"></div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+
+<div class="colored">
+    <div class="container colored">
+        <div class="header-head"><h2 class="white">Что нужно сделать для участия?</h2></div>
+        <div class="row">
+            {#            {% for s in event. %}#}
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+
+            <div class="col-md-3 todo">
+                <img align="middle" src="/static/img/test-icon-white.png">
+                <h5 class="white">Получить договор</h5>
+                <p class="white">После того, как вы подали заявку вы получите договор.</p>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <input class="header-btn-big header-btn" type="button"
+                   value="Принять участие">
+        </div>
+    </div>
+</div>
+
+<!-- Преподаватели -->
+{#   FIXME: create a class?#}
+<div class="orange-background">
+    <div class="orange-background container">
+        <h1 class="white">Преподаватели</h1>
+        <div class="row">
+            {% for e in event.experts %}
+                <div class="chel col-md-6">
+                    <div class="staff row">
+
+                        <div class="staff-avatar col-md-4">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="{{ e.profile_picture.url }}">
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{{ e.first_name }} {{ e.last_name }}</h3>
+                            <p>{{ e.short_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Вопросы и ответы -->
+{% if event.faquestions.all|length > 0 %}
+    <div class="container questions">
+        <div class="header-head"><h2>Вопросы и ответы</h2></div>
+        {% for q in event.faquestions.all %}
+            <a><p onclick="$('#answer{{ forloop.counter0 }}').toggle()">
+                q.question
+            </p></a>
+            <span style="display: none;" id="answer{{ forloop.counter0 }}">
+            q.answer
+        </span>
+        {% endfor %}
+
+    </div>
+    <div class="clearfix whitespace"></div>
+{% endif %}
+
+<div style="margin-top: 0" class="container partners">
+    <div class="header-head"><h2>Партнёры</h2></div>
+    <div class="row">
+        {% for p in s.current_left_school.partners.all %}
+            <div class="col-md-2 partner">
+                <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
