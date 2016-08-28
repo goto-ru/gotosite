@@ -1,13 +1,12 @@
 .navbar {
     background: none;
     box-shadow: none;
-    -webkit-box-shadow: none;3
+    -webkit-box-shadow: none;
 }
 
 .icon-bar {
     background-color: white !important;
 }
-
 
 .navbar a {
     color: white !important;
@@ -16,6 +15,7 @@
 .cards {
     padding-bottom: 20%;
 }
+
 .card {
     position: relative;
     float: left;
@@ -97,6 +97,10 @@
 
 .vector-description {
     padding: 5%;
+}
+
+.vector-description p {
+    font-size: 16px;
 }
 
 .vector-description h3 {

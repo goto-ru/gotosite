@@ -367,3 +367,6 @@ def export(req):
         return response
     else:
         return render(req, 'export_fields.html', {'fields': r._meta.fields})
+
+def test_hackathon(req):
+    return render(req, 'hackathon_template.html')

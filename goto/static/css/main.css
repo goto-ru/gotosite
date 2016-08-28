@@ -2,6 +2,10 @@ html, body {
     overflow-x: hidden !important;
 }
 
+h1, h2, h3, h4, h5, h6, p, a, html, body {
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
 .profile_img {
     width: 200px;
 }
@@ -158,14 +162,14 @@ a {
     text-align: center;
 }
 
-.partners {
-    margin-top: 5%;
-}
-
 .partner img {
     max-height: 100px;
     max-width: 200px;
-    padding: 10px;
+    padding: 20px;
+}
+
+.partner-tbl {
+    margin: 0 auto;
 }
 
 .partner {
@@ -242,11 +246,12 @@ a {
 
 /*# sourceMappingURL=main.css.map */
 
-.firefox-fix{
-  min-height: 100px;
+.firefox-fix {
+    min-height: 100px;
 }
-.firefox-fix-little{
-  min-height: 40px;
+
+.firefox-fix-little {
+    min-height: 40px;
 }
 
 .mobile-sheet {
@@ -258,4 +263,78 @@ a {
     bottom: 0;
     padding: 25px;
     background-color: #152136;
+}
+
+.email {
+    -webkit-box-shadow: None !important;
+    box-shadow: None !important;
+}
+
+.modal-footer {
+    margin-top: 0;
+}
+
+.article img {
+    max-width: 300px;
+    max-height: 150px;
+}
+
+.article table {
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+}
+
+.header-head {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.yellow-background {
+    background: #F3ED70;
+}
+
+a {
+    color: unset !important;
+}
+
+a:hover {
+    color: rgb(67, 180, 152) !important;
+    text-decoration: none !important;
+}
+
+p {
+    line-height: 1.2 !important;
+}
+
+.inside-information {
+    height: 100%;
+    padding: 10px;
+}
+
+.staff {
+    margin: 3%;
+    background: white;
+    position: relative;
+    min-height: 150px;
+}
+
+.staff img {
+    width: 150px;
+    height: 150px;
+}
+.staff-avatar table{
+    height: 100%;
+}
+.staff-avatar td{
+    vertical-align: middle;
+}
+
+.staff h3 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.reversed-link:hover {
+    color: #3e3e3e !important;
 }

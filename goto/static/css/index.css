@@ -53,7 +53,6 @@
 
 .news {
     text-align: center;
-    margin-top: 5%;
 }
 
 .news input {
@@ -129,4 +128,40 @@
 
 h1, h2, h3, h4, h6 {
     text-align: center;
+}
+
+.header {
+    height: 100vh;
+    position: relative;
+}
+
+.white-hr {
+    height: 2px;
+    width: 100%;
+    background: white;
+}
+
+.white-text {
+    position: relative;
+    margin-top: -4vw;
+    width: 80vw;
+    background: white;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.white-text h1 {
+    padding-top: 10vw;
+    font-size: 50px;
+    text-align: left;
+}
+
+.socials {
+    position: absolute;
+    right: 10px;
+    top: 40vh;
+    margin-top: -0.75rem;
+    margin-right: 0.1rem;
+    z-index: 3;
 }

@@ -19,55 +19,54 @@
 
 {% block container %}
     {% load staticfiles %}
+    {% include 'helpers/map.html' %}
     <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
     <link href="{% static 'css/schools.css' %}" rel="stylesheet">
     <script type="text/javascript" src="{% static 'js/camp.js' %}"></script>
+    {% if s.current_right_school.name %}
+        <div class="whitespace"></div>
+        <!-- Карточки -->
 
-    <div class="whitespace"></div>
-    <!-- Карточки -->
-    <div class="container cards">
-        <div class="row">
+        <div class="container cards">
+            <div class="row">
 
-            <div class="col-md-6">
-                <div onclick="load_orange()" class="card effect__hover">
-                    <div class="card__front green-background">
-                        <div class="card__text">
-                            <p class="card-title">{{ s.current_left_school.name }}</p>
-                            <p class="card-time">{{ s.current_left_school.short_description }}</p>
+                <div class="col-md-6">
+                    <div onclick="load_orange()" class="card effect__hover">
+                        <div class="card__front green-background">
+                            <div class="card__text">
+                                <p class="card-title">{{ s.current_left_school.name }}</p>
+                                <p class="card-time">{{ s.current_left_school.short_description }}</p>
+                            </div>
+                        </div>
+                        <div class="card__back green-background">
+                            <div class="card__text">
+                                <p class="card-title">{{ s.current_left_school.name }}</p>
+                                <p class="card-time">Подробнее</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="card__back green-background">
-                        <div class="card__text">
-                            <p class="card-title">{{ s.current_left_school.name }}</p>
-                            <p class="card-time">Подробнее</p>
+                </div>
+
+                <div class="col-md-6">
+                    <div onclick="load_green()" class="card effect__hover">
+                        <div class="card__front orange-background">
+                            <div class="card__text">
+                                <p class="card-title">{{ s.current_right_school.name }}</p>
+                                <p class="card-time">{{ s.current_right_school.short_description }}</p>
+                            </div>
+                        </div>
+                        <div class="card__back orange-background">
+                            <div class="card__text">
+                                <p class="card-title">{{ s.current_right_school.name }}</p>
+                                <p class="card-time">Подробнее</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6">
-                <div onclick="load_green()" class="card effect__hover">
-                    <div class="card__front orange-background">
-                        <div class="card__text">
-                            <p class="card-title">{{ s.current_right_school.name }}</p>
-                            <p class="card-time">{{ s.current_right_school.short_description }}</p>
-                        </div>
-                    </div>
-                    <div class="card__back orange-background">
-                        <div class="card__text">
-                            <p class="card-title">{{ s.current_right_school.name }}</p>
-                            <p class="card-time">Подробнее</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
-
-    </div>
-    <div class="clearfix whitespace"></div>
-
+        <div class="clearfix whitespace"></div>
+    {% endif %}
 
     <!-- Фичи -->
     <div class="green-item">
@@ -76,9 +75,10 @@
     <div class="orange-item">
         {% include 'events/event_partitial.html' with event=s.current_right_school %}
     </div>
-    <div style="background: whitesmoke">
-        <div style="background: whitesmoke;" class="container">
-            <h2>Прошедшие школы</h2>
+
+    <div>
+        <div class="container">
+            <div class="header-head"><h2>Прошедшие школы</h2></div>
             {% for ar in archive %}
                 <div style="margin-top: 2%" class="col-md-4">
                     <div class="school-card school">
@@ -92,6 +92,8 @@
                             Место проведения: {{ ar.event.place }}
                         </p>
                         <div style="text-align: center">
+                            <input onclick="document.location={% url 'event_detail' ar.event_id %};"
+                                   class="header-btn-little header-btn" type="button"
                             <input onclick="document.location={% url 'event_detail' ar.event.slug %};" class="header-btn-little header-btn" type="button"
                                    value="Подробнее">
                         </div>
@@ -99,14 +101,12 @@
 
                 </div>
             {% endfor %}
-
-            <div style="text-align: center" class="col-md-12">
-                <input class="header-btn-big header-btn smoke" type="button"
-                       value="Просмотреть все">
-            </div>
+            {% if  archive|length > 3 %}
+                <div style="text-align: center" class="col-md-12">
+                    <input class="header-btn-big header-btn smoke" type="button"
+                           value="Просмотреть все">
+                </div>
+            {% endif %}
         </div>
     </div>
-    <div class="clearfix whitespace"></div>
-
-
 {% endblock %}

@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
     url(r'^schools/$', views.schools, name='schools'),
     url(r'^hackathons/$', views.hackathons, name='hackathons'),
+    url(r'^test/$', views.test_hackathon, name='test'),
     url(r'^lectures/$', views.lectures, name='lectures'),
 
     url(r'^archive/$', views.archive, name='archive_events'),

@@ -1,0 +1,8 @@
+td {
+    padding: 10px;
+}
+
+.article img {
+    max-width: 500px !important;
+    max-height: 350px !important;
+}

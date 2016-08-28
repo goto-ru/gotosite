@@ -1,0 +1,222 @@
+{% extends 'base_site.html' %}
+{% load staticfiles %}
+{% block title %}
+    GoTo Хакатон
+{% endblock %}
+
+
+{% block container %}
+    <link rel="stylesheet" href="{% static 'css/hackathon_template.css' %}" type="text/css"/>
+    <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
+    <script src="{% static 'js/hackathon_template.js' %}"></script>
+    <script src="http://underscorejs.org/underscore.js"></script>
+
+    <div class="hackathon-header">
+        <img id="up" src="{% static 'img/hackathon/down.png' %}">
+        <div class="hackathon-header-text">
+            <table>
+                <tr>
+                    <td>
+                        <img id="logo" src="{% static 'img/hackathon/logo.png' %}">
+                    </td>
+                    <td>
+                        <div id="text-near-logo">
+                            <h3>Data Science</h3>
+                            <h3>Октябрь 2016</h3>
+                            <h3>Москва</h3>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <img id="down" src="{% static 'img/hackathon/down.png' %}">
+    </div>
+    {% include 'events/event_information.html' with event=s.current_hackathon %}
+
+    <div class="orange-background">
+        <div class="container orange-background">
+            <div class="header-head"><h3 class="give-me">Что ждёт участников?</h3></div>
+            <div class="row">
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/3ls.png">
+                    <p>Лекции и воркшопы</p>
+                </div>
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/9ls.png">
+                    <p>Единомышленники
+                        и новые идеи</p>
+                </div>
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/1ls.png">
+                    <p>Вкусная еда и
+                        печеньки</p>
+                </div>
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/2ls.png">
+                    <p>Презентации
+                        проектов</p>
+                </div>
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/4ls.png">
+                    <p>Призы и
+                        сувениры</p>
+                </div>
+                <div class="col-md-2 feature-get">
+                    <img src="http://goto.msk.ru/hackathon/images/5ls.png">
+                    <p>Эмоции и
+                        позитив</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header-head"><h3 style="color: #717171" class="give-me">Участие в хакатоне</h3></div>
+        <div class="col-md-3 feature-get-black">
+            <img src="http://goto.msk.ru/hackathon/images/1.png">
+            <p>Школьник или студент <br> 15-18 лет</p>
+        </div>
+        <div class="col-md-3 feature-get-black">
+            <img src="http://goto.msk.ru/hackathon/images/2.png">
+            <p>Умение программировать <br> хотя бы на одном языке</p>
+        </div>
+        <div class="col-md-3 feature-get-black">
+            <img src="http://goto.msk.ru/hackathon/images/3.png">
+            <p>Базовые знания алгоритмов и структур данных</p>
+        </div>
+        <div class="col-md-3 feature-get-black">
+            <img src="http://goto.msk.ru/hackathon/images/4.png">
+            <p>Представление о <br> базах данных</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="help">
+            <img src="http://goto.msk.ru/hackathon/images/download.png">
+            <h2 style="text-align: left;">Подготовка</h2>
+            <p>Все, кто не уверен в своем уровне подготовки, могут ознакомиться с подготовленными
+                для вас материалами. Для всех желающих в начале февраля будет проведена консультация.</p>
+        </div>
+    </div>
+
+    <div class="timesheet">
+        <div class="header-head">
+            <h3 style="color: #717171;" class="give-me">Программа хакатона</h3>
+        </div>
+        <div class="grey-dot"></div>
+        <div class="line-first"></div>
+        <div class="line-fix"></div>
+        <div class="line"></div>
+
+        <her>
+            <div class="time-grid right left-pad">
+                <div class="left timegrid-message grey-colored">
+                    <h3>Суббота</h3>
+                    <p>Официальное открытие<br>
+                        Открытые лекции<br>
+                        3 воркшопа для участников<br>
+                        Знакомство<br>
+                        Формирование команд</p>
+                </div>
+            </div>
+            <div class="space">
+                <div class="dot"></div>
+            </div>
+        </her>
+        <her>
+            <div class="time-grid left right-pad">
+                <div class="right timegrid-message grey-colored">
+                    <h3>Суббота</h3>
+                    <p>Официальное открытие<br>
+                        Открытые лекции<br>
+                        Знакомство<br>
+                        Формирование команд</p>
+                </div>
+            </div>
+            <div class="space">
+                <div class="dot"></div>
+            </div>
+        </her>
+        <her>
+            <div class="time-grid right left-pad">
+                <div class="left timegrid-message grey-colored">
+                    <h3>Суббота</h3>
+                    <p>Официальное открытие<br>
+                        Открытые лекции<br>
+                        3 воркшопа для участников<br>
+                        Знакомство<br>
+                        Формирование команд</p>
+                </div>
+            </div>
+            <div class="space">
+                <div class="dot"></div>
+            </div>
+        </her>
+
+        <div class="clearfix"></div>
+        <div class="line-second"></div>
+        <div class="line-second-fix"></div>
+        <div class="grey-dot"></div>
+    </div>
+
+    <div class="yellow-background">
+        <div class="container yellow-background">
+            <div class="header-head">
+                <h3 style="color: #717171;" class="give-me">Что в итоге?</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="inside white-background">
+                        <h4>Сертификат участника</h4>
+                        <p>Каждый участник хакатона получит именной сертификат и сувениры от партнеров и организаторов
+                            по
+                            итогам мероприятия.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="inside white-background">
+                        <h4>Номинации от партнеров</h4>
+                        <p>Партнеры хакатона наградят команду-победителя номинации компании призами, номинации будут
+                            объявлены позже. Команда, выигравшая хакатон, получит призы от организаторов.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="inside white-background">
+                        <h4>Публикация исследования</h4>
+                        <p>Результаты хакатона и работы экспертов будут опубликованы как исследование в рамках
+                            спецпроекта с
+                            T&P и не только.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="modal-footer">
+        <div class="footer">
+            <div style="padding-top: 5px; padding-bottom: 6px;">
+                <div class="container">
+                    <div class="col-md-6 bot-text">
+                        <img src="{% static 'img/logo.png' %}">
+
+                        <p>Образовательный проект, посвященный проектной деятельности в различных
+                            высокотехнологических областях. Использование визуальных материалов только с согласия
+                            создателей проекта. Все права защищены.</p>
+
+                    </div>
+                    <div class="col-md-6 contacts">
+                        <h5>Контакты</h5>
+                        +7 (985) 2443226<br>
+                        <a class="footer-mail" href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

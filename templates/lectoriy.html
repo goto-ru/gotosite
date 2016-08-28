@@ -21,49 +21,57 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/lectoriy.css' %}" type="text/css"/>
 
-    <div style="background: whitesmoke">
-        {% if upcoming_lectures|length > 0 %}
-            <div style="background: whitesmoke;" class="container">
-            {% for l in upcoming_lectures %}
-                <div style="margin-top: 2%" class="col-md-12 top-fix school-card container">
-                <div class="row">
-                    <div style="background: url('{{ l.main_image.url }}')" class="col-md-4 green-background">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="school">
-                            <h6>{{ l.name }}</h6>
-                            <p class="desc-school">{{ l.full_description }}</p>
-                            <p style="float: left" class="desc-shool"><a>{{ l.place }}</a></p>
-                            <p style="float: right" class="desc-shool">
-                                <a class="header-btn-little header-btn" type="button">Принять участие</a>
-                            </p>
-                        </div>
-                    </div>
+    <div>
+    {% if upcoming_lectures|length > 0 %}
+        <div class="container">
+        {% for l in upcoming_lectures %}
+            <div style="margin-top: 2%" class="col-md-12 top-fix school-card container">
+            <div class="row">
+                <div class="col-md-4">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="{{ l.main_image.url }}">
+                            </td>
+                        </tr>
+                    </table>
 
                 </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% for l in archive_lectures %}
-            <div class="col-md-4 top-fix">
-                <div class="col-md-12 school-card">
+                <div class="col-md-8">
                     <div class="school">
-                        <img src="{{ l.main_image.url }}">
                         <h6>{{ l.name }}</h6>
-                        <p class="desc-school">
-                            {{ l.short_description }}
+                        <p class="desc-school">{{ l.full_description }}</p>
+                        <p style="float: left" class="desc-shool"><a>{{ l.place }}</a></p>
+                        <p style="float: right" class="desc-shool">
+                            <a class="header-btn-little header-btn" type="button">Принять участие</a>
                         </p>
-                        <br>
-                        <p style="float: right;" class="desc-school">{{ l.begin_date }}</p>
-                        <p style="float: left;" class="desc-school"> Лекция состоялась</p>
                     </div>
                 </div>
             </div>
         {% endfor %}
-
+    </div>
+    {% endif %}
+</div>
+    <div class="container white-background">
+        <div class="row white-background">
+            {% for l in archive_lectures %}
+                <div class="col-md-6 top-fix">
+                    <div class="col-md-12 school-card">
+                        <div class="school">
+                            <img src="{{ l.main_image.url }}">
+                            <h6>{{ l.name }}</h6>
+                            <p class="desc-school">
+                                {{ l.short_description }}
+                            </p>
+                            <br>
+                            <p style="float: right;" class="desc-school">{{ l.begin_date }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    <div class="clearfix whitespace"></div>
+
 
     <div class="container subscribe">
         <p>Предложите тему следующей лекции</p>
