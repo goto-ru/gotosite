@@ -21,9 +21,9 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/lectoriy.css' %}" type="text/css"/>
 
-    <div style="background: whitesmoke">
+    <div>
     {% if upcoming_lectures|length > 0 %}
-        <div style="background: whitesmoke;" class="container">
+        <div class="container">
         {% for l in upcoming_lectures %}
             <div style="margin-top: 2%" class="col-md-12 top-fix school-card container">
             <div class="row">
