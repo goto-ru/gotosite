@@ -1,11 +1,18 @@
 {% extends 'base_site.html' %}
+{% load staticfiles %}
 {% block title %}
     GoTo
 {% endblock %}
 {% block header %}
     <div class="header">
         {% include 'navigation.html' %}
-
+        <div class="socials">
+            <a href="https://www.facebook.com/pages/GoTo-Camp/1517446851839524"><img width="22"
+                                                                                     src="{% static 'img/socials/fb.png' %}"></a><br><br>
+            <a href="https://vk.com/goto_msk"><img width="22" src="{% static 'img/socials/vk.png' %}"></a><br><br>
+            <a href="http://instagram.com/goto_goto_goto"><img width="25" src="{% static 'img/socials/in.png' %}"></a><br><br>
+            <a href="https://twitter.com/goto_camp"><img width="29" src="{% static 'img/socials/tw.png' %}"></a><br><br>
+        </div>
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
                 <p>GoTo<br>образовательные программы</p>
@@ -16,7 +23,6 @@
 {% endblock %}
 
 {% block container %}
-    {% load staticfiles %}
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
     <div class="orange-item">
         <div class="row">
@@ -34,7 +40,8 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link"
+                                                                                            href="">Принять участие</a>
                 </p>
             </div>
 
@@ -56,7 +63,8 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link"
+                                                                                            href="">Принять участие</a>
                 </p>
 
             </div>
@@ -76,7 +84,8 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link" href="">Принять участие</a>
+                <p style="text-align: right; font-size: 18px; color: rgb(67, 180, 152);"><a class="reversed-link"
+                                                                                            href="">Принять участие</a>
                 </p>
 
             </div>
@@ -97,7 +106,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <h6><a  href="{{ article.url }}">{{ article.title }}</a></h6></a>
+                        <h6><a href="{{ article.url }}">{{ article.title }}</a></h6></a>
                     <p>{{ article.description }}</p>
                 </div>
             {% endfor %}
