@@ -305,3 +305,27 @@ h2 {
     font-weight: 600;
     font-size: 16px;
 }
+
+.inside-information h3 {
+    text-align: center;
+}
+
+.header-btn {
+    border-radius: 0;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    max-width: 200px;
+    font-size: 18px;
+    padding: 0.6%;
+    border: 2px solid white;
+    margin-bottom: 5%;
+}
+
+.header-btn-little {
+    padding: 10px 15px;
+    margin-top: 3%;
+    max-width: 140px;
+    font-size: 14px;
+    border-color: rgb(207, 207, 207);
+    color: rgb(64, 64, 64);
+}

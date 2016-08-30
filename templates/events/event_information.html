@@ -17,9 +17,10 @@
                     <div class="">
                         <div class="feature ">
                             <div class="row">
-                                <div class="col-md-4">
-
-                                    <img class='doticon' src="{% static 'img/who.png' %}">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;'"><img src="{% static 'img/who.png' %}"></td>
+                                    </table>
                                 </div>
                                 <div class="col-md-8">
                                     <h5>Для кого?</h5>
@@ -31,8 +32,11 @@
 
                         <div class="feature">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img class='doticon' src="{% static 'img/how_much.png' %}">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/how_much.png' %}">
+                                        </td>
+                                    </table>
                                 </div>
 
                                 <div class="col-md-8">
@@ -45,8 +49,10 @@
 
                         <div class="feature">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img class='doticon' src="{% static 'img/when.png' %}">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/when.png' %}"></td>
+                                    </table>
                                 </div>
 
                                 <div class="col-md-8">
@@ -61,8 +67,10 @@
                         </div>
                         <div class="feature">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img class='doticon' src="{% static 'img/where.png' %}">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/where.png' %}"></td>
+                                    </table>
                                 </div>
 
                                 <div class="col-md-8">
@@ -76,7 +84,8 @@
                     </div>
                     <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
                         {% if request.user.is_authenticated %}
-                            <a href="{% url 'event_detail' event.slug  %}" class="take-part header-btn-little header-btn">Принять участие</a>
+                            <a href="{% url 'event_detail' event.slug %}"
+                               class="take-part header-btn-little header-btn">Принять участие</a>
                         {% else %}
                             <a href="{% url 'sign_in' %}" class="take-part header-btn-little header-btn">Принять
                                 участие</a>
