@@ -63,7 +63,7 @@ class EventAdmin(ModelAdmin):
 @admin.register(Arrangement)
 class ArrangementAdmin(ModelAdmin):
     model = Arrangement
-    inlines = [ExpertInline, DayInline]
+    inlines = [ExpertInline]
 
 
 class BlockEntityAdmin(TabularInline):
@@ -73,7 +73,7 @@ class BlockEntityAdmin(TabularInline):
 @admin.register(Block)
 class BlockAdmin(ModelAdmin):
     model = Block
-    inlines = [BlockEntityAdmin]
+    inlines = [BlockEntityAdmin, DayInline]
 
 
 

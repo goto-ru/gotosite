@@ -42,6 +42,7 @@
     {% for block in event.blocks.all     %}
         {% include "block_views/"|add:block.design|add:".html" %}
     {% endfor %}
+
     <div class="container">
         <div class="help">
             <img src="http://goto.msk.ru/hackathon/images/download.png">
@@ -51,65 +52,7 @@
         </div>
     </div>
 
-    <div class="timesheet">
-        <div class="header-head">
-            <h3 style="color: #717171;" class="give-me">Программа хакатона</h3>
-        </div>
-        <div class="grey-dot"></div>
-        <div class="line-first"></div>
-        <div class="line-fix"></div>
-        <div class="line"></div>
 
-        <her>
-            <div class="time-grid right left-pad">
-                <div class="left timegrid-message grey-colored">
-                    <h3>Суббота</h3>
-                    <p>Официальное открытие<br>
-                        Открытые лекции<br>
-                        3 воркшопа для участников<br>
-                        Знакомство<br>
-                        Формирование команд</p>
-                </div>
-            </div>
-            <div class="space">
-                <div class="dot"></div>
-            </div>
-        </her>
-        <her>
-            <div class="time-grid left right-pad">
-                <div class="right timegrid-message grey-colored">
-                    <h3>Суббота</h3>
-                    <p>Официальное открытие<br>
-                        Открытые лекции<br>
-                        Знакомство<br>
-                        Формирование команд</p>
-                </div>
-            </div>
-            <div class="space">
-                <div class="dot"></div>
-            </div>
-        </her>
-        <her>
-            <div class="time-grid right left-pad">
-                <div class="left timegrid-message grey-colored">
-                    <h3>Суббота</h3>
-                    <p>Официальное открытие<br>
-                        Открытые лекции<br>
-                        3 воркшопа для участников<br>
-                        Знакомство<br>
-                        Формирование команд</p>
-                </div>
-            </div>
-            <div class="space">
-                <div class="dot"></div>
-            </div>
-        </her>
-
-        <div class="clearfix"></div>
-        <div class="line-second"></div>
-        <div class="line-second-fix"></div>
-        <div class="grey-dot"></div>
-    </div>
 
     <div class="yellow-background">
         <div class="container yellow-background">

@@ -174,6 +174,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+    def single_arrangement(self):
+        if self.arrangements.count()!=1:
+            return None
+        else:
+            return self.arrangements.get()
+
 
     class Meta:
         verbose_name_plural = 'Events'
@@ -183,7 +189,8 @@ class Block(models.Model):
     DESIGNS = [('prizes', 'Призы'),
                ('result', 'Итоги'),
                ('requirements', 'Требования'),
-               ('expectations', 'Ожидания')]
+               ('expectations', 'Ожидания'),
+               ('timesheet', 'Расписание')]
     event = models.ForeignKey(Event, related_name='blocks')
     title = models.CharField(max_length=240)
     admin_title = models.CharField(max_length=240)
@@ -395,12 +402,13 @@ class Step(models.Model):
 
 
 class Day(models.Model):
-    arrangement = models.ForeignKey(Arrangement, related_name='days')
-    date = models.DateTimeField()
+    block = models.ForeignKey(Block, related_name='days')
+    date = models.DateField()
     content = models.TextField()
+    days = ['Понедельник', 'Вторник', "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
 
     def verbous_title(self):
-        return date.weekday()
+        return self.days[self.date.weekday()]
 
 
 class MassMediaArticle(models.Model):
