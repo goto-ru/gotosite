@@ -3,6 +3,8 @@ function include(arr, obj) {
 }
 
 $(document).ready(function () {
+    // Fucking firefox fix
+    $('#logo').css('max-height',$('#text-near-logo').css('height'));
     var a = 0;
     $('.grey-colored').each(function () {
         a += 1;
