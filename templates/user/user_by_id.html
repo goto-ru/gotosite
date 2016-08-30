@@ -213,24 +213,26 @@
                                         {% endif %}
 
                                         {% if  viewed_user.participant.phone_number|length > 0 %}
-                                            <div class="col-md-4 leftal much">
-                                                <p>Телефон:</p>
+                                            <div class="row">
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Телефон:</p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.participant.phone_number }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8 leftal much">
-                                                <p class="value">{{ viewed_user.participant.phone_number }}</p>
-                                            </div>
-                                            <br>
                                         {% endif %}
 
 
                                         {% if viewed_user.participant.parent_phone_number|length > 0 %}
-                                            <div class="col-md-4 leftal much">
-                                                <p>Телефон родителей:</p>
+                                            <div class="row">
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Телефон родителей:</p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.participant.parent_phone_number }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8 leftal much">
-                                                <p class="value">{{ viewed_user.participant.parent_phone_number }}</p>
-                                            </div>
-                                            <br>
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}

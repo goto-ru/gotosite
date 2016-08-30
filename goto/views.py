@@ -261,7 +261,7 @@ def user_by_id(req, id):
     base_context['user_form'] = user_form
 
     if user.participant:
-        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user)
+        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
         base_context['participant_form'] = participant_form
 
     if req.method == 'POST':
