@@ -86,6 +86,14 @@
                                 </div>
 
                                 <br>
+                                <div class="row">
+                                    <div class="col-md-4 leftal much">
+                                        <p>Email:</p>
+                                    </div>
+                                    <div class="col-md-8 leftal much">
+                                        <p class="value">{{ viewed_user.email }}</p>
+                                    </div>
+                                </div>
                                 {% if viewed_user.organization|length > 0 %}
                                     <div class="row">
                                         <div class="col-md-4 leftal much">
@@ -168,26 +176,25 @@
                                 {% endif %}
                                 {% if viewed_user.participant %}
                                     {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
-                                        {% if viewed_user.participant.birthday|length > 0 %}
-                                            <div class="row">
 
-                                                <div class="col-md-4 leftal much">
-                                                    <p>Полных лет:</p>
-                                                </div>
-                                                <div class="col-md-8 leftal much">
-                                                    <p class="value">{{ viewed_user.expert.position }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
+                                        <div class="row">
 
-                                                <div class="col-md-4 leftal much">
-                                                    <p>Дата рождения: </p>
-                                                </div>
-                                                <div class="col-md-8 leftal much">
-                                                    <p class="value">{{ viewed_user.participant.birthday }}</p>
-                                                </div>
+                                            <div class="col-md-4 leftal much">
+                                                <p>Полных лет:</p>
                                             </div>
-                                        {% endif %}
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.current_age }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-4 leftal much">
+                                                <p>Дата рождения: </p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.birthday }}</p>
+                                            </div>
+                                        </div>
 
                                         {% if viewed_user.participant.current_class|length > 0 %}
                                             <div class="row">

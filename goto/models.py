@@ -64,7 +64,6 @@ class Participant(GotoUser):
     def profile_completed(self):
         ret = self.graduation_year is not None
         ret &= self.birthday is not None
-        ret &= len(self.citizenship) > 0
         ret &= len(self.city) > 0
         ret &= len(self.phone_number) > 0
         ret &= len(self.programming_languages) > 0
