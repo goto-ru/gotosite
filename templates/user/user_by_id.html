@@ -69,37 +69,45 @@
                         <div class="inside">
                             <div class="features row">
 
-                                <div style="margin-bottom: 20px;" class="col-md-12">
-                                    <div class="name">
-                                        <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
-                                        {% if viewed_user.participant %}
-                                            <h3>Участник</h3>
-                                        {% elif viewed_user.expert %}
-                                            <h3>Эксперт</h3>
-                                        {% endif %}
+                                <div class="row">
 
-                                        <div class="hr"></div>
+                                    <div style="margin-bottom: 20px;" class="col-md-12">
+                                        <div class="name">
+                                            <h2>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</h2>
+                                            {% if viewed_user.participant %}
+                                                <h3>Участник</h3>
+                                            {% elif viewed_user.expert %}
+                                                <h3>Эксперт</h3>
+                                            {% endif %}
+
+                                            <div class="hr"></div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <br>
                                 {% if viewed_user.organization|length > 0 %}
-                                    <div class="col-md-4 leftal much">
-                                        <p>Организация:</p>
+                                    <div class="row">
+                                        <div class="col-md-4 leftal much">
+                                            <p>Организация:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value">{{ viewed_user.organization }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-8 leftal much">
-                                        <p class="value">{{ viewed_user.organization }}</p>
-                                    </div>
-                                    <br>
+
+
                                 {% endif %}
                                 {% if viewed_user.participant %}
                                     {% if viewed_user.participant.city|length > 0 %}
-                                        <div class="col-md-4 leftal much">
-                                            <p>Город проживания:</p>
+                                        <div class="row">
+                                            <div class="col-md-4 leftal much">
+                                                <p>Город проживания:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.city }}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-8 leftal much">
-                                            <p class="value">{{ viewed_user.participant.city }}</p>
-                                        </div>
-                                        <br>
                                     {% endif %}
                                 {% endif %}
 
@@ -107,71 +115,82 @@
 
                                 {% if viewed_user.participant %}
                                     {% if viewed_user.participant.programming_languages|length %}
-                                        <div class="col-md-4 leftal much">
-                                            <p>Языки и технологии:</p>
+                                        <div class="row">
+
+                                            <div class="col-md-4 leftal much">
+                                                <p>Языки и технологии:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value">{{ viewed_user.participant.programming_languages }}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-8 leftal much">
-                                            <p class="value">{{ viewed_user.participant.programming_languages }}</p>
-                                        </div>
-                                        <br>
+
                                     {% endif %}
                                 {% endif %}
                                 {% if viewed_user.participant %}
                                     {% if viewed_user.participant.experience|length %}
-                                        <div class="col-md-4 leftal much">
-                                            <p>Опыт в программировании:</p>
+                                        <div class="row">
+                                            <div class="col-md-4 leftal much">
+                                                <p>Опыт в программировании:</p>
+                                            </div>
+                                            <div class="col-md-8 leftal much">
+                                                <p class="value"> {{ viewed_user.participant.experience }} </p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-8 leftal much">
-                                            <p class="value"> {{ viewed_user.participant.experience }} </p>
-                                        </div>
-                                        <br>
+
                                     {% endif %}
                                 {% endif %}
 
                                 {% if viewed_user.expert %}
                                     {% if viewed_user.expert.position|length %}
-                                        <div class="col-md-4 leftal much">
-                                            <p>Должность:</p>
-                                        </div>
-                                        <div class="col-md-8 leftal much">
-                                            <p class="value">{{ viewed_user.expert.position }}</p>
-                                        </div>
-                                        <br>
-                                    {% endif %}
-                                {% endif %}
+                                        <div class="row">
 
-                                {% if viewed_user.about|length > 0 %}
-                                    <div class="col-md-4 leftal much">
-                                        <p>О себе:</p>
-                                    </div>
-                                    <div class="col-md-8 leftal much">
-                                        <p class="value">{{ viewed_user.about }}</p>
-                                    </div>
-                                    <br>
-                                {% endif %}
-                                {% if viewed_user.participant %}
-                                    {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
-                                        {% if viewed_user.expert.position|length > 0 %}
                                             <div class="col-md-4 leftal much">
-                                                <p>Полных лет:</p>
+                                                <p>Должность:</p>
                                             </div>
                                             <div class="col-md-8 leftal much">
                                                 <p class="value">{{ viewed_user.expert.position }}</p>
                                             </div>
-                                            <br>
-                                        {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
 
+                                {% if viewed_user.about|length > 0 %}
+                                    <div class="row">
+
+                                        <div class="col-md-4 leftal much">
+                                            <p>О себе:</p>
+                                        </div>
+                                        <div class="col-md-8 leftal much">
+                                            <p class="value">{{ viewed_user.about }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if viewed_user.participant %}
+                                    {% if  viewed_user.id == user.id or perms.goto.view_personal_data %}
                                         {% if viewed_user.participant.birthday|length > 0 %}
-                                            <div class="col-md-4 leftal much">
-                                                <p>Дата рождения: </p>
+                                            <div class="row">
+
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Полных лет:</p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.expert.position }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8 leftal much">
-                                                <p class="value">{{ viewed_user.participant.birthday }}</p>
+                                            <div class="row">
+
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Дата рождения: </p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.participant.birthday }}</p>
+                                                </div>
                                             </div>
-                                            <br>
                                         {% endif %}
 
                                         {% if viewed_user.participant.current_class|length > 0 %}
+
                                             <div class="col-md-4 leftal much">
                                                 <p>Класс:</p>
                                             </div>
