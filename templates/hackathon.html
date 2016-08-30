@@ -25,26 +25,26 @@
     <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
     {% include 'events/event_information.html' with event=s.current_hackathon %}
 
+    {% for hack in archive %}
+        <div class="row">
+            {% if forloop.counter0|divisibleby:2 == 0 %}
+                <div class="col-md-6 orange-background"></div>
+            {% endif %}
+            <div class="col-md-6">
+                <div class="description">
+                    <h5><a>GoToHack Анализ данных</a></h5>
+                    <p>26.09.2015</p>
+                    <a class="header-btn-little header-btn" type="button">Подробнее</a>
+                </div>
+            </div>
+            {% if forloop.counter0|divisibleby:2 == 1 %}
+                <div class="col-md-6 orange-background"></div>
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
 
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="description">
-                <h5>GoToHack Анализ данных</h5>
-                <p>26.09.2015</p>
-                <a class="header-btn-little header-btn" type="button">Подробнее</a>
-            </div>
-        </div>
-        <div class="col-md-6 orange-background"></div>
-        <div class="col-md-6 orange-background"></div>
-        <div class="col-md-6">
-            <div class="description">
-                <h5>GoToHack Анализ данных</h5>
-                <p>26.09.2015</p>
-                <a class="header-btn-little header-btn" type="button"
-                       >Подробнее</a>
-            </div>
-        </div>
-    </div>
 
 {% endblock %}

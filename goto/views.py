@@ -48,7 +48,9 @@ def schools(req):
 
 def hackathons(req):
     s = Settings.objects.get()
-    return render(req, 'hackathon.html', {'s': s})
+    archive = Event.objects.filter(format='hackathon',arrangements__end_date__lt=datetime.date.today())\
+        .order_by('-arrangements__end_date')
+    return render(req, 'hackathon.html', {'s': s, 'archive': archive})
 
 
 def lectures(req):
@@ -260,9 +262,24 @@ def user_by_id(req, id):
     user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
     base_context['user_form'] = user_form
 
-    if user.participant:
-        participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
-        base_context['participant_form'] = participant_form
+
+    try:
+        if user.participant:
+            participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
+            base_context['participant_form'] = participant_form
+            if req.user.pk == user.pk:
+                if not user.participant.profile_completed():
+                    messages.error(req, 'Профиль не заполнен до конца!')
+                if user.participant.current_age() and user.participant.current_age() < 18 and \
+                        len(user.participant.parent_phone_number) == 0:
+                    messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
+
+            if req.user.has_perm('view_private_comment'):
+                base_context['private_comments'] = user.participant.comments.filter(is_private=True)
+            else:
+                base_context['public_comments'] = user.participant.comments.filter(is_private=False)
+    except user.DoesNotExist:
+        pass
 
     if req.method == 'POST':
         if user.id != req.user.gotouser.id:
@@ -285,21 +302,6 @@ def user_by_id(req, id):
 
 
 
-    try:
-        if user.participant:
-            if req.user.pk == user.pk:
-                if not user.participant.profile_completed():
-                    messages.error(req, 'Профиль не заполнен до конца!')
-                if user.participant.current_age() and user.participant.current_age() < 18 and \
-                        len(user.participant.parent_phone_number) == 0:
-                    messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
-
-            if req.user.has_perm('view_private_comment'):
-                base_context['private_comments'] = user.participant.comments.filter(is_private=True)
-            else:
-                base_context['public_comments'] = user.participant.comments.filter(is_private=False)
-    except user.DoesNotExist:
-        pass
 
     return render(req, 'user/user_by_id.html', base_context)
 

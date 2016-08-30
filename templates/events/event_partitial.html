@@ -45,29 +45,32 @@
 
 <!-- Преподаватели -->
 {#   FIXME: create a class?#}
-<div style="background: whitesmoke">
+<div class="colored">
+    <div class="colored container">
+        <h1 class="white">Преподаватели</h1>
+        <div class="row">
+            {% for e in event.experts %}
+                <div class="chel col-md-6">
+                    <div class="staff row">
 
-    <div style="background: whitesmoke" class="container">
-        <div class="whitespace"></div>
-        <h2>Преподаватели</h2>
-        <div class="whitespace"></div>
-        {% for e in event.experts %}
-            <div class="col-md-6">
-                <div class="row">
+                        <div class="staff-avatar col-md-4">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="{{ e.profile_picture.url }}">
 
-                    <div class="staff col-md-4">
-                        <div class="helper">
-                            <img class="staff-avatar" src="{{ e.profile_picture.url }}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{{ e.first_name }} {{ e.last_name }}</h3>
+                            <p>{{ e.short_description }}</p>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <a href="{% url 'user_detail' e.pk %}"><h3>{{ e.last_name }} {{ e.first_name }}</h3></a>
-                        <p>{{ e.short_description }}</p>
-                    </div>
                 </div>
-            </div>
-
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 
