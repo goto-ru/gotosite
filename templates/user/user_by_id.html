@@ -190,24 +190,26 @@
                                         {% endif %}
 
                                         {% if viewed_user.participant.current_class|length > 0 %}
+                                            <div class="row">
 
-                                            <div class="col-md-4 leftal much">
-                                                <p>Класс:</p>
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Класс:</p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.participant.current_class }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8 leftal much">
-                                                <p class="value">{{ viewed_user.participant.current_class }}</p>
-                                            </div>
-                                            <br>
                                         {% endif %}
 
                                         {% if viewed_user.participant.health_issues|length > 0 %}
-                                            <div class="col-md-4 leftal much">
-                                                <p>Медецинские рекомендации:</p>
+                                            <div class="row">
+                                                <div class="col-md-4 leftal much">
+                                                    <p>Медецинские рекомендации:</p>
+                                                </div>
+                                                <div class="col-md-8 leftal much">
+                                                    <p class="value">{{ viewed_user.participant.health_issues }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8 leftal much">
-                                                <p class="value">{{ viewed_user.participant.health_issues }}</p>
-                                            </div>
-                                            <br>
                                         {% endif %}
 
                                         {% if  viewed_user.participant.phone_number|length > 0 %}
