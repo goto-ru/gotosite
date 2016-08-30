@@ -55,6 +55,7 @@
 
         </div>
         {% if participant_form %}
+
             <div class="col-md-6 cell">
                 <div class="col-md-6 rightal">
                     <label for="{{ participant_form.city.id_for_label }}">Город:</label>
@@ -64,12 +65,31 @@
                 </div>
             </div>
 
+{#            <div class="col-md-6 cell">#}
+{#                <div class="col-md-6 rightal">#}
+{#                    <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания:</label>#}
+{#                </div>#}
+{#                <div class="col-md-6 leftal">#}
+{#                    {{ participant_form.citizenship }}#}
+{#                </div>#}
+{#            </div>#}
+
+
             <div class="col-md-6 cell">
                 <div class="col-md-6 rightal">
-                    <label for="{{ participant_form.citizenship.id_for_label }}">Страна проживания:</label>
+                    <label for="{{ participant_form.graduation_year.id_for_label }}">Год выпуска</label>
                 </div>
                 <div class="col-md-6 leftal">
-                    {{ participant_form.citizenship }}
+                    {{ participant_form.graduation_year }}
+                </div>
+            </div>
+
+            <div class="col-md-6 cell">
+                <div class="col-md-6 rightal">
+                    <label for="{{ participant_form.birthday.id_for_label }}">Дата рождения</label>
+                </div>
+                <div class="col-md-6 leftal">
+                    {{ participant_form.birthday }}
                 </div>
             </div>
 
@@ -79,6 +99,39 @@
                 </div>
                 <div class="col-md-6 leftal">
                     {{ participant_form.experience }}
+                </div>
+            </div>
+            <div class="col-md-6 cell">
+                <div class="col-md-6 rightal">
+                    <label for="{{ participant_form.programming_languages.id_for_label }}">Языки программирования:</label>
+                </div>
+                <div class="col-md-6 leftal">
+                    {{ participant_form.programming_languages }}
+                </div>
+            </div>
+             <div class="col-md-6 cell">
+                <div class="col-md-6 rightal">
+                    <label for="{{ participant_form.health_issues.id_for_label }}">Особенности здоровья:</label>
+                </div>
+                <div class="col-md-6 leftal">
+                    {{ participant_form.health_issues }}
+                </div>
+            </div>
+
+             <div class="col-md-6 cell">
+                <div class="col-md-6 rightal">
+                    <label for="{{ participant_form.phone_number.id_for_label }}">Телефон:</label>
+                </div>
+                <div class="col-md-6 leftal">
+                    {{ participant_form.phone_number }}
+                </div>
+            </div>
+            <div class="col-md-6 cell">
+                <div class="col-md-6 rightal">
+                    <label for="{{ participant_form.phone_number.id_for_label }}">Телефон родителя:</label>
+                </div>
+                <div class="col-md-6 leftal">
+                    {{ participant_form.parent_phone_number }}
                 </div>
             </div>
             <div class="col-md-6 cell">
