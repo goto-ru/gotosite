@@ -225,7 +225,7 @@
                     <div class="col-md-12 profileedit project">
                         <div class="inside row project">
                             <div class="col-md-12 leftal"><input class="project-header" type="text"
-                                                                 placeholder="Хератень"></div>
+                                                                 placeholder="Название"></div>
                             <div class="col-md-12 leftal">
                                 <div id="example4"></div>
                             </div>
@@ -291,7 +291,7 @@
                                     {% endif %}
                                     {% if project.supervisor %}
                                         <p class="rightal">Начато в рамках мероприятия "<a
-                                                href="{% url 'user_detail' project.supervisor.id %}">{{ project.arrangement.event }}"</a>
+                                                href="{% url 'event_detail' project.arrangement.event.slug %}">{{ project.arrangement.event }}"</a>
                                         </p>
                                     {% endif %}
                                 </div>

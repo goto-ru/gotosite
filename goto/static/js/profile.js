@@ -28,7 +28,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.taggle_input').attr('placeholder', 'Участники проекта')
+    $('.taggle_input').attr('placeholder', 'Участники (начните вводить имя)')
 });
 
 $('#project-image').click(function(){ $('#imgupload').trigger('click'); });
