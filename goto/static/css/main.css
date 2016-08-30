@@ -295,11 +295,11 @@ a {
 }
 
 a {
-    color: unset !important;
+    color: rgb(67, 180, 152);
 }
 
 a:hover {
-    color: rgb(67, 180, 152) !important;
+    color: rgb(40, 103, 85) !important;
     text-decoration: none !important;
 }
 
