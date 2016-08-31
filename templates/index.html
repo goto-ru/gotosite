@@ -31,7 +31,8 @@
         <div class="container green-background">
             <div class="gotic-text">
                 <table style="height: 100%; width: 100%">
-                    <td style="vertical-align: middle"><p>Образовательные программы GoTo помогают школьникам со всей России воплощать в
+                    <td style="vertical-align: middle"><p>Образовательные программы GoTo помогают школьникам со всей
+                        России воплощать в
                         жизнь
                         самые
                         смелые идеи, получать знания у практикующих специалистов и предпринимателей, находить
@@ -70,7 +71,8 @@
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
                 <div>
                     <p class="down-links left-link"><a class="reversed-link" href="/schools">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
                 </div>
             </div>
 
@@ -94,7 +96,8 @@
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
                 <div>
                     <p class="down-links left-link"><a class="reversed-link" href="/hackathons">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -115,7 +118,8 @@
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
                 <div>
                     <p class="down-links left-link"><a class="reversed-link" href="/lectures">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
                 </div>
 
             </div>
@@ -123,77 +127,82 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <div class="header-head"><h2>Последние новости</h2></div>
-    <div class="container news">
-        <div class="row">
-            {% for article in articles|slice:':3 ' %}
-                <div class="col-md-4 article">
-                    <a href="{{ article.url }}">
-                        <table>
-                            <tr>
-                                <td style="vertical-align: middle">
-                                    <img src="/media/{{ article.image }}">
-                                </td>
-                            </tr>
-                        </table>
-                        <h6><a href="{{ article.url }}">{{ article.title }}</a></h6></a>
-                    <p>{{ article.description }}</p>
-                </div>
-            {% endfor %}
+    <div class="news-wrapper">
+        <div class="header-head"><h2>Последние новости</h2></div>
+        <div class="container news">
+            <div class="row">
+                {% for article in articles|slice:':3 ' %}
+                    <div class="col-md-4 article">
+                        <a href="{{ article.url }}">
+                            <table>
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        <img src="/media/{{ article.image }}">
+                                    </td>
+                                </tr>
+                            </table>
+                            <h6><a href="{{ article.url }}">{{ article.title }}</a></h6></a>
+                        <p>{{ article.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type='button' onclick="window.location = '{% url 'mm_about' %}'"
+                   class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
         </div>
-        <input type='button' onclick="window.location = '{% url 'mm_about' %}'"
-               class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
+    <div style="background: url(https://pp.vk.me/c637830/v637830190/6571/Ban5tk-OOuU.jpg)" class="features">
+        <table>
+            <td>
+                <div style="background: none" class="container">
+                    <div class="col-md-7">
 
-    <div class="features">
-        <div style="background: none" class="container">
-            <div class="col-md-7">
-
-            </div>
-            <div class="col-md-5">
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
                     </div>
-                </div>
-                <div class="white-hr"></div>
+                    <div class="col-md-5">
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
 
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <div class="white-hr"></div>
-
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            </td>
+        </table>
     </div>
     <div class="clearfix"></div>
 

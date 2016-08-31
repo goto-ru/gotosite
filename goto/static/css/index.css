@@ -61,7 +61,16 @@
 }
 
 .features {
-    background: url("/static/img/wallpaper.jpg");
+    min-height: 100vh;
+}
+
+.features table {
+    min-height: 100vh;
+    float: right;
+}
+
+.features td{
+    vertical-align: middle;
 }
 
 .features-mini {
@@ -190,14 +199,22 @@ h1, h2, h3, h4, h6 {
     color: white;
     text-align: center;
     font-size: 28px;
-    height: 100vh;
+    min-height: 100vh;
+}
+
+.gotic-text table {
+    min-height: 100vh;
 }
 
 .bottom-margin {
     padding-bottom: 20vh;
 }
 
-.like-button{
+.like-button {
     padding: 10px 15px;
     border: 2px solid;
+}
+
+.news-wrapper {
+    min-height: 100vh;
 }
