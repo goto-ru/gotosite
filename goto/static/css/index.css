@@ -100,7 +100,7 @@
 }
 
 .vector-description {
-    padding: 5%;
+    padding: 2% 5%;
 }
 
 .vector-description p {
@@ -186,12 +186,18 @@ h1, h2, h3, h4, h6 {
     float: left;
 }
 
-.gotic-text{
-    margin-top: 10vh;
+.gotic-text {
     color: white;
-    font-size: 18px;
+    text-align: center;
+    font-size: 28px;
+    height: 100vh;
 }
 
-.bottom-margin{
-    margin-bottom: 10vh;
+.bottom-margin {
+    padding-bottom: 20vh;
+}
+
+.like-button{
+    padding: 10px 15px;
+    border: 2px solid;
 }
