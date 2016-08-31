@@ -162,8 +162,8 @@ class Event(models.Model):
     steps = models.ManyToManyField('Step', blank=True, related_name='events')
     faquestions = models.ManyToManyField(FAQuestion, blank=True)
     main_image = FilerImageField(blank=True, null=True)
-    lon = models.FloatField(blank=True, null=True)
-    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, default=0)
+    lat = models.FloatField(blank=True, default=0)
 
     def experts(self):
         ret = set()

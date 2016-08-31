@@ -1,5 +1,7 @@
 {#{% if event.name|length > 0 %}#}
+
 {% load staticfiles %}
+{% include 'helpers/map.html' %}
 <div class="colored">
     <div class="container colored">
         <div class="row big-box">
@@ -7,7 +9,7 @@
                 <div class="inside-information  white-background">
                     <h3 class="">{{ event.name }}</h3>
                     <p class="">{{ event.full_description }} <a
-                            onclick="load_map(30,60, 8, 'Тут пихаем html для подписи на <br> маркере')">Проходить всё
+                            onclick="load_map({{ event.lon }},{{ event.lat }}, 8, '{{ event.place|safe }}')">Проходить всё
                         будет тут</a></p>
 
                 </div>

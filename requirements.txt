@@ -15,3 +15,4 @@ django-import-export==0.4.*
 django-admin-sortable2==0.6.*
 openpyxl
 django-admin-export
+django-seo2==1.0.*
