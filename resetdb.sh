@@ -1,3 +1,5 @@
+#!/bin/bash
+sudo systemctl stop postgresql
 sudo rm -r "/var/lib/postgres/data"
 sudo mkdir /var/lib/postgres/data
 sudo chown postgres /var/lib/postgres/data
