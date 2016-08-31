@@ -69,7 +69,7 @@
     float: right;
 }
 
-.features td{
+.features td {
     vertical-align: middle;
 }
 
@@ -93,13 +93,34 @@
 }
 
 .email {
-    border: 2px solid #696969;
+    background: none;
+    border: 2px solid !important;
+    padding: 4px !important;
+    padding-top: 3px !important;
     width: 200px;
 }
 
 .subscribe {
-    margin-top: 5%;
+    padding: 100px;
     text-align: center;
+}
+
+::-webkit-input-placeholder {
+    color: white;
+}
+
+::-moz-placeholder {
+    color: white;
+}
+
+/* Firefox 19+ */
+:-moz-placeholder {
+    color: white;
+}
+
+/* Firefox 18- */
+:-ms-input-placeholder {
+    color: white;
 }
 
 .subscribe p {
@@ -208,11 +229,6 @@ h1, h2, h3, h4, h6 {
 
 .bottom-margin {
     padding-bottom: 20vh;
-}
-
-.like-button {
-    padding: 10px 15px;
-    border: 2px solid;
 }
 
 .news-wrapper {

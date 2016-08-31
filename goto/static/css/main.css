@@ -402,3 +402,8 @@ p, h1, h2, h3, h4, h5, h6, div {
 .big-title{
     margin-bottom: 15px !important;
 }
+
+.like-button {
+    padding: 10px 15px;
+    border: 2px solid;
+}

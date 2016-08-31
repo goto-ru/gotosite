@@ -127,8 +127,27 @@
         </div>
     </div>
     <div class="clearfix"></div>
+    <div style="color: white" class="orange-background">
+        <div id="subscribe" class="container subscribe orange-background">
+            <p> Подпишитесь на новости! </p>
+            <form action="{% url 'subscribe' %}" method="get">
+                <table align="center" class="demotable">
+                    <tr>
+                        <td valign="middle">
+                            <input class="email" type="email" name="email" placeholder="Электронная почта*">
+                        </td>
+                        <td valign="middle">
+                            <input style="width: 40px; margin-top: 7px;" type="image" src={% static "img/tick.png" %}>
+                        </td>
+
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
     <div class="news-wrapper">
-        <div class="header-head"><h2>Последние новости</h2></div>
+        <div class="header-head"><h2>Новости</h2></div>
         <div class="container news">
             <div class="row">
                 {% for article in articles|slice:':3 ' %}
@@ -203,26 +222,6 @@
                 </div>
             </td>
         </table>
-    </div>
-    <div class="clearfix"></div>
-
-    <div id="subscribe" class="container subscribe">
-        <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
-            лекциях,
-            курсах и спецпредложениях.</p>
-        <form action="{% url 'subscribe' %}" method="get">
-            <table align="center" class="demotable">
-                <tr>
-                    <td valign="middle">
-                        <input class="email" type="email" name="email" placeholder="Электронная почта*">
-                    </td>
-                    <td valign="middle">
-                        <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
-                    </td>
-
-                </tr>
-            </table>
-        </form>
     </div>
     <div class="clearfix"></div>
 
