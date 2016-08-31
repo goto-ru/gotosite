@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'goto',
     'nested_inline',
     'django_jinja',
@@ -44,7 +45,9 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'import_export',
     'adminsortable2',
-    'admin_export'
+    'admin_export',
+'djangoseo',
+
 ]
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MESSAGE_TAGS = {
@@ -64,7 +67,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'gotosite2.urls'
-
+SITE_ID = 1
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

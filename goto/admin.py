@@ -16,6 +16,11 @@ from wsgiref.util import FileWrapper
 from io import StringIO
 from django.contrib.admin import AdminSite
 
+from djangoseo.admin import register_seo_admin, auto_register_inlines
+from django.contrib.sites.admin import SiteAdmin, Site
+from django.contrib import admin
+from goto.seo import MyMetadata
+
 import datetime
 
 models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
@@ -25,6 +30,7 @@ admin.site.register(Permission)
 
 from .application_admin import *
 
+#auto_register_inlines(admin.site, MyMetadata)
 
 
 
@@ -35,7 +41,7 @@ class ExpertInline(TabularInline):
 
 class ArrangementInline(TabularInline):
     model = Arrangement
-    #inlines = [ExpertInline]
+    # inlines = [ExpertInline]
     extra = 0
 
 
@@ -56,7 +62,7 @@ class DayInline(TabularInline):
 @admin.register(Event)
 class EventAdmin(ModelAdmin):
     model = Event
-    filter_horizontal = ('partners','steps')
+    filter_horizontal = ('partners', 'steps')
     inlines = [DepartmentInline, ArrangementInline]
 
 
@@ -70,11 +76,11 @@ class BlockEntityAdmin(TabularInline):
     model = BlockEntity
     extra = 0
 
+
 @admin.register(Block)
 class BlockAdmin(ModelAdmin):
     model = Block
     inlines = [BlockEntityAdmin, DayInline]
-
 
 
 models = [Participant, Expert, Page, Answer, Question,
@@ -82,3 +88,7 @@ models = [Participant, Expert, Page, Answer, Question,
           MassMediaArticle, FAQuestion, Step]
 for model in models:
     admin.site.register(model)
+
+#admin.site.register(Site, SiteAdmin)
+
+register_seo_admin(admin.site, MyMetadata)

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load staticfiles seo %}
 <html lang="en">
 <head>
     <meta http-equiv="content-type" charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="keywords" content=""/>
+    {% get_metadata %}
     <!-- styles -->
 
     <!-- Fav and touch icons -->
