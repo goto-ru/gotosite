@@ -248,6 +248,8 @@ def about_us(req):
 
 
 def info(req):
+    messages.info(req, 'Текст сообщения алерта и блала')
+    messages.error(req, 'Ваш профиль не заполнен до конца.')
     return render(req, 'info.html', {})
 
 
@@ -365,4 +367,4 @@ def export(req):
         return render(req, 'export_fields.html', {'fields': r._meta.fields})
 
 def test_hackathon(req):
-    return render(req, 'hackathon_template.html')
+    return render(req, 'fill_application.html')

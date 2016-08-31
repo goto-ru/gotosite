@@ -28,3 +28,7 @@ function took() {
     $('.much').css('display', 'none').toggle();
     $('.togmuch').toggle();
 }
+
+function close_message(obj) {
+    $(obj).css('display', 'none')
+}

@@ -45,4 +45,3 @@ $(document).ready(function () {
     var line_height = (whole_height - (our/count)) + our;
     $('.line').css('height', line_height);
 });
-

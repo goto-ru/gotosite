@@ -8,9 +8,8 @@
 
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
-                <p>GoTo <br>
-                    Серия выездных и городских школ.
-                </p>
+                <p>Лагерь GoTo</p>
+                <p class="decode-message">Серия выездных и городских школ</p>
             </div>
         </div>
     </div>
@@ -94,7 +93,8 @@
                         <div style="text-align: center">
                             <input onclick="document.location={% url 'event_detail' ar.event_id %};"
                                    class="header-btn-little header-btn" type="button"
-                            <input onclick="document.location={% url 'event_detail' ar.event.slug %};" class="header-btn-little header-btn" type="button"
+                            <input onclick="document.location={% url 'event_detail' ar.event.slug %};"
+                                   class="header-btn-little header-btn" type="button"
                                    value="Подробнее">
                         </div>
                     </div>

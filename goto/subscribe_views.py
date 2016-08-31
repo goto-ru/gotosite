@@ -31,7 +31,7 @@ def subscribe(req):
     # s = Subscriber.objects.get_or_create(email=email)
     mailchimp_subscribe(email)
     messages.info(req, 'Вы успешно подписаны на рассылку!')
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/#subscribe')
 
 
 def unsubscribe(req):

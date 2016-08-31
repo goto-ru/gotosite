@@ -165,3 +165,33 @@ h1, h2, h3, h4, h6 {
     margin-right: 0.1rem;
     z-index: 3;
 }
+
+.down-links {
+    font-size: 18px;
+    color: rgb(67, 180, 152);
+    width: 50%;
+
+}
+
+.reversed-link {
+    text-align: right;
+}
+
+.right-link {
+    float: right;
+    text-align: right;
+}
+
+.left-link {
+    float: left;
+}
+
+.gotic-text{
+    margin-top: 10vh;
+    color: white;
+    font-size: 18px;
+}
+
+.bottom-margin{
+    margin-bottom: 10vh;
+}
