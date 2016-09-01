@@ -11,7 +11,7 @@
                     <p class="">{{ event.full_description }} <a
                             onclick="load_map({{ event.lon }},{{ event.lat }}, 8, '{{ event.place|safe }}')">Проходить всё
                         будет тут</a></p>
-                    <p style="text-align: right"><a class="like-button">Подробнее</a></p>
+                    <p style="text-align: right"><a class="like-button" href="{% url 'event_detail' event.slug %}">Подробнее</a></p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -85,13 +85,9 @@
                         </div>
                     </div>
                     <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
-                        {% if request.user.is_authenticated %}
-                            <a href="{% url 'event_detail' event.slug %}"
+                            <a href="{% url 'application_fill' event.id %}"
                                class="take-part header-btn-little header-btn">Принять участие</a>
-                        {% else %}
-                            <a href="{% url 'sign_in' %}" class="take-part header-btn-little header-btn">Принять
-                                участие</a>
-                        {% endif %}
+
                     </div>
                 </div>
             </div>
