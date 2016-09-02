@@ -8,10 +8,12 @@
             <div style="padding: 0" class="col-md-8">
                 <div class="inside-information  white-background">
                     <h3 class="">{{ event.name }}</h3>
-                    <p class="">{{ event.full_description }} <a
-                            onclick="load_map({{ event.lon }},{{ event.lat }}, 8, '{{ event.place|safe }}')">Проходить всё
-                        будет тут</a></p>
-                    <p style="text-align: right"><a class="like-button" href="{% url 'event_detail' event.slug %}">Подробнее</a></p>
+                    <p class="">{{ event.full_description }}</p>
+
+                    {% if event.format == 'hackathone' %}
+                    <p style="text-align: right"><a class="like-button" href="{% url 'event_detail' event.slug %}">Подробнее</a>
+                    </p>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-4">
@@ -21,7 +23,8 @@
                             <div class="row">
                                 <div class="col-md-4 doticon">
                                     <table style="height: 100%; width: 100%">
-                                        <td style="vertical-align: middle; text-align: center;'"><img src="{% static 'img/who.png' %}"></td>
+                                        <td style="vertical-align: middle; text-align: center;'"><img
+                                                src="{% static 'img/who.png' %}"></td>
                                     </table>
                                 </div>
                                 <div class="col-md-8">
@@ -36,7 +39,8 @@
                             <div class="row">
                                 <div class="col-md-4 doticon">
                                     <table style="height: 100%; width: 100%">
-                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/how_much.png' %}">
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/how_much.png' %}">
                                         </td>
                                     </table>
                                 </div>
@@ -53,7 +57,8 @@
                             <div class="row">
                                 <div class="col-md-4 doticon">
                                     <table style="height: 100%; width: 100%">
-                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/when.png' %}"></td>
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/when.png' %}"></td>
                                     </table>
                                 </div>
 
@@ -71,22 +76,22 @@
                             <div class="row">
                                 <div class="col-md-4 doticon">
                                     <table style="height: 100%; width: 100%">
-                                        <td style="vertical-align: middle; text-align: center;"><img src="{% static 'img/where.png' %}"></td>
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/where.png' %}"></td>
                                     </table>
                                 </div>
 
                                 <div class="col-md-8">
                                     <h5>Где?</h5>
-
-                                    <p>{{ event.place }}</p>
-
+                                    <a class=""
+                                       onclick="load_map({{ event.lon }},{{ event.lat }}, 8, '{{ event.place|safe }}')">Место</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
-                            <a href="{% url 'application_fill' event.id %}"
-                               class="take-part header-btn-little header-btn">Принять участие</a>
+                        <a href="{% url 'application_fill' event.id %}"
+                           class="take-part header-btn-little header-btn">Принять участие</a>
 
                     </div>
                 </div>

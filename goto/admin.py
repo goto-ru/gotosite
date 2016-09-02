@@ -23,9 +23,6 @@ from goto.seo import MyMetadata
 
 import datetime
 
-models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
-          MassMediaArticle, FAQuestion, ParticipantComment, Step]
-
 admin.site.register(Permission)
 
 from .application_admin import *
@@ -82,9 +79,13 @@ class BlockAdmin(ModelAdmin):
     model = Block
     inlines = [BlockEntityAdmin, DayInline]
 
+@admin.register(Settings)
+class SettingsAdmin(ModelAdmin):
+    filter_horizontal = ('index_partners', 'about_us_partners', 'about_us_team')
+
 
 models = [Participant, Expert, Page, Answer, Question,
-          Project, Assignment, Solution, Settings, Partner,
+          Project, Assignment, Solution, Partner,
           MassMediaArticle, FAQuestion, Step]
 for model in models:
     admin.site.register(model)
