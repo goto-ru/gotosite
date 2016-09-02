@@ -1,0 +1,14 @@
+{% load staticfiles %}
+<link href="{% static 'css/helpers/map.css' %}" rel="stylesheet">
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="{% static 'js/helpers/map.js' %}"></script>
+
+<div id="map-outside">
+    <a onclick="close_map()"><i class="fa fa-times fa-3x"></i></a>
+    <table class="map-table">
+        <td style="vertical-align: middle">
+            <div id="map">
+            </div>
+        </td>
+    </table>
+</div>

@@ -1,7 +1,6 @@
 # goto-ru/gotosite
 
-
-![GoTo project] ![Code Health]
+[![GoTo project](https://img.shields.io/badge/GoTo-project-4bb89b.svg)](https://github.com/goto-ru/project-list) [![Code Health](https://landscape.io/github/goto-ru/gotosite/master/landscape.svg?style=flat)](https://landscape.io/github/goto-ru/gotosite/master)
 
 A new version of GoTo’s website. Kind of a tailored CRM, based on Django.
 
@@ -9,8 +8,12 @@ A new version of GoTo’s website. Kind of a tailored CRM, based on Django.
 
 Dependencies: python3, postgres
 
-1.  `git clone <https://github.com/goto-ru/gotosite/>`
+1.  `git clone https://github.com/goto-ru/gotosite/`
 2.  `cd gotosite`
+2.  `pip3 install virtualenv`
+2.  `virtualenv -p python3.5 env`
+2.  You need to run following command every time you start terminal and operate with local project
+`source env/bin/activate`
 3.  `git submodule init`
 4.  `git submodule update`
 5.  `pip3 install -r requirements.txt`
@@ -23,14 +26,11 @@ Dependencies: python3, postgres
 
 Dependencies: docker, docker-compose
 
-1.  `git clone <https://github.com/goto-ru/gotosite/>`
+1.  `git clone https://github.com/goto-ru/gotosite/`
 2.  `cd gotosite`
 3.  `git submodule init`
 4.  `git submodule update`
-5.  `docker-compose up -d –build`
+5.  `docker-compose up -d –-build`
 6.  `docker-compose exec web python3 manage.py loaddata sample_data/sample_data_1.json`
     **Service will become available at 0.0.0.0:8001**
 7.  (Optionally) for CI you can set up <https://github.com/Omrigan/flask-github-ci>
-
-[GoTo project]: https://img.shields.io/badge/GoTo-project-4bb89b.svg
-[Code Health]: https://landscape.io/github/goto-ru/gotosite/master/landscape.svg?style=flat

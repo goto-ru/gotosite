@@ -4,6 +4,10 @@
     -webkit-box-shadow: none;
 }
 
+.icon-bar {
+    background-color: white !important;
+}
+
 .navbar a {
     color: white !important;
 }
@@ -49,7 +53,6 @@
 
 .news {
     text-align: center;
-    margin-top: 5%;
 }
 
 .news input {
@@ -57,10 +60,17 @@
     border-color: rgb(66, 158, 132);
 }
 
-
-
 .features {
-    background: url("/static/img/wallpaper.jpg");
+    min-height: 100vh;
+}
+
+.features table {
+    min-height: 100vh;
+    float: right;
+}
+
+.features td {
+    vertical-align: middle;
 }
 
 .features-mini {
@@ -83,13 +93,34 @@
 }
 
 .email {
-    border: 2px solid #696969;
+    background: none;
+    border: 2px solid !important;
+    padding: 4px !important;
+    padding-top: 3px !important;
     width: 200px;
 }
 
 .subscribe {
-    margin-top: 5%;
+    padding: 100px;
     text-align: center;
+}
+
+::-webkit-input-placeholder {
+    color: white;
+}
+
+::-moz-placeholder {
+    color: white;
+}
+
+/* Firefox 19+ */
+:-moz-placeholder {
+    color: white;
+}
+
+/* Firefox 18- */
+:-ms-input-placeholder {
+    color: white;
 }
 
 .subscribe p {
@@ -99,11 +130,17 @@
 }
 
 .vector-description {
-    padding: 5%;
+    padding: 2% 5%;
+}
+
+.vector-description p {
+    font-size: 16px;
 }
 
 .vector-description h3 {
     text-align: center;
+    font-size: 42px;
+    padding-bottom: 20px;
 }
 
 .row {
@@ -121,4 +158,79 @@
 
 h1, h2, h3, h4, h6 {
     text-align: center;
+}
+
+.header {
+    height: 100vh;
+    position: relative;
+}
+
+.white-hr {
+    height: 2px;
+    width: 100%;
+    background: white;
+}
+
+.white-text {
+    position: relative;
+    margin-top: -4vw;
+    width: 80vw;
+    background: white;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.white-text h1 {
+    padding-top: 10vw;
+    font-size: 50px;
+    text-align: left;
+}
+
+.socials {
+    position: absolute;
+    right: 10px;
+    top: 40vh;
+    margin-top: -0.75rem;
+    margin-right: 0.1rem;
+    z-index: 3;
+}
+
+.down-links {
+    font-size: 18px;
+    color: rgb(67, 180, 152);
+    width: 50%;
+
+}
+
+.reversed-link {
+    text-align: right;
+}
+
+.right-link {
+    float: right;
+    text-align: right;
+}
+
+.left-link {
+    float: left;
+}
+
+.gotic-text {
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    min-height: 100vh;
+}
+
+.gotic-text table {
+    min-height: 100vh;
+}
+
+.bottom-margin {
+    padding-bottom: 20vh;
+}
+
+.news-wrapper {
+    min-height: 100vh;
 }

@@ -1,0 +1,331 @@
+.logo {
+    display: none !important;
+}
+
+.navbar,
+nav {
+    padding: 0 !important;
+}
+
+nav {
+    z-index: 10px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;;
+}
+
+.navbar-default {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.hackathon-header {
+    height: calc(100vh - 64px);
+}
+
+.hackathon-header img {
+    width: auto;
+    height: 30%;
+}
+
+#down {
+    position: absolute;
+    bottom: 0;
+}
+
+#up {
+    transform: rotate(180deg);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
+.hackathon-header-text {
+    position: absolute;
+    top: 30vh;
+    left: 0;
+    right: 0;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    margin: 0 auto;
+}
+
+#logo {
+    float: right;
+    margin-right: 30px;
+    margin-top: 23px;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.big-box {
+    margin: 3% 0;
+}
+
+.give-me {
+    color: white;
+    text-align: center;
+    font-weight: 700;
+}
+
+.feature-get {
+    padding: 2%;
+}
+
+.feature-get img {
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+.feature-get p {
+    text-align: center;
+    line-height: 1.1;
+    margin-top: 10px;
+    color: white;
+}
+
+.feature-get-black {
+    padding: 2%;
+}
+
+.feature-get-black img {
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+.feature-get-black p {
+    text-align: center;
+    line-height: 1.1;
+    margin-top: 10px;
+}
+
+.help {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.help img {
+    float: right;
+    max-width: 50px;
+    padding-top: 20px;
+    vertical-align: middle;
+}
+
+.help h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #717171;
+}
+
+.timesheet {
+    background: rgba(232, 232, 232, 0.17);
+    padding-bottom: 90px;
+}
+
+.message {
+    width: 60%;
+    margin-left: 10%;
+    text-align: left;
+    border: 1px solid #E1E5EB;
+    border-bottom-color: #f3ed70;
+    border-bottom-width: 5px;
+    padding: 1em 1em 0 1em;
+    background: white;
+}
+
+.message h3 {
+    color: #717171;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.message p {
+    color: #717171;
+    font-size: 14px;
+}
+
+.dot span {
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: #43b498;
+    border-radius: 30em;
+    margin: 0 auto;
+}
+
+.leftline {
+    border-left: 2px solid #D2D3D7;
+}
+
+h2 {
+    text-align: center;
+}
+
+.timegrid-message {
+    width: 60%;
+    text-align: left;
+    border: 1px solid #E1E5EB;
+    border-bottom-width: 5px;
+    background: white;
+    padding: 1em 1em 0 1em;
+}
+
+.green_down {
+    border-bottom-color: #43b498;
+}
+
+.yellow_down {
+    border-bottom-color: #f3ed70;
+}
+
+.orange_down {
+    border-bottom-color: #f58568;
+}
+
+.green_dot {
+    background: #43b498 !important;
+}
+
+.yellow_dot {
+    background: #f3ed70 !important;
+}
+
+.orange_dot {
+    background: #f58568 !important;
+}
+
+.timegrid-message h3 {
+    color: #717171;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.timegrid-message p {
+    color: #717171;
+    font-size: 14px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.time-grid {
+    width: 50%;
+
+}
+
+.line {
+    position: absolute;
+    width: 2px;
+    background: #D2D3D7;
+    left: 50%;
+    height: 1000px;
+}
+
+.left-pad {
+    padding-left: 4%;
+}
+
+.right-pad {
+    padding-right: 4%;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 30em;
+    position: absolute;
+    left: calc(50% - 10px);
+}
+
+.line-first {
+    position: absolute;
+    width: 2px;
+    background: #D2D3D7;
+    left: 50%;
+    height: 40px;
+}
+
+.line-fix {
+    margin-top: 40px;
+}
+
+.line-second-fix {
+    margin-top: 40px;
+}
+
+.line-second {
+    position: absolute;
+    width: 2px;
+    background: #D2D3D7;
+    left: 50%;
+    height: 40px;
+}
+
+.grey-dot {
+    width: 20px;
+    height: 20px;
+    background: #FFF;
+    border: 2px solid #D2D3D7;
+    border-radius: 30em;
+    position: absolute;
+    left: calc(50% - 10px);
+    z-index: 100;
+}
+
+.inside {
+    height: 100%;
+    padding: 5%;
+}
+
+.inside h4 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.inside-information h3 {
+    text-align: center;
+}
+
+.header-btn {
+    border-radius: 0;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    max-width: 200px;
+    font-size: 18px;
+    padding: 0.6%;
+    border: 2px solid white;
+    margin-bottom: 5%;
+}
+
+.header-btn-little {
+    padding: 10px 15px;
+    margin-top: 3%;
+    max-width: 140px;
+    font-size: 14px;
+    border-color: rgb(207, 207, 207);
+    color: rgb(64, 64, 64);
+}

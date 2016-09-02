@@ -4,71 +4,92 @@ from goto.models import *
 from django.contrib.admin import StackedInline, TabularInline, ModelAdmin
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+from django.core.mail import send_mail
+from adminsortable2.admin import SortableAdminMixin
 
+from django.core.urlresolvers import reverse
 from filer.admin.imageadmin import *
+from import_export.admin import ImportExportMixin, ImportMixin, ExportMixin
+from import_export import resources
+from django.http import HttpResponse
+from wsgiref.util import FileWrapper
+from io import StringIO
+from django.contrib.admin import AdminSite
 
-models = [Participant, Expert, Page, Answer, Question, Application, Project, Assignment, Solution, Settings, Partner,
-          MassMediaArticle]
+from djangoseo.admin import register_seo_admin, auto_register_inlines
+from django.contrib.sites.admin import SiteAdmin, Site
+from django.contrib import admin
+from goto.seo import MyMetadata
+
+import datetime
 
 admin.site.register(Permission)
 
+from .application_admin import *
 
-class AnswerInline(NestedStackedInline):
-    # fields = ['text']
-    model = Answer
-    max_num = 0
-    extra = 0
+#auto_register_inlines(admin.site, MyMetadata)
 
 
-class QuestionInline(NestedStackedInline):
-    fields = ['text']
-    model = Question
-    inlines = [AnswerInline]
-    max_num = 0
-    extra = 0
 
-
-class ApplicationInline(NestedStackedInline):
-    model = Application
-    inlines = [QuestionInline]
-    # fk_name = 'answers'
-    max_num = 0
-    extra = 0
-
-
-class ExpertInline(NestedStackedInline):
+class ExpertInline(TabularInline):
     model = Experting
     extra = 0
 
 
-class ArrangementInline(NestedStackedInline):
+class ArrangementInline(TabularInline):
     model = Arrangement
-    # inlines = [ExpertInline, ApplicationInline]
-    # fk_name = 'answers'
+    # inlines = [ExpertInline]
     extra = 0
 
 
-class DepartmentInline(NestedStackedInline):
+class DepartmentInline(TabularInline):
     model = Department
-    # fk_name = 'answers'
     extra = 0
 
 
-class EventAdmin(NestedModelAdmin):
+# class StepInline(TabularInline):
+#     model = Step
+#     extra = 0
+
+class DayInline(TabularInline):
+    model = Day
+    extra = 0
+
+
+@admin.register(Event)
+class EventAdmin(ModelAdmin):
     model = Event
+    filter_horizontal = ('partners', 'steps')
     inlines = [DepartmentInline, ArrangementInline]
 
 
-class ArrangementAdmin(NestedModelAdmin):
+@admin.register(Arrangement)
+class ArrangementAdmin(ModelAdmin):
     model = Arrangement
     inlines = [ExpertInline]
 
 
-admin.site.register(Event, EventAdmin)
-admin.site.register(Arrangement, ArrangementAdmin)
+class BlockEntityAdmin(TabularInline):
+    model = BlockEntity
+    extra = 0
 
+
+@admin.register(Block)
+class BlockAdmin(ModelAdmin):
+    model = Block
+    inlines = [BlockEntityAdmin, DayInline]
+
+@admin.register(Settings)
+class SettingsAdmin(ModelAdmin):
+    filter_horizontal = ('index_partners', 'about_us_partners', 'about_us_team')
+
+
+models = [Participant, Expert, Page, Answer, Question,
+          Project, Assignment, Solution, Partner,
+          MassMediaArticle, FAQuestion, Step]
 for model in models:
     admin.site.register(model)
 
+#admin.site.register(Site, SiteAdmin)
 
-# Register your models here.
+register_seo_admin(admin.site, MyMetadata)

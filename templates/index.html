@@ -1,18 +1,24 @@
 {% extends 'base_site.html' %}
+{% load staticfiles %}
 {% block title %}
     GoTo
 {% endblock %}
 {% block header %}
     <div class="header">
         {% include 'navigation.html' %}
-
+        <div class="socials">
+            <a href="https://www.facebook.com/pages/GoTo-Camp/1517446851839524"><img width="22"
+                                                                                     src="{% static 'img/socials/fb.png' %}"></a><br><br>
+            <a href="https://vk.com/goto_msk"><img width="22" src="{% static 'img/socials/vk.png' %}"></a><br><br>
+            <a href="http://instagram.com/goto_goto_goto"><img width="25"
+                                                               src="{% static 'img/socials/in.png' %}"></a><br><br>
+            <a href="https://twitter.com/goto_camp"><img width="29" src="{% static 'img/socials/tw.png' %}"></a><br><br>
+        </div>
         <div class="container" style="background: none;">
             <div class="xs-force-center header-text">
-                <p>GoTo <br>
-                    Серия меропритий
-                </p>
-                <input class="header-btn btn btn-transparent btn-xl inc" type="button"
-                       value="Принять участие">
+                <p class="big-title">Школа GoTo</p>
+                <p class="decode-message">Образовательные программы в области IT робототехники и цифрового
+                    производства</p>
             </div>
         </div>
     </div>
@@ -20,15 +26,37 @@
 {% endblock %}
 
 {% block container %}
-    {% load staticfiles %}
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <div class="green-background">
+        <div class="container green-background">
+            <div class="gotic-text">
+                <table style="height: 100%; width: 100%">
+                    <td style="vertical-align: middle"><p>Образовательные программы GoTo помогают школьникам со всей
+                        России воплощать в
+                        жизнь
+                        самые
+                        смелые идеи, получать знания у практикующих специалистов и предпринимателей, находить
+                        единомышленников и
+                        обрести мотивацию к дальнейшему саморазвитию.<br><br>
 
-     <div class="orange-item">
-        <h2>Направления</h2>
-        <div class="whitespace"></div>
+                        Участник каждой школы, лагеря или хакатона GoTo получает возможность реализовать проект или
+                        провести
+                        исследование в сфере IT и робототехники. Участники распределяются по командам, в которых они
+                        вместе
+                        пройдут все этапы развития проекта – от идеи до реализации. Работу над проектами курируют
+                        преподаватели лучших университетов страны и эксперты ведущих компаний: МФТИ, ВШЭ, Иннополис,
+                        Яндекс,
+                        КРОК, Microsoft, Nival, Rambler&Co, Intel и др.
+                    </p></td>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="orange-item">
         <div class="row">
             <div class="vector-description col-md-6">
-                <a href=""><h3>Летние школы</h3></a>
+                <h3>Летние школы</h3>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -41,16 +69,19 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <a href=""><p style="text-align: right">Ближайшая школа</p></a>
+                <div>
+                    <p class="down-links left-link"><a class="reversed-link" href="/schools">Подробнее</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
+                </div>
             </div>
 
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
         </div>
-
         <div class="row">
             <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
             <div class="vector-description col-md-6">
-                <a><h3>Хакатоны</h3></a>
+                <h3>Хакатоны</h3>
                 <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
                     обучения из 2 блоков:
 
@@ -63,113 +94,150 @@
                     предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
                     окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
                     Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <a href=""><p style="text-align: right">Ближайший хакатон</p></a>
+                <div>
+                    <p class="down-links left-link"><a class="reversed-link" href="/hackathons">Подробнее</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
+                </div>
             </div>
         </div>
-
-    </div>
-    <div class="clearfix"></div>
-    <h2>Последние новости</h2>
-    <div class="container news">
         <div class="row">
+            <div class="vector-description col-md-6">
+                <h3>Лекторий</h3>
+                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
+                    обучения из 2 блоков:
 
-            {% for article in articles %}
-                <div class="col-md-12 box">
+                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
+                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
+                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
+                    обработки текста (NLP).
 
-                    <div class="col-md-3 article">
-                        <a href="{{ article.url }}"><img src="/media/{{ article.image }}">
-                            <h6>{{ article.title }}</h6> </a>
-                            <p>{{ article.description }}</p>
-
-                    </div>
-
+                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
+                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
+                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
+                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
+                <div>
+                    <p class="down-links left-link"><a class="reversed-link" href="/lectures">Подробнее</a></p>
+                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
+                    </p>
                 </div>
-            {% endfor %}
-
-
-        </div>
-            <input type='button' onclick="window.location = '{% url 'mm_about' %}'" class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
-    </div>
-    <div class="clearfix"></div>
-
-    <div class="features">
-        <div style="background: none" class="container">
-            <div class="col-md-7">
 
             </div>
-            <div class="col-md-5">
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-                <div class="white-hr"></div>
-
-                <div class="features-mini">
-                    <div class="feature">
-                        <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                        <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                    </div>
-                </div>
-            </div>
-
+            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
         </div>
     </div>
     <div class="clearfix"></div>
+    <div style="color: white" class="orange-background">
+        <div id="subscribe" class="container subscribe orange-background">
+            <p> Подпишитесь на новости! </p>
+            <form action="{% url 'subscribe' %}" method="get">
+                <table align="center" class="demotable">
+                    <tr>
+                        <td valign="middle">
+                            <input class="email" type="email" name="email" placeholder="Электронная почта*">
+                        </td>
+                        <td valign="middle">
+                            <input style="width: 40px; margin-top: 7px;" type="image" src={% static "img/tick.png" %}>
+                        </td>
 
-    <div class="container subscribe">
-        <p> Подпишитесь, чтобы получать письма с отчетами о наших достижениях, а также информацию о предстоящих
-            лекциях,
-            курсах и спецпредложениях.</p>
-        <form action="{% url 'subscribe' %}" method="get">
-            <table align="center" class="demotable">
-                <tr>
-                    <td valign="middle">
-                        <input class="email" type="email" name="email" placeholder="Электронная почта*">
-                    </td>
-                    <td valign="middle">
-                        <input style="width: 40px;" type="image" src={% static "img/tick.png" %}>
-                    </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="news-wrapper">
+        <div class="header-head"><h2>Новости</h2></div>
+        <div class="container news">
+            <div class="row">
+                {% for article in articles|slice:':3 ' %}
+                    <div class="col-md-4 article">
+                        <a href="{{ article.url }}">
+                            <table>
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        <img src="/media/{{ article.image }}">
+                                    </td>
+                                </tr>
+                            </table>
+                            <h6><a href="{{ article.url }}">{{ article.title }}</a></h6></a>
+                        <p>{{ article.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type='button' onclick="window.location = '{% url 'mm_about' %}'"
+                   class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div style="background: url(https://pp.vk.me/c637830/v637830190/6571/Ban5tk-OOuU.jpg)" class="features">
+        <table>
+            <td>
+                <div style="background: none" class="container">
+                    <div class="col-md-7">
 
-                </tr>
-            </table>
-        </form>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                        <div class="white-hr"></div>
+
+                        <div class="features-mini">
+                            <div class="feature">
+                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
+                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </td>
+        </table>
     </div>
     <div class="clearfix"></div>
 
     <div class="container partners">
-        <h2  style="text-align: center;">Партнёры</h2>
+        <h2 style="text-align: center;">Партнёры</h2>
         <div class="whitespace"></div>
         <div class="row">
             {% for p in partners.all %}
                 <div class="col-md-2 partner">
-                    <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                    <table class="partner-tbl">
+                        <tr>
+                            <td style="vertical-align: middle">
+                                <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
             {% endfor %}

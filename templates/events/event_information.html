@@ -1,0 +1,102 @@
+{#{% if event.name|length > 0 %}#}
+
+{% load staticfiles %}
+{% include 'helpers/map.html' %}
+<div class="colored">
+    <div class="container colored">
+        <div class="row big-box">
+            <div style="padding: 0" class="col-md-8">
+                <div class="inside-information  white-background">
+                    <h3 class="">{{ event.name }}</h3>
+                    <p class="">{{ event.full_description }}</p>
+
+                    {% if event.format == 'hackathone' %}
+                    <p style="text-align: right"><a class="like-button" href="{% url 'event_detail' event.slug %}">Подробнее</a>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="inside-information white-background">
+                    <div class="">
+                        <div class="feature ">
+                            <div class="row">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;'"><img
+                                                src="{% static 'img/who.png' %}"></td>
+                                    </table>
+                                </div>
+                                <div class="col-md-8">
+                                    <h5>Для кого?</h5>
+                                    <p>{{ event.target_auditory }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/how_much.png' %}">
+                                        </td>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Сколько стоит?</h5>
+                                    <p>{{ event.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="black-hr "></div>
+
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/when.png' %}"></td>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Когда?</h5>
+
+                                    {% for a in event.arrangements.all %}
+                                        <p>        {{ a.begin_date }} - {{ a.end_date }} </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="row">
+                                <div class="col-md-4 doticon">
+                                    <table style="height: 100%; width: 100%">
+                                        <td style="vertical-align: middle; text-align: center;"><img
+                                                src="{% static 'img/where.png' %}"></td>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h5>Где?</h5>
+                                    <a class=""
+                                       onclick="load_map({{ event.lon }},{{ event.lat }}, 8, '{{ event.place|safe }}')">Место</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="firefox-fix-little" style="text-align: left; padding: 5%;">
+                        <a href="{% url 'application_fill' event.id %}"
+                           class="take-part header-btn-little header-btn">Принять участие</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#{% endif %}#}

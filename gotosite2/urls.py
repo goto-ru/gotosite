@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from goto import views, login_views, subscribe_views
 from django.conf import settings
@@ -21,7 +21,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^export/', views.export, name='export'),
+    url(r'^admin-shortcuts/$', views.admin_shortcuts, name='admin_shortcuts'),
+
     url(r'^$', views.index, name='index'),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^about-us/$', views.about_us, name='about_us'),
     url(r'^info/$', views.info, name='info'),
     url(r'^mm-about/$', views.mm_about, name='mm_about'),
@@ -32,21 +36,22 @@ urlpatterns = [
     url(r'^login/$', login_views.sign_in, name='sign_in'),
     url(r'^logout/$', login_views.sign_out, name='sign_out'),
     # url(r'^profile/$', views.profile, name='profile'),
-    url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 
     # Events
     url(r'^upcoming/$', views.upcoming, name='upcoming_events'),
     url(r'^schools/$', views.schools, name='schools'),
     url(r'^hackathons/$', views.hackathons, name='hackathons'),
+    url(r'^test/$', views.test_hackathon, name='test'),
     url(r'^lectures/$', views.lectures, name='lectures'),
 
     url(r'^archive/$', views.archive, name='archive_events'),
-    url(r'^event/(?P<id>\d+)/$', views.event_by_id, name='event_detail'),
-    url(r'^event/(?P<id>\d+)/participants$', views.event_participants, name='event_participants'),
+    url(r'^event/(?P<slug>[\w-]+)/$', views.event_by_id, name='event_detail'),
+    url(r'^event/(?P<slug>[\w-]+)/participants$', views.event_participants, name='event_participants'),
 
-    url(r'^application/fill/(?P<arrangement_id>\d+)/(?P<department_id>\d+)/$', views.application_fill,
+    url(r'^application/fill/(?P<event_id>\d+)/$', views.application_fill,
         name='application_fill'),
     url(r'^application/(?P<id>\d+)/$', views.application, name='application'),
+    url(r'^application/(?P<id>\d+)/(?P<method>\w*)$', views.application_change, name='application_change'),
     # Users
     url(r'^participants/$', views.participants, name='participants'),
     url(r'^experts/$', views.experts, name='experts'),
@@ -65,7 +70,8 @@ urlpatterns = [
 
     # Subscribe
     url(r'^subscribe/$', subscribe_views.subscribe, name='subscribe'),
-    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe')
+    url(r'^unsubscribe/$', subscribe_views.unsubscribe, name='unsubscribe'),
+    url(r'^askletter/(?P<emails>.+)/$', subscribe_views.ask_for_email, name='askletter')
 
     # url(r'^actions/apply/$', views.apply, name='apply'),
     # url(r'^actions/subscribe/$', views.subscribe, name='subscribe_action'),

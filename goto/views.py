@@ -23,6 +23,10 @@ def index(req):
     return render(req, 'index.html', context_dictionary)
 
 
+def admin_shortcuts(req):
+    return render(req, 'short_admin.html')
+
+
 def mm_about(req):
     context_dictionary = {'articles': MassMediaArticle.objects.all()}
     return render(req, 'mm-articles.html', context_dictionary)
@@ -43,7 +47,10 @@ def schools(req):
 
 
 def hackathons(req):
-    return render(req, 'hackathon.html')
+    s = Settings.objects.get()
+    archive = Event.objects.filter(format='hackathon',arrangements__end_date__lt=datetime.date.today())\
+        .order_by('-arrangements__end_date')
+    return render(req, 'hackathon.html', {'s': s, 'archive': archive})
 
 
 def lectures(req):
@@ -60,18 +67,12 @@ def archive(req):
     return render(req, 'events/events.html', {'events': events, 'title': 'Архив событий'})
 
 
-def event_by_id(req, id):
-    e = Event.objects.get(pk=id)
-    base_context = {'event': e}
-    try:
-        p = req.user.gotouser.participant
-    except AttributeError:
-        p = None
-    if p:
-        a = p.application_set.filter(event=e)
-        if a.count() > 0:
-            base_context['application'] = a[0]
-    return render(req, 'events/event_by_id.html', base_context)
+def event_by_id(req, slug):
+    e = Event.objects.get(slug=slug)
+    base_context = {'event': e, 's': Settings.objects.get()}
+
+
+    return render(req, 'hackathon_template.html', base_context)
 
 
 def event_participants(req, id):
@@ -104,11 +105,11 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-@login_required()
-def application_fill(req, arrangement_id, department_id):
-    arrangement = Arrangement.objects.get(pk=arrangement_id)
-    department = Department.objects.get(pk=department_id)
-    base_cotext = {'arrangement': arrangement, 'department': department}
+
+def application_fill(req, event_id):
+    event = Event.objects.get(pk=event_id)
+
+    base_cotext = {'event': event}
     if not req.user.is_authenticated():
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'events/events.html', base_cotext)
@@ -117,27 +118,33 @@ def application_fill(req, arrangement_id, department_id):
     if user.participant is None:
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
         return render(req, 'fill_application.html', base_cotext)
-    a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
-    if a.count() > 0:
-        messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
-        return render(req, 'fill_application.html', base_cotext)
-    if arrangement.event != department.event:
-        return HttpResponseBadRequest()
+    # a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
+    # if a.count() > 0:
+    #     messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
+    #     return render(req, 'fill_application.html', base_cotext)
+
     if req.method == 'POST':
+        data = req.POST.keys()
+        dep_id = [_.split('_')[1] for _ in data if _.startswith('department')][0]
+        arr_id = [_.split('_')[1] for _ in data if _.startswith('arrangement')][0]
+        department = Department.objects.get(pk=dep_id)
+        arrangement = Arrangement.objects.get(pk=arr_id)
+        if arrangement.event != department.event:
+            return HttpResponseBadRequest()
         app = Application()
         app.arrangement = arrangement
         app.department = department
         app.participant = user.participant
         app.date_created = datetime.datetime.now()
         app.save()
-        for q in arrangement.event.questions.all():
-            text = req.POST['question%s' % q.pk]
+        for q in arrangement.event.applier_questions.all():
+            text = req.POST['question_%s' % q.pk]
             ans = Answer()
             ans.application = app
             ans.question = q
             ans.text = text
             ans.save()
-        messages.add_message("Заявка успешно принята")
+        messages.info(req, "Заявка успешно принята")
         return render(req, 'fill_application.html', base_cotext)
     else:
         return render(req, 'fill_application.html', base_cotext)
@@ -215,48 +222,40 @@ def application(req, id):
     return render(req, 'application.html', base_context)
 
 
-def render_profile_edit(req, user):
-    user_form = UserEditForm(instance=user)
-    base_context = {'user': user, 'user_form': user_form}
-    if user.participant:
-        participant_form = ParticipantEditForm(instance=user.participant)
-        base_context['participant_form'] = participant_form
-    return render(req, 'user/edit.html', base_context)
-
-
 @login_required()
-def profile_edit(req):
-    user = GotoUser.objects.get(pk=req.user.pk)
-    user_form = UserEditForm(req.POST, req.FILES or None)
-    user_form.instance = user
-    participant_form = ParticipantEditForm(req.POST, req.FILES or None)
-    participant_form.instance = user
-    if req.method == 'POST':
+def application_change(req, id, method):
+    app = Application.objects.get(id=id)
+    if req.user.id == app.participant.id:
+        if app.status == 1:
+            if method=='confirm' :
+                app.status = 3
+                messages.info(req, 'Заявка успешно подтвержденна')
+            elif method=='reject':
+                app.status = 4
+                messages.info(req, 'Заявка успешно отозвана')
+            app.save()
+    else:
+        return HttpResponseForbidden()
 
-        if user_form.is_valid():
-            # print(req.FILES['profile_picture'])
-            # user.profile_picture = req.FILES['profile_picture']
-            # user.save()
-            # print(user.profile_picture)
-            user_form.save()
-        else:
-            return render_profile_edit(req, user)
-        if user.participant and participant_form.is_valid():
-            participant_form.save()
-        else:
-            return render_profile_edit(req, user)
+    return HttpResponseRedirect(reverse('user_detail', args=[app.user.id]))
 
-        return HttpResponseRedirect(reverse('user_detail', args=[user.id]))
-    return render_profile_edit(req, user)
 
 
 def about_us(req):
     s = Settings.objects.get()
-    context_dictionary = {'partners': s.about_us_partners, 'team': s.about_us_team}
+
+    context_dictionary = {'s': s, 'statistics': {
+        'projects': Project.objects.count(),
+        'archive': Arrangement.objects.filter(end_date__lte=datetime.datetime.now()).count(),
+        'participants': Participant.objects.count(),
+        'experts': Expert.objects.count()
+    }}
     return render(req, 'about.html', context_dictionary)
 
 
 def info(req):
+    messages.info(req, 'Текст сообщения алерта и блала')
+    messages.error(req, 'Ваш профиль не заполнен до конца.')
     return render(req, 'info.html', {})
 
 
@@ -267,16 +266,50 @@ def page(req, slug):
 def user_by_id(req, id):
     user = GotoUser.objects.get(pk=id)
     base_context = {'viewed_user': user}
-    # comments = None
+
+    user_form = UserEditForm(req.POST or None, req.FILES or None, instance=user)
+    base_context['user_form'] = user_form
+
+
     try:
         if user.participant:
+            participant_form = ParticipantEditForm(req.POST or None, req.FILES or None, instance=user.participant)
+            base_context['participant_form'] = participant_form
+            if req.user.pk == user.pk:
+                if not user.participant.profile_completed():
+                    messages.error(req, 'Профиль не заполнен до конца!')
+                if user.participant.current_age() and user.participant.current_age() < 18 and \
+                        len(user.participant.parent_phone_number) == 0:
+                    messages.error(req, 'Поскольку вам меньше 18, укажите, пожалуйста, телефон родителя')
+
             if req.user.has_perm('view_private_comment'):
                 base_context['private_comments'] = user.participant.comments.filter(is_private=True)
             else:
                 base_context['public_comments'] = user.participant.comments.filter(is_private=False)
     except user.DoesNotExist:
         pass
-    # acc should be typeB if account only has typeA and typeB subclasses
+
+    if req.method == 'POST':
+        if user.id != req.user.gotouser.id:
+            return HttpResponseForbidden()
+        # user_form = UserEditForm(req.POST, req.FILES or None, instance=user)
+        #
+        # if user.participant:
+        #     participant_form = ParticipantEditForm(req.POST, req.FILES or None, instance=user)
+
+        if user_form.is_valid():
+            # print(req.FILES['profile_picture'])
+            # user.profile_picture = req.FILES['profile_picture']
+            # user.save()
+            # print(user.profile_picture)
+            user_form.save()
+            if user.participant:
+                if participant_form.is_valid():
+                    participant_form.save()
+        return HttpResponseRedirect(reverse('user_detail', args=[user.pk]))
+
+
+
 
     return render(req, 'user/user_by_id.html', base_context)
 
@@ -310,3 +343,34 @@ def apply_solution(req, id):
 def view_solution(req, id):
     solution = get_object_or_404(Solution, pk=id)
     return render(req, 'solution/solution.html', {'solution': solution})
+from io import StringIO, BytesIO
+from goto.resources import ApplicationResource
+from django.http import HttpResponse
+
+from wsgiref.util import FileWrapper
+
+@staff_member_required()
+def export(req):
+    r = ApplicationResource()
+
+    if req.POST:
+        r.current_fields = [_[6:] for _ in req.POST if _.startswith('field_')]
+        file_format = req.POST['format'].lower()
+        exp = r.export(queryset=Application.objects.filter(pk__in=req.session['ids']))
+        if file_format=='csv':
+            s = StringIO()
+            s.write(exp.csv)
+        if file_format == 'xlsx':
+            s = BytesIO()
+            s.write(exp.xlsx)
+
+        s.seek(0)
+        response = HttpResponse(FileWrapper(s), content_type='text/%s'%file_format)
+        response['Content-Disposition'] = datetime.datetime.now().strftime(
+            'attachment; filename=Applications-%d.%m.%y.') + file_format
+        return response
+    else:
+        return render(req, 'export_fields.html', {'fields': r._meta.fields})
+
+def test_hackathon(req):
+    return render(req, 'fill_application.html')

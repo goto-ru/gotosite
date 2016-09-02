@@ -1,0 +1,12 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+    <h1>Письмо</h1>
+    <form method="post" action="{% url 'askletter' emails %}">
+        <input name="topic"> <br>
+        <textarea name="text">
+
+    </textarea><br>
+        <button type="submit">Отправить</button>
+    {% csrf_token %}
+    </form>
+{% endblock %}

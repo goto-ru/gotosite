@@ -19,8 +19,8 @@
                 <h3>{{ e.name }} </h3>
                 <p>{{ e.short_description }} </p>
                 <b>{{ e.begin_date }} - {{ e.end_date }}</b>
-                <a href="{% url 'event_detail' e.pk %}">Подробнее</a>
             </div>
+            <a href="{% url 'event_detail' e.slug %}">Подробнее</a>
         {% endfor %}
 
 

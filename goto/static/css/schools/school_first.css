@@ -1,18 +1,23 @@
-.orange-item{
+.orange-item {
     display: none;
 }
-.green-item{
+
+.green-item {
     display: block;
 }
 
-.hr{
+.hr {
     background: #43b498 none repeat scroll 0 0 !important;
 }
 
-.big-box{
+.big-box {
     background: #43b498 none repeat scroll 0 0 !important;
 }
 
-.colored{
-     background: #43b498;
+.colored {
+    background: #43b498;
+}
+
+.inversed-colored{
+    background: #f58568;
 }

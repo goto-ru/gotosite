@@ -2,23 +2,22 @@
 {% load staticfiles %}
 {% block header %}
     {% include 'navigation.html' %}
+
     <div class="hr"></div>
-    <div class="container-fluid">
+{% endblock %}
+{% block messages %}
+
+    <div class="container-fluid alerts">
         {% for message in messages %}
-            <div class="alert {{ message.tags }}" role="alert">
-                {{ message }}
+            <div onclick=" close_message(this)" class="alert {{ message.tags }}" role="alert">
+                <a class="message-close"><i class="fa fa-times"></i></a>
+                <p class="message-text">{{ message }}</p>
             </div>
-
         {% endfor %}
-
-
     </div>
-
-
 {% endblock %}
 
 {% block footer %}
-    <div class="hr"></div>
     <footer class="modal-footer">
         <div class="footer">
             <div style="padding-top: 5px; padding-bottom: 6px;">

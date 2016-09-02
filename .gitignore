@@ -15,6 +15,7 @@ __pycache__/
 
 old_frontend/goto2/media
 media/*/
+#static/
 
 db.sqlite3
 
@@ -23,7 +24,6 @@ db.sqlite3
 env/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
