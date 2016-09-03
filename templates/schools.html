@@ -22,7 +22,7 @@
     <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
     <link href="{% static 'css/schools.css' %}" rel="stylesheet">
     <script type="text/javascript" src="{% static 'js/camp.js' %}"></script>
-    {% if s.current_right_school.name %}
+    {% if s.current_left_school and s.current_right_school %}
         <div class="whitespace"></div>
         <!-- Карточки -->
 
@@ -68,13 +68,17 @@
     {% endif %}
 
     <!-- Фичи -->
-    <div class="green-item">
-        {% include 'events/event_partitial.html' with event=s.current_left_school %}
-    </div>
-    <div class="orange-item">
-        {% include 'events/event_partitial.html' with event=s.current_right_school %}
-    </div>
+    {% if s.current_left_school %}
+        <div class="green-item">
+            {% include 'events/event_partitial.html' with event=s.current_left_school %}
+        </div>
+    {% endif %}
+    {% if s.current_right_school %}
 
+        <div class="orange-item">
+            {% include 'events/event_partitial.html' with event=s.current_right_school %}
+        </div>
+    {% endif %}
     <div>
         <div class="container">
             <div class="header-head"><h2>Прошедшие школы</h2></div>
