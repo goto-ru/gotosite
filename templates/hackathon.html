@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="{% static 'css/hackathon.css' %}" type="text/css"/>
 
     <link class="orange-css" rel="stylesheet" href="{% static 'css/schools/school_first.css' %}" type="text/css"/>
-    {% include 'events/event_information.html' with event=s.current_hackathon %}
-
+    {% if event %}
+        {% include 'events/event_information.html' with event=s.current_hackathon %}
+    {% endif %}
     {% for hack in archive %}
         <div class="row">
             {% if forloop.counter0|divisibleby:2 == 0 %}

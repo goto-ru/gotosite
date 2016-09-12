@@ -29,13 +29,13 @@
                 <input type="text" placeholder="Фамилия" name="last_name" required> <br>
                 <input type="email"  placeholder="Email" name="email" required> <br>
                 <input type="password" placeholder="Пароль" name="password" required> <br>
+{##}
+{#                Тип аккаунта: <select name="type">#}
+{#                        <option value="participant">Участник</option>#}
+{#                        <option value="expert">Эксперт</option>#}
+{#                    </select> <br>#}
 
-                Тип аккаунта: <select name="type">
-                        <option value="participant">Участник</option>
-                        <option value="expert">Эксперт</option>
-                    </select> <br>
-
-                <input class="btn btn-default login-btn" type="submit">
+                <input class="btn btn-default login-btn" type="submit" value="Зарегистрироваться">
 
                 {% csrf_token %}
             </form>

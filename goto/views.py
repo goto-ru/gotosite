@@ -105,23 +105,24 @@ def experts(req):
     return render(req, 'user/users.html', {'users': experts, 'title': 'Эксперты'})
 
 
-
+@login_required(login_url='login/')
 def application_fill(req, event_id):
     event = Event.objects.get(pk=event_id)
 
     base_cotext = {'event': event}
-    if not req.user.is_authenticated():
-        messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
-        return render(req, 'events/events.html', base_cotext)
     user = GotoUser.objects.get(pk=req.user.pk)
     base_cotext['user'] = user
     if user.participant is None:
         messages.error(req, 'Пожалуйста, войдите как участник, чтобы подать заявку!')
+        return HttpResponseRedirect(reverse('event_detail', args=[event.slug]))
+    a = Application.objects.filter(participant=user.participant, arrangement__event=event)
+    if a.count() > 0:
+        messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
         return render(req, 'fill_application.html', base_cotext)
-    # a = Application.objects.filter(participant=user.participant, arrangement=arrangement)
-    # if a.count() > 0:
-    #     messages.error(req, 'Вы уже отправили заявку. Посмотреть статус можно в личном кабинете.')
-    #     return render(req, 'fill_application.html', base_cotext)
+
+    if not user.participant.profile_completed():
+        messages.error(req, 'Заполните, пожалуйста, профиль до конца')
+        return HttpResponse(reverse('user_detail', args=[user.id]))
 
     if req.method == 'POST':
         data = req.POST.keys()

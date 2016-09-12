@@ -226,6 +226,7 @@ a {
     left: 50px;
 }
 
+
 .header-btn {
     border-radius: 0;
     color: white;
@@ -234,7 +235,7 @@ a {
     font-size: 18px;
     padding: 0.6%;
     border: 2px solid white;
-    margin-bottom: 5%;
+    top: 10px;
 }
 
 .header-text p {

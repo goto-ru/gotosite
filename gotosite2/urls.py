@@ -32,9 +32,9 @@ urlpatterns = [
     url(r'^page/(?P<slug>[A-Za-z-]+)$', views.page, name='page'),
 
     # Auth
-    url(r'^signup/$', login_views.sign_up, name='sign_up'),
-    url(r'^login/$', login_views.sign_in, name='sign_in'),
-    url(r'^logout/$', login_views.sign_out, name='sign_out'),
+    url(r'^signup$', login_views.sign_up, name='sign_up'),
+    url(r'^login$', login_views.sign_in, name='sign_in'),
+    url(r'^logout$', login_views.sign_out, name='sign_out'),
     # url(r'^profile/$', views.profile, name='profile'),
 
     # Events
