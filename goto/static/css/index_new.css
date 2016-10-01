@@ -1,0 +1,324 @@
+.header {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+table {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+}
+
+.flip-container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#logo {
+    min-width: 430px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.text {
+    text-align: center;
+    font-size: 40px;
+    position: absolute;
+    top: 100vh;
+    z-index: 1000;
+    width: 700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    color: black;
+}
+
+.krutyashki{
+    position: relative;
+    top: calc(100vh + 30px);
+}
+
+.flip-container {
+    perspective: 1000px;
+}
+
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    height: 300px;
+    width: 100%;
+}
+
+.flip-container {
+    min-height: 320px;
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+}
+
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.robot {
+    background: rgb(81, 13, 129);
+}
+
+.programm {
+    background: rgb(67, 180, 152);
+}
+
+.bio {
+    background: rgb(255, 140, 102);
+}
+
+.ad {
+    background: rgb(238, 229, 58);
+}
+
+.ad,
+.bio,
+.programm,
+.robot {
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.ad p,
+.bio p,
+.programm p,
+.robot p {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.ad table,
+.bio table,
+.programm table,
+.robot table,
+.ad-back table,
+.bio-back table,
+.programm-back table,
+.robot-back table {
+    width: 100%;
+    height: 100%;
+}
+
+.ad h3,
+.bio h3,
+.programm h3,
+.robot h3 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.programm-back {
+    background-image: url(/static/img/napravleniya/programm.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.robot-back {
+    background-image: url(/static/img/napravleniya/robo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bio-back {
+    background-image: url(/static/img/napravleniya/bio.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ad-back {
+    background-image: url(/static/img/napravleniya/ad.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.programm-back table,
+.robot-back table,
+.bio-back table,
+.ad-back table {
+    background-color: rgba(55, 55, 55, 0.46);
+}
+
+.programm-back,
+.robot-back,
+.bio-back,
+.ad-back {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+.vertical.flip-container {
+    position: relative;
+}
+
+.vertical .back {
+    transform: rotateX(180deg);
+}
+
+.vertical.flip-container .flipper {
+    transform-origin: 100%; /* half of height */
+}
+
+.vertical.flip-container:hover .flipper {
+    transform: rotateX(-180deg);
+}
+
+.take-part-block h2 {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.big-partner img {
+    max-width: 160px;
+    max-height: 35px;
+}
+
+.little-partner img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.opisanie {
+    position: absolute;
+    z-index: 2;
+    height: 325px;
+    right: 15px;
+    left: 15px;
+    display: none;
+}
+
+.opisanie p {
+    background-color: white;
+    margin: 30px;
+    padding: 30px;
+    font-size: 14px;
+}
+
+.up img, .down img {
+    z-index: 1000;
+    max-height: 30px;
+    position: absolute;
+    right: calc(50% - 30px);
+}
+
+.up img {
+    bottom: 30px;
+    transform: rotateX(180deg);
+}
+
+.down img {
+    top: 30px;
+}
+
+.opisanie table {
+    height: 325px;
+}
+
+.crugleski {
+    position: relative;
+}
+
+.opisanie svg {
+    max-height: 19px;
+    position: absolute;
+    right: -18px;
+    top: 5px;
+}
+
+.opisanie path {
+    fill: #ffffff;
+}
+
+.robot-text,
+.ad-text,
+.bio-text,
+.programm-text {
+    display: none;
+}
+
+.first-slide{
+    position: absolute;
+    top: 0;
+}
+
+.opisanie a{
+    position: absolute;
+    right: 0;
+    width: 64px;
+    height: 19px;
+    top: 5px;
+    z-index: 1000;
+}
+
+.partners{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.partner img {
+    max-width: 70%;
+    max-height: 70%;
+    vertical-align: middle;
+}
+
+.partner {
+    height: 100px;
+    padding: 15px;
+    position: relative;
+    display: block;
+}
+
+.partner table,
+.partner td {
+    height: 100px;
+}
+
+.partner {
+    text-align: center;
+}
+
+.big-partner img {
+    max-width: 160px;
+    max-height: 35px;
+}
+
+.little-partner img {
+    max-width: 90%;
+    max-height: 90%;
+}
