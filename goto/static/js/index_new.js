@@ -40,7 +40,7 @@ $(window).bind('mousewheel', function (e) {
                 }
 
                 if (slide == 1) {
-                    if (c < 10) {
+                    if (c < 30) {
                         c += 1
                     }
                     else {
@@ -61,28 +61,39 @@ $(window).bind('mousewheel', function (e) {
 
     }
     if (e.originalEvent.wheelDelta > 0) {
-
         if (slide == 1) {
-            $('.first-slide').animate({
-                top: 0
-            }, 2000);
+            if (c < 30) {
+                c += 1
+            }
+            else {
+                $('.first-slide').animate({
+                    top: 0
+                }, 2000);
 
-            $('.krutyashki').animate({
-                top: $('.krutyashki').height()
-            }, 2000);
+                $('.krutyashki').animate({
+                    top: $('.krutyashki').height()
+                }, 2000);
 
-            slide = 0;
+                slide = 0;
+                c = 0;
+            }
         }
         if (slide == 2) {
-            $('.krutyashki').animate({
-                top: 0
-            }, 2000);
+            if (c < 30) {
+                c += 1
+            }
+            else {
+                $('.krutyashki').animate({
+                    top: 0
+                }, 2000);
 
-            $('.partners').animate({
-                top: $('.partners').height()
-            }, 2000);
+                $('.partners').animate({
+                    top: $('.partners').height()
+                }, 2000);
 
-            slide = 2;
+                slide = 1;
+                c = 0;
+            }
         }
     }
 
