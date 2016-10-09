@@ -5,7 +5,7 @@ var slide = 0;
 var lock = false;
 
 function next_down() {
-    if (slide != 1) {
+    if (slide != 3) {
         slide += 1;
     }
 }
@@ -36,14 +36,76 @@ function get_slide(n) {
 
 
             lock = true;
-            $('#logo').animate({'width': '300px'}, 1000);
-            $('.text').animate({top: $('#logo').position().top + 260 + 'px'}, 1000);
+            if ($('#logo').width() != 300) {
+                $('#logo').animate({'width': '300px'}, 1000);
+                $('.text').animate({top: $('#logo').position().top + 260 + 'px'}, 1000);
+
+                setTimeout(function () {
+                    lock = false;
+                }, 1000);
+            }
+            else {
+                $('.first-slide').animate({
+                    top: 0
+                }, 2000);
+
+                $('.krutyashki').animate({
+                    top: '100vh'
+                }, 2000);
+
+                setTimeout(function () {
+                    lock = false;
+                }, 2000);
+            }
+
+        }
+        else if (n == 2) {
+            console.log('third slide');
+            lock = true;
+
+            if ($('#partners').position().top != 0) {
+                $('.first-slide').animate({
+                    top: '-100vh'
+                }, 2000);
+
+                $('.krutyashki').animate({
+                    top: '0'
+                }, 2000);
+
+                setTimeout(function () {
+                    lock = false;
+                }, 2000);
+            }
+            else {
+
+                $('#partners').animate({
+                    top: '100vh'
+                }, 2000);
+
+                $('.krutyashki').animate({
+                    top: '0'
+                }, 2000);
+
+                setTimeout(function () {
+                    lock = false;
+                }, 2000);
+            }
+        }
+        else if (n == 3) {
+            console.log('fourth slide');
+            lock = true;
+
+            $('.krutyashki').animate({
+                top: '-100vh'
+            }, 2000);
+
+            $('#partners').animate({
+                top: '0'
+            }, 2000);
 
             setTimeout(function () {
                 lock = false;
-            }, 1000);
-        }
-        else if (n == 2) {
+            }, 2000);
 
         }
     }
@@ -55,7 +117,7 @@ function get_slide(n) {
 $(window).bind('mousewheel', function (e) {
     if (e.originalEvent.wheelDelta < 0) {
         down += 1;
-        if (down > 1) {
+        if (down > 2) {
             down = 0;
             if (get_slide(slide + 1) != 0) {
                 next_down();
@@ -64,9 +126,9 @@ $(window).bind('mousewheel', function (e) {
     }
     else {
         up += 1;
-        if (up > 1) {
+        if (up > 2) {
             up = 0;
-            if (get_slide(slide -= 1) != 0) {
+            if (get_slide(slide - 1) != 0) {
                 next_up();
             }
         }
