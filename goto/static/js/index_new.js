@@ -5,11 +5,15 @@ var slide = 0;
 var lock = false;
 
 function next_down() {
-    slide += 1;
+    if (slide != 1) {
+        slide += 1;
+    }
 }
 
 function next_up() {
-    slide -= 1;
+    if (slide != 0) {
+        slide -= 1;
+    }
 }
 
 function get_slide(n) {
@@ -53,7 +57,7 @@ $(window).bind('mousewheel', function (e) {
         down += 1;
         if (down > 1) {
             down = 0;
-            if (get_slide(slide + 1) != 0){
+            if (get_slide(slide + 1) != 0) {
                 next_down();
             }
         }
@@ -62,7 +66,7 @@ $(window).bind('mousewheel', function (e) {
         up += 1;
         if (up > 1) {
             up = 0;
-            if (get_slide(slide -= 1) != 0){
+            if (get_slide(slide -= 1) != 0) {
                 next_up();
             }
         }
