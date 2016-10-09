@@ -1,48 +1,70 @@
-
-
 var up = 0;
 var down = 0;
-
 var slide = 0;
+
+var lock = false;
 
 function next_down() {
     slide += 1;
 }
 
 function next_up() {
-    slide-=1;
+    slide -= 1;
 }
 
 function get_slide(n) {
-    if (n == 0){
-        $('#logo').animate({'width': '479px'}, 1000);
-        $('.text').animate({top: '100vh'}, 1000);
-    }
+    if (lock == false) {
+        if (n == 0) {
+            console.log('first slide');
 
-    else if(n == 1){
-        $('#logo').animate({'width': '300px'}, 1000);
-        $('.text').animate({top: $('#logo').position().top + 260 +'px'}, 1000);
-    }
-    else if(n == 2){
 
+            lock = true;
+            $('#logo').animate({'width': '479px'}, 1000);
+            $('.text').animate({top: '100vh'}, 1000);
+
+            setTimeout(function () {
+                lock = false;
+            }, 1000);
+        }
+
+        else if (n == 1) {
+            console.log('second slide');
+
+
+            lock = true;
+            $('#logo').animate({'width': '300px'}, 1000);
+            $('.text').animate({top: $('#logo').position().top + 260 + 'px'}, 1000);
+
+            setTimeout(function () {
+                lock = false;
+            }, 1000);
+        }
+        else if (n == 2) {
+
+        }
+    }
+    else {
+        return 0;
     }
 }
 
 $(window).bind('mousewheel', function (e) {
     if (e.originalEvent.wheelDelta < 0) {
         down += 1;
-        if (down > 20){
+        if (down > 1) {
             down = 0;
-            next_down();
-            get_slide(slide)
+            if (get_slide(slide + 1) != 0){
+                next_down();
+            }
         }
     }
-    else{
+    else {
         up += 1;
-        if (up > 20){
+        if (up > 1) {
             up = 0;
-            next_up();
-            get_slide(slide)
+            if (get_slide(slide -= 1) != 0){
+                next_up();
+            }
         }
     }
 });
