@@ -2,18 +2,106 @@ var lock = false;
 var slide = 0;
 var c = 0;
 
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
 function refresh() {
     location.reload();
 }
+
+'use strict';
+
+// taken from mo.js demos
+function isIOSSafari() {
+    var userAgent;
+    userAgent = window.navigator.userAgent;
+    return userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
+};
+
+// taken from mo.js demos
+function isTouch() {
+    var isIETouch;
+    isIETouch = navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    return [].indexOf.call(window, 'ontouchstart') >= 0 || isIETouch;
+};
+
+// taken from mo.js demos
+var isIOS = isIOSSafari(),
+    clickHandler = isIOS || isTouch() ? 'touchstart' : 'click';
+
+function extend(a, b) {
+    for (var key in b) {
+        if (b.hasOwnProperty(key)) {
+            a[key] = b[key];
+        }
+    }
+    return a;
+}
+
+function Animocon(el, options) {
+    this.el = el;
+    this.options = extend({}, this.options);
+    extend(this.options, options);
+
+    this.checked = false;
+
+    this.timeline = new mojs.Timeline();
+
+    for (var i = 0, len = this.options.tweens.length; i < len; ++i) {
+        this.timeline.add(this.options.tweens[i]);
+    }
+
+    var self = this;
+    this.el.addEventListener(clickHandler, function () {
+        if (self.checked) {
+            self.options.onUnCheck();
+        }
+        else {
+            self.options.onCheck();
+            self.timeline.replay();
+        }
+        self.checked = !self.checked;
+    });
+}
+
+Animocon.prototype.options = {
+    tweens: [
+        new mojs.Burst({})
+    ],
+    onCheck: function () {
+        return false;
+    },
+    onUnCheck: function () {
+        return false;
+    }
+};
+
+
 
 $(window).bind('mousewheel', function (e) {
 
     if (e.originalEvent.wheelDelta < 100) {
         if (lock == false) {
-            if ($('#logo').width() > 400) {
+            if ($('#logo').width() > 300) {
                 $('#logo').animate({
-                    width: '-=20px'
-                }, 1);
+                    width: '300px'
+                }, 500);
             }
             else {
                 lock = true;
@@ -22,8 +110,8 @@ $(window).bind('mousewheel', function (e) {
         else {
             if (parseInt($('.text').css('top').slice(0, -2)) > ($('#logo').position().top + $('#logo').height() )) {
                 $('.text').animate({
-                    top: '-=10px'
-                }, 0.000001)
+                    top: ($('#logo').position().top + $('#logo').height()) + "px"
+                }, 500)
             }
             else {
                 if (slide == 0) {
@@ -53,7 +141,7 @@ $(window).bind('mousewheel', function (e) {
                         }, 2000);
 
                         slide = 2;
-                        c = 0
+                        c = 0;
                     }
                 }
             }
