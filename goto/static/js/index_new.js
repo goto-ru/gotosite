@@ -1,190 +1,50 @@
-var lock = false;
+
+
+var up = 0;
+var down = 0;
+
 var slide = 0;
-var c = 0;
 
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+function next_down() {
+    slide += 1;
 }
 
-function refresh() {
-    location.reload();
+function next_up() {
+    slide-=1;
 }
 
-'use strict';
-
-// taken from mo.js demos
-function isIOSSafari() {
-    var userAgent;
-    userAgent = window.navigator.userAgent;
-    return userAgent.match(/iPad/i) || userAgent.match(/iPhone/i);
-};
-
-// taken from mo.js demos
-function isTouch() {
-    var isIETouch;
-    isIETouch = navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    return [].indexOf.call(window, 'ontouchstart') >= 0 || isIETouch;
-};
-
-// taken from mo.js demos
-var isIOS = isIOSSafari(),
-    clickHandler = isIOS || isTouch() ? 'touchstart' : 'click';
-
-function extend(a, b) {
-    for (var key in b) {
-        if (b.hasOwnProperty(key)) {
-            a[key] = b[key];
-        }
+function get_slide(n) {
+    if (n == 0){
+        $('#logo').animate({'width': '479px'}, 1000);
+        $('.text').animate({top: '100vh'}, 1000);
     }
-    return a;
+
+    else if(n == 1){
+        $('#logo').animate({'width': '300px'}, 1000);
+        $('.text').animate({top: $('#logo').position().top + 260 +'px'}, 1000);
+    }
+    else if(n == 2){
+
+    }
 }
-
-function Animocon(el, options) {
-    this.el = el;
-    this.options = extend({}, this.options);
-    extend(this.options, options);
-
-    this.checked = false;
-
-    this.timeline = new mojs.Timeline();
-
-    for (var i = 0, len = this.options.tweens.length; i < len; ++i) {
-        this.timeline.add(this.options.tweens[i]);
-    }
-
-    var self = this;
-    this.el.addEventListener(clickHandler, function () {
-        if (self.checked) {
-            self.options.onUnCheck();
-        }
-        else {
-            self.options.onCheck();
-            self.timeline.replay();
-        }
-        self.checked = !self.checked;
-    });
-}
-
-Animocon.prototype.options = {
-    tweens: [
-        new mojs.Burst({})
-    ],
-    onCheck: function () {
-        return false;
-    },
-    onUnCheck: function () {
-        return false;
-    }
-};
-
-
 
 $(window).bind('mousewheel', function (e) {
-
-    if (e.originalEvent.wheelDelta < 100) {
-        if (lock == false) {
-            if ($('#logo').width() > 300) {
-                $('#logo').animate({
-                    width: '300px'
-                }, 500);
-            }
-            else {
-                lock = true;
-            }
-        }
-        else {
-            if (parseInt($('.text').css('top').slice(0, -2)) > ($('#logo').position().top + $('#logo').height() )) {
-                $('.text').animate({
-                    top: ($('#logo').position().top + $('#logo').height()) + "px"
-                }, 500)
-            }
-            else {
-                if (slide == 0) {
-                    $('.first-slide').animate({
-                        top: (0 - $('.first-slide').height() - 30)
-                    }, 2000);
-
-                    $('.krutyashki').animate({
-                        top: 0
-                    }, 2000);
-
-                    slide = 1;
-                    c = 0;
-                }
-
-                if (slide == 1) {
-                    if (c < 30) {
-                        c += 1
-                    }
-                    else {
-                        $('.krutyashki').animate({
-                            top: (0 - $('.krutyashki').height() - 30)
-                        }, 2000);
-
-                        $('.partners').animate({
-                            top: 0
-                        }, 2000);
-
-                        slide = 2;
-                        c = 0;
-                    }
-                }
-            }
-        }
-
-    }
-    if (e.originalEvent.wheelDelta > 0) {
-        if (slide == 1) {
-            if (c < 30) {
-                c += 1
-            }
-            else {
-                $('.first-slide').animate({
-                    top: 0
-                }, 2000);
-
-                $('.krutyashki').animate({
-                    top: $('.krutyashki').height()
-                }, 2000);
-
-                slide = 0;
-                c = 0;
-            }
-        }
-        if (slide == 2) {
-            if (c < 30) {
-                c += 1
-            }
-            else {
-                $('.krutyashki').animate({
-                    top: 0
-                }, 2000);
-
-                $('.partners').animate({
-                    top: $('.partners').height()
-                }, 2000);
-
-                slide = 1;
-                c = 0;
-            }
+    if (e.originalEvent.wheelDelta < 0) {
+        down += 1;
+        if (down > 20){
+            down = 0;
+            next_down();
+            get_slide(slide)
         }
     }
-
+    else{
+        up += 1;
+        if (up > 20){
+            up = 0;
+            next_up();
+            get_slide(slide)
+        }
+    }
 });
 
 $(document).ready(function (ev) {
