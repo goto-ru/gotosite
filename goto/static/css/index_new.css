@@ -1,3 +1,8 @@
+body {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-weight: 300;
+}
+
 .header {
     min-height: 100vh;
     min-width: 100vw;
@@ -322,8 +327,8 @@ body {
 }
 
 .little-partner img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 69%;
+    max-height: 69%;
 }
 
 .hor-fix {
@@ -629,7 +634,59 @@ body {
     left: 0.0px;
 }
 
-.cool_table{
+.cool_table {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 112px);
+}
+
+.footer-container {
+    width: 100vw;
+    height: 112px;
+    position: absolute;
+    bottom: 0;
+}
+
+.hr {
+    background: #43b498 none repeat scroll 0 0;
+    /* margin-bottom: 5px; */
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+
+.modal-footer {
+    margin-top: 0;
+}
+
+.contacts {
+    line-height: 1.4;
+    text-align: right;
+}
+
+.bot-text img {
+    float: left;
+    max-height: 70px;
+    padding-right: 10px;
+}
+
+.bot-text p {
+    float: left;
+    font-size: 11px;
+    line-height: 1.2;
+    max-width: 60%;
+    text-align: left;
+    margin-top: 7px;
+}
+
+.contacts h5 {
+    margin: 3px;
+}
+
+.footer-mail {
+    color: #e61919;
+}
+
+.partners-header h1 {
+    text-align: center;
+    margin-bottom: 38px;
+    font-weight: 400;
 }

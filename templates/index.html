@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Hi!</title>
 </head>
-{#<body onResize="refresh()">#}
-<body>
+{% load staticfiles %}
+<body onResize="refresh()">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/index_new.css">
 <link rel="stylesheet" type="text/css" href="/static/css/menu/normalize.css"/>
 <link rel="stylesheet" type="text/css" href="/static/css/menu/demo.css">
@@ -19,11 +20,11 @@
 <nav id="bt-menu" class="bt-menu">
     <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
     <ul>
-        <li><a href="#">Лагерь</a></li>
-        <li><a href="#">Хакатон</a></li>
-        <li><a href="#">Лекторий</a></li>
+        <li><a href="{% url 'schools' %}">Лагерь</a></li>
+        <li><a href="{% url 'hackathons' %}">Хакатон</a></li>
+        <li><a href="{% url 'lectures' %}">Лекторий</a></li>
         <li><a href="#">Коворкинг</a></li>
-        <li><a href="#">О нас</a></li>
+        <li><a href="{% url 'about_us' %}">О нас</a></li>
     </ul>
 </nav>
 
@@ -53,11 +54,7 @@
     </table>
 
     <div class="text">
-
-        Неспокойные времена
-        настали для
-        Галактической Республики.
-
+        Образовательный проект в сфере высоких технологий
     </div>
 
 </div>
@@ -194,89 +191,115 @@
             <td valign="middle">
                 <div class="container">
                     <div class="row">
-                        <div class="partner col-md-3 little-partner">
+                        <div class="partners-header col-md-12"><h1>Партнёры</h1></div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/abitur.jpg"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/abitur.jpg"></a>
                                 </td>
                             </table>
                         </div>
-                        <div class="partner col-md-3 little-partner">
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/amperka.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/amperka.png"></a>
                                 </td>
                             </table>
                         </div>
-                        <div class="partner col-md-3 little-partner">
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/blastim.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/blastim.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/cat.jpg"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/codeforces.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/codeforces.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/cossa.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/cossa.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/golograph.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/golograph.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/hse.jpg"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/innopols.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/innopols.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/intel.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/intel.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/krok.gif"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/mfti.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/newtonew.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/newtonew.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/nts.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/popmech.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/popmech.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
-                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/rambler.png"></a>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/rambler.png"></a>
                                 </td>
                             </table>
-                        </div><div class="partner col-md-3 little-partner">
+                        </div>
+                        <div class="partner col-md-2 little-partner">
                             <table>
                                 <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/rvk.png"></a>
                                 </td>
@@ -288,7 +311,32 @@
             </td>
         </tr>
     </table>
+    <div class="footer-container">
+        <div class="hr footer-hr"></div>
+        <footer class="modal-footer">
+            <div class="footer">
+                <div style="padding-top: 5px; padding-bottom: 6px;">
+                    <div class="container">
+                        <div class="col-md-6 bot-text">
+                            <img src="{% static 'img/logo.png' %}">
+
+                            <p>Образовательный проект, посвященный проектной деятельности в различных
+                                высокотехнологических областях. Использование визуальных материалов только с согласия
+                                создателей проекта. Все права защищены.</p>
+
+                        </div>
+                        <div class="col-md-6 contacts">
+                            <h5>Контакты</h5>
+                            +7 (985) 2443226<br>
+                            <a class="footer-mail" href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/static/js/index_new.js"></script>

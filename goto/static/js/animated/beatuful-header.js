@@ -25,6 +25,7 @@ function range(start, stop, step) {
     return result;
 };
 
+
 (function () {
 
     var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
@@ -138,6 +139,21 @@ function range(start, stop, step) {
         for (var i in points) {
             shiftPoint(points[i]);
         }
+
+        setInterval(function () {
+            if (slide == 0) {
+                for (var i in points) {
+                    shiftPoint(points[i]);
+                }
+            }
+            else if (slide == 1){
+                for (var i in points) {
+                    shiftPoint(points[i]);
+                }
+            }
+        }, 6000);
+
+
     }
 
     function animate() {
@@ -164,14 +180,13 @@ function range(start, stop, step) {
     }
 
     function shiftPoint(p) {
-        setTimeout(function(){
+
         TweenLite.to(p, 1 + 1 * Math.random(), {
             x: p.originX - 50 + Math.random() * 100,
-            y: p.originY - 50 + Math.random() * 100, ease: Circ.easeInOut,
-            onComplete: function () {
-                shiftPoint(p)
-            }
-        })}, 1000);
+            y: p.originY - 50 + Math.random() * 100, ease: Circ.easeInOut
+        });
+
+
     }
 
     // Canvas manipulation
