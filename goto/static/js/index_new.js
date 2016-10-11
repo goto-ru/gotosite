@@ -4,8 +4,26 @@ var slide = 0;
 
 var lock = false;
 
+function getRandom(min, max){
+  return Math.random() * (max - min) + min;
+}
+
+var isSafari = /constructor/i.test(window.HTMLElement);
+var isFF = !!navigator.userAgent.match(/firefox/i);
+
+if (isSafari) {
+  document.getElementsByTagName('html')[0].classList.add('safari');
+}
+
+// Remove click on button for demo purpose
+Array.prototype.slice.call(document.querySelectorAll('.button'), 0).forEach(function(bt) {
+  bt.addEventListener('click', function(e) {
+    e.preventDefault();
+  });
+});
+
 function next_down() {
-    if (slide != 3) {
+    if (slide != 4) {
         slide += 1;
     }
 }
@@ -63,7 +81,7 @@ function get_slide(n) {
             console.log('third slide');
             lock = true;
 
-            if ($('#partners').position().top != 0) {
+            if ($('.button-big-picture').position().top != 0) {
                 $('.first-slide').animate({
                     top: '-100vh'
                 }, 2000);
@@ -78,7 +96,7 @@ function get_slide(n) {
             }
             else {
 
-                $('#partners').animate({
+                $('.button-big-picture').animate({
                     top: '100vh'
                 }, 2000);
 
@@ -95,7 +113,33 @@ function get_slide(n) {
             console.log('fourth slide');
             lock = true;
 
-            $('.krutyashki').animate({
+            if ($('#partners').position().top != 0) {
+                $('.krutyashki').animate({
+                    top: '-100vh'
+                }, 2000);
+
+                $('.button-big-picture').animate({
+                    top: '0'
+                }, 2000);
+            } else {
+                $('.button-big-picture').animate({
+                    top: '0'
+                }, 2000);
+                $('#partners').animate({
+                    top: '100vh'
+                }, 2000);
+            }
+
+
+            setTimeout(function () {
+                lock = false;
+            }, 2000);
+        }
+        else if (n == 4) {
+            console.log('5 slide');
+            lock = true;
+
+            $('.button-big-picture').animate({
                 top: '-100vh'
             }, 2000);
 

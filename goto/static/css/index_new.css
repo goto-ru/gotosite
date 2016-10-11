@@ -44,7 +44,7 @@ body {
     margin-right: auto;
     left: 0;
     right: 0;
-    color: black;
+    color: #080808;
 }
 
 .krutyashki {
@@ -421,7 +421,7 @@ body {
     width: 60px;
     height: 60px;
     z-index: 1000;
-    color: black;
+    color: #080808;
     position: fixed;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
@@ -470,7 +470,7 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #282928;
+    background: #080808;
     top: 50%;
     margin-top: -6px;
     left: 12px;
@@ -488,7 +488,7 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: black;
+    background: #080808;
 }
 
 #ss_menu > .menu .share .circle:after {
@@ -502,7 +502,7 @@ body {
 }
 
 .bar:before {
-    background: black;
+    background: #080808;
 }
 
 #ss_menu > .menu .share .bar {
@@ -511,7 +511,7 @@ body {
     transition: all 1s ease;
     width: 24px;
     height: 3px;
-    background: black;
+    background: #080808;
     position: absolute;
     top: 50%;
     margin-top: -1.5px;
@@ -535,7 +535,7 @@ body {
     content: '';
     width: 24px;
     height: 3px;
-    background: black;
+    background: #080808;
     position: absolute;
     left: 0px;
     -webkit-transform-origin: 0% 50%;
@@ -689,4 +689,45 @@ body {
     text-align: center;
     margin-bottom: 38px;
     font-weight: 400;
+}
+
+.button-big-picture {
+    position: absolute;
+    top: 100vh;
+}
+
+.button-big-picture table,
+.button-big-picture {
+    height: 100vh;
+    width: 100vw;
+}
+
+.button-big-picture table td {
+    margin: 0 auto;
+}
+
+.button-big-picture button {
+    font-size: 52px;
+    color: #080808;
+}
+
+.cropopo {
+    text-align: center;
+    width: 100vw;
+}
+
+.cropopo button:hover {
+    cursor: pointer;
+    color: #080808;
+    text-decoration: none;
+}
+
+.cropopo button {
+    border: 2px solid;
+    padding: 12px 58px;
+    background: white;
+}
+
+.cropopo svg{
+    position: absolute;
 }
