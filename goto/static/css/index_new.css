@@ -450,7 +450,7 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: -17px;;
+    left: 0px;
     top: 0px;
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
@@ -718,14 +718,14 @@ body {
 
 .cropopo button:hover {
     cursor: pointer;
+    color: #080808;
     text-decoration: none;
 }
 
 .cropopo button {
-    padding: 1px 73px;
-    background: rgb(255, 140, 102);
-    color: white;
-    border: none;
+    border: 4px solid rgb(255, 140, 102);
+    padding: 12px 58px;
+    background: white;
 }
 
 .cropopo svg{
@@ -736,5 +736,5 @@ body {
 background: rgba(255, 255, 255, 0); /* Safari */
 }
 ::-moz-selection {
-background: rgba(255, 255, 255, 0); /* Firefox */
+background: #ffb7b7; /* Firefox */
 }

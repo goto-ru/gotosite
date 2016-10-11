@@ -168,7 +168,7 @@ function range(start, stop, step) {
                     points[i].active = 0.1;
                     points[i].circle.active = 0.02;
                 } else {
-                    points[i].active = 0.03;
+                    points[i].active = 0;
                     points[i].circle.active = 0.001;
                 }
 
