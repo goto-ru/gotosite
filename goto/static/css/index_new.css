@@ -718,14 +718,14 @@ body {
 
 .cropopo button:hover {
     cursor: pointer;
-    color: #080808;
     text-decoration: none;
 }
 
 .cropopo button {
-    border: 2px solid;
-    padding: 12px 58px;
-    background: white;
+    padding: 1px 73px;
+    background: rgb(255, 140, 102);
+    color: white;
+    border: none;
 }
 
 .cropopo svg{
