@@ -711,31 +711,31 @@ body {
     color: #080808;
 }
 
-.cropopo {
-    text-align: center;
+::selection {
+    background: rgba(255, 255, 255, 0); /* Safari */
+}
+
+::-moz-selection {
+    background: #ffb7b7; /* Firefox */
+}
+
+.shariki {
+    height: 100vh;
     width: 100vw;
 }
 
-.cropopo button:hover {
-    cursor: pointer;
-    color: #080808;
-    text-decoration: none;
+.table-shar {
+    height: 100vh;
+    width: 100vw;
 }
 
-.cropopo button {
-    border: 4px solid #080808;
-    padding: 12px 86px;
-    background: white;
-    color: #080808;
+.table-shar td{
+    text-align: center;
 }
 
-.cropopo svg{
-    position: absolute;
-}
-
-::selection {
-background: rgba(255, 255, 255, 0); /* Safari */
-}
-::-moz-selection {
-background: #ffb7b7; /* Firefox */
+.table-shar button{
+    background: none;
+    border: none;
+    font-size: 5rem;
+    margin: 0 auto;
 }

@@ -43,7 +43,15 @@
     </div>
 </div>
 
-<div class="first-slide">
+<canvas id="shariki" class="shariki"></canvas>
+<table class="table-shar">
+    <td valign="middle">
+            <button id="component-2" class="button button--2">
+                Хочу
+            </button>
+    </td>
+</table>
+<div style="display: none" class="first-slide">
     <table id='large-header' class="header">
         <canvas id="demo-canvas"></canvas>
         <tbody>
@@ -187,22 +195,12 @@
 </div>
 
 <div class="button-big-picture">
+    <canvas id="shariki" class="shariki"></canvas>
     <table>
         <td valign="middle">
             <div class="cropopo">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-filters">
-                    <defs>
-                        <filter id="filter-goo-2">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" x="0"></feGaussianBlur>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                                           result="goo"></feColorMatrix>
-                            <feComposite in="SourceGraphic" in2="goo"></feComposite>
-                        </filter>
-                    </defs>
-                </svg>
-                <button id="component-2" class="button button--2" style="filter: url('#filter-goo-2')">
+                <button id="component-2" class="button button--2">
                     Хочу
-                    <span class="button__bg" style="transform: matrix(1, 0, 0, 1, 0, 0);"></span>
                 </button>
             </div>
         </td>
@@ -363,14 +361,17 @@
 </div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/static/js/index_new.js"></script>
+<script src="/static/js/hochu/hochu.js"></script>
 <script src="/static/js/menu/classie.js"></script>
 <script src="/static/js/menu/borderMenu.js"></script>
-<script src="/static/js/animated/TweenLite.min.js"></script>
 <script src="/static/js/animated/EasePack.min.js"></script>
 <script src="/static/js/animated/rAF.js"></script>
 <script src="/static/js/animated/beatuful-header.js"></script>
-<script src="/static/js/buttons/TweenMax.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
 </body>
 </html>
