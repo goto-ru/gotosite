@@ -729,13 +729,61 @@ body {
     width: 100vw;
 }
 
-.table-shar td{
+.table-shar td {
     text-align: center;
 }
 
-.table-shar button{
+.table-shar button {
     background: none;
     border: none;
     font-size: 5rem;
     margin: 0 auto;
+}
+
+#but1,
+#but2,
+#but3,
+#but4,
+#but5,
+#but6 {
+    position: absolute;
+    z-index: -200;
+    color: white;
+}
+
+#but1 {
+    top: 24vh;
+    left: 19vh;
+    font-size: 18px;
+
+}
+
+#but2 {
+    top: 55vh;
+    right: 44vw;
+    font-size: 20px;
+}
+
+#but3 {
+    bottom: 18vh;
+    left: 21vw;
+    font-size: 50px;
+}
+
+#but4 {
+    top: 34vh;
+    right: 17vw;
+    font-size: 18px;
+}
+
+#but5 {
+    top: 51vh;
+    right: 16vw;
+    font-size: 40px;
+}
+
+#but6 {
+    bottom: 16vh;
+    right: 23vw;
+    font-size: 40px;
 }
