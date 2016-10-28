@@ -45,35 +45,20 @@
 
 
 <div class="first-slide">
-    {#    <table id='large-header' class="header">#}
-    {#        <canvas id="demo-canvas"></canvas>#}
-    {#        <tbody>#}
-    {#        <tr>#}
-    {#            <td valign="middle">#}
-    {#                <img id="logo" src="/static/img/logo_big.png">#}
-    {#            </td>#}
-    {#        </tr>#}
-    {#        </tbody>#}
-    {#    </table>#}
-    {##}
-    {#    <div class="text">#}
-    {#        Образовательный проект в сфере высоких технологий#}
-    {#    </div>#}
-    <canvas id="shariki" class="shariki"></canvas>
-    <table class="table-shar">
-        <td valign="middle">
-            <button id="component-2" class="button button--2">
-                Хочу
-            </button>
-        </td>
-    </table>
+         <canvas id="demo-canvas"></canvas>
+        <table id='large-header' class="header">
+            <tbody>
+            <tr>
+                <td valign="middle">
+                    <img id="logo" src="/static/img/logo_big.png">
+                </td>
+            <tr>
+            </tbody>
+        </table>
 
-    <div id="but1">Помочь</div>
-    <div id="but2">Набубениться</div>
-    <div id="but3">Девушку</div>
-    <div id="but4">Парня</div>
-    <div id="but5">Мир</div>
-    <div id="but6">Работу</div>
+        <div class="text">
+            Образовательный проект в сфере высоких технологий
+        </div>
 </div>
 
 <!-- Весёлые покрутяшки -->
@@ -202,17 +187,49 @@
 </div>
 
 <div class="button-big-picture">
-    <canvas id="shariki" class="shariki"></canvas>
+           <canvas id="shariki" class="shariki"></canvas>
     <table class="table-shar">
-        <td valign="middle">
-            <button id="component-2" class="button button--2">
-                Хочу
-            </button>
-        </td>
+        <tr>
+            <td valign="middle">
+                                <button id="component-2" class="button button--2">
+                                    Хочу
+                                </button>
+                <div id="come_to_us_brother">
+                        <span class="input input--akira">
+                            <input class="input__field input__field--akira" type="text" id="input-22"/>
+                            <label class="input__label input__label--akira" for="input-22">
+                                <span class="input__label-content input__label-content--akira">Email</span>
+                            </label>
+                        </span>
+                </div>
+
+
+            </td>
+        </tr>
     </table>
+
+
+    <div id="take-part">
+        <table>
+            <tr>
+                <td valign="middle">
+                    <div id="part1"><a>Хакатон</a></div>
+                    <br><br><br>
+                    <div id="part2"><a>&nbsp;Школа&nbsp;</a></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <a onclick="come_to_us_brother()" id="but1">Подписаться</a>
+    <a id="but2">Стать<br>партнёром</a>
+    <a onclick="take_part()" id="but3">Принять <br> участие</a>
+    <a id="but4">Преподавать</a>
+    <a id="but5">Подробности<br>о проекте</a>
+    <a id="but6">Новости</a>
 </div>
 
-<!-- Ненависные партнёры -->
+
 <div id="partners" class="partners normal-otstup">
     <table class="cool_table">
         <tr>

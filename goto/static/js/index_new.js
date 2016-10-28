@@ -4,22 +4,22 @@ var slide = 0;
 
 var lock = false;
 
-function getRandom(min, max){
-  return Math.random() * (max - min) + min;
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 var isSafari = /constructor/i.test(window.HTMLElement);
 var isFF = !!navigator.userAgent.match(/firefox/i);
 
 if (isSafari) {
-  document.getElementsByTagName('html')[0].classList.add('safari');
+    document.getElementsByTagName('html')[0].classList.add('safari');
 }
 
 // Remove click on button for demo purpose
-Array.prototype.slice.call(document.querySelectorAll('.button'), 0).forEach(function(bt) {
-  bt.addEventListener('click', function(e) {
-    e.preventDefault();
-  });
+Array.prototype.slice.call(document.querySelectorAll('.button'), 0).forEach(function (bt) {
+    bt.addEventListener('click', function (e) {
+        e.preventDefault();
+    });
 });
 
 function next_down() {
@@ -254,4 +254,8 @@ function awesome() {
     $('.programm-text').css('display', 'none');
     $('.ad-text').css('display', 'none');
     $('.bio-text').css('display', 'none');
+}
+
+function refresh() {
+    window.location = window.location;
 }
