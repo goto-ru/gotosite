@@ -1,10 +1,12 @@
 var step = 0;
 var cool_clas = new Object();
+var l = 138;
+var ll = 110;
 
 $(document).ready(function () {
 
     // Copyright by Tvorog
-    console.log("cool_clas designed by Tvorog <https://vk.com/sttrelllok>");
+    console.log("Designed by Tvorog <https://vk.com/sttrelllok>");
 
     $("#shariki").width($(document).width);
     var c = document.getElementById("shariki");
@@ -155,6 +157,12 @@ $(document).ready(function () {
                 ctx.closePath();
 
             } else if (step == 4) {
+                ctx.beginPath();
+                ctx.moveTo($('#but3').position().left + l, $('#but3').position().top + ll);
+                ctx.lineTo($('#part1').position().left, $('#part1').position().top);
+                ctx.strokeStyle = 'rgba(97,97,97,0.5)';
+                ctx.stroke();
+
 
                 ctx.beginPath();
                 ctx.arc($('#but3').position().left + 138, $('#but3').position().top + 110, cool_clas["r3"], 0, 2 * Math.PI, false);
@@ -402,6 +410,12 @@ function come_to_us_brother() {
         $('#come_to_us_brother').toggle();
     }, 1000);
 }
+
+$('#part1').hover(function () {
+    $(this).animate({
+        padding: 20
+    }, 1000)
+});
 
 
 function take_part() {

@@ -6,6 +6,7 @@
 </head>
 {% load staticfiles %}
 <body onResize="refresh()">
+<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/index_new.css">
 <link rel="stylesheet" type="text/css" href="/static/css/menu/normalize.css"/>
@@ -45,20 +46,20 @@
 
 
 <div class="first-slide">
-         <canvas id="demo-canvas"></canvas>
-        <table id='large-header' class="header">
-            <tbody>
-            <tr>
-                <td valign="middle">
-                    <img id="logo" src="/static/img/logo_big.png">
-                </td>
-            <tr>
-            </tbody>
-        </table>
+    <canvas id="demo-canvas"></canvas>
+    <table id='large-header' class="header">
+        <tbody>
+        <tr>
+            <td valign="middle">
+                <img id="logo" src="/static/img/logo_big.png">
+            </td>
+        <tr>
+        </tbody>
+    </table>
 
-        <div class="text">
-            Образовательный проект в сфере высоких технологий
-        </div>
+    <div class="text">
+        Образовательный проект в сфере высоких технологий
+    </div>
 </div>
 
 <!-- Весёлые покрутяшки -->
@@ -187,13 +188,13 @@
 </div>
 
 <div class="button-big-picture">
-           <canvas id="shariki" class="shariki"></canvas>
+    <canvas id="shariki" class="shariki"></canvas>
     <table class="table-shar">
         <tr>
             <td valign="middle">
-                                <button id="component-2" class="button button--2">
-                                    Хочу
-                                </button>
+                <button id="component-2" class="button button--2">
+                    Хочу
+                </button>
                 <div id="come_to_us_brother">
                         <span class="input input--akira">
                             <input class="input__field input__field--akira" type="text" id="input-22"/>
@@ -384,7 +385,7 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
 <script src="/static/js/index_new.js"></script>
 <script src="/static/js/hochu/hochu.js"></script>
 <script src="/static/js/menu/classie.js"></script>
