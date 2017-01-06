@@ -14,7 +14,8 @@
                <a href="{% url 'user_detail' a.participant.pk %}">{{ a.participant }}</a>
 
             {% endfor %}
-            <h3>Приглашенные участники</h3>
+            <h3>Приглашенн
+                ые участники</h3>
             {% for a in invited %}
                <a href="{% url 'user_detail' a.participant.pk %}">{{ a.participant }}</a>
 
