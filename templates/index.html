@@ -1,250 +1,400 @@
-{% extends 'base_site.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hi!</title>
+</head>
 {% load staticfiles %}
-{% block title %}
-    GoTo
-{% endblock %}
-{% block header %}
-    <div class="header">
-        {% include 'navigation.html' %}
-        <div class="socials">
-            <a href="https://www.facebook.com/pages/GoTo-Camp/1517446851839524"><img width="22"
-                                                                                     src="{% static 'img/socials/fb.png' %}"></a><br><br>
-            <a href="https://vk.com/goto_msk"><img width="22" src="{% static 'img/socials/vk.png' %}"></a><br><br>
-            <a href="http://instagram.com/goto_goto_goto"><img width="25"
-                                                               src="{% static 'img/socials/in.png' %}"></a><br><br>
-            <a href="https://twitter.com/goto_camp"><img width="29" src="{% static 'img/socials/tw.png' %}"></a><br><br>
-        </div>
-        <div class="container" style="background: none;">
-            <div class="xs-force-center header-text">
-                <p class="big-title">Школа GoTo</p>
-                <p class="decode-message">Образовательные программы в области IT робототехники и цифрового
-                    производства</p>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-{% endblock %}
+<body onResize="refresh()">
+<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/index_new.css">
+<link rel="stylesheet" type="text/css" href="/static/css/menu/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/menu/demo.css">
+<link rel="stylesheet" type="text/css" href="/static/css/menu/icons.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/menu/menu.css"/>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="/static/js/menu/modernizr.custom.js"></script>
+<script src="/static/js/mo.min.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<nav id="bt-menu" class="bt-menu">
+    <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+    <ul>
+        <li><a href="{% url 'schools' %}">Лагерь</a></li>
+        <li><a href="{% url 'hackathons' %}">Хакатон</a></li>
+        <li><a href="{% url 'lectures' %}">Лекторий</a></li>
+        <li><a href="#">Коворкинг</a></li>
+        <li><a href="{% url 'about_us' %}">О нас</a></li>
 
-{% block container %}
-    <link href="{% static 'css/index.css' %}" rel="stylesheet">
-    <div class="green-background">
-        <div class="container green-background">
-            <div class="gotic-text">
-                <table style="height: 100%; width: 100%">
-                    <td style="vertical-align: middle"><p>Образовательные программы GoTo помогают школьникам со всей
-                        России воплощать в
-                        жизнь
-                        самые
-                        смелые идеи, получать знания у практикующих специалистов и предпринимателей, находить
-                        единомышленников и
-                        обрести мотивацию к дальнейшему саморазвитию.<br><br>
+        <li><a>Профиль</a></li>
+    </ul>
+</nav>
 
-                        Участник каждой школы, лагеря или хакатона GoTo получает возможность реализовать проект или
-                        провести
-                        исследование в сфере IT и робототехники. Участники распределяются по командам, в которых они
-                        вместе
-                        пройдут все этапы развития проекта – от идеи до реализации. Работу над проектами курируют
-                        преподаватели лучших университетов страны и эксперты ведущих компаний: МФТИ, ВШЭ, Иннополис,
-                        Яндекс,
-                        КРОК, Microsoft, Nival, Rambler&Co, Intel и др.
-                    </p></td>
-                </table>
-
-            </div>
+<div id='ss_menu' style="transform: rotate(88deg)">
+    <div class="hor-fix"><i class="fa fa-facebook-official"></i></div>
+    <div class="hor-fix"><i class="fa fa-twitter"></i></div>
+    <div class="hor-fix"><i class="fa fa-linkedin"></i></div>
+    <div class="hor-fix"><i class="fa fa-google-plus"></i></div>
+    <div class='menu hor-fix'>
+        <div class='share' id='ss_toggle' data-rot='88'>
+            <div class='circle'></div>
+            <div class='bar'></div>
         </div>
     </div>
-    <div class="orange-item">
-        <div class="row">
-            <div class="vector-description col-md-6">
-                <h3>Летние школы</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
-
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <div>
-                    <p class="down-links left-link"><a class="reversed-link" href="/schools">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
-                    </p>
-                </div>
-            </div>
-
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-        </div>
-        <div class="row">
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-            <div class="vector-description col-md-6">
-                <h3>Хакатоны</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
-
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <div>
-                    <p class="down-links left-link"><a class="reversed-link" href="/hackathons">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="vector-description col-md-6">
-                <h3>Лекторий</h3>
-                <p>После вводных лекций об актуальности и областях применения анализа данных участников ждет программа
-                    обучения из 2 блоков:
-
-                    – Серия мастер-классов, посвященных машинному обучению и анализу больших данных. Начинающие освоят
-                    азы и инструментарий, после чего присоединятся к направлению более опытных участников, которые сразу
-                    займутся кейсами по рекомендательным системам и персонализации контента, а также разбором задач
-                    обработки текста (NLP).
-
-                    – Реализация проекта в командах под руководством опытного куратора. Организаторы и партнеры
-                    предложат ряд задач по созданию рекомендательных систем и решению реальных бизнес-кейсов. По
-                    окончанию школы каждая команда презентует свой проект перед экспертным жюри и получит рекомендации.
-                    Лучшие ученики получат приглашения на стажировку у партнеров школы.</p>
-                <div>
-                    <p class="down-links left-link"><a class="reversed-link" href="/lectures">Подробнее</a></p>
-                    <p class="down-links right-link"><a class="reversed-link like-button" href="">Принять участие</a>
-                    </p>
-                </div>
-
-            </div>
-            <div style="background: url('/static/img/destinations/h2.jpg')" class="vector-image col-md-6"></div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <div style="color: white" class="orange-background">
-        <div id="subscribe" class="container subscribe orange-background">
-            <p> Подпишитесь на новости! </p>
-            <form action="{% url 'subscribe' %}" method="get">
-                <table align="center" class="demotable">
-                    <tr>
-                        <td valign="middle">
-                            <input class="email" type="email" name="email" placeholder="Электронная почта*">
-                        </td>
-                        <td valign="middle">
-                            <input style="width: 40px; margin-top: 7px;" type="image" src={% static "img/tick.png" %}>
-                        </td>
-
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="news-wrapper">
-        <div class="header-head"><h2>Новости</h2></div>
-        <div class="container news">
-            <div class="row">
-                {% for article in articles|slice:':3 ' %}
-                    <div class="col-md-4 article">
-                        <a href="{{ article.url }}">
-                            <table>
-                                <tr>
-                                    <td style="vertical-align: middle">
-                                        <img src="/media/{{ article.image }}">
-                                    </td>
-                                </tr>
-                            </table>
-                            <h6><a href="{{ article.url }}">{{ article.title }}</a></h6></a>
-                        <p>{{ article.description }}</p>
-                    </div>
-                {% endfor %}
-            </div>
-            <input type='button' onclick="window.location = '{% url 'mm_about' %}'"
-                   class="header-btn btn btn-transparent btn-xl inc" value="Все новости">
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div style="background: url(https://pp.vk.me/c637830/v637830190/6571/Ban5tk-OOuU.jpg)" class="features">
-        <table>
-            <td>
-                <div style="background: none" class="container">
-                    <div class="col-md-7">
-
-                    </div>
-                    <div class="col-md-5">
-                        <div class="features-mini">
-                            <div class="feature">
-                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                            </div>
-                        </div>
-                        <div class="white-hr"></div>
-
-                        <div class="features-mini">
-                            <div class="feature">
-                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                            </div>
-                        </div>
-                        <div class="white-hr"></div>
+</div>
 
 
-                        <div class="features-mini">
-                            <div class="feature">
-                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                            </div>
-                        </div>
-                        <div class="white-hr"></div>
-
-                        <div class="features-mini">
-                            <div class="feature">
-                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                            </div>
-                        </div>
-                        <div class="white-hr"></div>
-
-                        <div class="features-mini">
-                            <div class="feature">
-                                <h6>БЫСТРОЕ ОФОРМЛЯЕМ</h6>
-                                <p>Быстро оформим вашу заявку на забор груза или документов</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+<div class="first-slide">
+    <canvas id="demo-canvas"></canvas>
+    <table id='large-header' class="header">
+        <tbody>
+        <tr>
+            <td valign="middle">
+                <img id="logo" src="/static/img/logo_big.png">
             </td>
+        <tr>
+        </tbody>
+    </table>
+
+    <div class="text">
+        Образовательный проект в сфере высоких технологий
+    </div>
+</div>
+
+<!-- Весёлые покрутяшки -->
+<div class="krutyashki">
+    <div class="container">
+        <div class="row crugleski">
+            <div class="opisanie">
+                <a onclick="awesome()">
+                    <svg width="64" version="1.1" xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 0 64 64"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 64 64">
+                        <g>
+                            <path
+                                    d="M28.941,31.786L0.613,60.114c-0.787,0.787-0.787,2.062,0,2.849c0.393,0.394,0.909,0.59,1.424,0.59   c0.516,0,1.031-0.196,1.424-0.59l28.541-28.541l28.541,28.541c0.394,0.394,0.909,0.59,1.424,0.59c0.515,0,1.031-0.196,1.424-0.59   c0.787-0.787,0.787-2.062,0-2.849L35.064,31.786L63.41,3.438c0.787-0.787,0.787-2.062,0-2.849c-0.787-0.786-2.062-0.786-2.848,0   L32.003,29.15L3.441,0.59c-0.787-0.786-2.061-0.786-2.848,0c-0.787,0.787-0.787,2.062,0,2.849L28.941,31.786z"/>
+                        </g>
+                    </svg>
+                </a>
+                <table>
+                    <td valign="middle">
+                        <p class="programm-text">В начинающей группе запланирован базовый курс из лекций и воркшопов,
+                            сопровождающихся заданиями из различных областей, в рамках которых ребята сделают 5-6
+                            мини-проектов.<br>
+                            Участники, попавшие в старшую группу по результатам тестирования, все время посвятят
+                            реализации основного проекта в командах. Их ждут как технологические мастер-классы, так и
+                            семинары по организации работы в проекте, формированию тз и исследованию требований от
+                            пользователей, тестированию, а также ежедневная работа под руководством куратора и общение с
+                            опытными разработчиками.
+                        </p>
+
+                        <p class="robot-text">
+                            Участники направления будут разделены на 2 группы: Опытные ребята возьмутся сразу за проекты
+                            – пройдут все стадии от идеи до реализации. Второй поток специально предназначен для
+                            новичков, которые получат базовые навыки и инструментарий: познакомятся с платформой Arduino
+                            и средой разработки; научатся работать с различными датчиками, микросхемами, сервомоторами и
+                            объединять это все, чтобы получить умные устройства.
+                            <br>
+                            Каждый участник направления получит к концу школы результат в виде прототипа или
+                            законченного устройства, а также пройдет серию мастер-классов по проектной работе,
+                            промдизайну и 3д-печати, интернету вещей.
+                        </p>
+
+                        <p class="ad-text">
+                            Небольшая группа участников с опытом в прикладном программировании займется изучением одной
+                            из самых актуальных тем – анализ данных и машинное обучение. Ребята реализуют
+                            исследовательские проекты и познакомятся с Big Data, Machine Learning и SNA, освоят основные
+                            инструментарии и разберутся с математикой и статистикой, которые стоят за основными методами
+                            в этих областях.<br>
+                            В рамках направления для всех желающих будет проведена подготовка к нашим хакатонам и
+                            Олимпиаде НТИ по большим данным и машинному обучению.
+
+                        </p>
+
+                        <p class="bio-text">
+                            Биоинформатика - это стремительно развивающаяся область, точка смешения биологии, медицины,
+                            информатики и математики, целью которой является выявление новых биологических
+                            закономерностей алгоритмическими и статистическими методами. С развитием технологий
+                            появилась возможность исследовать весь геном организма в целом, определять уровни активности
+                            генов, исследовать их более сложные взаимодействия.
+                            <br>
+                            Участники узнают об основных задачах биоинформатики, получат опыт работы с реальными
+                            данными, рассмотрят примеры современных исследований. К участию приглашаются все, кто хочет
+                            познакомиться с новой областью и попробовать силы в решении нестандартных междисциплинарных
+                            задач. Знание биологии не является обязательным в отличие от базового знания Python/R.
+                        </p>
+                    </td>
+                </table>
+            </div>
+            <div onclick="cool(0)" class="up flip-container col-md-6">
+                <div class="flipper">
+                    <div class="front robot">
+                        <table>
+                            <td valign="middle"><h3>Робототехника</h3></td>
+                        </table>
+                    </div>
+                    <div class="back robot-back">
+                        <table>
+                            <img src="/static/img/arrow.png">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div onclick="cool(1)" class="up flip-container vertical col-md-6">
+                <div class="flipper">
+                    <div class="front programm">
+                        <table>
+                            <td valign="middle"><h3>Прикладное программирование</h3></td>
+                        </table>
+                    </div>
+                    <div class="back programm-back">
+                        <table>
+                            <img src="/static/img/arrow.png">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div onclick="ntcool(2)" class="down flip-container vertical col-md-6">
+                <div class="flipper">
+                    <div class="front ad">
+                        <table>
+                            <td valign="middle"><h3>Анализ данных</h3></td>
+                        </table>
+                    </div>
+                    <div class="back ad-back">
+                        <table>
+                            <img src="/static/img/arrow.png">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div onclick="ntcool(3)" class="down flip-container col-md-6">
+                <div class="flipper">
+                    <div class="front bio">
+                        <table>
+                            <td valign="middle"><h3>Биоинформатика</h3></td>
+                        </table>
+                    </div>
+                    <div class="back bio-back">
+                        <table>
+                            <img src="/static/img/arrow.png">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="button-big-picture">
+    <canvas id="shariki" class="shariki"></canvas>
+    <table class="table-shar">
+        <tr>
+            <td valign="middle">
+                <button id="component-2" class="button button--2">
+                    Хочу
+                </button>
+                <div id="come_to_us_brother">
+                        <span class="input input--akira">
+                            <input class="input__field input__field--akira" type="text" id="input-22"/>
+                            <label class="input__label input__label--akira" for="input-22">
+                                <span class="input__label-content input__label-content--akira">Email</span>
+                            </label>
+                        </span>
+                </div>
+
+
+            </td>
+        </tr>
+    </table>
+
+
+    <div id="take-part">
+        <table>
+            <tr>
+                <td valign="middle">
+                    <div id="part1"><a>Хакатон</a></div>
+                    <br><br><br>
+                    <div id="part2"><a>&nbsp;Школа&nbsp;</a></div>
+                </td>
+            </tr>
         </table>
     </div>
-    <div class="clearfix"></div>
 
-    <div class="container partners">
-        <h2 style="text-align: center;">Партнёры</h2>
-        <div class="whitespace"></div>
-        <div class="row">
-            {% for p in partners.all %}
-                <div class="col-md-2 partner">
-                    <table class="partner-tbl">
-                        <tr>
-                            <td style="vertical-align: middle">
-                                <a href="{{ p.link }}"><img src="/media/{{ p.image }}" alt="{{ p.name }}"></a>
-                            </td>
-                        </tr>
-                    </table>
+    <a onclick="come_to_us_brother()" id="but1">Подписаться</a>
+    <a id="but2">Стать<br>партнёром</a>
+    <a onclick="take_part()" id="but3">Принять <br> участие</a>
+    <a id="but4">Преподавать</a>
+    <a id="but5">Подробности<br>о проекте</a>
+    <a id="but6">Новости</a>
+</div>
+
+
+<div id="partners" class="partners normal-otstup">
+    <table class="cool_table">
+        <tr>
+            <td valign="middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="partners-header col-md-12"><h1>Партнёры</h1></div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/abitur.jpg"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/amperka.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/blastim.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/cat.jpg"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/codeforces.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/cossa.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/golograph.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/hse.jpg"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/innopols.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/intel.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/krok.gif"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/mfti.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/newtonew.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/nts.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/popmech.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img
+                                        src="/static/img/partners/rambler.png"></a>
+                                </td>
+                            </table>
+                        </div>
+                        <div class="partner col-md-2 little-partner">
+                            <table>
+                                <td valign="middle"><a href="https://mipt.ru/"><img src="/static/img/partners/rvk.png"></a>
+                                </td>
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
+            </td>
+        </tr>
+    </table>
+    <div class="footer-container">
+        <div class="hr footer-hr"></div>
+        <footer class="modal-footer">
+            <div class="footer">
+                <div style="padding-top: 5px; padding-bottom: 6px;">
+                    <div class="container">
+                        <div class="col-md-6 bot-text">
+                            <img src="{% static 'img/logo.png' %}">
 
-            {% endfor %}
-        </div>
+                            <p>Образовательный проект, посвященный проектной деятельности в различных
+                                высокотехнологических областях. Использование визуальных материалов только с согласия
+                                создателей проекта. Все права защищены.</p>
+
+                        </div>
+                        <div class="col-md-6 contacts">
+                            <h5>Контакты</h5>
+                            +7 (985) 2443226<br>
+                            <a class="footer-mail" href="mailto:school@goto.msk.ru"> school@goto.msk.ru</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="clearfix"></div>
-
-{% endblock %}
+</div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
+<script src="/static/js/index_new.js"></script>
+<script src="/static/js/hochu/hochu.js"></script>
+<script src="/static/js/menu/classie.js"></script>
+<script src="/static/js/menu/borderMenu.js"></script>
+<script src="/static/js/animated/EasePack.min.js"></script>
+<script src="/static/js/animated/rAF.js"></script>
+<script src="/static/js/animated/beatuful-header.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+</body>
+</html>
