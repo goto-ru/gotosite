@@ -3,14 +3,15 @@ var cool_clas = new Object();
 var l = 138;
 var ll = 110;
 
+$("#shariki").width($(document).width);
+var c = document.getElementById("shariki");
+var ctx = c.getContext("2d");
+
 $(document).ready(function () {
 
     // Copyright by Tvorog
     console.log("Designed by Tvorog <https://vk.com/sttrelllok>");
 
-    $("#shariki").width($(document).width);
-    var c = document.getElementById("shariki");
-    var ctx = c.getContext("2d");
 
     top_position = $(".table-shar button").position().top;
     left_position = $(".table-shar button").position().left;
@@ -158,23 +159,14 @@ $(document).ready(function () {
 
             } else if (step == 4) {
                 ctx.beginPath();
-                ctx.moveTo($('#but3').position().left + l, $('#but3').position().top + ll);
-                ctx.lineTo($('#part1').position().left, $('#part1').position().top);
-                ctx.strokeStyle = 'rgba(97,97,97,0.5)';
-                ctx.stroke();
-
-
-                ctx.beginPath();
                 ctx.arc($('#but3').position().left + 138, $('#but3').position().top + 110, cool_clas["r3"], 0, 2 * Math.PI, false);
                 ctx.fillStyle = 'rgb(255, 140, 102)';
                 ctx.fill();
                 ctx.strokeStyle = 'rgb(255, 140, 102)';
                 ctx.stroke();
                 ctx.closePath();
-
-
             }
-        }, 50);
+        }, 10);
     }
 
     draw();
@@ -411,12 +403,6 @@ function come_to_us_brother() {
     }, 1000);
 }
 
-$('#part1').hover(function () {
-    $(this).animate({
-        padding: 20
-    }, 1000)
-});
-
 
 function take_part() {
     if (lock_click == false) {
@@ -459,5 +445,56 @@ $('.input').keypress(function (e) {
         alert($('#come_to_us_brother input').val());
 
         $('#come_to_us_brother').toggle();
+
+        step = 0;
+        $("#component-2").toggle();
+        $("#want").toggle();
+        $(".subscription_alert").toggle();
+
+
+        top_position = $(".table-shar button").position().top;
+        left_position = $(".table-shar button").position().left;
+        width = $(".table-shar button").width();
+        height = $(".table-shar button").height();
+
+        locked_f = false;
+        lock_click = false;
+
+        cool_clas["x1"] = left_position + width / 2 + 98;
+        cool_clas["y1"] = top_position + height / 2 + 98;
+        cool_clas["r1"] = 130;
+
+        cool_clas["x2"] = left_position + width / 2 + 98;
+        cool_clas["y2"] = top_position + height / 2 + 98;
+        cool_clas["r2"] = 130;
+
+        cool_clas["x3"] = left_position + width / 2 + 98;
+        cool_clas["y3"] = top_position + height / 2 + 98;
+        cool_clas["r3"] = 130;
+
+
+        cool_clas["x4"] = left_position + width / 2 + 98;
+        cool_clas["y4"] = top_position + height / 2 + 98;
+        cool_clas["r4"] = 130;
+
+        cool_clas["x5"] = left_position + width / 2 + 98;
+        cool_clas["y5"] = top_position + height / 2 + 98;
+        cool_clas["r5"] = 130;
+
+
+        cool_clas["x6"] = left_position + width / 2 + 98;
+        cool_clas["y6"] = top_position + height / 2 + 98;
+        cool_clas["r6"] = 130;
+
+        cool_clas["line_helper"] = 4;
+        c.width = window.innerWidth;     // equals window dimension
+        c.height = window.innerHeight;
+
+        ctx.lineWidth = 4;
+        step = 1;
+        setTimeout(function () {
+            $(".subscription_alert").toggle();
+            $("#want").toggle();
+        }, 1000);
     }
 });

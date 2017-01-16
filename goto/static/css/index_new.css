@@ -157,24 +157,28 @@ body {
     background-image: url(/static/img/napravleniya/programm.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .robot-back {
     background-image: url(/static/img/napravleniya/robo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .bio-back {
     background-image: url(/static/img/napravleniya/bio.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .ad-back {
     background-image: url(/static/img/napravleniya/ad.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 }
 
 .programm-back table,
@@ -973,20 +977,30 @@ body {
     border: 2px solid;
     padding: 10px 15px;
     font-size: 55px;
-    width: 100%;
+    width: 300px;
     color: #080808;
     text-decoration: none !important;
-}
-
-#take-part a:hover{
-    padding: 20px 30px;
 }
 
 #part2 a{
     padding: 10px 16px;
 }
 
+
 #take-part table{
     width: 50vw;
     height: 100vh;
+}
+
+.subscription_alert{
+    display: none;
+    font-size: 20px;
+}
+
+a, button{
+    cursor: pointer;
+}
+
+#want{
+    cursor: pointer;
 }
