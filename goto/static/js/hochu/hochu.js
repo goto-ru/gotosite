@@ -9,10 +9,6 @@ var ctx = c.getContext("2d");
 
 $(document).ready(function () {
 
-    // Copyright by Tvorog
-    console.log("Designed by Tvorog <https://vk.com/sttrelllok>");
-
-
     top_position = $(".table-shar button").position().top;
     left_position = $(".table-shar button").position().left;
     width = $(".table-shar button").width();
@@ -158,6 +154,16 @@ $(document).ready(function () {
                 ctx.closePath();
 
             } else if (step == 4) {
+
+                $('.take_part_in').each(function () {
+                    ctx.beginPath();
+                    ctx.moveTo($('#but3').position().left + 138, $('#but3').position().top + 110);
+                    ctx.lineTo(c.width / 2, $(this).position().top + 60);
+                    ctx.strokeStyle = 'rgba(97,97,97,0.5)';
+                    ctx.stroke();
+                });
+
+
                 ctx.beginPath();
                 ctx.arc($('#but3').position().left + 138, $('#but3').position().top + 110, cool_clas["r3"], 0, 2 * Math.PI, false);
                 ctx.fillStyle = 'rgb(255, 140, 102)';
@@ -165,6 +171,7 @@ $(document).ready(function () {
                 ctx.strokeStyle = 'rgb(255, 140, 102)';
                 ctx.stroke();
                 ctx.closePath();
+
             }
         }, 10);
     }
@@ -230,6 +237,7 @@ $(document).ready(function () {
 
     $("#component-2").click(function () {
         $("#component-2").toggle();
+        $(".back-hochu").toggle();
         step = 1;
         TweenLite.to(cool_clas, 2, {
             x1: $('#but1').position().left + 90, // подписаться
@@ -404,6 +412,63 @@ function come_to_us_brother() {
 }
 
 
+$(".back-hochu").click(function () {
+    if (step == 1) {
+        $(".back-hochu").toggle();
+        $("#but1").css('display', 'none');
+        $("#but2").css('display', 'none');
+        $("#but3").css('display', 'none');
+        $("#but4").css('display', 'none');
+        $("#but5").css('display', 'none');
+        $("#but6").css('display', 'none');
+
+        TweenLite.to(cool_clas, 2, {
+            line_helper: 0,
+            r4: 0,
+            r5: 0,
+            r6: 0,
+            r3: 0,
+            r2: 0,
+            r1: 0,
+            ease: Power4.easeOut
+        });
+
+        setTimeout(function () {
+            step = 0;
+            $("#component-2").toggle();
+
+            cool_clas["x1"] = left_position + width / 2 + 98;
+            cool_clas["y1"] = top_position + height / 2 + 98;
+            cool_clas["r1"] = 130;
+
+            cool_clas["x2"] = left_position + width / 2 + 98;
+            cool_clas["y2"] = top_position + height / 2 + 98;
+            cool_clas["r2"] = 130;
+
+            cool_clas["x3"] = left_position + width / 2 + 98;
+            cool_clas["y3"] = top_position + height / 2 + 98;
+            cool_clas["r3"] = 130;
+
+
+            cool_clas["x4"] = left_position + width / 2 + 98;
+            cool_clas["y4"] = top_position + height / 2 + 98;
+            cool_clas["r4"] = 130;
+
+            cool_clas["x5"] = left_position + width / 2 + 98;
+            cool_clas["y5"] = top_position + height / 2 + 98;
+            cool_clas["r5"] = 130;
+
+
+            cool_clas["x6"] = left_position + width / 2 + 98;
+            cool_clas["y6"] = top_position + height / 2 + 98;
+            cool_clas["r6"] = 130;
+
+            cool_clas["line_helper"] = 4;
+        }, 1000);
+
+    }
+});
+
 function take_part() {
     if (lock_click == false) {
         locked_f = true;
@@ -428,7 +493,7 @@ function take_part() {
             locked_f = false;
 
             $('#but3').animate({
-                top: $('#part2').position().top + 200,
+                top: $('.take_part_in').position().top + 200,
                 left: "20vw"
             }, 1000);
 
@@ -438,7 +503,6 @@ function take_part() {
         }, 1000);
     }
 }
-
 
 $('.input').keypress(function (e) {
     if (e.which == 13 && step == 2) {
@@ -451,14 +515,6 @@ $('.input').keypress(function (e) {
         $("#want").toggle();
         $(".subscription_alert").toggle();
 
-
-        top_position = $(".table-shar button").position().top;
-        left_position = $(".table-shar button").position().left;
-        width = $(".table-shar button").width();
-        height = $(".table-shar button").height();
-
-        locked_f = false;
-        lock_click = false;
 
         cool_clas["x1"] = left_position + width / 2 + 98;
         cool_clas["y1"] = top_position + height / 2 + 98;
@@ -487,14 +543,37 @@ $('.input').keypress(function (e) {
         cool_clas["r6"] = 130;
 
         cool_clas["line_helper"] = 4;
-        c.width = window.innerWidth;     // equals window dimension
-        c.height = window.innerHeight;
 
-        ctx.lineWidth = 4;
-        step = 1;
+        step = 0;
         setTimeout(function () {
             $(".subscription_alert").toggle();
             $("#want").toggle();
+
+            cool_clas["x1"] = left_position + width / 2 + 98;
+            cool_clas["y1"] = top_position + height / 2 + 98;
+            cool_clas["r1"] = 130;
+
+            cool_clas["x2"] = left_position + width / 2 + 98;
+            cool_clas["y2"] = top_position + height / 2 + 98;
+            cool_clas["r2"] = 130;
+
+            cool_clas["x3"] = left_position + width / 2 + 98;
+            cool_clas["y3"] = top_position + height / 2 + 98;
+            cool_clas["r3"] = 130;
+
+
+            cool_clas["x4"] = left_position + width / 2 + 98;
+            cool_clas["y4"] = top_position + height / 2 + 98;
+            cool_clas["r4"] = 130;
+
+            cool_clas["x5"] = left_position + width / 2 + 98;
+            cool_clas["y5"] = top_position + height / 2 + 98;
+            cool_clas["r5"] = 130;
+
+
+            cool_clas["x6"] = left_position + width / 2 + 98;
+            cool_clas["y6"] = top_position + height / 2 + 98;
+            cool_clas["r6"] = 130;
         }, 1000);
     }
 });

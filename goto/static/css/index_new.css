@@ -776,12 +776,12 @@ body {
 #but4 a,
 #but5 a,
 #but6 a {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 #but1 {
     bottom: 19vh;
-    left: 12vh;
+    left: 10vw;
     font-size: 15px;
     padding: 40px 40px;
     text-decoration: none;
@@ -973,34 +973,60 @@ body {
     float: right;
 }
 
-#take-part a {
-    border: 2px solid;
+.take_part_in {
     padding: 10px 15px;
     font-size: 55px;
     width: 300px;
-    color: #080808;
+    color: white;
     text-decoration: none !important;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-#part2 a{
-    padding: 10px 16px;
+.take_part_in:hover {
+    cursor: pointer;
+    padding: 10px 20px;
 }
 
-
-#take-part table{
+#take-part table {
     width: 50vw;
     height: 100vh;
 }
 
-.subscription_alert{
+.subscription_alert {
     display: none;
     font-size: 20px;
 }
 
-a, button{
+a, button {
     cursor: pointer;
 }
 
-#want{
+#want {
     cursor: pointer;
+}
+
+.back-hochu {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    -webkit-transform: rotate(180deg); /* Chrome and other webkit browsers */
+    -moz-transform: rotate(180deg); /* FF */
+    -o-transform: rotate(180deg); /* Opera */
+    -ms-transform: rotate(180deg); /* IE9 */
+    transform: rotate(180deg); /* W3C compliant browsers */
+
+    /* IE8 and below */
+    filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
+    display: none;
+    z-index: 10000000;
+    cursor: pointer;
+}
+
+.back-hochu img{
+    height: 50px;
+}
+
+.button-big-picture{
+    letter-spacing: 1px !important;
 }

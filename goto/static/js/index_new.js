@@ -178,8 +178,8 @@ if (elem.addEventListener) {
 function onWheel(e) {
     e = e || window.event;
     var delta = e.deltaY || e.detail || e.wheelDelta;
-    console.log(delta);
-    if (delta < 0) {
+
+    if (delta > 0) {
         down += 1;
         if (down > 2) {
             down = 0;
@@ -279,3 +279,10 @@ function awesome() {
 function refresh() {
     window.location = window.location;
 }
+
+setTimeout(function () {
+    if (slide == 0){
+        get_slide(1);
+        next_down();
+    }
+},  2000);
